@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Xalsier</title>
+  <style>
+    :root {
+      --bg-color: #101217;
+      --sec-color: #1a1d24;
+      --green: rgb(86, 222, 147);
+      --white: #ffffff;
+    }
+    body {
+      margin: 0;
+      font-family: monospace;
+      background-color: var(--bg-color);
+      color: var(--white);
+    }
+    header {
+      padding: 1rem;
+    }
+    h1 {
+      color: var(--green);
+      font-size: 2rem;
+      margin: 0;
+    }
+    .subtitle {
+      margin-top: 0.5rem;
+      color: var(--white);
+      font-size: 1.2rem;
+      cursor: pointer;
+    }
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(4px);
+      z-index: 999;
+      align-items: center;
+      justify-content: center;
+    }
+    .modal-content {
+      background-color: var(--sec-color);
+      padding: 1rem;
+      border-radius: 6px;
+    }
+    select {
+      font-size: 1.2rem;
+      font-family: monospace;
+      padding: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Xalsier</h1>
+    <div class="subtitle" onclick="toggleModal(true)">Explore</div>
+  </header>
+
+  <div class="modal" onclick="toggleModal(false)" id="navModal">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <select onchange="navigate(this)">
+        <option value="index.html">Index</option>
+        <option value="review.html">Book Reviews</option>
+      </select>
+    </div>
+  </div>
+
+  <script src="utility.js"></script>
+</body>
+</html>
