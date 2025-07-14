@@ -1,0 +1,163 @@
+:root {
+    --bg-color: #101217;
+    --sec-color: #1a1d24;
+    --sec-color-2: #2a2d35;
+    --green: rgb(86, 222, 147);
+    --white: #ffffff;
+  }
+
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--white);
+  }
+
+  header {
+    padding: 1rem;
+  }
+
+  h1 {
+    color: var(--green);
+    font-family: monospace;
+    font-size: 2rem;
+    margin: 0;
+  }
+
+  .subtitle {
+    margin-top: 0.5rem;
+    color: var(--white);
+    font-size: 1.2rem;
+    font-family: monospace;
+    cursor: pointer;
+  }
+
+  .modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(4px);
+    z-index: 999;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .modal-content {
+    background-color: var(--sec-color);
+    padding: 1rem;
+    border-radius: 6px;
+  }
+
+  select {
+    font-size: 1.2rem;
+    font-family: monospace;
+    padding: 0.5rem;
+  }
+
+  /* Filter buttons container */
+  .filter-buttons {
+    display: flex;
+    gap: 1rem;
+    margin: 1rem auto 0 auto;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  /* Filter buttons */
+  .filter-btn {
+    background-color: var(--green);
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--bg-color);
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background-color 0.3s;
+    user-select: none;
+  }
+
+  .filter-btn:hover {
+    background-color: #2e4537;
+  }
+
+  /* Active filter highlight */
+  .filter-btn.active {
+    box-shadow: 0 0 8px var(--green);
+    background-color: #68d998;
+  }
+
+  .review-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 2rem 1rem;
+    gap: 2rem;
+    font-size: 1.2rem;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .review-item {
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-content: end;
+    align-items: center;
+    width: 100%;
+    text-align: right;
+    padding: 0 0.5rem;
+    transition: opacity 0.4s ease;
+  }
+
+  .review-item .stars {
+    display: inline-flex;
+    gap: 4px;
+    margin-left: 0.75rem;
+  }
+
+  svg.star {
+    width: 24px;
+    height: 24px;
+  }
+
+  .filled {
+    fill: var(--green);
+  }
+
+  .empty {
+    fill: var(--sec-color-2);
+  }
+
+  footer {
+    margin-top: 3rem;
+    padding: 1rem;
+    text-align: center;
+  }
+
+  .mirrors {
+    color: var(--green);
+    margin-bottom: 0.3rem;
+  }
+
+  .goodreads a {
+    color: var(--white);
+    text-decoration: none;
+  }
+
+  @media (min-width: 960px) {
+    .review-list {
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      gap: 2rem;
+      margin: 3rem auto;
+    }
+
+    .review-item {
+      width: 45%;
+      text-align: left;
+      grid-template-columns: auto auto;
+    }
+  }
