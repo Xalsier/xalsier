@@ -1,10 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta http-equiv="refresh" content="0; url=../pages/reviews.html" />
-    <title>Redirecting...</title>
-  </head>
-  <body>
-    <p>If you are not redirected automatically, <a href="../pages/reviews.html">click here</a>.</p>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Book Reviews</title>
+<link rel="stylesheet" href="./css/review.css">
+</head>
+<body>
+  <header style="text-align: center;">
+    <h1>Book Reviews</h1>
+    <div class="subtitle" onclick="toggleModal(true)">Explore</div>
+  </header>
+
+  <div class="modal" onclick="toggleModal(false)" id="navModal">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <select onchange="navigate(this)">
+        <option value="index.html">Index</option>
+        <option value="projects.html">Projects</option>
+        <option value="characters.html">Characters</option>
+        <option value="reviews.html" selected>Book Reviews</option>
+      </select>
+    </div>
+  </div>
+
+  <section style="max-width: 900px; margin: 2rem auto; padding: 0 1rem;">
+    <h2 style="color: var(--green); font-family: monospace; font-size: 1.8rem; margin-bottom: 0.5rem;">Currently Reading</h2>
+    <p style="font-family: monospace; font-size: 1rem; color: var(--white); margin-top: 0; margin-bottom: 1rem;">
+      - Ratings are current impressions
+    </p>
+    <div class="review-list" id="currentlyReading"></div>
+  </section>
+
+  <!-- Filter Buttons and main list -->
+  <section style="max-width: 900px; margin: 2rem auto; padding: 0 1rem;">
+    <h2 style="color: var(--green); font-family: monospace; font-size: 1.8rem; margin-bottom: 0.5rem;">Sort by Tag</h2>
+    <div class="filter-buttons" id="filterButtons">
+      <button class="filter-btn active" data-tag="All">All</button>
+      <button class="filter-btn" data-tag="Socialism">Socialism</button>
+      <button class="filter-btn" data-tag="Philosophy">Philosophy</button>
+      <button class="filter-btn" data-tag="History">History</button>
+    </div>
+
+    <h2 style="color: var(--green); font-family: monospace; font-size: 1.8rem; margin-bottom: 0.5rem;">Read</h2>
+    <p style="font-family: monospace; font-size: 1rem; color: var(--white); margin-top: 0; margin-bottom: 1rem;">
+      - Ratings are mirrored from my goodreads profile.
+    </p>
+
+    <div class="review-list" id="reviews"></div>
+  </section>
+  <footer>
+    <div class="mirrors">Mirrors</div>
+    <div class="goodreads"><a href="https://www.goodreads.com/xalsier" target="_blank">Goodreads profile</a></div>
+  </footer>
+  <script src="../config/reading.js"></script>
+  <script src="../js/reviews.js"></script>
+  <script src="../js/utility.js"></script>
+</body>
 </html>
