@@ -5,9 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Xalsier</title>
   <link rel="stylesheet" href="./css/index.css">
+  <link rel="stylesheet" href="./css/hot.css">
 </head>
 <body>
-  <header>
+  <header style="text-align: center;">
     <h1>Xalsier</h1>
     <div class="subtitle" onclick="toggleModal(true)">Explore</div>
   </header>
@@ -15,13 +16,75 @@
   <div class="modal" onclick="toggleModal(false)" id="navModal">
     <div class="modal-content" onclick="event.stopPropagation()">
       <select onchange="navigate(this)">
-        <option value="index.html">Index</option>
+        <option value="../index.html" selected>Index</option>
         <option value="/pages/projects.html">Projects</option>
         <option value="/pages/characters.html">Characters</option>
         <option value="/pages/reviews.html">Book Reviews</option>
       </select>
     </div>
   </div>
+
+  <div class="artwork-list">
+    <h2>Recent Artwork</h2>
+  
+    <div class="art-item" style="--final-opacity: 1; opacity: 0;">
+      <img class="art-image" src="https://d.furaffinity.net/art/xalsier/1752704663/1752704663.xalsier_img_2592.jpg" alt="Lion Kemono">
+      <div class="art-text">
+        <span class="art-rank">1.</span>
+        <span class="art-title">Lion Kemono</span>
+      </div>
+      <div class="art-meta">
+        <span>20</span>
+        <svg viewBox="0 0 24 24" fill="currentColor" class="heart-icon">
+          <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 
+          6 3.5 4 5.5 4c1.54 0 3.04.99 
+          3.57 2.36h1.87C13.46 4.99 14.96 4 
+          16.5 4 18.5 4 20 6 20 8.5c0 
+          3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+        </svg>
+        <a href="https://www.reddit.com/r/furry/comments/1m1stzi/lion_kemono_by_xalsier/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button" target="_blank">Reddit</a>
+      </div>
+    </div>
+  
+    <div class="art-item" style="--final-opacity: 0.6; opacity: 0;">
+      <img class="art-image" src="https://d.furaffinity.net/art/xalsier/1751152605/1751152605.xalsier_gukqfl7wmaes_za_jpeg.jpg" alt="Sera Redraw">
+      <div class="art-text">
+        <span class="art-rank">2.</span>
+        <span class="art-title">Sera Redraw</span>
+      </div>
+      <div class="art-meta">
+        <span>8</span>
+        <svg viewBox="0 0 24 24" fill="currentColor" class="heart-icon">
+          <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 
+          6 3.5 4 5.5 4c1.54 0 3.04.99 
+          3.57 2.36h1.87C13.46 4.99 14.96 4 
+          16.5 4 18.5 4 20 6 20 8.5c0 
+          3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+        </svg>
+        <a href="https://www.tiktok.com/t/ZT6Yjhp5U/" target="_blank">TikTok</a>
+      </div>
+    </div>
+  
+    <div class="art-item" style="--final-opacity: 0.3; opacity: 0;">>
+      <img class="art-image" src="https://t.furaffinity.net/61368298@600-1750966535.jpg" alt="Stacy">
+      <div class="art-text">
+        <span class="art-rank">3.</span>
+        <span class="art-title">Stacy</span>
+      </div>
+      <div class="art-meta">
+        <span>6</span>
+        <svg viewBox="0 0 24 24" fill="currentColor" class="heart-icon">
+          <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 
+          6 3.5 4 5.5 4c1.54 0 3.04.99 
+          3.57 2.36h1.87C13.46 4.99 14.96 4 
+          16.5 4 18.5 4 20 6 20 8.5c0 
+          3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+        </svg>
+        <a href="https://www.instagram.com/reel/DLYGOT1psej/" target="_blank">Instagram</a>
+      </div>
+    </div>
+  </div>
+  
 
   <script src="./js/utility.js"></script>
 </body>
