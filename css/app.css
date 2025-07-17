@@ -47,12 +47,6 @@
     display: block;
   }  
   
-  .app-details {
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-  }
-  
   .app-details .title {
     color: var(--white);
     font-size: 1.2rem;
@@ -85,7 +79,8 @@
   
   .app-description {
     margin-top: 0.5rem;
-    font-size: 0.95rem;
+    line-height: 1.7em;
+    font-size: 1.1rem;
     color: var(--white);
   }
   
@@ -105,5 +100,28 @@
   .more-link {
     color: var(--green);
     cursor: pointer;
+  }
+  
+  .app-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    background-color: var(--sec-color);
+    padding: 1rem;
+    border-radius: 12px;
+  }
+  
+  .app-item-header {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  
+  .app-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    flex-grow: 1;
   }
   

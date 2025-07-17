@@ -44,13 +44,12 @@
   }
 
   .modal-content {
-    background-color: var(--sec-color);
     padding: 1rem;
     border-radius: 6px;
   }
 
   select {
-    font-size: 1.2rem;
+    font-size: 2rem;
     font-family: Arial;
     padding: 0.5rem;
   }
@@ -134,7 +133,7 @@
     margin-top: 3rem;
     margin-bottom: 3rem;
     padding: 1rem;
-    text-align: center;
+    text-align: left;
   }
 
   .mirrors {

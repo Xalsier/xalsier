@@ -13,5 +13,5 @@ const reviews = [
   
   const currentlyReading = [
     { title: "Orientalism by Edward Said", rating: 5 },
-    { title: "The Emperor's Handbook by Marcus Aurelius", rating: 2 }
+    { title: "The Emperor's Handbook by Marcus Aurelius", rating: 1 }
   ];
