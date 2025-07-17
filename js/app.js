@@ -6,7 +6,7 @@
     const iconBox = document.createElement('div');
     iconBox.className = 'icon-box';
     if (app.svg) {
-      fetch(`/svg/${app.svg}`)
+      fetch(`./svg/${app.svg}`)
         .then(res => res.text())
         .then(svg => {
           iconBox.innerHTML = svg;
