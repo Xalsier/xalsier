@@ -1,0 +1,109 @@
+.app-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 2rem;
+    max-width: 960px;
+    margin: auto;
+  }
+  
+  .app-section {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .app-section-title {
+    font-size: 1.5rem;
+    color: var(--green);
+    border-bottom: 1px solid var(--sec-color-2);
+    padding-bottom: 0.5rem;
+  }
+  
+  .app-item {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    background-color: var(--sec-color);
+    padding: 1rem;
+    border-radius: 12px;
+  }
+  
+  .icon-box {
+    width: 60px;
+    height: 60px;
+    min-width: 60px;
+    background-color: var(--green);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .icon-box svg {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+  }  
+  
+  .app-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+  
+  .app-details .title {
+    color: var(--white);
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+  
+  .app-links a {
+    margin-right: 1rem;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  .link-green {
+    color: var(--green);
+  }
+  
+  .link-gray {
+    color: gray;
+  }
+  
+  .link-red {
+    color: #e58b8b;
+  }
+  
+  .updated {
+    font-size: 0.85rem;
+    color: #ccc;
+  }
+  
+  
+  .app-description {
+    margin-top: 0.5rem;
+    font-size: 0.95rem;
+    color: var(--white);
+  }
+  
+  .status {
+    color: #e58b8b;
+  }
+  
+  .status.green {
+    color: var(--green);
+  }
+  
+  .wiki-link {
+    color: var(--green);
+    text-decoration: underline;
+  }
+  
+  .more-link {
+    color: var(--green);
+    cursor: pointer;
+  }
+  

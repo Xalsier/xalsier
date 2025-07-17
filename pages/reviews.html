@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Book Reviews</title>
-<link rel="stylesheet" href="./css/review.css">
+<link rel="stylesheet" href="../css/review.css">
 </head>
 <body>
   <header>
@@ -16,7 +16,9 @@
     <div class="modal-content" onclick="event.stopPropagation()">
       <select onchange="navigate(this)">
         <option value="index.html">Index</option>
-        <option value="review.html" selected>Book Reviews</option>
+        <option value="/pages/projects.html">Projects</option>
+        <option value="/pages/characters.html">Characters</option>
+        <option value="/pages/reviews.html">Book Reviews</option>
       </select>
     </div>
   </div>
@@ -50,8 +52,8 @@
     <div class="mirrors">Mirrors</div>
     <div class="goodreads"><a href="https://www.goodreads.com/xalsier" target="_blank">Goodreads profile</a></div>
   </footer>
-
-  <script src="./js/reviews.js"></script>
-  <script src="./js/utility.js"></script>
+  <script src="../config/reading.js"></script>
+  <script src="../js/reviews.js"></script>
+  <script src="../js/utility.js"></script>
 </body>
 </html>

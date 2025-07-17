@@ -19,7 +19,7 @@
 
   h1 {
     color: var(--green);
-    font-family: monospace;
+    font-family: Arial;
     font-size: 2rem;
     margin: 0;
   }
@@ -28,7 +28,7 @@
     margin-top: 0.5rem;
     color: var(--white);
     font-size: 1.2rem;
-    font-family: monospace;
+    font-family: Arial;
     cursor: pointer;
   }
 
@@ -51,7 +51,7 @@
 
   select {
     font-size: 1.2rem;
-    font-family: monospace;
+    font-family: Arial;
     padding: 0.5rem;
   }
 
@@ -132,6 +132,7 @@
 
   footer {
     margin-top: 3rem;
+    margin-bottom: 3rem;
     padding: 1rem;
     text-align: center;
   }
