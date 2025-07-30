@@ -31,7 +31,8 @@ const reviews = [
     title: 'The Rise of Scourge',
     rating: 4,
     tags: ['Comics', 'Fiction'],
-    read: 'Jul 29, 2025' // or whatever date
+    read: 'Jul 29, 2025', // or whatever date
+    mini: "I read this comic back in my earlier years in education so it was a fun experience picking it back up to remember the backstory of Scourge. I really liked the pacing, and it was easy to follow the story from start to finish."
   },
   {
     author: 'Marx, Karl',
