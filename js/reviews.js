@@ -17,7 +17,23 @@ function buildReviewItem(r, isFaded) {
   if (isFaded) div.style.opacity = '0.3';
 
   const info = document.createElement('div');
-  info.innerHTML = `${r.author}, <em>${r.title}</em>`;
+
+  // Construct title with optional read date
+  let titleText = `<em>${r.title}</em>`;
+  if (r.read) {
+    titleText += ` <span class="read-date">(Read on ${r.read})</span>`;
+  }
+
+  // Main line: author and title (+ read date)
+  info.innerHTML = `${r.author}, ${titleText}`;
+
+  // Append mini-quote if present
+  if (r.mini) {
+    const miniQuote = document.createElement('div');
+    miniQuote.className = 'mini-quote';
+    miniQuote.textContent = `"${r.mini}"`;
+    info.appendChild(miniQuote);
+  }
 
   const starContainer = document.createElement('div');
   starContainer.className = 'stars';
@@ -30,6 +46,7 @@ function buildReviewItem(r, isFaded) {
   div.appendChild(starContainer);
   return div;
 }
+
 
 function renderReviews() {
   reviewContainer.innerHTML = '';

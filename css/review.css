@@ -161,3 +161,11 @@
       grid-template-columns: auto auto;
     }
   }
+
+  .mini-quote {
+    margin-top: 4px;
+    font-size: 0.85em;
+    color: rgb(86, 222, 147);
+    font-style: italic;
+  }
+  
