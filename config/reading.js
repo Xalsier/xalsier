@@ -2,10 +2,6 @@ const currentlyReading = [
   {
     title: "Orientalism by Edward Said",
     rating: null,
-  },
-  {
-    title: "Black Disability Politics by Sami Schalk",
-    rating: null
   }
 ];
 
@@ -40,6 +36,14 @@ const reviews = [
     rating: 3,
     tags: ['Socialism', 'Eun-byul Research'],
     read: "Apr 18, 2025"
+  },
+  {
+    author: 'Schalk, Sami',
+    title: 'Black Disability Politics',
+    rating: 3,
+    tags: ['History', 'Disability'],
+    read: "July 30, 2025",
+    mini: "I really like Imani Barbarin's reading of this. I picked it up with an interest to learn a little bit about the veteran that went through psychosurgery that resulted in lifelong disablement. There were also some historical events mentioned in this book such as the 504 Sit in, and the articles written by the Black Panther Party, that I had no idea about until I listened to the audiobook."
   },
   {
     author: 'Ross, Kristin',

@@ -12,6 +12,17 @@ const apps = [
       more: null
     },
     {
+      name: "Xalsier (Website)",
+      svg: "xalsiersvg.svg",
+      id: 6,
+      code: "https://github.com/Xalsier/xalsier",
+      site: "https://xalsier.github.io/xalsier/",
+      update: "June 26, 2025 - Present",
+      section: "Featured",
+      description: `<span class="status green">In Progress</span>Your here! This is a website that I plan to use to archive my art work, as well as information on stuff that I'm working on. There'll be a little bit of everything here.`,
+      more: null
+    },
+    {
       name: "Blackjack Trouble",
       svg: "cat.svg",
       id: 1,
@@ -20,6 +31,18 @@ const apps = [
       update: "Aug 1, 2023 - Jun 12, 2024",
       section: "Games",
       description: `<span class="status">Abandoned</span>A visual novel with a blackjack minigame. You play against <a class="wiki-link" href="https://www.furaffinity.net/view/58556294/" target="_blank">Clover</a>, a furry feline.`,
+      more: null
+    },
+    {
+      name: "Untitled Point and Click",
+      svg: "spencersvg.svg",
+      id: 3,
+      code: null,
+      cur: false,
+      site: null,
+      update: "July 9, 2025 - July 23, 2025.",
+      section: "Games",
+      description: `<span class="status">Abandoned</span>The romance game was meant to feature a puzzle where Stacy asks Spencer to close the window in her room due to it being cold outside, and re-interacting with the window replaces it with a new svg. A <a class="wiki-link" href="https://www.youtube.com/shorts/-kMuzkmYWF8" target="_blank">promotional video</a> I made for the game got 500 views.`,
       more: null
     },
     {
@@ -47,7 +70,7 @@ const apps = [
     },
     {
       name: "Calendar",
-      svg: null,
+      svg: "calendar3svg.svg",
       id: 2,
       code: "https://github.com/Xalsier/Calendar",
       site: "https://xalsier.github.io/Calendar/",
