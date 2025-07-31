@@ -104,6 +104,13 @@ const reviews = [
     read: "May 10, 2025"
   },
   {
+    author: 'Cherry, Kendra',
+    title: "Essentials of Psychology",
+    rating: 2,
+    tags: ['Psychology'],
+    read: "Dec 26, 2022"
+  },
+  {
     author: 'Aurelius, Marcus',
     title: "The Emperor's Handbook",
     rating: 2,
