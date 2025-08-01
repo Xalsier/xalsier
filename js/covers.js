@@ -25,7 +25,7 @@ const pianoCovers = [
       youtubeId: "Z3so5Uh8LBA",
       url: "https://youtu.be/Z3so5Uh8LBA?si=1mPslAjs5PpL5rpQ",
       tags: ["FNAF", "Fandom", "Video Game"],
-      description: "A powerful and dramatic musical piece",
+      description: "",
     },
     {
       id: 4,
@@ -34,7 +34,7 @@ const pianoCovers = [
       youtubeId: "hUrPdxanEac",
       url: "https://youtu.be/hUrPdxanEac?si=94YUOTF8qYP3kpV3",
       tags: ["Video Game", "EarthBound", "Fandom"],
-      description: "The iconic melody from EarthBound/Mother series",
+      description: "",
     },
   ]
   
