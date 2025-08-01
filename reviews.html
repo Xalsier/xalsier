@@ -4,10 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Book Reviews</title>
-<link rel="stylesheet" href="./css/review.css">
+  <link rel="stylesheet" href="./css/reviews.css">
 </head>
 <body>
-  <header style="text-align: center;">
+  <header>
     <h1>Book Reviews</h1>
     <div class="subtitle" onclick="toggleModal(true)">Explore</div>
   </header>
@@ -20,40 +20,117 @@
         <option value="projects.html">Projects</option>
         <option value="characters.html">Characters</option>
         <option value="reviews.html" selected>Book Reviews</option>
+        <option value="covers.html">Piano Covers</option>
       </select>
     </div>
   </div>
 
-  <section style="max-width: 900px; margin: 2rem auto; padding: 0 1rem;">
-    <h2 style="color: var(--green); font-family: monospace; font-size: 1.8rem; margin-bottom: 0.5rem;">Currently Reading</h2>
-    <div class="review-list" id="currentlyReading"></div>
-  </section>
+  <main class="container">
+    <!-- Character Research Section -->
+    <section class="section fade-in" id="character-research">
+      <div class="section-header">
+        <h2>Character Research</h2>
+        <p class="section-desc">Book's that I'm reading to portray a character more accurately. I've selected a few random quotes that I've written to best display how these books are impacting the development of these characters.</p>
+      </div>
+      
+      <div class="character-groups">
+        <div class="character-group fade-in">
+          <div class="character-card">
+            <img src="./img/car/roxie.png" alt="Roxie" class="character-avatar">
+            <img src="./img/car/eun.png" alt="Eun-byul" class="character-avatar">
+            <h3>Roxie & Eun-byul</h3>
+          </div>
+          <div class="book-status-container">
+            <div class="status-section">
+              <h4>Currently Reading</h4>
+              <div class="book-list" id="roxie-currently-reading"></div>
+            </div>
+            <div class="status-section">
+              <h4>Want to Read</h4>
+              <div class="book-list" id="roxie-want-to-read"></div>
+            </div>
+            <div class="status-section">
+              <h4>Completed</h4>
+              <div class="book-list" id="roxie-completed"></div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Character Quotes Section -->
+        <div class="character-quotes fade-in">
+          <div class="quotes-container" id="quotes-container">
+            <!-- Quote cards will be dynamically generated here -->
+          </div>
+        </div>
+      </div>
+    </section>
 
-  <!-- Filter Buttons and main list -->
-  <section style="max-width: 900px; margin: 2rem auto; padding: 0 1rem;">
-    <h2 style="color: var(--green); font-family: monospace; font-size: 1.8rem; margin-bottom: 0.5rem;">Sort by Tag</h2>
-    <div class="filter-buttons" id="filterButtons">
-      <button class="filter-btn active" data-tag="All">All</button>
-      <button class="filter-btn" data-tag="Eun-byul Research">Eun-byul Research</button>
-      <button class="filter-btn" data-tag="Philosophy">Philosophy</button>
-      <button class="filter-btn" data-tag="Psychology">Psychology</button>
-      <button class="filter-btn" data-tag="History">History</button>
-      <button class="filter-btn" data-tag="Comics">Comics</button>
-      <button class="filter-btn" data-tag="Plays">Plays</button>
 
+    <!-- Manga & Comics Section -->
+    <section class="section fade-in" id="manga-comics">
+      <div class="section-header">
+        <h2>Manga & Comic Reviews</h2>
+      </div>
+      
+      <div class="series-container">
+        <div class="series-card fade-in" id="kingdom-hearts">
+          <h3>Kingdom Hearts II</h3>
+          <div class="progress-info">1 of 10 read</div>
+          <div class="volume-grid" id="kh-volumes"></div>
+        </div>
+
+        <div class="series-card fade-in" id="demon-slayer">
+          <h3>Demon Slayer</h3>
+          <div class="progress-info">1 of 23 read</div>
+          <div class="volume-grid" id="ds-volumes"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Unsorted Bookshelf Section -->
+    <section class="section fade-in" id="unsorted">
+      <div class="section-header">
+        <h2>Unsorted Bookshelf</h2>
+        <p class="section-desc">All other books I've read</p>
+      </div>
+      
+      <div class="filter-buttons" id="filterButtons">
+        <button class="filter-btn" data-tag="All">All</button>
+        <button class="filter-btn" data-tag="Philosophy">Philosophy</button>
+        <button class="filter-btn active" data-tag="Psychology">Psychology</button>
+        <button class="filter-btn" data-tag="History">History</button>
+        <button class="filter-btn" data-tag="Plays">Plays</button>
+        <button class="filter-btn" data-tag="Disability">Disability</button>
+      </div>
+
+      <div class="book-grid fade-in" id="unsorted-books"></div>
+    </section>
+  </main>
+
+  <!-- Review Modal -->
+  <div class="review-modal" id="reviewModal">
+    <div class="review-modal-content">
+      <span class="close-btn" onclick="closeReviewModal()">&times;</span>
+      <div id="reviewContent"></div>
     </div>
+  </div>
 
-    <h2 style="color: var(--green); font-family: monospace; font-size: 1.8rem; margin-bottom: 0.5rem;">Read</h2>
+  <!-- Image Modal -->
+  <div class="image-modal" id="imageModal">
+    <div class="image-modal-content">
+      <span class="close-btn" onclick="closeImageModal()">&times;</span>
+      <img id="modalImage" src="/placeholder.svg" alt="">
+      <div class="image-caption" id="imageCaption"></div>
+    </div>
+  </div>
 
-    <div class="review-list" id="reviews"></div>
-    <div id="tooltip" class="tooltip hidden"></div>
-  </section>
   <footer>
     <div class="mirrors">Mirrors</div>
     <div class="goodreads"><a href="https://www.goodreads.com/xalsier" target="_blank">Goodreads profile (Books)</a></div>
     <div class="goodreads"><a href="https://myanimelist.net/profile/Xalsier" target="_blank">Myanimelist profile (Comics)</a></div>
   </footer>
-  <script src="./config/reading.js"></script>
+
+  <script src="./js/book-data.js"></script>
   <script src="./js/reviews.js"></script>
   <script src="./js/utility.js"></script>
 </body>

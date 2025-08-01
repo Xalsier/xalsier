@@ -1,11 +1,4 @@
-const modal = document.getElementById('navModal');
-function toggleModal(show) {
-  modal.style.display = show ? 'flex' : 'none';
-}
 
-function navigate(select) {
-  window.location.href = select.value;
-}
 
 const socialLinks = [
   { href: 'https://x.com/Xalsier', src: './svg/soc/x.svg', alt: 'X' },
@@ -27,3 +20,47 @@ socialLinks.forEach(link => {
     })
     .catch(err => console.error(`Failed to load ${link.src}`, err));
 });
+function toggleModal(show) {
+  const modal = document.getElementById("navModal")
+  modal.style.display = show ? "flex" : "none"
+}
+
+function navigate(select) {
+  const value = select.value
+  if (value) {
+    window.location.href = value
+  }
+}
+
+// Smooth scroll to sections
+function scrollToSection(sectionId) {
+  const section = document.getElementById(sectionId)
+  if (section) {
+    section.scrollIntoView({ behavior: "smooth" })
+  }
+}
+
+// Add keyboard navigation
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") {
+    // Assuming closeReviewModal is a function that needs to be defined elsewhere
+    // Placeholder for closeReviewModal function call
+    console.log("closeReviewModal function needs to be defined")
+    toggleModal(false)
+  }
+})
+
+// Add loading states
+function showLoading(elementId) {
+  const element = document.getElementById(elementId)
+  if (element) {
+    element.classList.add("loading")
+  }
+}
+
+function hideLoading(elementId) {
+  const element = document.getElementById(elementId)
+  if (element) {
+    element.classList.remove("loading")
+  }
+}
