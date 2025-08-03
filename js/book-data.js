@@ -212,16 +212,6 @@ const characterResearchBooks = {
       character: "Eun-byul",
       type: "thought",
     },
-    {
-        text: "Well we're not leaving this sanctuary either, are we sister? But we will be forced to when it's compromised. And yet, it already may be.",
-        character: "Eun-byul",
-        type: "quote",
-      },
-      {
-        text: "And [you] foiled him, like the brave soldier that you are. I wonder which is the case..? ~Which story will my friend with the bow would believe once you step out like a lamb into that crowd.",
-        character: "Eun-byul",
-        type: "quote",
-      },
       {
         text: "You didn't build anything, didn't write an autobiography. You sure as hell didn't tell the news, or publish anything about that book. You didn't embed yourself as a staff worker. And you didn't coordinate the protestsー",
         character: "Eun-byul",
