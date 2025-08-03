@@ -129,19 +129,13 @@
     fill: var(--bg-color);
   }
 
-  footer {
-    margin-top: 3rem;
-    margin-bottom: 3rem;
-    padding: 1rem;
-    text-align: left;
-  }
 
   .mirrors {
     color: var(--green);
     margin-bottom: 0.3rem;
   }
 
-  .goodreads a {
+  a {
     color: var(--white);
     text-decoration: none;
   }

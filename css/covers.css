@@ -181,19 +181,15 @@
   
   /* Cover Card */
   .cover-card {
-    background: var(--sec-color);
     border-radius: var(--border-radius);
     padding: 2rem;
-    box-shadow: var(--shadow);
     transition: var(--transition);
-    border-left: 4px solid var(--green);
     opacity: 0;
     animation: fadeInUp 0.6s ease forwards;
   }
   
   .cover-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 25px rgba(86, 222, 147, 0.1);
   }
   
   @keyframes fadeInUp {
