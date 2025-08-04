@@ -207,7 +207,7 @@ function createBookCard(book) {
 function renderMangaComics() {
   renderVolumeGrid("kh-volumes", mangaComicsData.kingdomHearts)
   renderVolumeGrid("ds-volumes", mangaComicsData.demonSlayer)
-  renderVolumeGrid("wc-volumes", mangaComicsData.warriorCats)
+  renderVolumeGrid("be-volumes", mangaComicsData.beastars)
 }
 
 function renderVolumeGrid(containerId, seriesData) {

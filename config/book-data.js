@@ -77,7 +77,7 @@ const characterResearchBooks = {
     kingdomHearts: {
       title: "Kingdom Hearts II",
       totalVolumes: 10,
-      readVolumes: [2],
+      readVolumes: [1],
       volumes: [
         { number: 1, read: false },
         {
@@ -100,7 +100,7 @@ const characterResearchBooks = {
     demonSlayer: {
       title: "Demon Slayer",
       totalVolumes: 23,
-      readVolumes: [6],
+      readVolumes: [1],
       volumes: Array.from({ length: 23 }, (_, i) => ({
         number: i + 1,
         read: i + 1 === 6,
@@ -110,19 +110,39 @@ const characterResearchBooks = {
         }),
       })),
     },
-    warriorCats: {
-      title: "Warrior Cats",
-      totalVolumes: 1,
+    beastars: {
+      title: "Beastars",
+      totalVolumes: 22,
       readVolumes: [1],
       volumes: [
         {
           number: 1,
           read: true,
-          title: "The Rise of Scourge",
-          rating: 4,
-          mini: "I read this comic back in my earlier years in education so it was a fun experience picking it back up to remember the backstory of Scourge. I really liked the pacing, and it was easy to follow the story from start to finish.",
-          read_date: "Jul 29, 2025",
+          rating: 5,
+          mini: "I read this while indoor biking. I feel like it's a good sign that I couldn't even tell my legs were starting to ache while cycling. The volume was well paced.",
+          read_date: "Aug 4, 2025",
         },
+        { number: 2, read: false },
+        { number: 3, read: false },
+        { number: 4, read: false },
+        { number: 5, read: false },
+        { number: 6, read: false },
+        { number: 7, read: false },
+        { number: 8, read: false },
+        { number: 9, read: false },
+        { number: 10, read: false },
+        { number: 11, read: false },
+        { number: 12, read: false },
+        { number: 13, read: false },
+        { number: 14, read: false },
+        { number: 15, read: false },
+        { number: 16, read: false },
+        { number: 17, read: false },
+        { number: 18, read: false },
+        { number: 19, read: false },
+        { number: 20, read: false },
+        { number: 21, read: false },
+        { number: 22, read: false },
       ],
     },
   }
