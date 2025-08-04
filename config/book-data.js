@@ -219,28 +219,3 @@ const characterResearchBooks = {
         status: "completed",
       },
   ]
-  
-  // Character Quotes Data
-  const characterQuotes = [
-    {
-      text: "Maybe I know the reason you're so eager to [..] dehumanize her by calling her a thing. Its because you have [ experience ].",
-      character: "Eun-byul",
-      type: "quote",
-    },
-    {
-      text: "He doesn't care about the community. He really does want [ her ] to suffer [...]. What a selfish greedy prick, keeping that to himself so that he can take a faux-moralist posture.",
-      character: "Eun-byul",
-      type: "thought",
-    },
-      {
-        text: "You didn't build anything, didn't write an autobiography. You sure as hell didn't tell the news, or publish anything about that book. You didn't embed yourself as a staff worker. And you didn't coordinate the protestsー",
-        character: "Eun-byul",
-        type: "quote",
-      },
-      {
-        text: "You had 5 years. 5 goddamn years- you have no place to act entitled- We only know what we know. And you kept this a secret until NOW? No wonder this happened. [...] Maybe even worse, because I can see right through you. Your complicit. Only the enemy would keep secrets [...]",
-        character: "Eun-byul",
-        type: "quote",
-      },
-  ]
-  
