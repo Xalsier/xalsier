@@ -166,7 +166,7 @@ const ARCHIVE_ITEMS = [
     {
         id: 11,
         title: "Welcome Gate",
-        image: "./img/car/comicB.jpg",
+        image: "./img/car/ComicB.jpg",
         characters: ["Eun-byul"],
         project: "Eun-byul (Comic)",
         background: "White Background",
