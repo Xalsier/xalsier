@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Xalsier - Bio</title>
+    <title>Biography</title>
     <link rel="stylesheet" href="./css/global.css">
+    <link rel="stylesheet" href="./css/index.css">
 </head>
 <body>
     <header style="text-align: center;">
@@ -17,9 +18,9 @@
             <select onchange="navigate(this)">
                 <option value="index.html">Index</option>
                 <option value="biography.html" selected>Biography</option>
+                <option value="characters.html">Characters</option>
                 <option value="reviews.html">Book Reviews</option>
                 <option value="projects.html">Projects</option>
-                <option value="characters.html">Characters</option>
                 <option value="covers.html">Piano Covers</option>
             </select>
         </div>
@@ -39,9 +40,34 @@
                     <p><b>Xalsier</b> is an American artist and writer.</p>
                 </div>
 
+                <!-- Upcoming Works -->
+                <div class="upcoming-works fade-in">
+                  <h2 class="section-title">Upcoming Written Works</h2>
+                  <div class="table-container">
+                      <table class="works-table">
+                          <thead>
+                              <tr>
+                                  <th>Work</th>
+                                  <th>Description</th>
+                                  <th>Genre</th>
+                                  <th>Notes</th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                              <tr>
+                                  <td class="work-title">Short Story</td>
+                                  <td class="work-description">Two stories, following Elaine Prowler, Roxie, and Spencer Erichson.</td>
+                                  <td class="work-notes">Adult, Romance, Furry</td>
+                                  <td class="work-notes">*Est 2500 words. TBA 2025</td>
+                              </tr>
+                          </tbody>
+                      </table>
+                  </div>
+              </div>
+
                 <!-- Profile Cards Grid -->
                 <div class="profile-section fade-in">
-                    <h2 class="section-title">Profile</h2>
+                    <h2 class="section-title" style="display: none;">Profile</h2>
                     <div class="profile-cards-grid">
                         <div class="profile-card">
                             <div class="profile-card-label">Education</div>
@@ -64,37 +90,12 @@
                     </div>
                 </div>
 
-                <!-- Upcoming Works -->
-                <div class="upcoming-works fade-in">
-                    <h2 class="section-title">Upcoming Works</h2>
-                    <div class="table-container">
-                        <table class="works-table">
-                            <thead>
-                                <tr>
-                                    <th>Work</th>
-                                    <th>Description</th>
-                                    <th>Genre</th>
-                                    <th>Notes</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="work-title">Short Story</td>
-                                    <td class="work-description">Two stories, following Elaine Prowler, Roxie, and Spencer Erichson.</td>
-                                    <td class="work-notes">Adult, Romance, Furry</td>
-                                    <td class="work-notes">*Est 2500 words. TBA 2025</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
             </div>
         </div>
     </main>
 
     <footer>
-
+      <div class="social-bar" id="socialBar"></div>
     </footer>
 
     <script src="./js/utility.js"></script>

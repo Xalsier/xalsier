@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="./css/oldrev.css">
 <link rel="stylesheet" href="./css/app.css">
 <link rel="stylesheet" href="./css/global.css">
+<link rel="stylesheet" href="./css/index.css">
 </head>
 <body>
   <header style="text-align: center;">
@@ -19,9 +20,9 @@
       <select onchange="navigate(this)">
         <option value="index.html">Index</option>
         <option value="biography.html">Biography</option>
+        <option value="characters.html">Characters</option>
         <option value="reviews.html">Book Reviews</option>
         <option value="projects.html" selected>Projects</option>
-        <option value="characters.html">Characters</option>
         <option value="covers.html">Piano Covers</option>
       </select>
     </div>
@@ -30,10 +31,9 @@
   <main id="app-container" class="app-container"></main>
   
   <footer>
-    <div class="mirrors">Mirrors</div>
-    <div class="goodreads"><a href="https://github.com/Xalsier" target="_blank">Github profile</a></div>
-    <div class="goodreads"><a href="https://codepen.io/Xalsier" target="_blank">Codepen profile</a></div>
+    <div class="social-bar" id="socialBar"></div>
   </footer>
+
   <script src="./config/projects.js"></script>
   <script src="./js/app.js"></script>
   <script src="./js/utility.js"></script>

@@ -1,7 +1,7 @@
 const apps = [
     {
       name: "Birth by Memory",
-      svg: null,
+      svg: "naori1.svg",
       id: 3,
       code: "https://github.com/Xalsier/Birth-by-Memory",
       cur: false,
@@ -47,7 +47,7 @@ const apps = [
     },
     {
       name: "Pachinko",
-      svg: null,
+      svg: "flower2.svg",
       id: 4,
       code: "https://github.com/Xalsier/pachinko",
       cur: true,
@@ -59,7 +59,7 @@ const apps = [
     },
     {
       name: "Lunar Clock",
-      svg: null,
+      svg: "degree2.svg",
       id: 5,
       site: "https://xalsier.github.io/lunar_clock/",
       code: "https://github.com/Xalsier/lunar_clock",
