@@ -119,7 +119,7 @@ const characterResearchBooks = {
           number: 1,
           read: true,
           rating: 5,
-          mini: "I read this while indoor biking. I feel like it's a good sign that I couldn't even tell my legs were starting to ache while cycling. The volume was well paced.",
+          mini: "I read this while indoor biking. I feel like it's a good sign that I couldn't even tell my legs were starting to ache while cycling a few quarters of the way into the book. The volume was well paced ^-^",
           read_date: "Aug 4, 2025",
         },
         { number: 2, read: false },
