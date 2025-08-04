@@ -3,34 +3,216 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Xalsier</title>
-  <link rel="stylesheet" href="./css/index.css">
+  <title>Artwork Index</title>
   <link rel="stylesheet" href="./css/global.css">
+  <link rel="stylesheet" href="./css/archive.css">
+  <link rel="stylesheet" href="./css/index.css">
 </head>
 <body>
   <header style="text-align: center;">
-    <h1>Xalsier</h1>
+    <h1>Artwork Index</h1>
     <div class="subtitle" onclick="toggleModal(true)">Explore</div>
   </header>
 
   <div class="modal" onclick="toggleModal(false)" id="navModal">
     <div class="modal-content" onclick="event.stopPropagation()">
       <select onchange="navigate(this)">
-        <option value="index.html" selected>Index</option>
+        <option value="index.html" selected>Artwork Index</option>
         <option value="biography.html">Biography</option>
-        <option value="characters.html">Characters</option>
         <option value="reviews.html">Book Reviews</option>
-        <option value="projects.html">Projects</option>
+        <option value="projects.html">Coding Projects</option>
         <option value="covers.html">Piano Covers</option>
       </select>
     </div>
   </div>
 
+      <!-- Character Profile Section (shown when single character selected) -->
+      <div class="character-profile-section" id="characterProfileSection" style="display: none;">
+        <div class="character-profile-card">
+          <div class="character-header">
+            <img id="profileImage" alt="Character Image">
+            <div class="character-info">
+              <h2 id="profileName"></h2>
+              <p id="profileProject"></p>
+              <p id="profileDescription"></p>
+            </div>
+          </div>
+          <div class="character-details">
+            <div class="character-traits">
+              <h3>Traits</h3>
+              <div id="profileTraits"></div>
+            </div>
+            <div class="character-background">
+              <h3>Background</h3>
+              <p id="profileBackground"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    <!-- Filter Section -->
+    <div class="filter-section">
+      <div class="filter-controls">
+        <div class="filter-group">
+          <label for="metaFilter">Meta</label>
+          <select id="metaFilter" class="filter-select">
+            <option value="">Select Meta Filter</option>
+            <optgroup label="Projects">
+              <option value="project:Untitled Project">Untitled Project</option>
+              <option value="project:Eun-byul (Comic)">Eun-byul (Comic)</option>
+              <option value="project:Birth by Memory">Birth by Memory</option>
+            </optgroup>
+            <optgroup label="Filters">
+              <option value="filter:Safe">Safe</option>
+              <option value="filter:Hidden">Hidden</option>
+              <option value="filter:Violent">Violent</option>
+              <option value="filter:Explicit">Explicit</option>
+            </optgroup>
+            <optgroup label="Medium">
+              <option value="tag:Raster Art">Raster Art</option>
+              <option value="tag:Vector Art">Vector Art</option>
+              <option value="tag:Traditional Art">Traditional Art</option>
+              <option value="tag:Black & White">Black & White</option>
+            </optgroup>
+            <optgroup label="Backgrounds">
+              <option value="background:White Background">White Background</option>
+              <option value="background:Yellow Background">Yellow Background</option>
+              <option value="background:Pink Background">Pink Background</option>
+              <option value="background:Gray Background">Gray Background</option>
+            </optgroup>
+            <optgroup label="History">
+              <option value="history:Recent">Recent</option>
+              <option value="history:Oldest">Oldest</option>
+            </optgroup>
+          </select>
+        </div>
+  
+        <div class="filter-group">
+          <label for="characterFilter">Characters</label>
+          <select id="characterFilter" class="filter-select">
+            <option value="">Select Character</option>
+            <optgroup label="Untitled Project">
+              <option value="character:Spencer">Spencer</option>
+              <option value="character:Stacy">Stacy</option>
+              <option value="character:Roxie">Roxie</option>
+              <option value="character:Elaine">Elaine</option>
+            </optgroup>
+            <optgroup label="Birth by Memory">
+              <option value="character:Naori">Naori</option>
+              <option value="character:Leo">Leo</option>
+              <option value="character:Sera">Sera</option>
+            </optgroup>
+            <optgroup label="Campaigns & Roleplays">
+              <option value="character:Eun-byul">Eun-byul</option>
+              <option value="character:Zsasz">Zsasz</option>
+            </optgroup>
+          </select>
+        </div>
+  
+        <div class="filter-group">
+          <label for="attributeFilter">Attributes</label>
+          <select id="attributeFilter" class="filter-select">
+            <option value="">Select Attribute</option>
+            <optgroup label="Species">
+              <option value="species:Hyena">Hyena</option>
+              <option value="species:Fox">Fox</option>
+              <option value="species:Wolf">Wolf</option>
+              <option value="species:Lion">Lion</option>
+            </optgroup>
+            <optgroup label="Gender">
+              <option value="gender:Female">Female</option>
+              <option value="gender:Male">Male</option>
+            </optgroup>
+            <optgroup label="Body Type">
+              <option value="bodyType:Flat Chested">Flat Chested</option>
+            </optgroup>
+            <optgroup label="Fur Color">
+              <option value="furColor:Brown">Brown</option>
+              <option value="furColor:Orange">Orange</option>
+              <option value="furColor:Black">Black</option>
+              <option value="furColor:Yellow">Yellow</option>
+              <option value="furColor:Mixed">Mixed</option>
+            </optgroup>
+            <optgroup label="Clothing">
+              <option value="tag:Crop Top">Crop Top</option>
+              <option value="tag:Turtleneck">Turtleneck</option>
+              <option value="tag:Button-Up">Button-Up</option>
+            </optgroup>
+          </select>
+        </div>
+      </div>
+  
+      <!-- Active Filters Display -->
+      <div class="active-filters" id="activeFilters"></div>
+
+      
+  
+      <!-- Search Section -->
+      <div class="search-section">
+        <button class="search-btn" id="searchBtn">Search</button>
+        <div class="progress-container" id="progressContainer" style="display: none;">
+          <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+          </div>
+          <div class="progress-text" id="progressText">Searching...</div>
+        </div>
+      </div>
+  
+    </div>
+
+  
+    <!-- Gallery Section -->
+    <div class="gallery-section" id="gallerySection">
+
+            <!-- Pagination -->
+            <div class="pagination" id="pagination"></div>
+            <br>
+      <div class="gallery-grid" id="galleryGrid">
+        <!-- Gallery items will be populated by JavaScript -->
+      </div>
+  
+
+          <!-- Error Display -->
+          <div class="error-display" id="errorDisplay" style="display: none;"></div>
+  
+    </div>
+  
+    <!-- Image Expansion Modal -->
+    <div class="image-modal" id="imageModal">
+      <div class="modal-backdrop"></div>
+      <div class="modal-content">
+        <button class="modal-close" id="modalClose">&times;</button>
+        <div class="modal-image-container">
+          <img id="modalImage" alt="">
+        </div>
+        <div class="modal-info">
+          <h3 id="modalTitle"></h3>
+          <div class="modal-meta">
+            <p><strong>Created:</strong> <span id="modalDate"></span></p>
+            <div class="modal-mirrors" id="modalMirrors"></div>
+          </div>
+          <div class="modal-tags-section">
+            <button class="view-tags-btn" id="viewTagsBtn">View Tags</button>
+            <div class="modal-tags" id="modalTags" style="display: none;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
 
 
   <footer>
+    <div style="display:flex;flex-direction: row;gap:20px;">
+      <a href="index.html">Artwork Index</a>
+      <a href="biography.html">Biography</a>
+      <a href="reviews.html">Book Reviews</a>
+      <a href="projects.html">Projects</a>
+      <a href="covers.html">Piano Covers</a>
+    </div>
     <div class="social-bar" id="socialBar"></div>
   </footer>
+  <script src="./config/character.js"></script>
+  <script src="./config/archive-data.js"></script>
   <script src="./js/utility.js"></script>
+  <script src="./js/archive.js"></script>
 </body>
 </html>

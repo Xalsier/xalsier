@@ -16,11 +16,10 @@
   <div class="modal" onclick="toggleModal(false)" id="navModal">
     <div class="modal-content" onclick="event.stopPropagation()">
       <select onchange="navigate(this)">
-        <option value="index.html">Index</option>
+        <option value="index.html">Artwork Index</option>
         <option value="biography.html">Biography</option>
-        <option value="characters.html">Characters</option>
         <option value="reviews.html">Book Reviews</option>
-        <option value="projects.html">Projects</option>
+        <option value="projects.html">Coding Projects</option>
         <option value="covers.html" selected>Piano Covers</option>
       </select>
     </div>
@@ -47,6 +46,13 @@
   </main>
 
   <footer>
+    <div style="display:flex;flex-direction: row;gap:20px;">
+      <a href="index.html">Artwork Index</a>
+      <a href="biography.html">Biography</a>
+      <a href="reviews.html">Book Reviews</a>
+      <a href="projects.html">Projects</a>
+      <a href="covers.html">Piano Covers</a>
+    </div>
     <div class="social-bar" id="socialBar"></div>
   </footer>
 
