@@ -246,7 +246,8 @@ const ARCHIVE_ITEMS = [
     {
         id: 15,
         title: "Tail Swish Animation ",
-        image: "./gif/2160.gif",
+        thumb: "./gif/240p.gif",
+        image: "./mp4/swish.mp4",
         characters: ["Sera"],
         project: "Birth by Memory",
         background: "White Background",
@@ -259,7 +260,7 @@ const ARCHIVE_ITEMS = [
         mirrors: [{ platform: "furaffinity", url: "https://www.furaffinity.net/view/61392757/"},
         { platform: "newgrounds", url: "https://www.newgrounds.com/portal/view/986507"},
         { platform: "twitter", url: "https://x.com/Xalsier/status/1939099254972166188"}],
-        tags: ["Vector Art", "Affinty Designer 2", "Green Eyes", "Bra", "Animated"],
+        tags: ["Vector Art", "Affinty Designer 2", "Green Eyes", "Bra", "Animated", "60 FPS", "14 Seconds"],
     },
     {
         id: 16,
@@ -339,7 +340,7 @@ const ARCHIVE_ITEMS = [
         bodyType: [],
         createdDate: "September 10, 2021",
         mirrors: [{ platform: "furaffinity", url: "https://www.furaffinity.net/view/58556403/"}],
-        tags: ["Pixel Art", "Aseprite", "Yellow Eyes", "Animated"],
+        tags: ["Pixel Art", "Aseprite", "Yellow Eyes", "Animated", "5 FPS", "12 Seconds"],
     },
   ]
   

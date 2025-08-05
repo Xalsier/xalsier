@@ -1,0 +1,1 @@
+- Do NOT use gif images as a replacement for heavy mp4 files. If anything, a good practice is to use lower res gifs for the thumbnails of mp4s.

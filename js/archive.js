@@ -231,60 +231,53 @@ class ArchiveApp {
     }
   
     createGalleryItem(item) {
-      const itemElement = document.createElement("div")
-      itemElement.className = "gallery-item"
-      itemElement.addEventListener("click", () => this.openModal(item))
-  
-      const imageContainer = document.createElement("div")
-      imageContainer.className = "gallery-item-image"
-  
-      // Create image element
-      const img = document.createElement("img")
-      img.src = item.image
-      img.alt = item.title
+        const itemElement = document.createElement("div");
+        itemElement.className = "gallery-item";
+        itemElement.addEventListener("click", () => this.openModal(item));
       
-      img.onerror = () => {
-        // Keep green square visible if image fails
-        console.log("Image failed to load:", item.image)
-      }
-  
-      img.onload = () => {
-        const resolutionTag = `${img.naturalWidth}x${img.naturalHeight}`
-        
-        if (!item.tags.includes(resolutionTag)) {
-          item.tags.push(resolutionTag) // Add resolution as a dynamic tag
+        const imageContainer = document.createElement("div");
+        imageContainer.className = "gallery-item-image";
+      
+        // Use thumb or fallback to image
+        const isVideo = item.image && item.image.endsWith(".mp4");
+        const thumbSrc = item.thumb || (isVideo ? "./img/video-thumb.png" : item.image);
+      
+        if (thumbSrc.endsWith(".mp4")) {
+          const video = document.createElement("video");
+          video.src = thumbSrc;
+          video.muted = true;
+          video.loop = true;
+          video.autoplay = true;
+          video.playsInline = true;
+          video.className = "gallery-thumb-video";
+          imageContainer.appendChild(video);
+        } else {
+          const img = document.createElement("img");
+          img.src = thumbSrc;
+          img.alt = item.title;
+          img.onerror = () => console.warn("Thumb failed to load:", thumbSrc);
+          imageContainer.appendChild(img);
         }
       
-        console.log("Added resolution tag:", resolutionTag)
+        const infoContainer = document.createElement("div");
+        infoContainer.className = "gallery-item-info";
+      
+        const filterStatus = item.filters && item.filters.length > 0 ? item.filters[0] : "Unknown";
+        const filterClass = `filter-${filterStatus.toLowerCase()}`;
+        const allowedMeta = ["Explicit", "Scrap", "Violent"];
+        const subtitle = allowedMeta.includes(item.meta) ? item.meta : item.species || "";
+      
+        infoContainer.innerHTML = `
+          <div class="gallery-item-title">${item.title}</div>
+          ${subtitle ? `<div class="gallery-item-filter ${filterClass}">${subtitle}</div>` : ""}
+        `;
+      
+        itemElement.appendChild(imageContainer);
+        itemElement.appendChild(infoContainer);
+      
+        return itemElement;
       }
       
-  
-      // Add image to container (green square is background)
-      imageContainer.appendChild(img)
-  
-      const infoContainer = document.createElement("div")
-      infoContainer.className = "gallery-item-info"
-  
-      // Get filter status
-      const filterStatus = item.filters && item.filters.length > 0 ? item.filters[0] : "Unknown"
-      const filterClass = `filter-${filterStatus.toLowerCase()}`
-  
-// Determine which subtitle to show
-const allowedMeta = ["Explicit", "Scrap", "Violent"];
-const subtitle =
-  allowedMeta.includes(item.meta) ? item.meta : item.species || "";
-
-infoContainer.innerHTML = `
-  <div class="gallery-item-title">${item.title}</div>
-  ${subtitle ? `<div class="gallery-item-filter ${filterClass}">${subtitle}</div>` : ""}
-`;
-
-  
-      itemElement.appendChild(imageContainer)
-      itemElement.appendChild(infoContainer)
-  
-      return itemElement
-    }
   
     renderPagination() {
       const pagination = document.getElementById("pagination")
@@ -346,91 +339,96 @@ infoContainer.innerHTML = `
     }
   
     openModal(item) {
-      const modal = document.getElementById("imageModal")
-      const modalImage = document.getElementById("modalImage")
-      const modalTitle = document.getElementById("modalTitle")
-      const modalDate = document.getElementById("modalDate")
-      const modalMirrors = document.getElementById("modalMirrors")
-      const modalTags = document.getElementById("modalTags")
-      const modalImageContainer = document.querySelector(".modal-image-container")
-  
-      // Set content
-      modalImage.src = item.image
-      modalImage.alt = item.title
-      modalTitle.textContent = item.title
-      modalDate.textContent = new Date(item.createdDate).toLocaleDateString(undefined, {
-        year: "numeric",
-        month: "long",
-        day: "numeric"
-      })
+        const modal = document.getElementById("imageModal");
+        const modalTitle = document.getElementById("modalTitle");
+        const modalDate = document.getElementById("modalDate");
+        const modalMirrors = document.getElementById("modalMirrors");
+        const modalTags = document.getElementById("modalTags");
+        const modalImageContainer = document.querySelector(".modal-image-container");
       
-      if (item.image.startsWith("./svg/")) {
-        modalImageContainer.style.background = "var(--green)"
-      } else if (item.image.startsWith("./img/")) {
-        modalImageContainer.style.background = "var(--bg-color)"
-      } else {
-        modalImageContainer.style.background = "" // fallback or default
+        // Reset modal image container
+        modalImageContainer.innerHTML = "";
+        modalImageContainer.style.background = "var(--bg-color)";
+      
+        // Render media (image or video)
+        if (item.image && item.image.endsWith(".mp4")) {
+          const video = document.createElement("video");
+          video.src = item.image;
+          video.controls = true;
+          video.autoplay = true;
+          video.loop = false;
+          video.playsInline = true;
+          video.className = "modal-video";
+          modalImageContainer.appendChild(video);
+        } else {
+          const img = document.createElement("img");
+          img.src = item.image;
+          img.alt = item.title;
+          img.id = "modalImage"; // Retain ID for legacy styling
+          modalImageContainer.appendChild(img);
+        }
+      
+        // Set title and date
+        modalTitle.textContent = item.title;
+        modalDate.textContent = new Date(item.createdDate).toLocaleDateString(undefined, {
+          year: "numeric",
+          month: "long",
+          day: "numeric"
+        });
+      
+        // Render mirrors
+        const platformIconMap = {
+          twitter: "./svg/soc/x.svg",
+          bluesky: "./svg/soc/blue.svg",
+          instagram: "./svg/soc/insta.svg"
+        };
+      
+        modalMirrors.innerHTML = "";
+      
+        item.mirrors.forEach((mirror) => {
+          const link = document.createElement("a");
+          link.href = mirror.url;
+          link.target = "_blank";
+          link.className = "mirror-link";
+      
+          const svgPath = platformIconMap[mirror.platform];
+      
+          if (svgPath) {
+            const iconId = "icon";
+      
+            link.innerHTML = `
+              <svg class="mirror-icon" viewBox="0 0 24 24" fill="currentColor">
+                <use href="${svgPath}#${iconId}"></use>
+              </svg>
+              ${mirror.platform.charAt(0).toUpperCase() + mirror.platform.slice(1)}
+            `;
+      
+            const testImg = new Image();
+            testImg.onerror = () => {
+              console.warn(`SVG failed to load for ${mirror.platform}: ${svgPath}`);
+            };
+            testImg.src = svgPath;
+          } else {
+            link.textContent = mirror.platform.charAt(0).toUpperCase() + mirror.platform.slice(1);
+          }
+      
+          modalMirrors.appendChild(link);
+        });
+      
+        // Render tags (initially hidden)
+        modalTags.innerHTML = "";
+        item.tags.forEach((tag) => {
+          const tagElement = document.createElement("span");
+          tagElement.className = "tag";
+          tagElement.textContent = tag;
+          modalTags.appendChild(tagElement);
+        });
+      
+        // Show modal
+        modal.style.display = "block";
+        document.body.style.overflow = "hidden";
       }
-
-// 1. Define inline path map for known platforms
-const platformIconMap = {
-    twitter: "./svg/soc/x.svg",
-    bluesky: "./svg/soc/blue.svg",
-    instagram: "./svg/soc/insta.svg"
-  };
-  
-  modalMirrors.innerHTML = "";
-  
-  item.mirrors.forEach((mirror) => {
-    const link = document.createElement("a");
-    link.href = mirror.url;
-    link.target = "_blank";
-    link.className = "mirror-link";
-  
-    // 2. Check if we have a known path for the platform
-    const svgPath = platformIconMap[mirror.platform];
-  
-    // 3. Build the inner HTML
-    if (svgPath) {
-      const iconId = "icon"; // Assuming #icon is used in all files
-  
-      link.innerHTML = `
-        <svg class="mirror-icon" viewBox="0 0 24 24" fill="currentColor">
-          <use href="${svgPath}#${iconId}"></use>
-        </svg>
-        ${mirror.platform.charAt(0).toUpperCase() + mirror.platform.slice(1)}
-      `;
-  
-      // 4. Check if the SVG actually loads — use <use>'s onerror detection via a workaround
-      // Create a temporary <img> to test load
-      const testImg = new Image();
-      testImg.onerror = () => {
-        console.warn(`SVG failed to load for ${mirror.platform}: ${svgPath}`);
-      };
-      testImg.src = svgPath; // this won't check #icon, but will detect missing file
-  
-    } else {
-      // If not mapped, fallback to text-only or minimal markup
-      link.textContent = mirror.platform.charAt(0).toUpperCase() + mirror.platform.slice(1);
-    }
-  
-    modalMirrors.appendChild(link);
-  });
-  
-  
-      // Render tags (hidden initially)
-      modalTags.innerHTML = ""
-      item.tags.forEach((tag) => {
-        const tagElement = document.createElement("span")
-        tagElement.className = "tag"
-        tagElement.textContent = tag
-        modalTags.appendChild(tagElement)
-      })
-  
-      // Show modal
-      modal.style.display = "block"
-      document.body.style.overflow = "hidden"
-    }
+      
   
     closeModal() {
       const modal = document.getElementById("imageModal")
