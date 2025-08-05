@@ -15,13 +15,21 @@ class ArchiveApp {
         this.setupEventListeners()
         this.loadItems()
         
-        // Add "new" (history:Recent) filter by default
-        const defaultFilterId = "history-Recent"
-        this.activeFilters.set(defaultFilterId, {
-          type: "history",
-          name: "Recent",
-          display: "Recent",
-        })
+    // Add "Recent" (history:Recent) filter by default
+    const recentFilterId = "history-Recent";
+    this.activeFilters.set(recentFilterId, {
+      type: "history",
+      name: "Recent",
+      display: "Recent",
+    });
+
+    // Add "Safe" (filter:Safe) filter by default
+    const safeFilterId = "filter-Safe";
+    this.activeFilters.set(safeFilterId, {
+      type: "filter",
+      name: "Safe",
+      display: "Safe",
+    });
       
         this.renderActiveFilters()
         this.filterItems()
