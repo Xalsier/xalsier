@@ -43,6 +43,22 @@
     line-height: 1.6;
     overflow-x: hidden;
   }
+
+  /* Body Scrollbar */
+body::-webkit-scrollbar {
+    width: 12px;
+  }
+  body::-webkit-scrollbar-track {
+    background: var(--sec-color);
+  }
+  body::-webkit-scrollbar-thumb {
+    background: var(--green);
+    border-radius: 10px;
+  }
+  body {
+    scrollbar-width: thin;
+    scrollbar-color: var(--green) var(--sec-color);
+  }
   
   h1 {
     color: var(--green);

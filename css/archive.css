@@ -247,7 +247,7 @@
   .gallery-item-image img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit:fill;
     transition: var(--transition);
     position: absolute;
     top: 0;
@@ -272,9 +272,11 @@
   .gallery-item-image img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* preserves aspect ratio, crops if needed */
+    object-fit: cover;
+    object-position: top;
     display: block;
   }
+  
   
   
   .gallery-item:hover .gallery-item-image img {
@@ -373,6 +375,19 @@
     cursor: not-allowed;
   }
   
+/* Modal Scrollbar */
+.modal-content::-webkit-scrollbar {
+    width: 10px;
+  }
+  .modal-content::-webkit-scrollbar-thumb {
+    background: var(--green);
+    border-radius: 10px;
+  }
+  .modal-content {
+    scrollbar-width: thin;
+    scrollbar-color: var(--green) var(--sec-color);
+  }
+
   /* Image Modal */
   .image-modal {
     display: none;
@@ -407,7 +422,8 @@
   }
   
   .modal-close {
-    position: absolute;
+    position: flex;
+    margin-bottom: 20px;
     top: 1rem;
     right: 1rem;
     background: rgba(0, 0, 0, 0.7);
@@ -418,7 +434,7 @@
     height: 40px;
     font-size: 1.5rem;
     cursor: pointer;
-    z-index: 10;
+    z-index: 1;
     transition: var(--transition);
   }
   
@@ -434,6 +450,8 @@
     justify-content: center;
     background: var(--bg-color);
     overflow: auto;
+    height: 600px;
+    border-radius:25px;
   }
   
   .modal-image-container img {

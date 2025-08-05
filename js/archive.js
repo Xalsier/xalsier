@@ -242,16 +242,22 @@ class ArchiveApp {
       const img = document.createElement("img")
       img.src = item.image
       img.alt = item.title
-  
+      
       img.onerror = () => {
         // Keep green square visible if image fails
         console.log("Image failed to load:", item.image)
       }
   
       img.onload = () => {
-        // Image loaded successfully, it will overlay the green square
-        console.log("Image loaded:", item.image)
+        const resolutionTag = `${img.naturalWidth}x${img.naturalHeight}`
+        
+        if (!item.tags.includes(resolutionTag)) {
+          item.tags.push(resolutionTag) // Add resolution as a dynamic tag
+        }
+      
+        console.log("Added resolution tag:", resolutionTag)
       }
+      
   
       // Add image to container (green square is background)
       imageContainer.appendChild(img)
