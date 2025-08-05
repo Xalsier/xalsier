@@ -414,7 +414,6 @@
     max-width: 90vw;
     max-height: 90vh;
     margin: 5vh auto;
-    background: var(--sec-color);
     border-radius: var(--border-radius);
     overflow-y: scroll;
     overflow-x:hidden;
@@ -462,8 +461,9 @@
     align-items: center;
     justify-content: center;
     background: var(--bg-color);
-    overflow: auto;
-    max-height: 600px;
+
+    object-position: bottom;
+    height: 600px;
     border-radius: 25px;
   }
   

@@ -416,7 +416,6 @@ body::-webkit-scrollbar {
   }
   
   .modal-content {
-    background: var(--sec-color);
     padding: 2rem;
     border-radius: var(--border-radius);
     box-shadow: var(--shadow);

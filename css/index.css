@@ -45,7 +45,6 @@ h1 {
 }
 
 .modal-content {
-  background: var(--sec-color);
   padding: 1rem;
   border-radius: 6px;
 }

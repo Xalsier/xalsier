@@ -374,7 +374,7 @@ class ArchiveApp {
         if (item.image.startsWith("./svg/")) {
             modalImageContainer.style.background = "var(--green)"
           } else if (item.image.startsWith("./img/")) {
-            modalImageContainer.style.background = "var(--bg-color)"
+            modalImageContainer.style.background = "none"
           } else {
             modalImageContainer.style.background = "" // fallback or default
           }
