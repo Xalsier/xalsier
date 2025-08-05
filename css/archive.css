@@ -656,7 +656,11 @@
     }
   
     .gallery-grid {
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      grid-template-columns: repeat(2, 1fr);
+    }
+  
+    .gallery-item-info {
+      display: none;
     }
   
     .search-btn {
@@ -668,5 +672,6 @@
       max-width: 250px;
     }
   }
+  
   
   
