@@ -261,7 +261,7 @@ const ARCHIVE_ITEMS = [
         { platform: "newgrounds", url: "https://www.newgrounds.com/portal/view/986507"},
         { platform: "twitter", url: "https://x.com/Xalsier/status/1939099254972166188"},
         { platform: "youtube", url: "https://youtube.com/shorts/pCu3VEY5Te8"}],
-        tags: ["Vector Art", "Affinty Designer 2", "Green Eyes", "Bra", "Animated", "60 FPS", "14 Seconds", ";3"],
+        tags: ["Vector Art", "Affinty Designer 2", "Procreate Dreams", "Green Eyes", "Bra", "Animated", "60 FPS", "14 Seconds", ";3"],
     },
     {
         id: 16,
