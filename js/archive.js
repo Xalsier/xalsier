@@ -358,8 +358,36 @@ class ArchiveApp {
         modalImageContainer.innerHTML = "";
         modalImageContainer.style.background = "var(--bg-color)";
       
-        // Render media (image or video)
-        if (item.image && item.image.endsWith(".mp4")) {
+        // Helper to extract YouTube video ID from various URL formats, including shorts
+        function extractYouTubeID(url) {
+          const patterns = [
+            /(?:youtube\.com\/watch\?v=|youtube\.com\/embed\/|youtu\.be\/)([^&\n?#]+)/, // normal and short url
+            /youtube\.com\/shorts\/([^&\n?#]+)/ // shorts url
+          ];
+          for (const pattern of patterns) {
+            const match = url.match(pattern);
+            if (match && match[1]) return match[1];
+          }
+          return null;
+        }
+      
+        // Check if item.image is a YouTube URL
+        const ytID = extractYouTubeID(item.image);
+      
+        if (ytID) {
+          // Create iframe with embed url
+          const iframe = document.createElement("iframe");
+          iframe.src = `https://www.youtube.com/embed/${ytID}`;
+          iframe.width = "100%";
+          iframe.height = "100%";
+          iframe.frameBorder = "0";
+          iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+          iframe.allowFullscreen = true;
+          iframe.className = "modal-video-iframe";
+          modalImageContainer.appendChild(iframe);
+      
+        } else if (item.image && item.image.endsWith(".mp4")) {
+          // Existing video handling
           const video = document.createElement("video");
           video.src = item.image;
           video.controls = true;
@@ -368,11 +396,13 @@ class ArchiveApp {
           video.playsInline = true;
           video.className = "modal-video";
           modalImageContainer.appendChild(video);
+      
         } else {
+          // Default image fallback
           const img = document.createElement("img");
           img.src = item.image;
           img.alt = item.title;
-          img.id = "modalImage"; // Retain ID for legacy styling
+          img.id = "modalImage"; // legacy styling
           modalImageContainer.appendChild(img);
         }
       
@@ -403,14 +433,12 @@ class ArchiveApp {
       
           if (svgPath) {
             const iconId = "icon";
-      
             link.innerHTML = `
               <svg class="mirror-icon" viewBox="0 0 24 24" fill="currentColor">
                 <use href="${svgPath}#${iconId}"></use>
               </svg>
               ${mirror.platform.charAt(0).toUpperCase() + mirror.platform.slice(1)}
             `;
-      
             const testImg = new Image();
             testImg.onerror = () => {
               console.warn(`SVG failed to load for ${mirror.platform}: ${svgPath}`);
@@ -436,6 +464,7 @@ class ArchiveApp {
         modal.style.display = "block";
         document.body.style.overflow = "hidden";
       }
+      
       
   
     closeModal() {
