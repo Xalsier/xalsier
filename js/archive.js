@@ -149,7 +149,7 @@ class ArchiveApp {
             case "bodyType":
               return item.bodyType.includes(filter.name)
             case "furColor":
-              return item.furColor === filter.name
+              return item.furColor.includes(filter.name)
             case "tag":
                 // Check if item's tags array includes the filter name
                 return item.tags && item.tags.includes(filter.name)
@@ -346,30 +346,71 @@ infoContainer.innerHTML = `
       const modalDate = document.getElementById("modalDate")
       const modalMirrors = document.getElementById("modalMirrors")
       const modalTags = document.getElementById("modalTags")
+      const modalImageContainer = document.querySelector(".modal-image-container")
   
       // Set content
       modalImage.src = item.image
       modalImage.alt = item.title
       modalTitle.textContent = item.title
-      modalDate.textContent = new Date(item.createdDate).toLocaleDateString()
-  
-      // Render mirrors
-      modalMirrors.innerHTML = ""
-      item.mirrors.forEach((mirror) => {
-        const link = document.createElement("a")
-        link.href = mirror.url
-        link.target = "_blank"
-        link.className = "mirror-link"
-  
-        const iconName = mirror.platform === "twitter" ? "x" : mirror.platform
-        link.innerHTML = `
-          <svg class="mirror-icon" viewBox="0 0 24 24" fill="currentColor">
-            <use href="./svg/soc/${iconName}.svg#icon"></use>
-          </svg>
-          ${mirror.platform.charAt(0).toUpperCase() + mirror.platform.slice(1)}
-        `
-        modalMirrors.appendChild(link)
+      modalDate.textContent = new Date(item.createdDate).toLocaleDateString(undefined, {
+        year: "numeric",
+        month: "long",
+        day: "numeric"
       })
+      
+      if (item.image.startsWith("./svg/")) {
+        modalImageContainer.style.background = "var(--green)"
+      } else if (item.image.startsWith("./img/")) {
+        modalImageContainer.style.background = "var(--bg-color)"
+      } else {
+        modalImageContainer.style.background = "" // fallback or default
+      }
+
+// 1. Define inline path map for known platforms
+const platformIconMap = {
+    twitter: "./svg/soc/x.svg",
+    bluesky: "./svg/soc/blue.svg",
+    instagram: "./svg/soc/insta.svg"
+  };
+  
+  modalMirrors.innerHTML = "";
+  
+  item.mirrors.forEach((mirror) => {
+    const link = document.createElement("a");
+    link.href = mirror.url;
+    link.target = "_blank";
+    link.className = "mirror-link";
+  
+    // 2. Check if we have a known path for the platform
+    const svgPath = platformIconMap[mirror.platform];
+  
+    // 3. Build the inner HTML
+    if (svgPath) {
+      const iconId = "icon"; // Assuming #icon is used in all files
+  
+      link.innerHTML = `
+        <svg class="mirror-icon" viewBox="0 0 24 24" fill="currentColor">
+          <use href="${svgPath}#${iconId}"></use>
+        </svg>
+        ${mirror.platform.charAt(0).toUpperCase() + mirror.platform.slice(1)}
+      `;
+  
+      // 4. Check if the SVG actually loads — use <use>'s onerror detection via a workaround
+      // Create a temporary <img> to test load
+      const testImg = new Image();
+      testImg.onerror = () => {
+        console.warn(`SVG failed to load for ${mirror.platform}: ${svgPath}`);
+      };
+      testImg.src = svgPath; // this won't check #icon, but will detect missing file
+  
+    } else {
+      // If not mapped, fallback to text-only or minimal markup
+      link.textContent = mirror.platform.charAt(0).toUpperCase() + mirror.platform.slice(1);
+    }
+  
+    modalMirrors.appendChild(link);
+  });
+  
   
       // Render tags (hidden initially)
       modalTags.innerHTML = ""
@@ -522,8 +563,11 @@ infoContainer.innerHTML = `
       }
   
       const brokenImages = this.filteredItems.filter((item) => {
-        return item.image && !item.image.startsWith("./img/") && !item.image.startsWith("http")
-      })
+        if (!item.image) return true
+      
+        const validPrefixes = ["./img/", "./svg/", "https://"]
+        return !validPrefixes.some(prefix => item.image.startsWith(prefix))
+      })      
       if (brokenImages.length > 0) {
         this.errors.push(`${brokenImages.length} items have invalid image paths.`)
       }

@@ -64,3 +64,19 @@ function hideLoading(elementId) {
     element.classList.remove("loading")
   }
 }
+
+function getArchiveLength() {
+  if (!Array.isArray(ARCHIVE_ITEMS)) {
+    console.warn("ARCHIVE_ITEMS is not an array.");
+    return 0;
+  }
+  return ARCHIVE_ITEMS.length;
+}
+
+function updateArchiveHeader() {
+  const header = document.getElementById("archive-count");
+  const count = getArchiveLength();
+  header.textContent = `${count} Item${count !== 1 ? 's' : ''}`;
+}
+
+updateArchiveHeader();
