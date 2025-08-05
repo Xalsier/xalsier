@@ -370,6 +370,14 @@ class ArchiveApp {
           }
           return null;
         }
+
+        if (item.image.startsWith("./svg/")) {
+            modalImageContainer.style.background = "var(--green)"
+          } else if (item.image.startsWith("./img/")) {
+            modalImageContainer.style.background = "var(--bg-color)"
+          } else {
+            modalImageContainer.style.background = "" // fallback or default
+          }
       
         // Check if item.image is a YouTube URL
         const ytID = extractYouTubeID(item.image);
