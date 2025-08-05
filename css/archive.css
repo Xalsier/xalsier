@@ -461,11 +461,10 @@
     align-items: center;
     justify-content: center;
     background: var(--bg-color);
-
-    object-position: bottom;
-    height: 600px;
     border-radius: 25px;
+    max-height: 90vh;
   }
+  
   
   .modal-image-container img {
     max-width: 100%;
@@ -473,7 +472,9 @@
     width: auto;
     height: auto;
     object-fit: contain;
+    display: block;
   }
+  
   
   .modal-info {
     flex: 1;
