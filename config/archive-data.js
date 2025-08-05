@@ -14,7 +14,7 @@ const ARCHIVE_ITEMS = [
       bodyType: ["Flat Chested"],
       createdDate: "November 26 2023",
       mirrors: [{ platform: "furaffinity", url: "https://www.furaffinity.net/view/57439158/" }],
-      tags: ["Raster Art", "Procreate"],
+      tags: ["Raster Art", "Procreate", "Yellow Eyes"],
     },
     {
         id: 2,
@@ -48,7 +48,7 @@ const ARCHIVE_ITEMS = [
         createdDate: "July 16, 2025",
         mirrors: [{ platform: "furaffinity", url: "https://www.furaffinity.net/view/61600438/" },
         { platform: "instagram", url: "https://www.instagram.com/p/DMMA1CDJ1JN/" }],
-        tags: ["Crop Top", "Raster Art", "Procreate"],
+        tags: ["Crop Top", "Raster Art", "Procreate", "Yellow Eyes"],
     },
     {
         id: 4,
@@ -81,7 +81,7 @@ const ARCHIVE_ITEMS = [
         bodyType: ["Flat Chested"],
         createdDate: "June 21, 2025",
         mirrors: [{ platform: "instagram", url: "https://www.instagram.com/p/DLYGOT1psej/" }],
-        tags: ["Turtleneck", "Traditional Art"],
+        tags: ["Turtleneck", "Traditional Art", "Gray Eyes"],
     },
     {
         id: 6,
@@ -97,7 +97,7 @@ const ARCHIVE_ITEMS = [
         bodyType: ["Flat Chested"],
         createdDate: "July 11, 2025",
         mirrors: [{ platform: "furaffinity", url: "https://www.furaffinity.net/view/61622527/"}],
-        tags: ["Raster Art", "Procreate"],
+        tags: ["Raster Art", "Procreate", "Pink Eyes"],
     },
     {
         id: 7,
@@ -113,7 +113,7 @@ const ARCHIVE_ITEMS = [
         bodyType: ["Flat Chested"],
         createdDate: "July 9, 2025",
         mirrors: [{ platform: "furaffinity", url: "https://www.furaffinity.net/view/61622785/"}],
-        tags: ["Raster Art", "Procreate"],
+        tags: ["Raster Art", "Procreate", "Pink Eyes"],
     },
     {
         id: 8,
@@ -145,7 +145,7 @@ const ARCHIVE_ITEMS = [
         bodyType: ["Flat Chested"],
         createdDate: "December 9, 2021",
         mirrors: [{ platform: "furaffinity", url: "https://www.furaffinity.net/view/57584718/"}],
-        tags: ["Raster Art", "Photopea"],
+        tags: ["Raster Art", "Photopea", "Purple Eyes"],
     },
     {
         id: 10,
@@ -161,7 +161,7 @@ const ARCHIVE_ITEMS = [
         bodyType: [],
         createdDate: "April 9, 2025",
         mirrors: [{ platform: "furaffinity", url: "https://www.furaffinity.net/view/60518849/"}],
-        tags: ["Raster Art", "Comic", "Button-Up", "Black & White", "Procreate"],
+        tags: ["Raster Art", "Comic", "Button-Up", "Black & White", "Procreate", "Bandana"],
     },
     {
         id: 11,
@@ -177,7 +177,7 @@ const ARCHIVE_ITEMS = [
         bodyType: [],
         createdDate: "March 30, 2025",
         mirrors: [{ platform: "furaffinity", url: "https://www.furaffinity.net/view/60391986/"}],
-        tags: ["Raster Art", "Comic", "Button-Up", "Black & White", "Procreate"],
+        tags: ["Raster Art", "Comic", "Button-Up", "Black & White", "Procreate", "Bandana"],
     },
     {
         id: 12,
@@ -241,7 +241,7 @@ const ARCHIVE_ITEMS = [
         bodyType: [],
         createdDate: "July 8, 2025",
         mirrors: [{ platform: "furaffinity", url: "https://www.furaffinity.net/view/61622347/"}],
-        tags: ["Raster Art", "Procreate"],
+        tags: ["Raster Art", "Procreate", "Purple Eyes"],
     },
     {
         id: 15,
@@ -259,7 +259,7 @@ const ARCHIVE_ITEMS = [
         mirrors: [{ platform: "furaffinity", url: "https://www.furaffinity.net/view/61392757/"},
         { platform: "newgrounds", url: "https://www.newgrounds.com/portal/view/986507"},
         { platform: "twitter", url: "https://x.com/Xalsier/status/1939099254972166188"}],
-        tags: ["Vector Art", "Affinty Designer 2"],
+        tags: ["Vector Art", "Affinty Designer 2", "Green Eyes"],
     },
     {
         id: 16,
@@ -272,7 +272,7 @@ const ARCHIVE_ITEMS = [
         furColor: ["Orange"],
         species: ["Hyena"],
         gender: ["Female"],
-        bodyType: [],
+        bodyType: ["Scar Marks"],
         createdDate: "July 30, 2025",
         mirrors: [],
         tags: ["Raster Art", "Procreate"],
@@ -323,7 +323,23 @@ const ARCHIVE_ITEMS = [
         bodyType: [],
         createdDate: "September 12, 2022",
         mirrors: [{ platform: "reddit", url: "https://www.reddit.com/r/FurryArtSchool/comments/xc8mej/can_i_have_some_critique_on_the_first_page_of_a/"}],
-        tags: ["Raster Art", "Clip Studio Paint"],
+        tags: ["Raster Art", "Clip Studio Paint", "Yellow Eyes"],
+    },
+    {
+        id: 20,
+        title: "Benjamin in the Swamp (2021)",
+        image: "./gif/Ben_Subu.gif",
+        characters: [],
+        project: null,
+        background: "Rendered Background",
+        filters: ["Safe"],
+        furColor: ["Black"],
+        species: ["Cat"],
+        gender: ["Male"],
+        bodyType: [],
+        createdDate: "September 10, 2021",
+        mirrors: [{ platform: "furaffinity", url: "https://www.furaffinity.net/view/58556403/"}],
+        tags: ["Pixel Art", "Aseprite", "Yellow Eyes"],
     },
   ]
   
