@@ -6,7 +6,7 @@ const apps = [
       code: "https://github.com/Xalsier/Birth-by-Memory",
       cur: false,
       site: "https://birthbymemory.com",
-      update: "April 14, 2025 - Present",
+      update: "June 4, 2023 - Present",
       section: "Featured",
       description: `<span class="status">Hiatus</span>Furry Dark Fantasy work of science fiction, set in a Neo <a class="wiki-link" href="https://en.wikipedia.org/wiki/Age_of_Discovery" target="_blank">Golden Age of Discovery</a> after the entire planet of Earth is terraformed by wind spirits, leaving the world shrouded in fog, new geography, beasts, magic, and evolved monsters and plants.`,
       more: null
@@ -17,7 +17,7 @@ const apps = [
       id: 6,
       code: "https://github.com/Xalsier/xalsier",
       site: "https://xalsier.github.io/xalsier/",
-      update: "June 26, 2025 - Present",
+      update: "March 15, 2024 - Present",
       section: "Featured",
       description: `<span class="status green">In Progress</span>Your here! This is a website that I plan to use to archive my art work, as well as information on stuff that I'm working on. There'll be a little bit of everything here.`,
       more: null
@@ -52,7 +52,7 @@ const apps = [
       code: "https://github.com/Xalsier/pachinko",
       cur: true,
       site: "https://xalsier.github.io/pachinko/",
-      update: "Jun 20, 2023",
+      update: "Jun 18, 2023 - Feb 16, 2024",
       section: "Games",
       description: `<span class="status">Abandoned</span>A pinball-style game where you collect points by hitting special pins on a single board.`,
       more: null
@@ -63,7 +63,7 @@ const apps = [
       id: 5,
       site: "https://xalsier.github.io/lunar_clock/",
       code: "https://github.com/Xalsier/lunar_clock",
-      update: "Sep 26, 2023",
+      update: "Sept 13, 2023 - Sept 26, 2023",
       section: "Other",
       description: `<span class="status">Abandoned</span>A fictional real-time clock that tracks the moon's position instead of standard hours.`,
       more: null
