@@ -1,0 +1,122 @@
+/* Infographic Styles */
+.timeline-infographic {
+    width: 100%;
+    max-width: 960px;
+    margin: 2rem auto;
+    border-radius: var(--border-radius);
+    padding: 0 1.5rem; /* Removed top/bottom padding */
+    box-shadow: var(--shadow);
+    overflow-x: auto; /* Allow horizontal scrolling for wide timelines */
+  }
+  
+  .timeline-infographic svg {
+    display: block;
+    margin: 0 auto;
+    /* Ensure SVG scales down */
+    width: 100%;
+    height: auto;
+  }
+  
+  .timeline-axis-line {
+    stroke: var(--sec-color-2);
+    stroke-width: 2;
+  }
+  
+  .timeline-tick-line {
+    stroke: var(--sec-color-2);
+    stroke-width: 1;
+  }
+  
+  .timeline-label {
+    fill: var(--white);
+    font-size: 0.85rem;
+    font-family: "Arial", sans-serif;
+  }
+  
+  .project-bar {
+    fill: var(--green);
+    border-radius: 4px;
+    transition: opacity 0.3s ease;
+  }
+  
+  .project-bar:hover {
+    opacity: 0.8 !important; /* Ensure hover works */
+  }
+  
+  .project-label-group {
+    cursor: pointer;
+  }
+  
+  .project-label-group:hover .project-label-text {
+    fill: var(--green);
+  }
+  
+  .project-label-text {
+    fill: var(--white);
+    font-size: 0.9rem;
+    font-weight: bold;
+    font-family: "Arial", sans-serif;
+    transition: fill 0.3s ease;
+  }
+  
+  .project-icon-square {
+    fill: var(--green);
+    border-radius: 4px;
+  }
+  
+  .project-icon-svg {
+    fill: var(--bg-color); /* Color for the SVG inside the green square */
+  }
+  
+  /* New style for abandoned indicator */
+  .abandoned-indicator {
+    fill: #e58b8b; /* Using the red pastel color from your app.css */
+    border-radius: 2px; /* Slightly rounded corners for the small bar */
+  }
+  
+  
+  /* Project Sections Container */
+  #project-sections-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 2rem;
+    max-width: 960px;
+    margin: auto;
+  }
+  
+  .app-section.hidden {
+    display: none;
+  }
+  
+  .app-item.highlight {
+    border: 2px solid var(--green);
+    box-shadow: 0 0 15px rgba(86, 222, 147, 0.5);
+    animation: pulseHighlight 1s ease-in-out;
+  }
+  
+  @keyframes pulseHighlight {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.01); opacity: 0.9; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+  
+  /* Removed Version Modal Specific Styles */
+  
+  /* Responsive adjustments for infographic */
+  @media (max-width: 768px) {
+    .timeline-infographic {
+      padding: 0 0.5rem; /* Reduced padding for mobile */
+    }
+  
+    /* Hide X-axis labels and ticks on smaller screens */
+    .timeline-label,
+    .timeline-tick-line {
+      display: none;
+    }
+  
+    .project-label-text {
+      font-size: 0.75rem; /* Smaller font for project names */
+    }
+  }
+  

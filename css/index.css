@@ -37,7 +37,6 @@ h1 {
   display: none;
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.7);
   backdrop-filter: blur(4px);
   z-index: 999;
   align-items: center;
@@ -50,12 +49,14 @@ h1 {
 }
 
 select {
-  font-size: 2rem;
-  font-family: Arial;
-  padding: 0.5rem;
+  font-size: 1.5rem;
+  padding: 1rem;
   background: var(--bg-color);
   color: var(--white);
-  border-radius: 4px;
+  border: 2px solid var(--green);
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: var(--transition);
 }
 
 /* Social Bar */

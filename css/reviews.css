@@ -62,7 +62,6 @@ h1 {
 }
 
 .modal-content {
-  background: var(--sec-color);
   padding: 2rem;
   border-radius: var(--border-radius);
   box-shadow: var(--shadow);
@@ -71,7 +70,6 @@ h1 {
 select {
   font-size: 1.5rem;
   padding: 1rem;
-  background: var(--bg-color);
   color: var(--white);
   border: 2px solid var(--green);
   border-radius: var(--border-radius);

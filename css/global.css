@@ -429,5 +429,6 @@ body::-webkit-scrollbar {
     border: 2px solid var(--green);
     border-radius: var(--border-radius);
     cursor: pointer;
+    transition: var(--transition);
   }
   

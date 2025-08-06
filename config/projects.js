@@ -2,7 +2,7 @@ const apps = [
     {
       name: "Birth by Memory",
       svg: "naori1.svg",
-      id: 3,
+      id: 1,
       code: "https://github.com/Xalsier/Birth-by-Memory",
       cur: false,
       site: "https://birthbymemory.com",
@@ -14,18 +14,18 @@ const apps = [
     {
       name: "Xalsier (Website)",
       svg: "xalsiersvg.svg",
-      id: 6,
+      id: 2,
       code: "https://github.com/Xalsier/xalsier",
       site: "https://xalsier.github.io/xalsier/",
       update: "March 15, 2024 - Present",
       section: "Featured",
-      description: `<span class="status green">In Progress</span>Your here! This is a website that I plan to use to archive my art work, as well as information on stuff that I'm working on. There'll be a little bit of everything here.`,
+      description: `<span class="status green">In Progress</span>You're here! This is a website that I plan to use to archive my art work, as well as information on stuff that I'm working on. There'll be a little bit of everything here.`,
       more: null
     },
     {
       name: "Blackjack Trouble",
       svg: "cat.svg",
-      id: 1,
+      id: 3,
       site: "https://xalsier.github.io/BlackjackTrouble/",
       code: "https://github.com/Xalsier/BlackjackTrouble",
       update: "Aug 1, 2023 - Jun 12, 2024",
@@ -36,19 +36,20 @@ const apps = [
     {
       name: "Untitled Point and Click",
       svg: "spencersvg.svg",
-      id: 3,
+      id: 4,
       code: null,
       cur: false,
       site: null,
       update: "July 9, 2025 - July 23, 2025.",
       section: "Games",
       description: `<span class="status">Abandoned</span>The romance game was meant to feature a puzzle where Stacy asks Spencer to close the window in her room due to it being cold outside, and re-interacting with the window replaces it with a new svg. A <a class="wiki-link" href="https://www.youtube.com/shorts/-kMuzkmYWF8" target="_blank">promotional video</a> I made for the game got 500 views.`,
-      more: null
+      more: null,
+      hideOnTimeline: true
     },
     {
       name: "Pachinko",
       svg: "flower2.svg",
-      id: 4,
+      id: 5,
       code: "https://github.com/Xalsier/pachinko",
       cur: true,
       site: "https://xalsier.github.io/pachinko/",
@@ -58,20 +59,9 @@ const apps = [
       more: null
     },
     {
-      name: "Lunar Clock",
-      svg: "degree2.svg",
-      id: 5,
-      site: "https://xalsier.github.io/lunar_clock/",
-      code: "https://github.com/Xalsier/lunar_clock",
-      update: "Sept 13, 2023 - Sept 26, 2023",
-      section: "Other",
-      description: `<span class="status">Abandoned</span>A fictional real-time clock that tracks the moon's position instead of standard hours.`,
-      more: null
-    },
-    {
       name: "Calendar",
       svg: "calendar3svg.svg",
-      id: 2,
+      id: 6,
       code: "https://github.com/Xalsier/Calendar",
       site: "https://xalsier.github.io/Calendar/",
       update: "Jul 18, 2023 - Mar 23, 2024",

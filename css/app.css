@@ -1,127 +1,160 @@
 .app-container {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    padding: 2rem;
-    max-width: 960px;
-    margin: auto;
-  }
-  
-  .app-section {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-  }
-  
-  .app-section-title {
-    font-size: 1.5rem;
-    color: var(--green);
-    border-bottom: 1px solid var(--sec-color-2);
-    padding-bottom: 0.5rem;
-  }
-  
-  .app-item {
-    display: flex;
-    gap: 1rem;
-    align-items: flex-start;
-    background-color: var(--sec-color);
-    padding: 1rem;
-    border-radius: 12px;
-  }
-  
-  .icon-box {
-    width: 60px;
-    height: 60px;
-    min-width: 60px;
-    background-color: var(--green);
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .icon-box svg {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    display: block;
-  }  
-  
-  .app-details .title {
-    color: var(--white);
-    font-size: 1.2rem;
-    font-weight: bold;
-  }
-  
-  .app-links a {
-    margin-right: 1rem;
-    text-decoration: none;
-    font-weight: bold;
-  }
-  
-  .link-green {
-    color: var(--green);
-  }
-  
-  .link-gray {
-    color: gray;
-  }
-  
-  .link-red {
-    color: #e58b8b;
-  }
-  
-  .updated {
-    font-size: 0.85rem;
-    color: #ccc;
-  }
-  
-  
-  .app-description {
-    margin-top: 0.5rem;
-    line-height: 1.7em;
-    font-size: 1.1rem;
-    color: var(--white);
-  }
-  
-  .status {
-    color: #e58b8b;
-  }
-  
-  .status.green {
-    color: var(--green);
-  }
-  
-  .wiki-link {
-    color: var(--green);
-    text-decoration: underline;
-  }
-  
-  .more-link {
-    color: var(--green);
-    cursor: pointer;
-  }
-  
-  .app-item {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    background-color: var(--sec-color);
-    padding: 1rem;
-    border-radius: 12px;
-  }
-  
-  .app-item-header {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    gap: 1rem;
-  }
-  
-  .app-details {
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-    flex-grow: 1;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 2rem;
+  max-width: 960px;
+  margin: auto;
+}
+
+.app-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.app-section-title {
+  font-size: 1.5rem;
+  color: var(--green);
+  border-bottom: 1px solid var(--sec-color-2);
+  padding-bottom: 0.5rem;
+}
+
+.app-item {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  background-color: var(--sec-color);
+  padding: 1rem;
+  border-radius: 12px;
+}
+
+.icon-box {
+  width: 60px;
+  height: 60px;
+  min-width: 60px;
+  background-color: var(--green);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-box svg {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}  
+
+.app-details .title {
+  color: var(--white);
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.app-links a {
+  margin-right: 1rem;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.link-green {
+  color: var(--green);
+}
+
+.link-gray {
+  color: gray;
+}
+
+.link-red {
+  color: #e58b8b;
+}
+
+.updated {
+  font-size: 0.85rem;
+  color: #ccc;
+}
+
+
+.app-description {
+  margin-top: 0.5rem;
+  line-height: 1.7em;
+  font-size: 1.1rem;
+  color: var(--white);
+}
+
+.status {
+  color: #e58b8b;
+}
+
+.status.green {
+  color: var(--green);
+}
+
+.wiki-link {
+  color: var(--green);
+  text-decoration: underline;
+}
+
+.more-link {
+  color: var(--green);
+  cursor: pointer;
+}
+
+.app-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  background-color: var(--sec-color);
+  padding: 1rem;
+  border-radius: 12px;
+}
+
+.app-item-header {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.app-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  flex-grow: 1;
+}
+
+/* New Nav Tabs Styles */
+.nav-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap; /* Allow tabs to wrap on smaller screens */
+}
+
+.nav-tab {
+  background-color: var(--sec-color-2);
+  color: var(--white);
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 9999px; /* Makes it rounded */
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: bold;
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+}
+
+.nav-tab:hover {
+  background-color: var(--green);
+  color: var(--bg-color);
+  transform: translateY(-2px);
+}
+
+.nav-tab.active {
+  background-color: var(--green);
+  color: var(--bg-color);
+  box-shadow: 0 4px 8px rgba(86, 222, 147, 0.3);
+}
