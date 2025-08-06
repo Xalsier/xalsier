@@ -1,5 +1,3 @@
-// Moved the original app-container content to a new container
-// to allow the infographic to be placed above it.
 const originalAppContainer = document.getElementById('app-container');
 const projectSectionsContainer = document.createElement('div');
 projectSectionsContainer.id = 'project-sections-container';
