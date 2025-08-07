@@ -438,6 +438,7 @@
     aspect-ratio: 16 / 9;
     border: none;
     display: block;
+    border-radius: 25px;
     max-height: 100%;
   }
   
@@ -480,6 +481,7 @@
     max-height: 600px;
     width: auto;
     height: auto;
+    border-radius: 25px;
     object-fit: contain;
     display: block;
   }
