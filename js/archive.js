@@ -113,18 +113,26 @@ class ArchiveApp {
                       return item.project === filter.name
                   case "background":
                       return item.background === filter.name
-                  case "filter":
-                      if (filter.name === "Safe") {
-                          const isScrap = item.filters && item.filters.includes("Scrap");
-                          const scrapFilterActive = Array.from(this.activeFilters.values()).some(
-                              (f) => f.type === "filter" && f.name === "Scrap"
-                          );
-                          if (isScrap && !scrapFilterActive) {
-                              return false;
-                          }
-                          return true;
-                      }
-                      return item.filters && item.filters.includes(filter.name)
+                      case "filter":
+                        if (filter.name === "Safe") {
+                            const isScrap = item.filters?.includes("Scrap");
+                            const isObject = item.filters?.includes("Object");
+                    
+                            const scrapFilterActive = Array.from(this.activeFilters.values()).some(
+                                (f) => f.type === "filter" && f.name === "Scrap"
+                            );
+                            const objectFilterActive = Array.from(this.activeFilters.values()).some(
+                                (f) => f.type === "filter" && f.name === "Object"
+                            );
+                    
+                            if ((isScrap && !scrapFilterActive) || (isObject && !objectFilterActive)) {
+                                return false;
+                            }
+                    
+                            return true;
+                        }
+                    
+                        return item.filters?.includes(filter.name);                    
                   case "history":
                       return true
                   case "character":

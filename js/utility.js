@@ -1,9 +1,11 @@
 
 
 const socialLinks = [
-  { href: 'https://x.com/Xalsier', src: './svg/soc/x.svg', alt: 'X' },
+  { href: 'https://x.com/Xalsier', src: './svg/soc/x.svg', alt: 'X / Twitter' },
   { href: 'https://instagram.com/xalsier', src: './svg/soc/insta.svg', alt: 'Instagram' },
-  { href: 'https://bsky.app/profile/xalsier.bsky.social', src: './svg/soc/blue.svg', alt: 'Blue' }
+  { href: 'https://bsky.app/profile/xalsier.bsky.social', src: './svg/soc/blue.svg', alt: 'Bluesky' },
+  { href: 'https://www.youtube.com/c/Xalsier', src: './svg/soc/red.svg', alt: 'Youtube' }
+
 ];
 
 const container = document.getElementById('socialBar');

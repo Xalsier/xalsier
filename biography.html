@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Biography</title>
     <link rel="stylesheet" href="./css/global2.css">
+    <link rel="stylesheet" href="./css/index.css">
     <script type="application/ld+json">
         {
           "@context": "https://schema.org",
@@ -81,7 +82,7 @@
                             <div class="progress-info">
                                 <a href="https://x.com/Xalsier" target="_blank" rel="noopener">Twitter</a>
                                 <div class="progress-bar">
-                                    <div class="progress-fill" id="progress-80"></div>
+                                    <div class="progress-fill" id="progress-80" data-platform="Twitter"></div>
                                 </div>
                                 <small>240/300</small>
                             </div>
@@ -96,7 +97,7 @@
                             <div class="progress-info">
                                 <a href="https://instagram.com/xalsier" target="_blank" rel="noopener">Instagram</a>
                                 <div class="progress-bar">
-                                    <div class="progress-fill" id="progress-98"></div>
+                                    <div class="progress-fill" id="progress-98" data-platform="Instagram"></div>
                                 </div>
                                 <small>98/100</small>
                             </div>
@@ -111,7 +112,7 @@
                             <div class="progress-info">
                                 <a href="https://bsky.app/profile/xalsier.bsky.social" target="_blank" rel="noopener">Bluesky</a>
                                 <div class="progress-bar">
-                                    <div class="progress-fill" id="progress-40"></div>
+                                    <div class="progress-fill" id="progress-40" data-platform="Bluesky"></div>
                                 </div>
                                 <small>40/100</small>
                             </div>
@@ -132,7 +133,7 @@
                             <div class="progress-info">
                                 <a href="https://www.youtube.com/c/Xalsier" target="_blank" rel="noopener">YouTube</a>
                                 <div class="progress-bar">
-                                    <div class="progress-fill" id="progress-55"></div>
+                                    <div class="progress-fill" id="progress-55" data-platform="YouTube"></div>
                                 </div>
                                 <small>1180/2000</small>
                             </div>
@@ -283,7 +284,7 @@
         </div>
         <div class="social-bar" id="socialBar"></div>
     </footer>
-
+    <script src="./js/utility.js"></script>
     <script>
         // Modal functionality
         function toggleModal(show) {
@@ -305,13 +306,20 @@
             }, 600);
         }
 
-        // Fade in animation observer
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
+            const fallbackAnimation = () => {
+                document.getElementById('progress-80')?.classList.add('animate-80');
+                document.getElementById('progress-98')?.classList.add('animate-98');
+                document.getElementById('progress-40')?.classList.add('animate-49');
+                document.getElementById('progress-55')?.classList.add('animate-55');
+            };
+        
+            // Animation for fade-ins
             const observerOptions = {
                 threshold: 0.1,
                 rootMargin: '0px 0px -50px 0px'
             };
-
+        
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
@@ -319,18 +327,40 @@
                     }
                 });
             }, observerOptions);
-
-            document.querySelectorAll('.fade-in').forEach(el => {
-                observer.observe(el);
-            });
-
-            // Animate progress bars with proper widths
-            setTimeout(() => {
-                document.getElementById('progress-80').classList.add('animate-80');
-                document.getElementById('progress-98').classList.add('animate-98');
-                document.getElementById('progress-40').classList.add('animate-49');
-                document.getElementById('progress-55').classList.add('animate-55');
-            }, 1000);
+        
+            document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+        
+            // Fetch config JSON
+            fetch('./json/socmed.json')
+                .then(res => {
+                    if (!res.ok) throw new Error('Failed to fetch config');
+                    return res.json();
+                })
+                .then(config => {
+                    document.querySelectorAll('.progress-fill').forEach(el => {
+                        const platform = el.dataset.platform;
+                        if (!platform || !config[platform]) return;
+        
+                        const { current, goal } = config[platform];
+                        const percent = Math.min((current / goal) * 100, 100);
+        
+                        el.style.width = percent + '%';
+                    });
+        
+                    // Update small text values as well
+                    document.querySelectorAll('.progress-info').forEach(info => {
+                        const link = info.querySelector('a');
+                        const small = info.querySelector('small');
+                        if (link && small && config[link.textContent]) {
+                            const { current, goal } = config[link.textContent];
+                            small.textContent = `${current}/${goal}`;
+                        }
+                    });
+                })
+                .catch(err => {
+                    console.warn('Using fallback progress animations due to error:', err);
+                    fallbackAnimation(); // Use existing hardcoded CSS animation
+                });
         });
     </script>
 </body>
