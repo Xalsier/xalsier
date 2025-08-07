@@ -1,4 +1,9 @@
-/characters.html  /index.html  301
-/bio.html         /biography.html  301
-/gallery.html     /index.html  301
-/artwork.html     /index.html  301
+/characters.html  /index.html        301
+/bio.html         /biography.html   301
+/gallery.html     /index.html        301
+/artwork.html     /index.html        301
+
+/characters       /index.html        301
+/bio              /biography.html   301
+/gallery          /index.html        301
+/artwork          /index.html        301
