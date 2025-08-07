@@ -218,7 +218,6 @@
   
   /* Profile Cards Grid */
   .profile-section {
-    background: var(--sec-color);
     border-radius: var(--border-radius);
     padding: 1.5rem;
     box-shadow: var(--shadow);
@@ -301,7 +300,6 @@
   
   /* Upcoming Works - Enhanced Table */
   .upcoming-works {
-    background: var(--sec-color);
     border-radius: var(--border-radius);
     padding: 1.5rem;
     box-shadow: var(--shadow);
@@ -637,3 +635,88 @@
     }
   }
   
+  /* Featured Art Section */
+.featured-art-section {
+  border-radius: var(--border-radius);
+  padding: 1.5rem;
+  box-shadow: var(--shadow);
+}
+
+.featured-art-grid {
+  display: flex;
+  flex-direction: column; /* Stack vertically on mobile */
+  gap: 1rem;
+}
+
+.featured-art-item {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9; /* Default aspect ratio for art */
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  background-color: var(--sec-color-2);
+  transition: transform 0.3s ease;
+  cursor: pointer;
+  box-shadow: var(--shadow);
+}
+
+.featured-art-item.large {
+  aspect-ratio: 16 / 9; /* Maintain aspect ratio for large item */
+}
+
+.featured-art-item.small {
+  aspect-ratio: 4 / 3; /* Different aspect ratio for small items */
+}
+
+.featured-art-item:hover {
+  transform: scale(1.02);
+}
+
+.featured-art-item .art-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.featured-art-item .art-text {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(3px);
+  color: var(--white);
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.featured-art-small-items {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  flex: 1; /* Take available space */
+}
+
+  /* Featured Art Layout on Desktop */
+  .featured-art-grid {
+    flex-direction: row; /* Arrange horizontally on desktop */
+    align-items: stretch;
+  }
+
+  .featured-art-item.large {
+    flex: 2; /* Take 66% width */
+  }
+
+  .featured-art-small-items {
+    flex: 1; /* Take 34% width */
+  }
+
+  .artist-header {
+    text-align: left;
+  }
+
+  .tap-to-enlarge {
+    display: none; /* Hide on desktop */
+  }
