@@ -1,4 +1,7 @@
+# System-specific files
 .DS_Store
+
+# Directories for github to ignore
 /lib/
 /config/
 /con/
