@@ -1,2 +1,0 @@
-- Do NOT use gif images as a replacement for heavy mp4 files. If anything, a good practice is to use lower res gifs for the thumbnails of mp4s.
-- Temporarily, to solve mp4 issues we can embed youtube. This is not ideal but it's a fallback solution until I can find a solution to file constraints.
