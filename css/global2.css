@@ -634,7 +634,7 @@
     .profile-cards-grid {
       grid-template-columns: 1fr;
     }
-  
+
     .footer-links {
       flex-direction: column;
       gap: 10px;
