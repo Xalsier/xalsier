@@ -381,16 +381,7 @@ body::-webkit-scrollbar {
       grid-template-columns: 1fr;
     }
   }
-  
-  /* Footer */
-  footer {
-    margin-top: 6rem;
-    padding: 3rem 1rem;
-    width: 100%;
-    text-align: center;
-    background: var(--sec-color);
-    border-top: 1px solid var(--sec-color-2);
-  }
+
 
   footer div a {
     display: flex;

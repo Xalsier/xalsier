@@ -18,8 +18,19 @@ body {
 }
 
 header {
-  padding: 1rem;
+  padding: 2rem 1rem;
+  width: 100%;
   text-align: center;
+  background: linear-gradient(135deg, var(--bg-color) 0%, var(--sec-color) 100%);
+}
+
+footer {
+  margin-top: 6rem;
+  padding: 3rem 1rem;
+  width: 100%;
+  text-align: center;
+  background: var(--sec-color);
+  border-top: 1px solid var(--sec-color-2);
 }
 
 h1 {
