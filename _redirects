@@ -1,13 +1,25 @@
-/characters.html   /         301
-/bio.html          /biography  301
-/gallery.html      /         301
-/artwork.html      /         301
-/art.html      /         301
-/about.html        /biography  301
+# Redirect .html URLs
 
-/characters        /         301
-/bio               /biography  301
-/gallery           /         301
-/artwork           /         301
-/art           /         301
-/about             /biography  301
+/characters.html    /           301
+/bio.html           /biography  301
+/gallery.html       /           301
+/artwork.html       /           301
+/art.html           /           301
+/about.html         /biography  301
+/cover.html         /covers     301
+/review.html        /reviews    301
+/project.html       /projects   301
+/drawings.html      /           301
+
+# Redirect extensionless URLs
+
+/characters         /           301
+/bio                /biography  301
+/gallery            /           301
+/artwork            /           301
+/art                /           301
+/about              /biography  301
+/cover              /covers     301
+/review             /reviews    301
+/project            /projects   301
+/drawings           /           301
