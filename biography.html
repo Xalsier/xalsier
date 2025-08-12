@@ -81,7 +81,7 @@
             <!-- Content Section -->
             <div class="content-section">
                 <!-- Artist Header -->
-                <div style="display:flex;flex-direction: row;gap:20px;padding:1rem;">
+                <div class="artist-header-container">
                     <img title="(Fuwa) Xalsier's profile on Social Media." alt="A drawing of the character Fuwa, an anthropomorphic rabbit. Xalsier's main profile image on social media." class="profile-placeholder" src="./thumb/fuwa.jpg">
                     <div class="artist-header fade-in">
                         <h1 class="artist-name">Xalsier</h1>
@@ -106,64 +106,37 @@
                     </div>
                 </section>
 
-                <!-- Upcoming Works -->
+                <!-- Converted table to card format for better mobile experience -->
                 <div class="upcoming-works fade-in">
                     <h2>Upcoming Written Works</h2>
-                    <div class="table-container">
-                        <table class="works-table">
-                            <thead>
-                                <tr>
-                                    <th>Work</th>
-                                    <th>Description</th>
-                                    <th>Genre</th>
-                                    <th>Notes</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="work-title">Short Story</td>
-                                    <td class="work-description">Two stories, following Elaine Prowler, Roxie, and Spencer Erichson.</td>
-                                    <td class="work-notes">Adult, Romance, Furry</td>
-                                    <td class="work-notes">*Est 2500 words. TBA 2025</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    <div class="works-cards">
+                        <div class="work-card">
+                            <div class="work-card-header">
+                                <h3 class="work-title">Short Story</h3>
+                                <span class="work-genre">Adult, Romance, Furry</span>
+                            </div>
+                            <p class="work-description">Two stories, following Elaine Prowler, Roxie, and Spencer Erichson.</p>
+                            <div class="work-notes">*Est 2500 words. TBA 2025</div>
+                        </div>
                     </div>
                 </div>
 
-                <div class="profile-section fade-in" itemscope itemtype="https://schema.org/Person">
+                <!-- Stripped schema attributes from profile cards and restructured for better mobile flex -->
+                <div class="profile-section fade-in">
                     <h2 style="display: none;">Profile</h2>
                     <div class="profile-cards-grid">
-                        <div class="profile-card" style="display:none;"onclick="spinCard(this)">
-                            <div class="card-inner">
-                                <div class="card-front">
-                                    <div class="profile-card-label">Name</div>
-                                    <div class="profile-card-value">
-                                        <span itemprop="name">Xalsier</span>
-                                    </div>
-                                </div>
-                                <div class="card-back">
-                                    <div class="card-back-content">✨</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="profile-card" onclick="spinCard(this)">
+                        <div class="profile-card profile-card-large" onclick="spinCard(this)">
                             <div class="card-inner">
                                 <div class="card-front">
                                     <div class="profile-card-label">Born</div>
-                                    <div class="profile-card-value">
-                                        <time itemprop="birthDate" datetime="2003-02-01">February 1, 2003</time>,
-                                        <span itemprop="birthPlace" itemscope itemtype="https://schema.org/Place">
-                                            <span itemprop="name">Boca Raton, Florida</span>
-                                        </span>
-                                    </div>
+                                    <div class="profile-card-value">February 1, 2003, Boca Raton, Florida</div>
                                 </div>
                                 <div class="card-back">
                                     <div class="card-back-content">✨</div>
                                 </div>
                             </div>
                         </div>
-                        <div class="profile-card" onclick="spinCard(this)">
+                        <div class="profile-card profile-card-small" onclick="spinCard(this)">
                             <div class="card-inner">
                                 <div class="card-front">
                                     <div class="profile-card-label">Age</div>
@@ -174,54 +147,47 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="profile-card" onclick="spinCard(this)">
+                        <!-- Added eye color card with 50% chance to replace height -->
+                        <div class="profile-card profile-card-small" id="heightEyeCard" onclick="spinCard(this)">
                             <div class="card-inner">
                                 <div class="card-front">
-                                    <div class="profile-card-label">Height</div>
-                                    <div class="profile-card-value">
-                                        <span itemprop="height">6'0"</span>
-                                    </div>
+                                    <div class="profile-card-label" id="heightEyeLabel">Height</div>
+                                    <div class="profile-card-value" id="heightEyeValue">6'0"</div>
                                 </div>
                                 <div class="card-back">
                                     <div class="card-back-content">✨</div>
                                 </div>
                             </div>
                         </div>
-                        <div class="profile-card" style="display:none;" onclick="spinCard(this)">
-                            <div class="card-inner">
-                                <div class="card-front">
-                                    <div class="profile-card-label">Nationality</div>
-                                    <div class="profile-card-value">
-                                        <span itemprop="nationality">American</span>
-                                    </div>
-                                </div>
-                                <div class="card-back">
-                                    <div class="card-back-content">✨</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="profile-card" onclick="spinCard(this)">
+                        <div class="profile-card profile-card-large" onclick="spinCard(this)">
                             <div class="card-inner">
                                 <div class="card-front">
                                     <div class="profile-card-label">Occupation</div>
-                                    <div class="profile-card-value">
-                                        <span itemprop="jobTitle">Artist and writer</span>
-                                    </div>
+                                    <div class="profile-card-value">Artist and writer</div>
                                 </div>
                                 <div class="card-back">
                                     <div class="card-back-content">✨</div>
                                 </div>
                             </div>
                         </div>
-                        <!-- Hidden metadata -->
-                        <div style="display:none;">
-                            <span itemprop="gender">Male</span>
-                            <link itemprop="url" href="https://xalsier.com/"/>
-                            <link itemprop="sameAs" href="https://x.com/Xalsier"/>
-                            <link itemprop="sameAs" href="https://instagram.com/xalsier"/>
-                            <link itemprop="sameAs" href="https://www.youtube.com/c/Xalsier"/>
-                        </div>
                     </div>
+                </div>
+
+                <!-- Moved schema data to hidden section -->
+                <div style="display:none;" itemscope itemtype="https://schema.org/Person">
+                    <span itemprop="name">Xalsier</span>
+                    <time itemprop="birthDate" datetime="2003-02-01">February 1, 2003</time>
+                    <span itemprop="birthPlace" itemscope itemtype="https://schema.org/Place">
+                        <span itemprop="name">Boca Raton, Florida</span>
+                    </span>
+                    <span itemprop="height">6'0"</span>
+                    <span itemprop="nationality">American</span>
+                    <span itemprop="jobTitle">Artist and writer</span>
+                    <span itemprop="gender">Male</span>
+                    <link itemprop="url" href="https://xalsier.com/"/>
+                    <link itemprop="sameAs" href="https://x.com/Xalsier"/>
+                    <link itemprop="sameAs" href="https://instagram.com/xalsier"/>
+                    <link itemprop="sameAs" href="https://www.youtube.com/c/Xalsier"/>
                 </div>
             </div>
         </div>
@@ -259,7 +225,23 @@
             }, 600);
         }
 
+        function randomizeHeightEye() {
+            const card = document.getElementById('heightEyeCard');
+            const label = document.getElementById('heightEyeLabel');
+            const value = document.getElementById('heightEyeValue');
+            
+            if (Math.random() < 0.5) {
+                label.textContent = 'Eye Color';
+                value.textContent = 'Hazel';
+            } else {
+                label.textContent = 'Height';
+                value.textContent = '6\'0"';
+            }
+        }
+
         document.addEventListener('DOMContentLoaded', function () {
+            randomizeHeightEye();
+            
             const fallbackAnimation = () => {
                 document.getElementById('progress-80')?.classList.add('animate-80');
                 document.getElementById('progress-98')?.classList.add('animate-98');

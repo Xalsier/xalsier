@@ -1,726 +1,594 @@
 @keyframes pulse {
-    0%, 100% {
-      opacity: 1;
-    }
-    50% {
-      opacity: 0.5;
-    }
+  0%,
+  100% {
+    opacity: 1;
   }
-  
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(30px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+  50% {
+    opacity: 0.5;
   }
-  
-  @keyframes progressLoad {
-    from {
-      width: 0%;
-    }
-    to {
-      width: 100%;
-    }
-  }
-  
-  @keyframes cardSpin {
-    0% {
-      transform: rotateY(0deg);
-    }
-    50% {
-      transform: rotateY(180deg);
-    }
-    100% {
-      transform: rotateY(360deg);
-    }
-  }
-  
-  @keyframes bounce {
-    0%, 20%, 50%, 80%, 100% {
-      transform: translateY(0);
-    }
-    40% {
-      transform: translateY(-10px);
-    }
-    60% {
-      transform: translateY(-5px);
-    }
-  }
-  
-  .fade-in {
+}
+
+@keyframes fadeIn {
+  from {
     opacity: 0;
     transform: translateY(30px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
   }
-  
-  .fade-in.visible {
+  to {
     opacity: 1;
     transform: translateY(0);
   }
-  
-  .profile-card.spin {
-    animation: cardSpin 0.6s ease-in-out;
-  }
-  
-  :root {
-    --bg-color: #101217;
-    --sec-color: #1a1d24;
-    --sec-color-2: #2a2d35;
-    --green: rgb(86, 222, 147);
-    --white: #ffffff;
-    --border-radius: 12px;
-    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    --transition: all 0.3s ease;
-  }
+}
 
-  html {
-    width: 100%;
-  }
-  
-  * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
-  
-  body {
-    font-family: "Arial", sans-serif;
-    background-color: var(--bg-color);
-    color: var(--white);
-    line-height: 1.6;
-    overflow-x: hidden;
-  }
-  
-  /* Body Scrollbar */
-  body::-webkit-scrollbar {
-    width: 12px;
-  }
-  
-  body::-webkit-scrollbar-track {
-    background: var(--sec-color);
-  }
-  
-  body::-webkit-scrollbar-thumb {
-    background: var(--green);
-    border-radius: 10px;
-  }
-  
-  body {
-    scrollbar-width: thin;
-    scrollbar-color: var(--green) var(--sec-color);
-  }
-  
-  h1 {
-    color: var(--green);
-    font-size: clamp(2rem, 5vw, 3rem);
-    margin-bottom: 0.5rem;
-    font-weight: 700;
-  }
-  
-  h2 {
-    color: var(--green);
-    font-size: 1.8rem;
-    margin-bottom: 1.5rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 2px solid var(--sec-color-2);
-  }
-  
-  a, b {
-    color: var(--green);
-    text-decoration: none;
-    font-weight: bold;
-  }
-  
-  
-  .subtitle {
-    color: var(--white);
-    font-size: 1.2rem;
-    cursor: pointer;
-    transition: var(--transition);
-    padding: 0.5rem 1rem;
-    border-radius: var(--border-radius);
-  }
-  
-  .subtitle:hover {
-    background: var(--sec-color);
-    transform: translateY(-2px);
-  }
-  
-  /* Biography Specific Styles */
-  .biography-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 2rem 1rem;
-  }
-  
-  .biography-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 2rem;
-    align-items: start;
-  }
-  
-  .image-section {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 2rem;
-  }
-  
-  .image-placeholder {
-    width: 100%;
-    max-width: 300px;
-    aspect-ratio: 1;
-    background-color: var(--green);
-    border-radius: var(--border-radius);
-    box-shadow: var(--shadow);
-    transition: var(--transition);
-    background-image: url("data:image/svg+xml,%3Csvg%20viewBox%3D%220%200%202404%202404%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20style%3D%22fill-rule%3Aevenodd%3Bclip-rule%3Aevenodd%3Bstroke-linejoin%3Around%3Bstroke-miterlimit%3A2%3B%22%3E%3Cg%20id%3D%22Layer1%22%3E%3Cpath%20d%3D%22M885.18%2C2405.57L886.959%2C2388.18L877.454%2C2377.59L877.119%2C2370.17L883.788%2C2358.16L883.918%2C2342.24L884.216%2C2327.03L888.33%2C2314.37L895.36%2C2303.59L892.146%2C2285.83L888.746%2C2273L887.833%2C2258.31L885.376%2C2246.69L882.938%2C2233.86L866.27%2C2214.85L859.712%2C2225.73L857.614%2C2231.73L845.226%2C2237.01L842.795%2C2240.8L837.744%2C2240.29L836.864%2C2242.55L833.613%2C2241.64L828.568%2C2234.21L826.984%2C2219.59L831.382%2C2201.33L835.564%2C2184.99L844.244%2C2153.91L838.899%2C2150.93L837.429%2C2144.59L834.208%2C2143.89L836.076%2C2138.43L833.35%2C2134.31L832.996%2C2129.37L839.828%2C2120.55L840.772%2C2115.01L851.499%2C2103.25L854.552%2C2102.29L855.165%2C2098.69L843.564%2C2095.85L833.801%2C2089.4L830.861%2C2085.98C830.861%2C2085.98%20830.985%2C2079.36%20830.758%2C2078.72C830.532%2C2078.08%20837.06%2C2072.14%20837.06%2C2072.14L850.304%2C2069.91L844.435%2C2062.31L843.503%2C2048.72L848.79%2C2043.75L844.935%2C2027.48L841.132%2C2015.72L840.057%2C2000.23L836.476%2C1984.03L830.833%2C1974.85L819.366%2C1963.15L812.572%2C1952.03L806.263%2C1940.82L802.46%2C1932.5L802.46%2C1920.61L801.537%2C1905.66L802.302%2C1892.09L793.207%2C1880.09L787.892%2C1871.32L783.477%2C1860.67L782.536%2C1850.1L781.866%2C1839.06L781.521%2C1824.61L781.344%2C1820.15L770.969%2C1810.08L760.536%2C1802.12L756.213%2C1804.85L756.131%2C1823.7L756%2C1843.5L754.053%2C1860.47L752.026%2C1876.66L751.373%2C1886.43L742.352%2C1898.08L729.404%2C1912.25L724.458%2C1919.91C724.458%2C1919.91%20714.67%2C1929.42%20714.618%2C1928.57C714.566%2C1927.73%20713.889%2C1965.29%20713.889%2C1965.29L712.227%2C1982.79L707.684%2C2005.85L702.928%2C2024.7L697.586%2C2046.98L696.34%2C2055.36L688.034%2C2067.66L681.159%2C2078.92L672.212%2C2088.85L670.162%2C2098.1L660.435%2C2114.46L658.757%2C2120.88L648.005%2C2134.61L641.136%2C2145.87L632.386%2C2156.04L623.53%2C2168.34L613.895%2C2181.69L608.663%2C2188.24L601.758%2C2197.55L581.383%2C2214.52L564.874%2C2225.91L549.382%2C2235.13L535.825%2C2241.43L528.958%2C2245.43L521.284%2C2247.7L512.498%2C2251.41L501.943%2C2258.85L486.558%2C2261.88L472.216%2C2262.74L458.646%2C2261.6L451.722%2C2257.02L443.651%2C2253.47L437.111%2C2248.74L423.188%2C2237.51L416.55%2C2228.83L409.847%2C2220.11L399.319%2C2208.81L392.917%2C2201.68L383.308%2C2190.54L372.75%2C2176.07L367.125%2C2166.87L364.764%2C2157.3L357.759%2C2114.18L355.365%2C2087.98L353.816%2C2069.34L353.016%2C2047.78L352.428%2C2024.89L353.693%2C2003.17L353.603%2C1984.72L354.067%2C1970.94L354.481%2C1947.96L354.019%2C1928.08L352.591%2C1914.62L354.019%2C1894.62L354.633%2C1876.72L357.109%2C1861.55L359.91%2C1849.6L368.713%2C1830.82L376.681%2C1822.43L377.968%2C1810.79L380.924%2C1800.18L391.031%2C1790.37L405.303%2C1778.5L416.018%2C1768.77L418.426%2C1753.72L420.226%2C1739.76L427.532%2C1730.52L438.229%2C1720.81L450.049%2C1702.74L456.237%2C1689.36L461.049%2C1677.55L460.361%2C1667.03L466.936%2C1649.77L470.701%2C1637.62L485.076%2C1594.1L485.381%2C1572.94L486.673%2C1553.99L488.987%2C1538.11L494.592%2C1507.64L499.642%2C1498.04L500.284%2C1488.64L502.527%2C1478.23L507.582%2C1470.69L517.755%2C1431.4L521.565%2C1404.47L528.819%2C1392.91L531.041%2C1376.35L537.841%2C1356.62L550.136%2C1329.64L558.568%2C1312.05L559.582%2C1303.25L563.4%2C1296L566.427%2C1284.14L570.453%2C1279.01L572.421%2C1265.15L576.373%2C1257.55L585.244%2C1236.49L587.091%2C1225.83L602.475%2C1204.68L604.588%2C1196.57L623.498%2C1172.86L634.765%2C1163.77L655.973%2C1146.41L671.832%2C1135.49L681.588%2C1129.35L691.477%2C1121.53L700.196%2C1112.87L706.757%2C1113.27L710.025%2C1090.86L711.631%2C1072.84L712.158%2C1052.22L720.809%2C1038.67L729.042%2C1025.57L738.144%2C1004.79L740.191%2C992.574L745.533%2C978.488L749.026%2C963.683L751.372%2C954.246L756.625%2C942.077L769.135%2C924.122L779.574%2C911.267L785.736%2C900.826L789.154%2C888.54L793.304%2C874.092L798.061%2C862.726L804.792%2C848.589L809.964%2C848.634L816.8%2C853.466L824.658%2C855.796L825.899%2C839.053L827.55%2C817.517L829.734%2C801.572L838.03%2C789.121L852.831%2C781.292L863.577%2C777.47L882.697%2C775.633L906.559%2C775.359L933.461%2C775.775L952.593%2C775.74L952.039%2C766.337L943.786%2C768.485L941.171%2C763.422L931.486%2C761.83L930.612%2C755.125L921.801%2C744.332L923.15%2C754.008L916.488%2C745.768L913.024%2C737.627L901.748%2C722.57L906.536%2C742.453L901.748%2C722.57L906.536%2C742.453L902.459%2C738.546L899.65%2C728.513L897.01%2C716.722L895.494%2C709.229L892.159%2C702.658L889.591%2C695.859L886.522%2C696.781L883.382%2C694.063L883.382%2C681.015L881.199%2C667.154L880.302%2C659.51L871.322%2C665.13L880.391%2C655.072L880.972%2C643.445L883.235%2C630.641L885.011%2C617.377L883.711%2C597.564L887.262%2C562.006L896.975%2C523.047L908.429%2C497.572L919.413%2C483.274L922.641%2C464.502L932.756%2C432.279L935.652%2C418.393L942.959%2C402.136L957.84%2C373.404L966.132%2C356.094L995.483%2C335.315L1028.03%2C306.883L1065.73%2C288.657L1104.41%2C280.383L1135.68%2C283.371L1151.41%2C290.452L1172.51%2C292.828L1197.73%2C278.979L1232.63%2C276.937L1251.07%2C280.339L1267.95%2C273.142L1291.76%2C275.584L1310.98%2C281.746L1332.24%2C296.06L1349.15%2C312.772L1374.53%2C329.259L1396.57%2C346.587L1411.53%2C387.845L1441.65%2C406.012L1458.11%2C412.842L1471.97%2C430.51L1478.47%2C453.946L1486.08%2C470.671L1493.63%2C481.183L1499.57%2C504.737L1509.79%2C517.517L1516.84%2C545.342L1523.66%2C567.989L1527.33%2C591.599L1527.45%2C614.3L1523.3%2C652.246L1500.1%2C699.248L1475.38%2C737.648L1453.88%2C767.438L1437.63%2C784.491L1413.22%2C821.492L1397.23%2C865.308L1369.25%2C917.36L1386.52%2C933.269L1406.33%2C952.349L1421.02%2C974.341L1436.54%2C1000.63L1443.6%2C1015.9L1459.61%2C1029.59L1472.54%2C1043.32L1489.47%2C1050.96L1514.26%2C1061.93L1536.36%2C1072.12L1555.33%2C1082.57L1573.94%2C1096.08L1594.38%2C1114.51L1612.06%2C1131.78L1620.29%2C1154.47L1625.05%2C1179.28L1636.22%2C1212.78L1640.92%2C1237.51L1643.51%2C1261.7L1650.09%2C1289.63L1654.71%2C1318.51L1659.36%2C1356.33L1664.69%2C1380.65L1668.35%2C1400.56L1667.97%2C1419.1L1673.88%2C1446.22L1681.39%2C1476.97L1685.53%2C1497.54L1689.22%2C1517.09L1692.73%2C1537.63C1692.73%2C1537.63%201699.4%2C1558.98%201699.15%2C1557.18C1698.89%2C1555.37%201700.49%2C1569.39%201700.49%2C1569.39L1704.55%2C1589.99L1710.41%2C1612.25L1715.92%2C1635.36L1721.28%2C1654.82L1723.94%2C1666.96L1725.22%2C1685.94C1725.22%2C1685.94%201739.33%2C1716.39%201739.07%2C1718.29C1738.8%2C1720.18%201739.32%2C1762.62%201739.32%2C1762.62L1753.64%2C1796.25L1754.92%2C1812.31L1758.38%2C1839.24L1767.91%2C1866.88L1772.11%2C1906.63L1779.39%2C1916.86L1782.34%2C1948.76L1789.38%2C1963.62L1788.75%2C1981.16L1793.69%2C1991.85L1791.94%2C2015.28L1794.38%2C2030.34L1797.6%2C2035.85L1793.22%2C2048.2L1793.38%2C2063.82L1812.38%2C2088.49L1825.1%2C2122.73L1819.05%2C2131.9L1815.76%2C2145.35L1854.1%2C2226.4L1862.76%2C2278.36L1857.51%2C2289.43L1836.99%2C2298.41L1803.94%2C2301.06L1801.78%2C2325.97L1804.62%2C2336.78L1806.05%2C2347.05L1818.22%2C2379.18L1823.2%2C2408.48L920.956%2C2450.73L885.18%2C2405.57Z%22%20style%3D%22fill%3Argb%2816%2C18%2C23%29%3B%22/%3E%3C/g%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: contain;
-  }
-  
-  .image-placeholder:hover {
-    transform: scale(1.02);
-    box-shadow: 0 8px 16px rgba(86, 222, 147, 0.3);
-  }
-
-  .profile-placeholder {
-    width:120px;
-    height:120px;
-    background-color: var(--green);
-    box-shadow: var(--shadow);
-    border-radius: 50%;
-    background-size: cover;
-    border-radius: var(--border-radius);
-    box-shadow: var(--shadow);
-    transition: var(--transition);
-  }
-
-  .profile-placeholder:hover {
-    transform: scale(1.02);
-    box-shadow: 0 8px 16px rgba(86, 222, 147, 0.3);
-  }
-  
-  .content-section {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-  }
-  
-  /* Artist Header */
-  .artist-header {
-    text-align: left;
-  }
-  
-  .artist-name {
-    color: var(--green);
-    font-size: clamp(2.5rem, 6vw, 4rem);
-    font-weight: 700;
-    margin-bottom: 0.5rem;
-    line-height: 1.1;
-  }
-  
-  .artist-description {
-    color: var(--white);
-    font-size: 1.4rem;
-    font-weight: 400;
-    opacity: 0.9;
-    margin: 0;
-  }
-  
-  /* Profile Cards Grid */
-  .profile-section {
-    border-radius: var(--border-radius);
-    padding: 1.5rem;
-    box-shadow: var(--shadow);
-  }
-  
-  .profile-cards-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1rem;
-  }
-  
-  .profile-card {
-    background: transparent;
-    border-radius: var(--border-radius);
-    padding: 0;
-    text-align: center;
-    box-shadow: var(--shadow);
-    transition: var(--transition);
-    cursor: pointer;
-    position: relative;
-    perspective: 1000px;
-    height: 120px;
-  }
-  
-  .card-inner {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    text-align: center;
-    transition: transform 0.6s;
-    transform-style: preserve-3d;
-  }
-  
-  .profile-card.spin .card-inner {
-    transform: rotateY(180deg);
-  }
-  
-  .card-front, .card-back {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    backface-visibility: hidden;
-    border-radius: var(--border-radius);
-    padding: 1.5rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .card-front {
-    background: var(--green);
-  }
-  
-  .card-back {
-    background: var(--sec-color-2);
-    transform: rotateY(180deg);
-  }
-  
-  .card-back-content {
-    font-size: 2rem;
-    color: var(--green);
-  }
-  
-  .profile-card-label {
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: var(--bg-color);
-    margin-bottom: 0.5rem;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-  }
-  
-  .profile-card-value {
-    font-size: 1.4rem;
-    font-weight: 700;
-    color: var(--bg-color);
-    line-height: 1.2;
-  }
-  
-  /* Upcoming Works - Enhanced Table */
-  .upcoming-works {
-    border-radius: var(--border-radius);
-    padding: 1.5rem;
-    box-shadow: var(--shadow);
-  }
-  
-  .table-container {
-    overflow-x: auto;
-    border-radius: var(--border-radius);
-    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
-  }
-  
-  .works-table {
-    width: 100%;
-    border-collapse: collapse;
-    background: var(--bg-color);
-    border-radius: var(--border-radius);
-    overflow: hidden;
-  }
-  
-  .works-table th {
-    background: var(--sec-color-2);
-    color: var(--white);
-    font-weight: 700;
-    padding: 1.2rem;
-    text-align: left;
-    border-bottom: 2px solid var(--bg-color);
-    font-size: 1rem;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-  }
-  
-  .works-table td {
-    padding: 1.2rem;
-    border-bottom: 1px solid var(--sec-color-2);
-    color: var(--green);
-    font-weight: 600;
-    font-size: 1rem;
-  }
-  
-  .works-table tr:last-child td {
-    border-bottom: none;
-  }
-  
-  .works-table tr:hover {
-    background: rgba(86, 222, 147, 0.08);
-  }
-  
-  .work-title {
-    font-weight: 700;
-    font-size: 1.1rem;
-  }
-  
-  .work-description {
-    line-height: 1.5;
-  }
-  
-  .work-notes {
-    font-style: italic;
-    opacity: 0.9;
-  }
-  
-  /* Upcoming Milestones */
-  .upcoming-milestones {
-    width: 100%;
-    max-width: 600px;
-    margin: 0;
-    font-family: Arial, sans-serif;
-  }
-  
-  .upcoming-milestones h2 {
-    color: var(--green);
-    margin-bottom: 1.5rem;
-    font-size: 1.5rem;
-  }
-  
-  .milestones-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1rem;
-  }
-  
-  .milestone {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    background: var(--sec-color);
-    padding: 1rem;
-    border-radius: var(--border-radius);
-    box-shadow: var(--shadow);
-    transition: var(--transition);
-    min-height: 70px;
-  }
-  
-  .milestone:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-  }
-  
-  .icon-container {
-    background: transparent;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    animation: bounce 2s infinite;
-    flex-shrink: 0;
-  }
-  
-  .icon-container svg {
-    fill: white;
-    width: 28px;
-    height: 28px;
-  }
-  
-  .progress-info {
-    flex: 1;
-    min-width: 0;
-  }
-  
-  .progress-info a {
-    color: var(--green);
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 1rem;
-  }
-  
-  .progress-bar {
-    background: #374151;
-    border-radius: 9999px;
-    overflow: hidden;
-    height: 10px;
-    margin: 0.5rem 0;
-    width: 100%;
-  }
-  
-  .progress-fill {
-    background: var(--green);
-    height: 100%;
-    border-radius: 9999px 0 0 9999px;
+@keyframes progressLoad {
+  from {
     width: 0%;
-    transition: width 2s ease-out;
   }
-  
-  .progress-fill.animate-80 {
-    width: 80%;
+  to {
+    width: 100%;
   }
-  
-  .progress-fill.animate-98 {
-    width: 98%;
-  }
-  
-  .progress-fill.animate-49 {
-    width: 49%;
-  }
-  
-  .progress-fill.animate-55 {
-    width: 55%;
-  }
-  
-  .milestone small {
-    color: #8a8a8a;
-    font-size: 0.85rem;
-  }
-  
-  
-  .footer-links {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    gap: 20px;
-    justify-content: center;
-    padding: 1em;
-  }
-  
-  .footer-links a {
-    transition: var(--transition);
-    padding: 0.5rem;
-    border-radius: var(--border-radius);
-  }
-  
-  .footer-links a:hover {
-    background: var(--bg-color);
-    transform: translateY(-2px);
-  }
-  
-  .social-bar {
-    margin-top: 1rem;
-  }
-  
-  /* Modal */
-  .modal {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.8);
-    backdrop-filter: blur(8px);
-    z-index: 999;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .modal-content {
-    padding: 2rem;
-    border-radius: var(--border-radius);
-    box-shadow: var(--shadow);
-  }
-  
-  .modal select {
-    font-size: 1.5rem;
-    padding: 1rem;
-    background: var(--bg-color);
-    color: var(--white);
-    border: 2px solid var(--green);
-    border-radius: var(--border-radius);
-    cursor: pointer;
-    transition: var(--transition);
-  }
-  
-  .modal select:hover {
-    border-color: var(--white);
-  }
-  
-  /* Desktop Layout */
-  @media (min-width: 1024px) {
-    .biography-grid {
-      grid-template-columns: 1fr 2fr;
-      gap: 3rem;
-    }
-  
-    .image-placeholder {
-      max-width: 400px;
-    }
-  
-    .profile-cards-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  
-    .upcoming-milestones {
-      margin-top: 2rem;
-    }
-  
-    .artist-header {
-      text-align: left;
-    }
-  }
-  
-  /* Tablet adjustments */
-  @media (max-width: 768px) {
-    .profile-cards-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  
-    .profile-card {
-      padding: 1rem;
-    }
-  
-    .profile-card-value {
-      font-size: 1.2rem;
-    }
-  
-    .works-table {
-      font-size: 0.9rem;
-    }
-  
-    .works-table th,
-    .works-table td {
-      padding: 0.8rem 0.6rem;
-    }
-  
-    .upcoming-milestones {
-      max-width: 100%;
-      margin: 2rem auto;
-    }
-  
-    .milestones-grid {
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1rem;
-    }
-  
-    .milestone {
-      flex-direction: column;
-      text-align: center;
-      padding: 1rem;
-      gap: 0.5rem;
-    }
-  
-    .progress-info {
-      width: 100%;
-    }
-  
-    .artist-header {
-      text-align: center;
-    }
-  }
-  
-  /* Mobile adjustments */
-  @media (max-width: 480px) {
-    .profile-cards-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-
-    .footer-links {
-      flex-direction: column;
-      gap: 10px;
-    }
-  
-    .milestones-grid {
-      grid-template-columns: 1fr;
-      gap: 1rem;
-    }
-  
-    .milestone {
-      flex-direction: row;
-      text-align: left;
-      padding: 1rem;
-      gap: 1rem;
-    }
-  
-    .artist-header {
-      text-align: center;
-    }
-  }
-  
-  /* Featured Art Section */
-.featured-art-section {
-  border-radius: var(--border-radius);
-  padding: 1rem;
-  box-shadow: var(--shadow);
 }
 
-.featured-art-grid {
-  display: flex;
-  flex-direction: column; /* Stack vertically on mobile */
-  gap: 1rem;
+@keyframes cardSpin {
+  0% {
+    transform: rotateY(0deg);
+  }
+  50% {
+    transform: rotateY(180deg);
+  }
+  100% {
+    transform: rotateY(360deg);
+  }
 }
 
-.featured-art-item {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 16 / 9; /* Default aspect ratio for art */
-  border-radius: var(--border-radius);
-  overflow: hidden;
-  background-color: var(--sec-color-2);
-  transition: transform 0.3s ease;
-  cursor: pointer;
-  box-shadow: var(--shadow);
+@keyframes bounce {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
 }
 
-.featured-art-item.large {
-  aspect-ratio: 16 / 9; /* Maintain aspect ratio for large item */
+.fade-in {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
-.featured-art-item.small {
-  aspect-ratio: 4 / 3; /* Different aspect ratio for small items */
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
-.featured-art-item:hover {
-  transform: scale(1.02);
+.profile-card.spin {
+  animation: cardSpin 0.6s ease-in-out;
 }
 
-.featured-art-item .art-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
+:root {
+  --bg-color: #101217;
+  --sec-color: #1a1d24;
+  --sec-color-2: #2a2d35;
+  --green: rgb(86, 222, 147);
+  --white: #ffffff;
+  --border-radius: 12px;
+  --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --transition: all 0.3s ease;
 }
 
-.featured-art-item .art-text {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  padding: 0.75rem 1rem;
-  background: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(3px);
+html,
+body {
+  max-width: 100%;
+}
+
+body {
+  font-family: "Arial", sans-serif;
+  background-color: var(--bg-color);
   color: var(--white);
-  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+/* Body Scrollbar */
+body::-webkit-scrollbar {
+  width: 12px;
+}
+
+body::-webkit-scrollbar-track {
+  background: var(--sec-color);
+}
+
+body::-webkit-scrollbar-thumb {
+  background: var(--green);
+  border-radius: 10px;
+}
+
+body {
+  scrollbar-width: thin;
+  scrollbar-color: var(--green) var(--sec-color);
+}
+
+h1 {
+  color: var(--green);
+  font-size: clamp(2rem, 5vw, 3rem);
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+}
+
+h2 {
+  color: var(--green);
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--sec-color-2);
+}
+
+a,
+b {
+  color: var(--green);
+  text-decoration: none;
   font-weight: bold;
 }
 
-.featured-art-small-items {
+.subtitle {
+  color: var(--white);
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: var(--transition);
+  padding: 0.5rem 1rem;
+  border-radius: var(--border-radius);
+}
+
+.subtitle:hover {
+  background: var(--sec-color);
+  transform: translateY(-2px);
+}
+
+/* Biography Specific Styles */
+.biography-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  width: 100%;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+.biography-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  align-items: start;
+  width: 100%;
+  max-width: 100%;
+}
+
+.image-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  width: 100%;
+  max-width: 100%;
+}
+
+.image-placeholder {
+  width: 100%;
+  max-width: 300px;
+  aspect-ratio: 1;
+  background-color: var(--green);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  transition: var(--transition);
+  background-image: url("data:image/svg+xml,%3Csvg%20viewBox%3D%220%200%202404%202404%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20style%3D%22fill-rule%3Aevenodd%3Bclip-rule%3Aevenodd%3Bstroke-linejoin%3Around%3Bstroke-miterlimit%3A2%3B%22%3E%3Cg%20id%3D%22Layer1%22%3E%3Cpath%20d%3D%22M885.18%2C2405.57L886.959%2C2388.18L877.454%2C2377.59L877.119%2C2370.17L883.788%2C2358.16L883.918%2C2342.24L884.216%2C2327.03L888.33%2C2314.37L895.36%2C2303.59L892.146%2C2285.83L888.746%2C2273L887.833%2C2258.31L885.376%2C2246.69L882.938%2C2233.86L866.27%2C2214.85L859.712%2C2225.73L857.614%2C2231.73L845.226%2C2237.01L842.795%2C2240.8L837.744%2C2240.29L836.864%2C2242.55L833.613%2C2241.64L828.568%2C2234.21L826.984%2C2219.59L831.382%2C2201.33L835.564%2C2184.99L844.244%2C2153.91L838.899%2C2150.93L837.429%2C2144.59L834.208%2C2143.89L836.076%2C2138.43L833.35%2C2134.31L832.996%2C2129.37L839.828%2C2120.55L840.772%2C2115.01L851.499%2C2103.25L854.552%2C2102.29L855.165%2C2098.69L843.564%2C2095.85L833.801%2C2089.4L830.861%2C2085.98C830.861%2C2085.98%20830.985%2C2079.36%20830.758%2C2078.72C830.532%2C2078.08%20837.06%2C2072.14%20837.06%2C2072.14L850.304%2C2069.91L844.435%2C2062.31L843.503%2C2048.72L848.79%2C2043.75L844.935%2C2027.48L841.132%2C2015.72L840.057%2C2000.23L836.476%2C1984.03L830.833%2C1974.85L819.366%2C1963.15L812.572%2C1952.03L806.263%2C1940.82L802.46%2C1932.5L802.46%2C1920.61L801.537%2C1905.66L802.302%2C1892.09L793.207%2C1880.09L787.892%2C1871.32L783.477%2C1860.67L782.536%2C1850.1L781.866%2C1839.06L781.521%2C1824.61L781.344%2C1820.15L770.969%2C1810.08L760.536%2C1802.12L756.213%2C1804.85L756.131%2C1823.7L756%2C1843.5L754.053%2C1860.47L752.026%2C1876.66L751.373%2C1886.43L742.352%2C1898.08L729.404%2C1912.25L724.458%2C1919.91C724.458%2C1919.91%20714.67%2C1929.42%20714.618%2C1928.57C714.566%2C1927.73%20713.889%2C1965.29%20713.889%2C1965.29L712.227%2C1982.79L707.684%2C2005.85L702.928%2C2024.7L697.586%2C2046.98L696.34%2C2055.36L688.034%2C2067.66L681.159%2C2078.92L672.212%2C2088.85L670.162%2C2098.1L660.435%2C2114.46L658.757%2C2120.88L648.005%2C2134.61L641.136%2C2145.87L632.386%2C2156.04L623.53%2C2168.34L613.895%2C2181.69L608.663%2C2188.24L601.758%2C2197.55L581.383%2C2214.52L564.874%2C2225.91L549.382%2C2235.13L535.825%2C2241.43L528.958%2C2245.43L521.284%2C2247.7L512.498%2C2251.41L501.943%2C2258.85L486.558%2C2261.88L472.216%2C2262.74L458.646%2C2261.6L451.722%2C2257.02L443.651%2C2253.47L437.111%2C2248.74L423.188%2C2237.51L416.55%2C2228.83L409.847%2C2220.11L399.319%2C2208.81L392.917%2C2201.68L383.308%2C2190.54L372.75%2C2176.07L367.125%2C2166.87L364.764%2C2157.3L357.759%2C2114.18L355.365%2C2087.98L353.816%2C2069.34L353.016%2C2047.78L352.428%2C2024.89L353.693%2C2003.17L353.603%2C1984.72L354.067%2C1970.94L354.481%2C1947.96L354.019%2C1928.08L352.591%2C1914.62L354.019%2C1894.62L354.633%2C1876.72L357.109%2C1861.55L359.91%2C1849.6L368.713%2C1830.82L376.681%2C1822.43L377.968%2C1810.79L380.924%2C1800.18L391.031%2C1790.37L405.303%2C1778.5L416.018%2C1768.77L418.426%2C1753.72L420.226%2C1739.76L427.532%2C1730.52L438.229%2C1720.81L450.049%2C1702.74L456.237%2C1689.36L461.049%2C1677.55L460.361%2C1667.03L466.936%2C1649.77L470.701%2C1637.62L485.076%2C1594.1L485.381%2C1572.94L486.673%2C1553.99L488.987%2C1538.11L494.592%2C1507.64L499.642%2C1498.04L500.284%2C1488.64L502.527%2C1478.23L507.582%2C1470.69L517.755%2C1431.4L521.565%2C1404.47L528.819%2C1392.91L531.041%2C1376.35L537.841%2C1356.62L550.136%2C1329.64L558.568%2C1312.05L559.582%2C1303.25L563.4%2C1296L566.427%2C1284.14L570.453%2C1279.01L572.421%2C1265.15L576.373%2C1257.55L585.244%2C1236.49L587.091%2C1225.83L602.475%2C1204.68L604.588%2C1196.57L623.498%2C1172.86L634.765%2C1163.77L655.973%2C1146.41L671.832%2C1135.49L681.588%2C1129.35L691.477%2C1121.53L700.196%2C1112.87L706.757%2C1113.27L710.025%2C1090.86L711.631%2C1072.84L712.158%2C1052.22L720.809%2C1038.67L729.042%2C1025.57L738.144%2C1004.79L740.191%2C992.574L745.533%2C978.488L749.026%2C963.683L751.372%2C954.246L756.625%2C942.077L769.135%2C924.122L779.574%2C911.267L785.736%2C900.826L789.154%2C888.54L793.304%2C874.092L798.061%2C862.726L804.792%2C848.589L809.964%2C848.634L816.8%2C853.466L824.658%2C855.796L825.899%2C839.053L827.55%2C817.517L829.734%2C801.572L838.03%2C789.121L852.831%2C781.292L863.577%2C777.47L882.697%2C775.633L906.559%2C775.359L933.461%2C775.775L952.593%2C775.74L952.039%2C766.337L943.786%2C768.485L941.171%2C763.422L931.486%2C761.83L930.612%2C755.125L921.801%2C744.332L923.15%2C754.008L916.488%2C745.768L913.024%2C737.627L901.748%2C722.57L906.536%2C742.453L901.748%2C722.57L906.536%2C742.453L902.459%2C738.546L899.65%2C728.513L897.01%2C716.722L895.494%2C709.229L892.159%2C702.658L889.591%2C695.859L886.522%2C696.781L883.382%2C694.063L883.382%2C681.015L881.199%2C667.154L880.302%2C659.51L871.322%2C665.13L880.391%2C655.072L880.972%2C643.445L883.235%2C630.641L885.011%2C617.377L883.711%2C597.564L887.262%2C562.006L896.975%2C523.047L908.429%2C497.572L919.413%2C483.274L922.641%2C464.502L932.756%2C432.279L935.652%2C418.393L942.959%2C402.136L957.84%2C373.404L966.132%2C356.094L995.483%2C335.315L1028.03%2C306.883L1065.73%2C288.657L1104.41%2C280.383L1135.68%2C283.371L1151.41%2C290.452L1172.51%2C292.828L1197.73%2C278.979L1232.63%2C276.937L1251.07%2C280.339L1267.95%2C273.142L1291.76%2C275.584L1310.98%2C281.746L1332.24%2C296.06L1349.15%2C312.772L1374.53%2C329.259L1396.57%2C346.587L1411.53%2C387.845L1441.65%2C406.012L1458.11%2C412.842L1471.97%2C430.51L1478.47%2C453.946L1486.08%2C470.671L1493.63%2C481.183L1499.57%2C504.737L1509.79%2C517.517L1516.84%2C545.342L1523.66%2C567.989L1527.33%2C591.599L1527.45%2C614.3L1523.3%2C652.246L1500.1%2C699.248L1475.38%2C737.648L1453.88%2C767.438L1437.63%2C784.491L1413.22%2C821.492L1397.23%2C865.308L1369.25%2C917.36L1386.52%2C933.269L1406.33%2C952.349L1421.02%2C974.341L1436.54%2C1000.63L1443.6%2C1015.9L1459.61%2C1029.59L1472.54%2C1043.32L1489.47%2C1050.96L1514.26%2C1061.93L1536.36%2C1072.12L1555.33%2C1082.57L1573.94%2C1096.08L1594.38%2C1114.51L1612.06%2C1131.78L1620.29%2C1154.47L1625.05%2C1179.28L1636.22%2C1212.78L1640.92%2C1237.51L1643.51%2C1261.7L1650.09%2C1289.63L1654.71%2C1318.51L1659.36%2C1356.33L1664.69%2C1380.65L1668.35%2C1400.56L1667.97%2C1419.1L1673.88%2C1446.22L1681.39%2C1476.97L1685.53%2C1497.54L1689.22%2C1517.09L1692.73%2C1537.63C1692.73%2C1537.63%201699.4%2C1558.98%201699.15%2C1557.18C1698.89%2C1555.37%201700.49%2C1569.39%201700.49%2C1569.39L1704.55%2C1589.99L1710.41%2C1612.25L1715.92%2C1635.36L1721.28%2C1654.82L1723.94%2C1666.96L1725.22%2C1685.94C1725.22%2C1685.94%201739.33%2C1716.39%201739.07%2C1718.29C1738.8%2C1720.18%201739.32%2C1762.62%201739.32%2C1762.62L1753.64%2C1796.25L1754.92%2C1812.31L1758.38%2C1839.24L1767.91%2C1866.88L1772.11%2C1906.63L1779.39%2C1916.86L1782.34%2C1948.76L1789.38%2C1963.62L1788.75%2C1981.16L1793.69%2C1991.85L1791.94%2C2015.28L1794.38%2C2030.34L1797.6%2C2035.85L1793.22%2C2048.2L1793.38%2C2063.82L1812.38%2C2088.49L1825.1%2C2122.73L1819.05%2C2131.9L1815.76%2C2145.35L1854.1%2C2226.4L1862.76%2C2278.36L1857.51%2C2289.43L1836.99%2C2298.41L1803.94%2C2301.06L1801.78%2C2325.97L1804.62%2C2336.78L1806.05%2C2347.05L1818.22%2C2379.18L1823.2%2C2408.48L920.956%2C2450.73L885.18%2C2405.57Z%22%20style%3D%22fill%3Argb%2816%2C18%2C23%29%3B%22/%3E%3C/g%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+.image-placeholder:hover {
+  transform: scale(1.02);
+  box-shadow: 0 8px 16px rgba(86, 222, 147, 0.3);
+}
+
+.profile-placeholder {
+  width: 120px;
+  height: 120px;
+  background-color: var(--green);
+  box-shadow: var(--shadow);
+  border-radius: 50%;
+  background-size: cover;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  transition: var(--transition);
+  flex-shrink: 0;
+}
+
+.profile-placeholder:hover {
+  transform: scale(1.02);
+  box-shadow: 0 8px 16px rgba(86, 222, 147, 0.3);
+}
+
+.content-section {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* Artist Header */
+.artist-header-container {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  padding: 1rem;
+  align-items: center;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.artist-header {
+  text-align: left;
+  flex: 1;
+  min-width: 0;
+}
+
+.artist-name {
+  color: var(--green);
+  font-size: clamp(2rem, 6vw, 4rem);
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  line-height: 1.1;
+  word-wrap: break-word;
+}
+
+.artist-description {
+  color: var(--white);
+  font-size: clamp(1rem, 3vw, 1.4rem);
+  font-weight: 400;
+  opacity: 0.9;
+  margin: 0;
+  word-wrap: break-word;
+}
+
+/* Profile Cards Grid */
+.profile-section {
+  border-radius: var(--border-radius);
+  padding: 1.5rem;
+  box-shadow: var(--shadow);
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.profile-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+  width: 100%;
+}
+
+.profile-card {
+  background: transparent;
+  border-radius: var(--border-radius);
+  padding: 0;
+  text-align: center;
+  box-shadow: var(--shadow);
+  transition: var(--transition);
+  cursor: pointer;
+  position: relative;
+  perspective: 1000px;
+  height: 120px;
+  width: 100%;
+  max-width: 100%;
+}
+
+/* Added large and small profile card variants */
+.profile-card-large {
+  grid-column: span 2;
+}
+
+.profile-card-small {
+  grid-column: span 1;
+}
+
+.card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+}
+
+.profile-card.spin .card-inner {
+  transform: rotateY(180deg);
+}
+
+.card-front,
+.card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: var(--border-radius);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.card-front {
+  background: var(--green);
+}
+
+.card-back {
+  background: var(--sec-color-2);
+  transform: rotateY(180deg);
+}
+
+.card-back-content {
+  font-size: 2rem;
+  color: var(--green);
+}
+
+.profile-card-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--bg-color);
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.profile-card-value {
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+  font-weight: 700;
+  color: var(--bg-color);
+  line-height: 1.2;
+  text-align: center;
+  word-wrap: break-word;
+  hyphens: auto;
+}
+
+/* Converted table to card format for better mobile experience */
+.upcoming-works {
+  border-radius: var(--border-radius);
+  padding: 1.5rem;
+  box-shadow: var(--shadow);
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.works-cards {
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  flex: 1; /* Take available space */
 }
 
-  /* Featured Art Layout on Desktop */
+.work-card {
+  background: var(--bg-color);
+  border-radius: var(--border-radius);
+  padding: 1.5rem;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--sec-color-2);
+  transition: var(--transition);
+}
+
+.work-card:hover {
+  background: rgba(86, 222, 147, 0.08);
+  transform: translateY(-2px);
+}
+
+.work-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.work-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--green);
+  margin: 0;
+}
+
+.work-genre {
+  font-size: 0.9rem;
+  color: var(--white);
+  background: var(--sec-color-2);
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+
+.work-description {
+  color: var(--white);
+  line-height: 1.6;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+}
+
+.work-notes {
+  color: var(--green);
+  font-size: 0.9rem;
+  font-style: italic;
+  opacity: 0.8;
+}
+
+  /* Featured Art Section */
+  .featured-art-section {
+    border-radius: var(--border-radius);
+    padding: 1rem;
+    box-shadow: var(--shadow);
+  }
+  
   .featured-art-grid {
-    flex-direction: row; /* Arrange horizontally on desktop */
-    align-items: stretch;
+    display: flex;
+    flex-direction: column; /* Stack vertically on mobile */
+    gap: 1rem;
   }
-
+  
+  .featured-art-item {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9; /* Default aspect ratio for art */
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    background-color: var(--sec-color-2);
+    transition: transform 0.3s ease;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+  }
+  
   .featured-art-item.large {
-    flex: 2; /* Take 66% width */
+    aspect-ratio: 16 / 9; /* Maintain aspect ratio for large item */
+  }
+  
+  .featured-art-item.small {
+    aspect-ratio: 4 / 3; /* Different aspect ratio for small items */
+  }
+  
+  .featured-art-item:hover {
+    transform: scale(1.02);
+  }
+  
+  .featured-art-item .art-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  
+  .featured-art-item .art-text {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(3px);
+    color: var(--white);
+    font-size: 1.1rem;
+    font-weight: bold;
+  }
+  
+  .featured-art-small-items {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    flex: 1; /* Take available space */
+  }
+  
+    /* Featured Art Layout on Desktop */
+    .featured-art-grid {
+      flex-direction: row; /* Arrange horizontally on desktop */
+      align-items: stretch;
+    }
+  
+    .featured-art-item.large {
+      flex: 2; /* Take 66% width */
+    }
+  
+    .featured-art-small-items {
+      flex: 1; /* Take 34% width */
+    }
+  
+    .artist-header {
+      text-align: left;
+    }
+
+/* Featured Art Layout on Desktop */
+@media (min-width: 1024px) {
+  .biography-grid {
+    grid-template-columns: 1fr 2fr;
+    gap: 3rem;
   }
 
-  .featured-art-small-items {
-    flex: 1; /* Take 34% width */
+  .image-placeholder {
+    max-width: 400px;
+  }
+
+  .profile-cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .upcoming-milestones {
+    margin-top: 2rem;
   }
 
   .artist-header {
     text-align: left;
   }
+}
+
+/* Tablet adjustments */
+@media (max-width: 768px) {
+  .biography-container {
+    padding: 1.5rem 0.8rem;
+  }
+
+  .artist-header-container {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+  }
+
+  .artist-header {
+    text-align: center;
+  }
+
+  .profile-cards-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.8rem;
+  }
+
+  .profile-card-large {
+    grid-column: span 2;
+  }
+
+  .profile-card-small {
+    grid-column: span 1;
+  }
+
+  .profile-card {
+    height: 100px;
+  }
+
+  .card-front,
+  .card-back {
+    padding: 0.8rem;
+  }
+
+  .profile-card-value {
+    font-size: 1rem;
+  }
+
+  .work-card {
+    padding: 1.2rem;
+  }
+
+  .work-card-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .upcoming-milestones {
+    max-width: 100%;
+    margin: 2rem auto;
+  }
+}
