@@ -18,10 +18,12 @@
     <div class="modal-content" onclick="event.stopPropagation()">
       <select onchange="navigate(this)">
         <option value="index.html" selected>Artwork Index</option>
+        <optgroup label="Explore">
         <option value="biography.html">Biography</option>
         <option value="reviews.html">Book Reviews</option>
         <option value="projects.html">Coding Projects</option>
         <option value="covers.html">Piano Covers</option>
+      </optgroup>
       </select>
     </div>
   </div>
@@ -75,11 +77,12 @@
               <option value="filter:Safe">Safe</option>
               <option value="filter:Scrap">Scrap</option>
               <option value="filter:Object">Object</option>
+              <option value="filter:Explicit">Explicit</option>
               <option value="filter:Violent">Violent</option>
             </optgroup>
             <optgroup label="Medium">
               <option value="tag:Raster Art">Raster Art</option>
-              <option value="tag:Vector Art">Vector Art</option>
+              <option value="tag:SVG">SVG</option>
               <option value="tag:Pixel Art">Pixel Art</option>
               <option value="tag:Animated">Animated</option>
               <option value="tag:Traditional Art">Traditional Art</option>
