@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>YouTube Videos</title>
+<link rel="stylesheet" href="./css/covers.css">
+<link rel="stylesheet" href="./css/index.css">
+<link rel="stylesheet" href="./css/global.css">
+<link rel="stylesheet" href="./css/app.css">
+</head>
+<body>
+<header>
+  <h1>YouTube Videos</h1>
+  <div class="subtitle" onclick="toggleModal(true)">Explore</div>
+</header>
+
+<div class="modal" onclick="toggleModal(false)" id="navModal">
+  <div class="modal-content" onclick="event.stopPropagation()">
+    <select onchange="navigate(this)">
+      <option value="index.html">Artwork Index</option>
+      <optgroup label="Explore">
+      <option value="biography.html">Biography</option>
+      <option value="reviews.html">Book Reviews</option>
+      <option value="projects.html">Coding Projects</option>
+    </optgroup>
+    <optgroup label="Socials">
+        <option value="youtube.html" selected>YouTube</option>
+    </optgroup>
+    </select>
+  </div>
+</div>
+
+<main class="container">
+  <section class="intro-section fade-in">
+    <p class="intro-text">
+      Explore videos from my YouTube channels!
+    </p>
+  </section>
+
+  <section class="filter-section fade-in">
+    <div class="nav-tabs" id="channelTabs">
+      <button class="nav-tab active" data-channel="xalsier">Xalsier</button>
+      <button class="nav-tab" data-channel="vods">VODS</button>
+      <button class="nav-tab" data-channel="piano-covers">Piano Covers</button>
+    </div>
+  </section>
+
+  <section class="covers-grid fade-in" id="videos-grid">
+    <!-- Videos will be dynamically loaded here -->
+  </section>
+</main>
+
+<footer>
+  <div style="display:flex;flex-direction: row;gap:20px;">
+    <a href="index.html">Artwork Index</a>
+    <a href="biography.html">Biography</a>
+    <a href="reviews.html">Book Reviews</a>
+    <a href="projects.html">Projects</a>
+    <a href="covers.html">Piano Covers</a>
+    <a href="youtube.html">YouTube Videos</a>
+  </div>
+  <div class="social-bar" id="socialBar"></div>
+</footer>
+
+
+<script src="./public/video.js"></script>
+<script src="./js/covers.js"></script>
+<script src="./js/utility.js"></script>
+</body>
+</html>

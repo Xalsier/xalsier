@@ -6,7 +6,8 @@
 /artwork.html       /           301
 /art.html           /           301
 /about.html         /biography  301
-/cover.html         /covers     301
+/cover.html         /youtube    301
+/covers.html        /youtube    301
 /review.html        /reviews    301
 /project.html       /projects   301
 /drawings.html      /           301
@@ -19,7 +20,8 @@
 /artwork            /           301
 /art                /           301
 /about              /biography  301
-/cover              /covers     301
+/cover              /youtube    301
+/covers             /youtube    301
 /review             /reviews    301
 /project            /projects   301
 /drawings           /           301
