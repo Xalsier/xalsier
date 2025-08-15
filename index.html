@@ -16,16 +16,8 @@
 
   <div class="modal" onclick="toggleModal(false)" id="navModal">
     <div class="modal-content" onclick="event.stopPropagation()">
-      <select onchange="navigate(this)">
-        <option value="index.html" selected>Artwork Index</option>
-        <optgroup label="Explore">
-        <option value="biography.html">Biography</option>
-        <option value="reviews.html">Book Reviews</option>
-        <option value="projects.html">Coding Projects</option>
-      </optgroup>
-      <optgroup label="Socials">
-        <option value="youtube.html">YouTube</option>
-    </optgroup>
+      <select onchange="navigate(this)" id="navigationSelect">
+        <!-- Navigation options will be populated by JavaScript -->
       </select>
     </div>
   </div>
@@ -36,6 +28,7 @@
   
 
   <h2 id="archive-count" class="archive-header"></h2>
+  <h2 id="tag-count" class="archive-header"></h2>
 
 
       <!-- Character Profile Section (shown when single character selected) -->
@@ -68,152 +61,21 @@
         <div class="filter-group">
           <label for="metaFilter">Meta</label>
           <select id="metaFilter" class="filter-select">
-            <option value="">Select Meta Filter</option>
-            <optgroup label="Projects">
-              <option value="project:Untitled Project">Untitled Project</option>
-              <option value="project:Silhouette Project">Silhouette Project</option>
-              <option value="project:Snapshot Comic">Snapshot Comic</option>
-              <option value="project:Birth by Memory">Birth by Memory</option>
-            </optgroup>
-            <optgroup label="Filters">
-              <option value="filter:Safe">Safe</option>
-              <option value="filter:Scrap">Scrap</option>
-              <option value="filter:Object">Object</option>
-              <option value="filter:Explicit">Explicit</option>
-              <option value="filter:Violent">Violent</option>
-            </optgroup>
-            <optgroup label="Medium">
-              <option value="tag:Raster Art">Raster Art</option>
-              <option value="tag:SVG">SVG</option>
-              <option value="tag:Pixel Art">Pixel Art</option>
-              <option value="tag:Animated">Animated</option>
-              <option value="tag:Traditional Art">Traditional Art</option>
-              <option value="tag:Black & White">Black & White</option>
-            </optgroup>
-            <optgroup label="Art Program">
-              <option value="tag:Procreate">Procreate</option>
-              <option value="tag:Procreate Dreams">Procreate Dreams</option>
-              <option value="tag:Affinity Designer 2">Affinity Designer 2</option>
-              <option value="tag:Clip Studio Paint">Clip Studio Paint</option>
-              <option value="tag:Adobe Illustrator">Adobe Illustrator</option>
-              <option value="tag:Photopea">Photopea</option>
-              <option value="tag:Aseprite">Aseprite</option>
-              <option value="tag:Pixel Studio">Pixel Studio</option>
-            </optgroup>
-            <optgroup label="Backgrounds">
-              <option value="background:Rendered Background">Rendered Background</option>
-              <option value="background:White Background">White Background</option>
-              <option value="background:Yellow Background">Yellow Background</option>
-              <option value="background:Pink Background">Pink Background</option>
-              <option value="background:Gray Background">Gray Background</option>
-              <option value="background:Purple Background">Purple Background</option>
-              <option value="background:Dark Background">Dark Background</option>
-            </optgroup>
-            <optgroup label="History">
-              <option value="history:Recent">Recent</option>
-              <option value="history:Oldest">Oldest</option>
-            </optgroup>
+            <!-- Options will be populated by JavaScript -->
           </select>
         </div>
   
         <div class="filter-group">
           <label for="characterFilter">Characters</label>
           <select id="characterFilter" class="filter-select">
-            <option value="">Select Character</option>
-            <optgroup label="Untitled Project">
-              <option value="character:Spencer">Spencer</option>
-              <option value="character:Stacy">Stacy</option>
-              <option value="character:Roxie">Roxie</option>
-              <option value="character:Elaine">Elaine</option>
-            </optgroup>
-            <optgroup label="Birth by Memory">
-              <option value="character:Naori">Naori</option>
-              <option value="character:Fuwa">Fuwa</option>
-              <option value="character:Heather">Heather</option>
-              <option value="character:Leo">Leo</option>
-              <option value="character:Sera">Sera</option>
-            </optgroup>
-            <optgroup label="Campaigns & Roleplays">
-              <option value="character:Eun-byul">Eun-byul</option>
-              <option value="character:Zsasz">Zsasz</option>
-            </optgroup>
-            <optgroup label="???">
-              <option value="character:No Name Given">No Name Given</option>
-            </optgroup>
+            <!-- Options will be populated by JavaScript -->
           </select>
         </div>
   
         <div class="filter-group">
           <label for="attributeFilter">Attributes</label>
           <select id="attributeFilter" class="filter-select">
-            <option value="">Select Attribute</option>
-            <optgroup label="Species">
-              <option value="species:Rabbit">Rabbit</option>
-              <option value="species:Hyena">Hyena</option>
-              <option value="species:Cat">Cat</option>
-              <option value="species:Fox">Fox</option>
-              <option value="species:Canine > Werewolf">Canine > Werewolf</option>
-              <option value="species:Canine > Other">Canine > Other</option>
-              <option value="species:Lion">Lion</option>
-              <option value="species:Reindeer">Reindeer</option>
-              <option value="species:Mouse">Mouse</option>
-              <option value="species:Human">Human</option>
-            </optgroup>
-            <optgroup label="Gender">
-              <option value="gender:Female">Female</option>
-              <option value="gender:Male">Male</option>
-            </optgroup>
-            <optgroup label="Facial Expression">
-              <option value="tag:;3">;3</option>
-              <option value="tag:Tired">Tired</option>
-              <option value="tag:Nervous">Nervous</option>
-              <option value="tag:Panting">Panting</option>
-              <option value="tag:Smirk">Smirk</option>
-              <option value="tag:Surprise">Surprise</option>
-              <option value="tag:Neutral">Neutral</option>
-              <option value="tag:Angry">Angry</option>
-            </optgroup>
-            <optgroup label="Body Type">
-              <option value="bodyType:Kemono Face">Kemono Face</option>
-              <option value="bodyType:Anthro Face">Anthro Face</option>
-              <option value="bodyType:Flat Chested">Flat Chested</option>
-              <option value="bodyType:Underweight">Underweight</option>
-              <option value="bodyType:Freckles">Freckles</option>
-              <option value="bodyType:Scars">Scars</option>
-              <option value="bodyType:Spotted">Spotted</option>
-              <option value="bodyType:Body Stripes">Body Stripes</option>
-              <option value="bodyType:Face Stripes">Face Stripes</option>
-              <option value="bodyType:Shoulder Muscles">Shoulder Muscles</option>
-            </optgroup>
-            <optgroup label="Fur Color">
-              <option value="furColor:Brown">Brown</option>
-              <option value="furColor:Orange">Orange</option>
-              <option value="furColor:Yellow">Yellow</option>
-              <option value="furColor:Beige">Beige</option>
-              <option value="furColor:White">White</option>
-              <option value="furColor:Black">Black</option>
-            </optgroup>
-            <optgroup label="Eye Color">
-              <option value="tag:Yellow Eyes">Yellow Eyes</option>
-              <option value="tag:Green Eyes">Green Eyes</option>
-              <option value="tag:Purple Eyes">Purple Eyes</option>
-              <option value="tag:Pink Eyes">Pink Eyes</option>
-              <option value="tag:Pink Eyes">Gray Eyes</option>
-              <option value="tag:Dark Eyes">Dark Eyes</option>
-            </optgroup>
-            <optgroup label="Clothing">
-              <option value="tag:Crop Top">Crop Top</option>
-              <option value="tag:Turtleneck">Turtleneck</option>
-              <option value="tag:Button-Up">Button-Up</option>
-              <option value="tag:Arm Warmer">Neck Collar</option>
-              <option value="tag:Witch Hat">Witch Hat</option>
-              <option value="tag:Arm Warmer">Arm Warmer</option>
-              <option value="tag:Kimono">Kimono</option>
-              <option value="tag:Bra">Bra</option>
-              <option value="tag:Bandages">Hair Tie</option>
-              <option value="tag:Bandages">Bandages</option>
-              <option value="tag:Bandana">Bandana</option>
-            </optgroup>
+            <!-- Options will be populated by JavaScript -->
           </select>
         </div>
       </div>
@@ -286,6 +148,11 @@
     </div>
     <div class="social-bar" id="socialBar"></div>
   </footer>
+  
+  <!-- Load configuration and utility first -->
+  <script src="./con/library.js"></script>
+  
+  <!-- Then load your existing scripts -->
   <script src="./con/char.js"></script>
   <script src="./con/con_archive.js"></script>
   <script src="./js/utility.js"></script>

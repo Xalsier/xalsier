@@ -121,21 +121,9 @@ class ArchiveApp {
                 return item.project === filter.name;
               case "background":
                 return item.background === filter.name;
-              case "filter":
-                if (filter.name === "Safe") {
-                  const isScrap = item.filters?.includes("Scrap");
-                  const isObject = item.filters?.includes("Object");
-                  const scrapFilterActive = Array.from(this.activeFilters.values())
-                    .some(f => f.type === "filter" && f.name === "Scrap");
-                  const objectFilterActive = Array.from(this.activeFilters.values())
-                    .some(f => f.type === "filter" && f.name === "Object");
-      
-                  if ((isScrap && !scrapFilterActive) || (isObject && !objectFilterActive)) {
-                    return false;
-                  }
-                  return true;
-                }
-                return item.filters?.includes(filter.name);
+                case "filter":
+                    // Treat all filters, including 'Safe', the same
+                    return item.filters?.includes(filter.name);
               case "history":
                 return true;
               case "character":
@@ -231,29 +219,56 @@ class ArchiveApp {
         imageContainer.className = "gallery-item-image";
       
         const isVideo = item.image && item.image.endsWith(".mp4");
+        const isYouTube = item.image && /(?:youtube\.com|youtu\.be)/.test(item.image);
+        let missingImageError = false;
+      
         const thumbSrc = item.thumb || (isVideo ? "./img/video-thumb.png" : item.image);
       
         const safeMode = this.activeFilters.has("filter-Safe");
         const isViolent = item.filters && item.filters.includes("Violent");
         const shouldBlur = safeMode && isViolent;
+    
+        const createPastelBlock = (text = "") => {
+            const block = document.createElement("div");
+            block.className = "gallery-thumb-placeholder";
+            const hue = Math.floor(Math.random() * 360);
+            block.style.backgroundColor = `hsl(${hue}, 70%, 85%)`;
+            block.textContent = text || item.title || "";
+            return block;
+        };
       
-        if (thumbSrc.endsWith(".mp4")) {
-          const video = document.createElement("video");
-          video.src = thumbSrc;
-          video.muted = true;
-          video.loop = true;
-          video.autoplay = true;
-          video.playsInline = true;
-          video.className = "gallery-thumb-video";
-          if (shouldBlur) video.classList.add("blurred-thumbnail");
-          imageContainer.appendChild(video);
+        if (isVideo || isYouTube) {
+            // If video or YouTube but no usable thumb, mark missing
+            if (!item.thumb) {
+                missingImageError = true;
+                imageContainer.appendChild(createPastelBlock());
+            } else {
+                const img = document.createElement("img");
+                img.src = item.thumb;
+                img.alt = item.title;
+                img.onerror = () => {
+                    missingImageError = true;
+                    imageContainer.innerHTML = "";
+                    imageContainer.appendChild(createPastelBlock());
+                };
+                if (shouldBlur) img.classList.add("blurred-thumbnail");
+                imageContainer.appendChild(img);
+            }
+        } else if (thumbSrc) {
+            const img = document.createElement("img");
+            img.src = thumbSrc;
+            img.alt = item.title;
+            img.onerror = () => {
+                console.warn("Thumb failed to load:", thumbSrc);
+                missingImageError = true;
+                imageContainer.innerHTML = "";
+                imageContainer.appendChild(createPastelBlock());
+            };
+            if (shouldBlur) img.classList.add("blurred-thumbnail");
+            imageContainer.appendChild(img);
         } else {
-          const img = document.createElement("img");
-          img.src = thumbSrc;
-          img.alt = item.title;
-          img.onerror = () => console.warn("Thumb failed to load:", thumbSrc);
-          if (shouldBlur) img.classList.add("blurred-thumbnail");
-          imageContainer.appendChild(img);
+            missingImageError = true;
+            imageContainer.appendChild(createPastelBlock());
         }
       
         const infoContainer = document.createElement("div");
@@ -262,48 +277,51 @@ class ArchiveApp {
         const metaFilters = ["Explicit", "Scrap", "Violent"];
         const itemMetaFilter = item.filters && item.filters.find((f) => metaFilters.includes(f) && f !== "Safe");
         const primaryDisplayTag = itemMetaFilter || "";
-const secondaryDisplayTag = (item.species && item.species.length > 0) ? item.species[0] : "";
-
-// New: third display tag
-const thirdDisplayTag = (item.tags && item.tags.includes("SVG")) ? "SVG" : "";
-
-const filterStatusForClass = item.filters && item.filters.length > 0 ? item.filters[0] : "Unknown";
-const filterClass = `filter-${filterStatusForClass.toLowerCase()}`;
-
-// Build HTML
-const titleElement = document.createElement("div");
-titleElement.className = "gallery-item-title";
-titleElement.textContent = item.title;
-
-infoContainer.appendChild(titleElement);
-
-if (primaryDisplayTag) {
-  const tagEl = document.createElement("div");
-  tagEl.className = `gallery-item-filter ${filterClass}`;
-  tagEl.textContent = primaryDisplayTag;
-  infoContainer.appendChild(tagEl);
-}
-
-if (secondaryDisplayTag) {
-  const tagEl = document.createElement("div");
-  tagEl.className = `gallery-item-filter filter-species`;
-  tagEl.textContent = secondaryDisplayTag;
-  infoContainer.appendChild(tagEl);
-}
-
-// Append third tag if applicable
-if (thirdDisplayTag) {
-  const tagEl = document.createElement("div");
-  tagEl.className = `gallery-item-filter filter-svg`;
-  tagEl.textContent = thirdDisplayTag;
-  infoContainer.appendChild(tagEl);
-}
-
+        const secondaryDisplayTag = (item.species && item.species.length > 0) ? item.species[0] : "";
+        const thirdDisplayTag = (item.tags && item.tags.includes("SVG")) ? "SVG" : "";
+        const fourthDisplayTag = missingImageError ? "Missing Image" : "";
+      
+        const filterStatusForClass = item.filters && item.filters.length > 0 ? item.filters[0] : "Unknown";
+        const filterClass = `filter-${filterStatusForClass.toLowerCase()}`;
+      
+        const titleElement = document.createElement("div");
+        titleElement.className = "gallery-item-title";
+        titleElement.textContent = item.title;
+        infoContainer.appendChild(titleElement);
+      
+        if (primaryDisplayTag) {
+            const tagEl = document.createElement("div");
+            tagEl.className = `gallery-item-filter ${filterClass}`;
+            tagEl.textContent = primaryDisplayTag;
+            infoContainer.appendChild(tagEl);
+        }
+      
+        if (secondaryDisplayTag) {
+            const tagEl = document.createElement("div");
+            tagEl.className = `gallery-item-filter filter-species`;
+            tagEl.textContent = secondaryDisplayTag;
+            infoContainer.appendChild(tagEl);
+        }
+      
+        if (thirdDisplayTag) {
+            const tagEl = document.createElement("div");
+            tagEl.className = `gallery-item-filter filter-svg`;
+            tagEl.textContent = thirdDisplayTag;
+            infoContainer.appendChild(tagEl);
+        }
+    
+        if (fourthDisplayTag) {
+            const tagEl = document.createElement("div");
+            tagEl.className = `gallery-item-filter filter-explicit`;
+            tagEl.textContent = fourthDisplayTag;
+            infoContainer.appendChild(tagEl);
+        }
       
         itemElement.appendChild(imageContainer);
         itemElement.appendChild(infoContainer);
         return itemElement;
-      }
+    }
+    
       
   
     renderPagination() {
@@ -339,119 +357,142 @@ if (thirdDisplayTag) {
     }
   
     openModal(item) {
-      const modal = document.getElementById("imageModal")
-      const modalTitle = document.getElementById("modalTitle")
-      const modalDate = document.getElementById("modalDate")
-      const modalMirrors = document.getElementById("modalMirrors")
-      const modalTags = document.getElementById("modalTags")
-      const modalImageContainer = document.querySelector(".modal-image-container")
-  
-      modalImageContainer.innerHTML = ""
-      modalImageContainer.style.background = "var(--bg-color)"
-  
-      function extractYouTubeID(url) {
-        const patterns = [
-          /(?:youtube\.com\/watch\?v=|youtube\.com\/embed\/|youtu\.be\/)([^&\n?#]+)/,
-          /youtube\.com\/shorts\/([^&\n?#]+)/,
-        ]
-        for (const pattern of patterns) {
-          const match = url.match(pattern)
-          if (match && match[1]) return match[1]
+        const modal = document.getElementById("imageModal");
+        const modalTitle = document.getElementById("modalTitle");
+        const modalDate = document.getElementById("modalDate");
+        const modalMirrors = document.getElementById("modalMirrors");
+        const modalTags = document.getElementById("modalTags");
+        const modalImageContainer = document.querySelector(".modal-image-container");
+    
+        modalImageContainer.innerHTML = "";
+        modalImageContainer.style.background = "var(--bg-color)";
+    
+        const createPastelBlock = (text = "") => {
+            const block = document.createElement("div");
+            block.className = "modal-placeholder";
+            const hue = Math.floor(Math.random() * 360);
+            block.style.backgroundColor = `hsl(${hue}, 70%, 85%)`;
+            block.style.width = "100%";
+            block.style.height = "60vh";
+            block.style.display = "flex";
+            block.style.alignItems = "center";
+            block.style.justifyContent = "center";
+            block.style.fontWeight = "bold";
+            block.style.fontSize = "1.5rem";
+            block.textContent = text;
+            return block;
+        };
+    
+        function extractYouTubeID(url) {
+            const patterns = [
+                /(?:youtube\.com\/watch\?v=|youtube\.com\/embed\/|youtu\.be\/)([^&\n?#]+)/,
+                /youtube\.com\/shorts\/([^&\n?#]+)/,
+            ];
+            for (const pattern of patterns) {
+                const match = url.match(pattern);
+                if (match && match[1]) return match[1];
+            }
+            return null;
         }
-        return null
-      }
-  
-      if (item.image.startsWith("./svg/")) {
-        modalImageContainer.style.background = "var(--green)"
-      } else if (item.image.startsWith("./img/")) {
-        modalImageContainer.style.background = "none"
-      } else {
-        modalImageContainer.style.background = ""
-      }
-  
-      const ytID = extractYouTubeID(item.image)
-      if (ytID) {
-        const wrapper = document.createElement("div")
-        wrapper.style.position = "relative"
-        wrapper.style.width = "100%"
-        wrapper.style.aspectRatio = "16 / 9"
-        wrapper.style.maxHeight = "90vh"
-        const iframe = document.createElement("iframe")
-        iframe.src = `https://www.youtube.com/embed/${ytID}`
-        iframe.style.position = "absolute"
-        iframe.style.top = 0
-        iframe.style.left = 0
-        iframe.style.width = "100%"
-        iframe.style.height = "100%"
-        iframe.style.border = "none"
-        iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        iframe.allowFullscreen = true
-        iframe.className = "modal-video-iframe"
-        wrapper.appendChild(iframe)
-        modalImageContainer.appendChild(wrapper)
-      } else if (item.image && item.image.endsWith(".mp4")) {
-        const video = document.createElement("video")
-        video.src = item.image
-        video.controls = true
-        video.autoplay = true
-        video.loop = false
-        video.playsInline = true
-        video.className = "modal-video"
-        modalImageContainer.appendChild(video)
-      } else if (item.image && item.image.toLowerCase().includes(".svg")) {
-            this.loadInteractiveSVG(item, modalImageContainer)
+    
+        if (item.image && item.image.startsWith("./svg/")) {
+            modalImageContainer.style.background = "var(--green)";
+        } else if (item.image && item.image.startsWith("./img/")) {
+            modalImageContainer.style.background = "none";
         } else {
-        const img = document.createElement("img")
-        img.src = item.image
-        img.alt = item.title
-        img.id = "modalImage"
-        modalImageContainer.appendChild(img)
-      }
-  
-      modalTitle.textContent = item.title
-      modalDate.textContent = new Date(item.createdDate).toLocaleDateString(undefined, {
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-      })
-  
-      const platformIconMap = {
-        twitter: "./svg/soc/x.svg",
-        bluesky: "./svg/soc/blue.svg",
-        instagram: "./svg/soc/insta.svg",
-      }
-      modalMirrors.innerHTML = ""
-      item.mirrors.forEach((mirror) => {
-        const link = document.createElement("a")
-        link.href = mirror.url
-        link.target = "_blank"
-        link.className = "mirror-link"
-        const svgPath = platformIconMap[mirror.platform]
-        if (svgPath) {
-          const iconId = "icon"
-          link.innerHTML = `              <svg class="mirror-icon" viewBox="0 0 24 24" fill="currentColor">                <use href="${svgPath}#${iconId}"></use>              </svg>${mirror.platform.charAt(0).toUpperCase() + mirror.platform.slice(1)}            `
-          const testImg = new Image()
-          testImg.onerror = () => {
-            console.warn(`SVG failed to load for ${mirror.platform}: ${svgPath}`)
-          }
-          testImg.src = svgPath
-        } else {
-          link.textContent = mirror.platform.charAt(0).toUpperCase() + mirror.platform.slice(1)
+            modalImageContainer.style.background = "";
         }
-        modalMirrors.appendChild(link)
-      })
-  
-      modalTags.innerHTML = ""
-      item.tags.forEach((tag) => {
-        const tagElement = document.createElement("span")
-        tagElement.className = "tag"
-        tagElement.textContent = tag
-        modalTags.appendChild(tagElement)
-      })
-  
-      modal.style.display = "block"
-      document.body.style.overflow = "hidden"
+    
+        const ytID = item.image ? extractYouTubeID(item.image) : null;
+        if (ytID) {
+            const wrapper = document.createElement("div");
+            wrapper.style.position = "relative";
+            wrapper.style.width = "100%";
+            wrapper.style.aspectRatio = "16 / 9";
+            wrapper.style.maxHeight = "90vh";
+            const iframe = document.createElement("iframe");
+            iframe.src = `https://www.youtube.com/embed/${ytID}`;
+            iframe.style.position = "absolute";
+            iframe.style.top = 0;
+            iframe.style.left = 0;
+            iframe.style.width = "100%";
+            iframe.style.height = "100%";
+            iframe.style.border = "none";
+            iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+            iframe.allowFullscreen = true;
+            iframe.className = "modal-video-iframe";
+            wrapper.appendChild(iframe);
+            modalImageContainer.appendChild(wrapper);
+        } else if (item.image && item.image.endsWith(".mp4")) {
+            const video = document.createElement("video");
+            video.src = item.image;
+            video.controls = true;
+            video.autoplay = true;
+            video.loop = false;
+            video.playsInline = true;
+            video.className = "modal-video";
+            modalImageContainer.appendChild(video);
+        } else if (item.image && item.image.toLowerCase().includes(".svg")) {
+            this.loadInteractiveSVG(item, modalImageContainer);
+        } else if (item.image) {
+            const img = document.createElement("img");
+            img.src = item.image;
+            img.alt = item.title;
+            img.id = "modalImage";
+            img.onerror = () => {
+                modalImageContainer.innerHTML = "";
+                modalImageContainer.appendChild(createPastelBlock(item.title));
+            };
+            modalImageContainer.appendChild(img);
+        } else {
+            modalImageContainer.appendChild(createPastelBlock(item.title));
+        }
+    
+        modalTitle.textContent = item.title;
+        modalDate.textContent = new Date(item.createdDate).toLocaleDateString(undefined, {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+        });
+    
+        const platformIconMap = {
+            twitter: "./svg/soc/x.svg",
+            bluesky: "./svg/soc/blue.svg",
+            instagram: "./svg/soc/insta.svg",
+        };
+        modalMirrors.innerHTML = "";
+        item.mirrors.forEach((mirror) => {
+            const link = document.createElement("a");
+            link.href = mirror.url;
+            link.target = "_blank";
+            link.className = "mirror-link";
+            const svgPath = platformIconMap[mirror.platform];
+            if (svgPath) {
+                const iconId = "icon";
+                link.innerHTML = `<svg class="mirror-icon" viewBox="0 0 24 24" fill="currentColor"><use href="${svgPath}#${iconId}"></use></svg>${mirror.platform.charAt(0).toUpperCase() + mirror.platform.slice(1)}`;
+                const testImg = new Image();
+                testImg.onerror = () => {
+                    console.warn(`SVG failed to load for ${mirror.platform}: ${svgPath}`);
+                };
+                testImg.src = svgPath;
+            } else {
+                link.textContent = mirror.platform.charAt(0).toUpperCase() + mirror.platform.slice(1);
+            }
+            modalMirrors.appendChild(link);
+        });
+    
+        modalTags.innerHTML = "";
+        item.tags.forEach((tag) => {
+            const tagElement = document.createElement("span");
+            tagElement.className = "tag";
+            tagElement.textContent = tag;
+            modalTags.appendChild(tagElement);
+        });
+    
+        modal.style.display = "block";
+        document.body.style.overflow = "hidden";
     }
+    
   
     async loadInteractiveSVG(item, container) {
         try {
