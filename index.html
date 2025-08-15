@@ -16,11 +16,19 @@
 
   <div class="modal" onclick="toggleModal(false)" id="navModal">
     <div class="modal-content" onclick="event.stopPropagation()">
-      <select onchange="navigate(this)" id="navigationSelect">
-        <!-- Navigation options will be populated by JavaScript -->
-      </select>
+        <select onchange="navigate(this)">
+            <option value="index.html" selected>Artwork Index</option>
+            <optgroup label="Explore">
+            <option value="biography.html">Biography</option>
+            <option value="reviews.html">Book Reviews</option>
+            <option value="projects.html">Coding Projects</option>
+        </optgroup>
+        <optgroup label="Socials">
+            <option value="youtube.html">YouTube</option>
+        </optgroup>
+        </select>
     </div>
-  </div>
+</div>
   <br>
   <div style="width: 100%; display: flex; justify-content: center;">
     <img title="(Fuwa) Xalsier's profile on Social Media." alt="A drawing of the character Fuwa, an anthropomorphic rabbit. Xalsier's main profile image on social media." style="border-radius: 50%; width: 200px;" src="./thumb/fuwa.jpg">
