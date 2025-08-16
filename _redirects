@@ -1,11 +1,11 @@
 # Redirect .html URLs
 
 /characters.html    /           301
-/bio.html           /biography  301
+/bio.html           /bio        301
 /gallery.html       /           301
 /artwork.html       /           301
 /art.html           /           301
-/about.html         /biography  301
+/about.html         /bio        301
 /cover.html         /youtube    301
 /covers.html        /youtube    301
 /review.html        /reviews    301
@@ -15,11 +15,11 @@
 # Redirect extensionless URLs
 
 /characters         /           301
-/bio                /biography  301
+/bio                /bio        301
 /gallery            /           301
 /artwork            /           301
 /art                /           301
-/about              /biography  301
+/about              /bio        301
 /cover              /youtube    301
 /covers             /youtube    301
 /review             /reviews    301
