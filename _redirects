@@ -10,6 +10,11 @@
 /review.html        /reviews    301
 /project.html       /projects   301
 /drawings.html      /           301
+/data.html          /analytics  301
+/stats.html         /analytics  301
+/stat.html          /analytics  301
+/graph.html         /analytics  301
+/graphs.html        /analytics  301
 
 # Redirect extensionless URLs
 
@@ -28,3 +33,8 @@
 /piano_covers       /youtube    301
 /drawing            /           301
 /draw               /           301
+/data               /analytics  301
+/stats              /analytics  301
+/stat               /analytics  301
+/graph              /analytics  301
+/graphs             /analytics  301
