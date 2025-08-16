@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Analytics (WIP)</title>
+<link rel="stylesheet" href="./css/covers.css">
+<link rel="stylesheet" href="./css/index.css">
+<link rel="stylesheet" href="./css/global.css">
+<link rel="stylesheet" href="./css/app.css">
+<link rel="stylesheet" href="./exp/testA.css">
+</head>
+<body>
+<header>
+  <h1>Analytics (WIP)</h1>
+  <div class="subtitle" onclick="toggleModal(true)">Explore</div>
+</header>
+
+<div class="modal" onclick="toggleModal(false)" id="navModal">
+  <div class="modal-content" onclick="event.stopPropagation()">
+    <select onchange="navigate(this)">
+      <option value="index.html">Rawr Folder</option>
+      <optgroup label="Explore">
+      <option value="bio.html">Biography</option>
+      <option value="reviews.html">Book Reviews</option>
+      <option value="projects.html">Coding Projects</option>
+      <option value="analytics.html" selected>Analytics</option>
+    </optgroup>
+    <optgroup label="Socials">
+        <option value="youtube.html">YouTube</option>
+    </optgroup>
+    </select>
+  </div>
+</div>
+
+<main class="container">
+  <!-- Removed fade-in class from filter section -->
+  <section class="filter-section">
+    <div class="nav-tabs" id="channelTabs">
+      <button class="nav-tab active" data-channel="rawr-folder">Rawr Folder</button>
+      <button class="nav-tab" data-channel="social-media">Social Media</button>
+    </div>
+  </section>
+
+  <!-- Removed fade-in class from analytics content -->
+  <section class="analytics-content" id="analytics-content">
+    <div id="app">
+      <!-- Loading State -->
+      <div id="loadingContainer" class="loading-container">
+        <div class="progress-bar">
+          <div id="progressFill" class="progress-fill"></div>
+        </div>
+      </div>
+
+      <!-- Main Content -->
+      <div id="mainContent" class="main-content">
+        <h1 id="chartTitle" class="chart-title">Distribution of Gender</h1>
+        
+        <div class="chart-container">
+          <canvas id="pieChart" width="350" height="350" aria-label="Animated Pie Chart showing data distribution"></canvas>
+        </div>
+
+        <!-- Added category selection dropdown -->
+        <div class="category-selection">
+          <select id="categorySelect" class="category-select">
+            <optgroup label="Meta">
+              <option value="meta.projects">Projects</option>
+              <option value="meta.medium">Medium</option>
+              <option value="meta.artProgram">Art Program</option>
+              <option value="meta.canon">Canon</option>
+              <option value="meta.nonCanon">Non-Canon</option>
+              <option value="meta.time">Time</option>
+              <option value="meta.filters">Filters</option>
+            </optgroup>
+            <optgroup label="Characters">
+              <option value="characters.Untitled Project">Untitled Project</option>
+              <option value="characters.Birth by Memory">Birth by Memory</option>
+              <option value="characters.Campaigns & Roleplays">Campaigns & Roleplays</option>
+              <option value="characters.???">???</option>
+            </optgroup>
+            <optgroup label="Attributes">
+              <option value="attributes.species">Species</option>
+              <option value="attributes.gender" selected>Gender</option>
+              <option value="attributes.environments">Environments</option>
+              <option value="attributes.staticPoses">Static Poses</option>
+              <option value="attributes.dynamicPoses">Dynamic Poses</option>
+              <option value="attributes.facialExpression">Facial Expression</option>
+              <option value="attributes.bodyType">Body Type</option>
+              <option value="attributes.furColor">Fur Color</option>
+              <option value="attributes.eyeColor">Eye Color</option>
+              <option value="attributes.hairColor">Hair Color</option>
+              <option value="attributes.clothing">Clothing</option>
+              <option value="attributes.backgrounds">Backgrounds</option>
+              <option value="attributes.violentImagery">Violent Imagery</option>
+            </optgroup>
+          </select>
+        </div>
+
+        <!-- Added legend/key -->
+        <div id="chartLegend" class="chart-legend"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Removed fade-in class from social media content -->
+  <section class="social-media-content" id="social-media-content" style="display: none;">
+    <div class="no-content">
+      <h2>Social Media Analytics</h2>
+      <p>No content available for now</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div style="display:flex;flex-direction: row;gap:20px;">
+    <a href="index.html">Artwork Index</a>
+    <a href="bio.html">Biography</a>
+    <a href="reviews.html">Book Reviews</a>
+    <a href="projects.html">Projects</a>
+    <a href="youtube.html">YouTube Videos</a>
+    <a href="analytics.html">Analytics</a>
+  </div>
+  <div class="social-bar" id="socialBar"></div>
+</footer>
+
+<!-- Updated script loading order with con_archive.js first -->
+<script src="./con/con_archive.js"></script>
+<script src="./con/library.js"></script>
+<script src="./js/utility.js"></script>
+<script src="./js/select.js"></script>
+<script src="./exp/testA.js"></script>
+
+<!-- Added tab switching functionality -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const tabs = document.querySelectorAll('.nav-tab');
+  const analyticsContent = document.getElementById('analytics-content');
+  const socialMediaContent = document.getElementById('social-media-content');
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', function() {
+      // Remove active class from all tabs
+      tabs.forEach(t => t.classList.remove('active'));
+      // Add active class to clicked tab
+      this.classList.add('active');
+
+      // Show/hide content based on selected tab
+      if (this.dataset.channel === 'rawr-folder') {
+        analyticsContent.style.display = 'block';
+        socialMediaContent.style.display = 'none';
+      } else if (this.dataset.channel === 'social-media') {
+        analyticsContent.style.display = 'none';
+        socialMediaContent.style.display = 'block';
+      }
+    });
+  });
+});
+</script>
+</body>
+</html>

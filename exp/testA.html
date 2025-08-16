@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobile Pie Chart</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app">
+        <!-- Loading State -->
+        <div id="loadingContainer" class="loading-container">
+            <div class="progress-bar">
+                <div id="progressFill" class="progress-fill"></div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div id="mainContent" class="main-content">
+            <h1 id="chartTitle" class="chart-title">Sales Distribution</h1>
+            
+            <div class="chart-container">
+                <canvas id="pieChart" width="350" height="350" aria-label="Animated Pie Chart showing sales distribution"></canvas>
+            </div>
+
+                      <button id="continueBtn" class="continue-btn">Continue</button>
+            <!-- Added legend/key back -->
+            <div id="chartLegend" class="chart-legend"></div>
+
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
