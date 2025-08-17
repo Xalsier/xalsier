@@ -187,11 +187,52 @@ function showMainContent() {
   addSlider()
 }
 
-function init() {
-  const categorySelect = document.getElementById("categorySelect")
-  categorySelect.addEventListener("change", e => updateChart(e.target.value))
+function populateCategorySelect() {
+    const categorySelect = document.getElementById("categorySelect")
+    categorySelect.innerHTML = "" // clear existing options
+  
+    const sections = [
+      { key: "meta", label: "Meta" },
+      { key: "characters", label: "Characters" },
+      { key: "attributes", label: "Attributes" },
+    ]
+  
+    sections.forEach(section => {
+      if (!LIBRARY_CONFIG[section.key]) return
+  
+      const optgroup = document.createElement("optgroup")
+      optgroup.label = section.label
+  
+      Object.keys(LIBRARY_CONFIG[section.key]).forEach(subsectionKey => {
+        const option = document.createElement("option")
+        option.value = `${section.key}.${subsectionKey}`
+  
+        // For characters, just display project name; for others, make readable
+        if (section.key === "characters") {
+          option.textContent = subsectionKey
+        } else {
+          option.textContent = subsectionKey.replace(/([A-Z])/g, " $1").replace(/^./, str => str.toUpperCase())
+        }
+  
+        // Default selection
+        if (option.value === "attributes.gender") option.selected = true
+  
+        optgroup.appendChild(option)
+      })
+  
+      categorySelect.appendChild(optgroup)
+    })
+  }
+  
 
-  showMainContent()
-}
+  function init() {
+    populateCategorySelect() // populate dynamically
+  
+    const categorySelect = document.getElementById("categorySelect")
+    categorySelect.addEventListener("change", e => updateChart(e.target.value))
+  
+    showMainContent()
+  }
+  
 
 document.addEventListener("DOMContentLoaded", init)
