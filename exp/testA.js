@@ -209,22 +209,6 @@ function updateChart(categoryPath) {
   }, 100)
 }
 
-// Show loading progress
-function showLoadingProgress() {
-  const progressFill = document.getElementById("progressFill")
-  let progress = 0
-
-  const interval = setInterval(() => {
-    progress += 100 / 30 // 3 seconds = 30 intervals of 100ms
-    progressFill.style.width = Math.min(progress, 100) + "%"
-
-    if (progress >= 100) {
-      clearInterval(interval)
-      setTimeout(showMainContent, 200)
-    }
-  }, 100)
-}
-
 // Show main content
 function showMainContent() {
   const loadingContainer = document.getElementById("loadingContainer")
@@ -252,7 +236,7 @@ function init() {
   })
 
   // Start loading sequence
-  showLoadingProgress()
+  showMainContent()
 }
 
 // Start the app when DOM is loaded

@@ -33,9 +33,6 @@
     </select>
   </div>
 </div>
-
-<h1>Rawr Folder</h1>
-
 <main class="container">
   <!-- Removed fade-in class from filter section -->
   <section class="filter-section">
@@ -103,6 +100,14 @@
         <div id="chartLegend" class="chart-legend"></div>
       </div>
     </div>
+
+    <div style="width: 100%; display: flex; justify-content: center;flex-direction:column; padding: 20px;">
+        <h2 style="color: var(--green);">Rawr Folder Stats:</h2>
+        <div style="display:flex;flex-direction:row;gap:20px;">
+          <span id="archive-count" class="archive-header"></span>
+          <span id="tag-count" class="archive-header"></span>
+        </div>
+      </div>
   </section>
 
   <!-- Removed fade-in class from social media content -->
@@ -159,5 +164,8 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 </script>
+<script>
+    updateArchiveHeader();
+  </script>
 </body>
 </html>
