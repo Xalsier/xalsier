@@ -66,7 +66,7 @@ function processData(data) {
   }
   
 
-function generateColorPalette(count) {
+  function generateColorPalette(count) {
     const colors = []
   
     // Dice roll for whole-chart theme
@@ -79,7 +79,7 @@ function generateColorPalette(count) {
     }
   
     const saturation = 60
-    const lightness = 55
+    const baseLightness = 55
   
     function hslToRgb(h, s, l) {
       s /= 100
@@ -93,10 +93,13 @@ function generateColorPalette(count) {
       )}, ${Math.round(255 * f(4))})`
     }
   
-    // Up to 10 progressively darker/lighter shades
+    // Dynamically adjust darkening strength: fewer slices = steeper difference
+    const maxSlices = 10
+    const darkeningStep = 0.6 / Math.max(count - 1, 1) // spread 60% darkness across slices
+  
     for (let i = 0; i < count; i++) {
-      const factor = 1 - i * 0.08 // gentler slope so 10 shades look distinct
-      const l = Math.max(25, Math.min(85, lightness * factor))
+      const factor = 1 - i * darkeningStep
+      const l = Math.max(25, Math.min(85, baseLightness * factor))
       colors.push(hslToRgb(themeHue, saturation, l))
     }
   
@@ -148,10 +151,7 @@ function drawPieChart(canvas, data, colors, progress = 1) {
     ctx.fillStyle = colors[index]
     ctx.fill()
     
-    ctx.shadowBlur = 0 // reset for clean borders
-    ctx.strokeStyle = "rgba(255, 255, 255, 0.1)"
-    ctx.lineWidth = 1
-    ctx.stroke()
+
     
 
     currentAngle += sliceAngle
