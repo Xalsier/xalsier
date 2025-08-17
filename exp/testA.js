@@ -47,35 +47,64 @@ function getCategoryTitle(categoryPath) {
 }
 
 function processData(data) {
-  return data.filter(item => item.value !== null && item.value > 0).sort((a, b) => b.value - a.value)
-}
+    // Filter & sort
+    const sorted = data
+      .filter(item => item.value !== null && item.value > 0)
+      .sort((a, b) => b.value - a.value)
+  
+    // If there are more than 9 entries, group the rest into "Other"
+    if (sorted.length > 9) {
+      const topNine = sorted.slice(0, 9)
+      const others = sorted.slice(9)
+      const otherValue = others.reduce((sum, item) => sum + item.value, 0)
+  
+      topNine.push({ label: "Other", value: otherValue })
+      return topNine
+    }
+  
+    return sorted
+  }
+  
 
 function generateColorPalette(count) {
-  const colors = []
-  const baseColors = [
-    [86, 222, 147],
-    [255, 107, 107],
-    [74, 144, 226],
-    [255, 193, 7],
-    [156, 39, 176],
-    [255, 152, 0],
-    [0, 188, 212],
-    [139, 195, 74],
-    [233, 30, 99],
-    [121, 85, 72],
-  ]
-
-  for (let i = 0; i < count; i++) {
-    const baseColor = baseColors[i % baseColors.length]
-    const factor = 1 - Math.floor(i / baseColors.length) * 0.2
-    const r = Math.max(20, Math.floor(baseColor[0] * factor))
-    const g = Math.max(20, Math.floor(baseColor[1] * factor))
-    const b = Math.max(20, Math.floor(baseColor[2] * factor))
-    colors.push(`rgb(${r}, ${g}, ${b})`)
+    const colors = []
+  
+    // Dice roll for whole-chart theme
+    let themeHue
+    if (Math.random() < 0.5) {
+      themeHue = 140 // green 50% of the time
+    } else {
+      const altHues = [0, 200, 280, 50] // red, blue, purple, yellow
+      themeHue = altHues[Math.floor(Math.random() * altHues.length)]
+    }
+  
+    const saturation = 60
+    const lightness = 55
+  
+    function hslToRgb(h, s, l) {
+      s /= 100
+      l /= 100
+      const k = n => (n + h / 30) % 12
+      const a = s * Math.min(l, 1 - l)
+      const f = n =>
+        l - a * Math.max(-1, Math.min(k(n) - 3, Math.min(9 - k(n), 1)))
+      return `rgb(${Math.round(255 * f(0))}, ${Math.round(
+        255 * f(8)
+      )}, ${Math.round(255 * f(4))})`
+    }
+  
+    // Up to 10 progressively darker/lighter shades
+    for (let i = 0; i < count; i++) {
+      const factor = 1 - i * 0.08 // gentler slope so 10 shades look distinct
+      const l = Math.max(25, Math.min(85, lightness * factor))
+      colors.push(hslToRgb(themeHue, saturation, l))
+    }
+  
+    return colors
   }
-
-  return colors
-}
+  
+  
+  
 
 function createLegend(data, colors) {
   const legend = document.getElementById("chartLegend")
@@ -110,12 +139,20 @@ function drawPieChart(canvas, data, colors, progress = 1) {
     ctx.moveTo(centerX, centerY)
     ctx.arc(centerX, centerY, radius, currentAngle, currentAngle + sliceAngle)
     ctx.closePath()
+    
+    ctx.shadowColor = colors[index]
+    ctx.shadowBlur = 20
+    ctx.shadowOffsetX = 0
+    ctx.shadowOffsetY = 0
+    
     ctx.fillStyle = colors[index]
     ctx.fill()
-
+    
+    ctx.shadowBlur = 0 // reset for clean borders
     ctx.strokeStyle = "rgba(255, 255, 255, 0.1)"
     ctx.lineWidth = 1
     ctx.stroke()
+    
 
     currentAngle += sliceAngle
   })
