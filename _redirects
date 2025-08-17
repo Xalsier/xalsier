@@ -5,6 +5,7 @@
 /artwork.html       /           301
 /art.html           /           301
 /about.html         /bio        301
+/biography.html     /bio        301
 /cover.html         /youtube    301
 /covers.html        /youtube    301
 /review.html        /reviews    301
@@ -37,4 +38,5 @@
 /stats              /analytics  301
 /stat               /analytics  301
 /graph              /analytics  301
+/biography          /bio        301
 /graphs             /analytics  301
