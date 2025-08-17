@@ -147,6 +147,8 @@ class SelectUtility {
         select.appendChild(this.createOptGroup(this.formatLabel(categoryKey), items))
       })
     }
+
+    
   
     buildCharacterFilter(selectId) {
       const select = document.getElementById(selectId)

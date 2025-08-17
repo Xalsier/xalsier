@@ -1,20 +1,13 @@
-
 let currentData = []
 let animationProgress = 0
 let animationId = null
 let currentColors = []
-const ARCHIVE_DATA = [] // Declare ARCHIVE_DATA variable
+let currentThreshold = 0 // slider filter value
 
 function getDataFromCategory(categoryPath) {
-  console.log("[v0] Getting data for category:", categoryPath)
-
-  if (typeof LIBRARY_CONFIG === "undefined") {
-    console.error("[v0] LIBRARY_CONFIG not found - make sure library.js is loaded first")
-    return []
-  }
+  if (typeof LIBRARY_CONFIG === "undefined") return []
 
   const [section, subsection] = categoryPath.split(".")
-
   let categoryData = []
 
   if (section === "attributes" && LIBRARY_CONFIG.attributes && LIBRARY_CONFIG.attributes[subsection]) {
@@ -22,85 +15,54 @@ function getDataFromCategory(categoryPath) {
   } else if (section === "meta" && LIBRARY_CONFIG.meta && LIBRARY_CONFIG.meta[subsection]) {
     categoryData = LIBRARY_CONFIG.meta[subsection]
   } else if (section === "characters" && LIBRARY_CONFIG.characters) {
-    // Characters has nested structure, flatten all character arrays
     categoryData = []
-    Object.values(LIBRARY_CONFIG.characters).forEach((projectChars) => {
-      if (Array.isArray(projectChars)) {
-        categoryData = categoryData.concat(projectChars)
-      }
+    Object.values(LIBRARY_CONFIG.characters).forEach(projectChars => {
+      if (Array.isArray(projectChars)) categoryData = categoryData.concat(projectChars)
     })
   }
 
-  console.log("[v0] Raw category data:", categoryData)
-
   const processedData = categoryData
-    .map((item) => ({
-      label: item.label,
-      value: item.count,
-    }))
-    .filter((item) => item.value > 0)
+    .map(item => ({ label: item.label, value: item.count }))
+    .filter(item => item.value > 0)
 
-  console.log("[v0] Processed data:", processedData)
   return processedData
 }
 
 function getCategoryTitle(categoryPath) {
   const [section, subsection] = categoryPath.split(".")
-
-  const sectionTitles = {
-    meta: "Meta",
-    characters: "Characters",
-    attributes: "Attributes",
+  const configMap = {
+    meta: LIBRARY_CONFIG.meta,
+    characters: LIBRARY_CONFIG.characters,
+    attributes: LIBRARY_CONFIG.attributes,
   }
 
-  const subsectionTitles = {
-    projects: "Projects",
-    medium: "Medium",
-    artProgram: "Art Program",
-    canon: "Canon",
-    nonCanon: "Non-Canon",
-    time: "Time",
-    filters: "Filters",
-    species: "Species",
-    gender: "Gender",
-    environments: "Environments",
-    staticPoses: "Static Poses",
-    dynamicPoses: "Dynamic Poses",
-    facialExpression: "Facial Expression",
-    bodyType: "Body Type",
-    furColor: "Fur Color",
-    eyeColor: "Eye Color",
-    hairColor: "Hair Color",
-    clothing: "Clothing",
-    backgrounds: "Backgrounds",
-    violentImagery: "Violent Imagery",
-  }
+  const sectionTitle = section.charAt(0).toUpperCase() + section.slice(1)
 
-  if (subsection) {
-    return `Distribution of ${subsectionTitles[subsection] || subsection}`
+  if (subsection && configMap[section] && configMap[section][subsection]) {
+    const subsectionTitle = subsection.replace(/([A-Z])/g, " $1").replace(/^./, str => str.toUpperCase())
+    return `Distribution of ${subsectionTitle}`
   } else {
-    return `Distribution of ${sectionTitles[section] || section}`
+    return `Distribution of ${sectionTitle}`
   }
 }
 
-// Process data
 function processData(data) {
-  return data.filter((item) => item.value !== null && item.value > 0)
+  return data.filter(item => item.value !== null && item.value > 0).sort((a, b) => b.value - a.value)
 }
 
 function generateColorPalette(count) {
   const colors = []
   const baseColors = [
-    [86, 222, 147], // Green
-    [255, 107, 107], // Red
-    [74, 144, 226], // Blue
-    [255, 193, 7], // Yellow
-    [156, 39, 176], // Purple
-    [255, 152, 0], // Orange
-    [0, 188, 212], // Cyan
-    [139, 195, 74], // Light Green
-    [233, 30, 99], // Pink
-    [121, 85, 72], // Brown
+    [86, 222, 147],
+    [255, 107, 107],
+    [74, 144, 226],
+    [255, 193, 7],
+    [156, 39, 176],
+    [255, 152, 0],
+    [0, 188, 212],
+    [139, 195, 74],
+    [233, 30, 99],
+    [121, 85, 72],
   ]
 
   for (let i = 0; i < count; i++) {
@@ -122,12 +84,10 @@ function createLegend(data, colors) {
   data.forEach((item, index) => {
     const legendItem = document.createElement("div")
     legendItem.className = "legend-item"
-
     legendItem.innerHTML = `
       <div class="legend-color" style="background-color: ${colors[index]}"></div>
       <span class="legend-label">${item.label} (${item.value})</span>
     `
-
     legend.appendChild(legendItem)
   })
 }
@@ -140,13 +100,12 @@ function drawPieChart(canvas, data, colors, progress = 1) {
 
   ctx.clearRect(0, 0, canvas.width, canvas.height)
 
-  let currentAngle = -Math.PI / 2 // Start from top
+  let currentAngle = -Math.PI / 2
   const total = data.reduce((sum, item) => sum + item.value, 0)
 
   data.forEach((item, index) => {
     const sliceAngle = (item.value / total) * 2 * Math.PI * progress
 
-    // Draw slice
     ctx.beginPath()
     ctx.moveTo(centerX, centerY)
     ctx.arc(centerX, centerY, radius, currentAngle, currentAngle + sliceAngle)
@@ -154,7 +113,6 @@ function drawPieChart(canvas, data, colors, progress = 1) {
     ctx.fillStyle = colors[index]
     ctx.fill()
 
-    // Add subtle border
     ctx.strokeStyle = "rgba(255, 255, 255, 0.1)"
     ctx.lineWidth = 1
     ctx.stroke()
@@ -165,51 +123,53 @@ function drawPieChart(canvas, data, colors, progress = 1) {
 
 function animatePieChart() {
   const canvas = document.getElementById("pieChart")
-  const processedData = processData(currentData)
+  const filteredData = processData(currentData).filter(item => item.value > currentThreshold)
 
-  currentColors = generateColorPalette(processedData.length)
+  currentColors = generateColorPalette(filteredData.length)
+  createLegend(filteredData, currentColors)
 
-  // Create legend with same colors
-  createLegend(processedData, currentColors)
-
-  // Reset animation progress
   animationProgress = 0
 
   function animate() {
     animationProgress += 0.035
     if (animationProgress > 1) animationProgress = 1
 
-    drawPieChart(canvas, processedData, currentColors, animationProgress)
+    drawPieChart(canvas, filteredData, currentColors, animationProgress)
 
-    if (animationProgress < 1) {
-      animationId = requestAnimationFrame(animate)
-    }
+    if (animationProgress < 1) animationId = requestAnimationFrame(animate)
   }
 
   animate()
 }
 
 function updateChart(categoryPath) {
-  // Cancel any ongoing animation
-  if (animationId) {
-    cancelAnimationFrame(animationId)
-  }
+  if (animationId) cancelAnimationFrame(animationId)
 
-  // Get new data
   currentData = getDataFromCategory(categoryPath)
-  console.log("[v0] Current data:", currentData)
+  document.getElementById("chartTitle").textContent = getCategoryTitle(categoryPath)
 
-  // Update title
-  const title = getCategoryTitle(categoryPath)
-  document.getElementById("chartTitle").textContent = title
-
-  // Start new animation
   setTimeout(() => {
     animatePieChart()
   }, 100)
 }
 
-// Show main content
+function addSlider() {
+  const container = document.getElementById("sliderContainer")
+  container.innerHTML = `
+    <label for="thresholdSlider">Min Count: <span id="sliderValue" style="color: var(--green);">0</span></label>
+    <input type="range" id="thresholdSlider" min="0" max="10" step="1" value="0" />
+  `
+
+  const slider = document.getElementById("thresholdSlider")
+  const sliderValue = document.getElementById("sliderValue")
+
+  slider.addEventListener("input", e => {
+    currentThreshold = Number(e.target.value)
+    sliderValue.textContent = currentThreshold
+    animatePieChart()
+  })
+}
+
 function showMainContent() {
   const loadingContainer = document.getElementById("loadingContainer")
   const mainContent = document.getElementById("mainContent")
@@ -218,26 +178,20 @@ function showMainContent() {
   mainContent.classList.add("visible")
 
   document.getElementById("chartTitle").textContent = "Distribution of Gender"
-
   currentData = getDataFromCategory("attributes.gender")
 
-  // Start pie chart animation
   setTimeout(() => {
     animatePieChart()
   }, 100)
+
+  addSlider()
 }
 
-// Initialize app
 function init() {
   const categorySelect = document.getElementById("categorySelect")
+  categorySelect.addEventListener("change", e => updateChart(e.target.value))
 
-  categorySelect.addEventListener("change", (e) => {
-    updateChart(e.target.value)
-  })
-
-  // Start loading sequence
   showMainContent()
 }
 
-// Start the app when DOM is loaded
 document.addEventListener("DOMContentLoaded", init)
