@@ -1,0 +1,78 @@
+:root {
+    --bg-color: #101217;
+    --sec-color: #1a1d24;
+    --sec-color-2: #2a2d35;
+    --green: rgb(86, 222, 147);
+    --white: #ffffff;
+    --border-radius: 12px;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
+  }
+  
+
+  
+  .heatmap-container {
+    background: var(--sec-color);
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    width: 100%;
+    max-width: 800px;
+  }
+  
+  .heatmap-container h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    font-size: 1.25rem;
+    color: var(--white);
+  }
+  
+  #heatmap {
+    display: grid;
+    grid-template-columns: repeat(13, 1fr); /* 1 for year label + 12 months */
+    gap: 0.5rem;
+  }
+  
+  .year-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: var(--white);
+  }
+  
+  .month-cell {
+    width: 100%;
+    padding-top: 100%; /* keep it square */
+    border-radius: 6px;
+    background-color: var(--sec-color-2);
+    position: relative;
+    transition: var(--transition);
+  }
+  
+  .month-cell:hover {
+    transform: scale(1.1);
+  }
+  
+  .month-cell::after {
+    content: attr(data-count);
+    position: absolute;
+    bottom: 2px;
+    right: 4px;
+    font-size: 0.6rem;
+    color: var(--white);
+    opacity: 0.7;
+  }
+  
+  /* Mobile responsiveness */
+  @media (max-width: 600px) {
+    #heatmap {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  
+    .year-label {
+      grid-column: span 4;
+      justify-content: flex-start;
+    }
+  }
+  
