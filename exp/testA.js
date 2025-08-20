@@ -15,10 +15,14 @@ function getDataFromCategory(categoryPath) {
   } else if (section === "meta" && LIBRARY_CONFIG.meta && LIBRARY_CONFIG.meta[subsection]) {
     categoryData = LIBRARY_CONFIG.meta[subsection]
   } else if (section === "characters" && LIBRARY_CONFIG.characters) {
-    categoryData = []
-    Object.values(LIBRARY_CONFIG.characters).forEach(projectChars => {
-      if (Array.isArray(projectChars)) categoryData = categoryData.concat(projectChars)
-    })
+    if (subsection && LIBRARY_CONFIG.characters[subsection]) {
+        categoryData = LIBRARY_CONFIG.characters[subsection];
+    } else {
+        // This is the original logic that flattened the array
+        Object.values(LIBRARY_CONFIG.characters).forEach(projectChars => {
+            if (Array.isArray(projectChars)) categoryData = categoryData.concat(projectChars)
+        })
+    }
   }
 
   const processedData = categoryData

@@ -1,38 +1,39 @@
+const DEFAULT_FILTERS = ["Recent", "Safe"];
+const BLACKLIST_FILTERS = ["Explicit", "Display Error", "Calendar", "Silhouette Project", "Whiteboard", "Traditional Art"];
+
 class ArchiveApp {
-    constructor() {
-      this.currentPage = 1
-      this.itemsPerPage = 9
-      this.activeFilters = new Map()
-      this.filteredItems = []
-      this.archiveItems = []
-      this.isSearching = false
-      this.errors = []
-      this.hasSearched = false
-      this.init()
-    }
-  
-    init() {
-      this.setupEventListeners()
-      this.loadItems()
-      const recentFilterId = "history-Recent"
-      this.activeFilters.set(recentFilterId, {
-        type: "history",
-        name: "Recent",
-        display: "Recent",
+  constructor() {
+    this.currentPage = 1;
+    this.itemsPerPage = 9;
+    this.activeFilters = new Map();
+    this.filteredItems = [];
+    this.archiveItems = [];
+    this.isSearching = false;
+    this.errors = [];
+    this.hasSearched = false;
+    this.init();
+  }
+
+  init() {
+    this.setupEventListeners();
+    this.loadItems();
+    // This loop now assumes 'Safe' is a tag
+    DEFAULT_FILTERS.forEach((filterName) => {
+      const filterType = filterName === "Recent" ? "history" : "tag";
+      const filterId = `${filterType}-${filterName}`;
+      this.activeFilters.set(filterId, {
+        type: filterType,
+        name: filterName,
+        display: filterName,
       });
-      const safeFilterId = "filter-Safe";
-      this.activeFilters.set(safeFilterId, {
-          type: "filter",
-          name: "Safe",
-          display: "Safe",
-      });
-      this.renderActiveFilters()
-      this.filterItems()
-      this.currentPage = 1
-      this.showGallery()
-      this.renderGallery()
-      this.renderPagination()
-    }
+    });
+    this.renderActiveFilters();
+    this.filterItems();
+    this.currentPage = 1;
+    this.showGallery();
+    this.renderGallery();
+    this.renderPagination();
+  }
   
     setupEventListeners() {
       document.getElementById("metaFilter").addEventListener("change", (e) => {
@@ -101,59 +102,150 @@ class ArchiveApp {
     }
   
     loadItems() {
-      this.archiveItems = ARCHIVE_ITEMS || []
-      this.filteredItems = [...this.archiveItems]
+      this.archiveItems = ARCHIVE_ITEMS || [];
+      
+      // New Preprocessing Step
+      this.archiveItems.forEach(item => {
+        // If tags array doesn't exist, create it
+        if (!item.tags) {
+          item.tags = [];
+        }
+        
+        // Add 'project' as a tag
+        if (item.project && !item.tags.includes(item.project)) {
+          item.tags.push(item.project);
+        }
+        
+        // Add 'background' as a tag
+        if (item.background && !item.tags.includes(item.background)) {
+            item.tags.push(item.background);
+        }
+    
+        // Add 'filters' as tags
+        if (item.filters && Array.isArray(item.filters)) {
+          item.filters.forEach(filter => {
+            if (!item.tags.includes(filter)) {
+              item.tags.push(filter);
+            }
+          });
+        }
+    
+        // New: Add 'species' as a tag
+        if (item.species && Array.isArray(item.species)) {
+            item.species.forEach(species => {
+                if (!item.tags.includes(species)) {
+                    item.tags.push(species);
+                }
+            });
+        }
+    
+        // New: Add 'gender' as a tag
+        if (item.gender && Array.isArray(item.gender)) {
+            item.gender.forEach(gender => {
+                if (!item.tags.includes(gender)) {
+                    item.tags.push(gender);
+                }
+            });
+        }
+    
+        // New: Add 'bodyType' as a tag
+        if (item.bodyType && Array.isArray(item.bodyType)) {
+            item.bodyType.forEach(bodyType => {
+                if (!item.tags.includes(bodyType)) {
+                    item.tags.push(bodyType);
+                }
+            });
+        }
+    
+        // New: Add 'furColor' as a tag
+        if (item.furColor && Array.isArray(item.furColor)) {
+            item.furColor.forEach(furColor => {
+                if (!item.tags.includes(furColor)) {
+                    item.tags.push(furColor);
+                }
+            });
+        }
+        
+        // Handle "Display Error" for items without an image
+        if (!item.image || item.image.trim() === "") {
+            if (!item.tags.includes("Display Error")) {
+                item.tags.push("Display Error");
+            }
+        }
+      });
+    
+      this.filteredItems = [...this.archiveItems];
     }
   
     filterItems() {
-        const explicitFilterActive = Array.from(this.activeFilters.values())
-          .some(f => f.type === "filter" && f.name === "Explicit");
-      
-        this.filteredItems = this.archiveItems.filter((item) => {
-          // Global block for Explicit unless explicitly requested
-          if (item.filters?.includes("Explicit") && !explicitFilterActive) {
-            return false;
+      const blacklistFilterActive = BLACKLIST_FILTERS.some(blacklistTag => 
+        this.activeFilters.has(`tag-${blacklistTag}`) || this.activeFilters.has(`history-${blacklistTag}`)
+      );
+    
+      this.filteredItems = this.archiveItems.filter((item) => {
+        const itemHasBlacklistTag = BLACKLIST_FILTERS.some(blacklistTag => item.tags?.includes(blacklistTag));
+    
+        if (itemHasBlacklistTag && !blacklistFilterActive) {
+          return false;
+        }
+    
+        // The main filtering loop is now much simpler.
+        return Array.from(this.activeFilters.values()).every((filter) => {
+          switch (filter.type) {
+            case "history":
+              return true; // History filters only affect sorting, not item inclusion
+            case "character":
+              return item.characters?.includes(filter.name);
+            case "tag":
+              // All special filters now just check the `tags` array
+              return item.tags?.includes(filter.name);
+            default:
+              return true;
           }
-      
-          return Array.from(this.activeFilters.values()).every((filter) => {
-            switch (filter.type) {
-              case "project":
-                return item.project === filter.name;
-              case "background":
-                return item.background === filter.name;
-                case "filter":
-                    // Treat all filters, including 'Safe', the same
-                    return item.filters?.includes(filter.name);
-              case "history":
-                return true;
-              case "character":
-                return item.characters && item.characters.includes(filter.name);
-              case "species":
-                return item.species && item.species.includes(filter.name);
-              case "gender":
-                return item.gender && item.gender.includes(filter.name);
-              case "bodyType":
-                return item.bodyType && item.bodyType.includes(filter.name);
-              case "furColor":
-                return item.furColor && item.furColor.includes(filter.name);
-              case "tag":
-                return item.tags && item.tags.includes(filter.name);
-              default:
-                return true;
-            }
-          });
         });
-      
-        const historyFilter = Array.from(this.activeFilters.values())
-          .find(f => f.type === "history");
-        if (historyFilter) {
-          if (historyFilter.name === "Recent") {
-            this.filteredItems.sort((a, b) => new Date(b.createdDate) - new Date(a.createdDate));
-          } else if (historyFilter.name === "Oldest") {
-            this.filteredItems.sort((a, b) => new Date(a.createdDate) - new Date(b.createdDate));
-          }
+      });
+    
+      // The sorting logic for history filters remains the same
+      const historyFilter = Array.from(this.activeFilters.values()).find(
+        (f) => f.type === "history"
+      );
+      if (historyFilter) {
+        if (historyFilter.name === "Recent") {
+          this.filteredItems.sort(
+            (a, b) => new Date(b.createdDate) - new Date(a.createdDate)
+          );
+        } else if (historyFilter.name === "Oldest") {
+          this.filteredItems.sort(
+            (a, b) => new Date(a.createdDate) - new Date(b.createdDate)
+          );
         }
       }
+    }
+    
+    handleFilterChange(filterValue, selectElement) {
+      if (!filterValue) return;
+      const [filterType, filterName] = filterValue.split(":");
+      
+      // Updated: Change `filterType` to 'tag' for all special cases
+      const specialTypes = ["project", "background", "filter", "species", "gender", "bodyType", "furColor"];
+      const newFilterType = specialTypes.includes(filterType) ? "tag" : filterType;
+  
+      const filterId = `${newFilterType}-${filterName}`;
+      
+      if (this.activeFilters.has(filterId)) {
+          selectElement.value = "";
+          return;
+      }
+      
+      this.activeFilters.set(filterId, {
+          type: newFilterType,
+          name: filterName,
+          display: filterName,
+      });
+      selectElement.value = "";
+      this.renderActiveFilters();
+      this.updateCharacterProfile();
+  }
       
   
     updateCharacterProfile() {
@@ -650,14 +742,7 @@ class ArchiveApp {
       this.renderGallery()
       this.renderPagination()
       this.hasSearched = true
-      this.validateSearch()
-      if (this.errors.length > 0) {
-        errorDisplay.innerHTML = this.errors.join("<br>")
-        errorDisplay.style.display = "block"
-        progressText.textContent = "Failed to hunt."
-      } else {
-        progressText.textContent = "Hunt complete."
-      }
+      this.validateSearch()  
       setTimeout(() => {
         progressContainer.style.display = "none"
         searchBtn.disabled = false
