@@ -31,7 +31,6 @@ function initApp() {
   renderPagination();
 }
 
-// Function to set up all event listeners
 function setupEventListeners() {
   document.getElementById("metaFilter").addEventListener("change", (e) => {
     handleFilterChange(e.target.value, e.target);
@@ -48,7 +47,6 @@ function setupEventListeners() {
       closeModal();
     }
   });
-  document.getElementById("viewTagsBtn").addEventListener("click", toggleTags);
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") {
       closeModal();
@@ -247,7 +245,43 @@ function getYouTubeId(url) {
   return null;
 }
 
-// Helper function to create a single gallery item
+// Add this new helper function at the top of your script or near the `createGalleryItem` function.
+// Function to fetch an SVG, remove animation tags, and return a static img element with a data URL.
+async function createStaticSvgElement(url, altText) {
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const svgText = await response.text();
+    const parser = new DOMParser();
+    const svgDoc = parser.parseFromString(svgText, "image/svg+xml");
+    const svgElement = svgDoc.querySelector('svg');
+
+    if (svgElement) {
+      // Find all animation elements and remove them
+      const animateElements = svgElement.querySelectorAll('animate, animateMotion, animateTransform, animateColor, animateTransform, mpath');
+      animateElements.forEach(el => el.parentNode.removeChild(el));
+
+      // Re-serialize the SVG without animations
+      const modifiedSvgText = new XMLSerializer().serializeToString(svgDoc);
+      const dataUrl = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(modifiedSvgText)}`;
+
+      const img = document.createElement("img");
+      img.src = dataUrl;
+      img.alt = altText || "SVG thumbnail";
+      return img;
+    } else {
+      throw new Error('No SVG element found in the fetched content.');
+    }
+  } catch (error) {
+    console.error('Failed to create static SVG element:', error);
+    // Fallback to a placeholder in case of a failure
+    return null;
+  }
+}
+
+// Function to create a single gallery item
 function createGalleryItem(item) {
   const itemElement = document.createElement("div");
   itemElement.className = "gallery-item";
@@ -262,6 +296,7 @@ function createGalleryItem(item) {
   imageContainer.className = "gallery-item-image";
   const isVideo = item.image && item.image.endsWith(".mp4");
   const isYouTube = item.image && /(?:youtube\.com|youtu\.be)/.test(item.image);
+  const isSvg = item.image && item.image.toLowerCase().endsWith(".svg");
   let missingImageError = false;
   const safeMode = archiveState.activeFilters.has("filter-Safe");
   const isViolent = item.filters && item.filters.includes("Violent");
@@ -285,13 +320,6 @@ function createGalleryItem(item) {
       // Use maxresdefault for best quality, fall back to hqdefault
       thumbSrc = `https://img.youtube.com/vi/${youtubeId}/maxresdefault.jpg`;
     }
-  } else if (isVideo) {
-    thumbSrc = item.thumb || "./img/video-thumb.png";
-  } else {
-    thumbSrc = item.thumb || item.image;
-  }
-
-  if (thumbSrc) {
     const img = document.createElement("img");
     img.src = thumbSrc;
     img.alt = item.title;
@@ -303,9 +331,62 @@ function createGalleryItem(item) {
     };
     if (shouldBlur) img.classList.add("blurred-thumbnail");
     imageContainer.appendChild(img);
+  } else if (isVideo) {
+    thumbSrc = item.thumb || "./img/video-thumb.png";
+    const img = document.createElement("img");
+    img.src = thumbSrc;
+    img.alt = item.title;
+    img.onerror = () => {
+      console.warn("Thumbnail failed to load, falling back to placeholder.");
+      missingImageError = true;
+      imageContainer.innerHTML = "";
+      imageContainer.appendChild(createPastelBlock());
+    };
+    if (shouldBlur) img.classList.add("blurred-thumbnail");
+    imageContainer.appendChild(img);
+  } else if (isSvg) {
+    // START of the new SVG logic for gallery thumbnails
+    const placeholder = createPastelBlock();
+    imageContainer.appendChild(placeholder);
+    
+    // Asynchronously create the static SVG image and replace the placeholder
+    createStaticSvgElement(item.image, item.title)
+      .then(staticImg => {
+        if (staticImg) {
+          imageContainer.innerHTML = ""; // Clear placeholder
+          if (shouldBlur) staticImg.classList.add("blurred-thumbnail");
+          imageContainer.appendChild(staticImg);
+        } else {
+          missingImageError = true;
+          imageContainer.innerHTML = "";
+          imageContainer.appendChild(createPastelBlock()); // Fallback to a placeholder
+        }
+      })
+      .catch(error => {
+        console.error("Error creating static SVG thumbnail:", error);
+        missingImageError = true;
+        imageContainer.innerHTML = "";
+        imageContainer.appendChild(createPastelBlock()); // Fallback on error
+      });
+    // END of new SVG logic
   } else {
-    missingImageError = true;
-    imageContainer.appendChild(createPastelBlock());
+    thumbSrc = item.thumb || item.image;
+    if (thumbSrc) {
+      const img = document.createElement("img");
+      img.src = thumbSrc;
+      img.alt = item.title;
+      img.onerror = () => {
+        console.warn("Thumbnail failed to load, falling back to placeholder.");
+        missingImageError = true;
+        imageContainer.innerHTML = "";
+        imageContainer.appendChild(createPastelBlock());
+      };
+      if (shouldBlur) img.classList.add("blurred-thumbnail");
+      imageContainer.appendChild(img);
+    } else {
+      missingImageError = true;
+      imageContainer.appendChild(createPastelBlock());
+    }
   }
 
   const infoContainer = document.createElement("div");
@@ -314,7 +395,22 @@ function createGalleryItem(item) {
   const itemMetaFilter = item.filters && item.filters.find((f) => metaFilters.includes(f) && f !== "Safe");
   const primaryDisplayTag = itemMetaFilter || "";
   const secondaryDisplayTag = (item.species && item.species.length > 0) ? item.species[0] : "";
-  const thirdDisplayTag = (item.tags && item.tags.includes("SVG")) ? "SVG" : "";
+  
+  // START of the updated logic for the third display tag
+  let animationTag = "";
+  let animationClass = "";
+  if (item.tags?.includes("SMIL")) {
+    animationTag = "SMIL";
+    animationClass = "filter-svg";
+  } else if (item.tags?.includes("GIF")) {
+    animationTag = "GIF";
+    animationClass = "filter-svg";
+  } else if (item.tags?.includes("SVG")) {
+    animationTag = "SVG";
+    animationClass = "filter-svg";
+  }
+  // END of the updated logic
+  
   const fourthDisplayTag = missingImageError ? "Missing Image" : "";
 
   const filterStatusForClass = item.filters && item.filters.length > 0 ? item.filters[0] : "Unknown";
@@ -335,12 +431,15 @@ function createGalleryItem(item) {
     tagEl.textContent = secondaryDisplayTag;
     infoContainer.appendChild(tagEl);
   }
-  if (thirdDisplayTag) {
+  
+  // Use the new animationTag variable here
+  if (animationTag) {
     const tagEl = document.createElement("div");
-    tagEl.className = `gallery-item-filter filter-svg`;
-    tagEl.textContent = thirdDisplayTag;
+    tagEl.className = `gallery-item-filter ${animationClass}`;
+    tagEl.textContent = animationTag;
     infoContainer.appendChild(tagEl);
   }
+  
   if (fourthDisplayTag) {
     const tagEl = document.createElement("div");
     tagEl.className = `gallery-item-filter filter-explicit`;
@@ -386,7 +485,6 @@ function changePage(page) {
   });
 }
 
-// Function to open the modal and display item details
 function openModal(item) {
   const modal = document.getElementById("imageModal");
   const modalTitle = document.getElementById("modalTitle");
@@ -534,9 +632,13 @@ function openModal(item) {
     modalTags.appendChild(tagElement);
   });
   
+  // Display tags regardless
+  modalTags.style.display = "flex";
+  
   modal.style.display = "block";
   document.body.style.overflow = "hidden";
 }
+
 
 // Function to load and handle interactive SVGs
 async function loadInteractiveSVG(item, container) {

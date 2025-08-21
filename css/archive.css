@@ -267,14 +267,16 @@
   width: 100%; /* or fixed width */
   position: relative;
   overflow: hidden;
-  display: flex;
-  flex-direction: column;
+  /* Remove flexbox properties from the parent */
 }
 
 .gallery-item-image {
-  flex-grow: 1;
+  /* Set image container to fill the parent */
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
-  overflow: hidden;
+  height: 100%;
 }
 
 .gallery-item-image img {
@@ -283,6 +285,7 @@
   object-fit: cover;
   object-position: top;
   display: block;
+  transition: transform 0.3s ease; /* Keep the hover effect smooth */
 }
 
 .gallery-item:hover .gallery-item-image img {
@@ -305,7 +308,15 @@
 }
 
 .gallery-item-info {
+  position: absolute; /* Layer on top of the image */
+  bottom: 0; /* Position at the bottom of the gallery item */
+  left: 0;
+  width: 100%; /* Ensure it spans the full width */
   padding: 1rem;
+  z-index: 10;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent); /* Add a subtle gradient for readability */
+  color: white; /* Ensure text is visible on the image */
+  box-sizing: border-box; /* Include padding in the element's total width */
 }
 
 .gallery-item-title {
@@ -313,6 +324,12 @@
   font-size: 1.1rem;
   font-weight: 600;
   margin-bottom: 0.5rem;
+  
+}
+
+.gallery-item-title {
+  color: white;
+  text-shadow: 1px 1px 2px black;
 }
 
 .gallery-item-filter {
@@ -327,8 +344,10 @@
 }
 
 .filter-safe, .filter-species, .filter-svg {
-  background: #4ecdc4;
+  background: var(--green);
   color: var(--bg-color);
+  font-weight: bold;
+  font-size: 1.1em; /* Makes the font a bit bigger */
 }
 
 .filter-hidden {
@@ -684,9 +703,6 @@
     grid-template-columns: repeat(2, 1fr);
   }
 
-  .gallery-item-info {
-    display: none;
-  }
 
   .search-btn {
     width: 100%;
