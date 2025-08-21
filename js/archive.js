@@ -584,80 +584,67 @@ class ArchiveApp {
     
   
     async loadInteractiveSVG(item, container) {
-        try {
-          const response = await fetch(item.image)
-          const svgText = await response.text()
-          console.log('Loading Interactive SVG')
-      
-          // Parse the SVG text directly
-          const parser = new DOMParser()
-          const svgDoc = parser.parseFromString(svgText, "image/svg+xml")
-          const svgElement = svgDoc.querySelector("svg")
-      
-          if (svgElement) {
-            console.log("SVG element found:", svgElement)
-      
-            svgElement.id = "modalSVG"
-            svgElement.style.maxWidth = "100%"
-            svgElement.style.maxHeight = "600px"
-            svgElement.style.width = "auto"
-            svgElement.style.height = "auto"
-      
-            // Log dimensions
-            requestAnimationFrame(() => {
-              const bbox = svgElement.getBBox()
-              console.log(`SVG dimensions: width=${bbox.width}, height=${bbox.height}`)
-              if (bbox.width === 0 || bbox.height === 0) {
-                console.warn("SVG is in the DOM but has no visible size — likely CSS or missing viewBox.")
-              }
-            })
-      
-            // Handle interactive layer
-            if (item.layer) {
-              const layerElement = svgElement.querySelector(`#${item.layer}`)
-              if (layerElement) {
-                console.log(`Interactive layer found: #${item.layer}`, layerElement)
-      
-                layerElement.style.cursor = "pointer"
-                layerElement.classList.add("interactive-layer")
-      
-                layerElement.addEventListener("click", (e) => {
-                  e.stopPropagation()
-                  this.animateLayer(layerElement)
-                })
-      
-                layerElement.addEventListener("mouseenter", () => {
-                  layerElement.style.filter = "brightness(1.2)"
-                })
-      
-                layerElement.addEventListener("mouseleave", () => {
-                  layerElement.style.filter = "brightness(1)"
-                })
-              } else {
-                console.warn(`Layer #${item.layer} not found inside SVG`)
-              }
-            }
-      
-            // Append the SVG directly to the modal container
-            container.appendChild(svgElement)
-          } else {
-            console.error("No <svg> element found in fetched SVG text. Raw text:", svgText.slice(0, 200) + "...")
-            // fallback to image
-            const img = document.createElement("img")
-            img.src = item.image
-            img.alt = item.title
-            img.id = "modalImage"
-            container.appendChild(img)
-          }
-        } catch (error) {
-          console.error("Failed to load interactive SVG:", error)
-          const img = document.createElement("img")
-          img.src = item.image
-          img.alt = item.title
-          img.id = "modalImage"
-          container.appendChild(img)
+      try {
+        const response = await fetch(item.image);
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
         }
+        const svgText = await response.text();
+        console.log('Successfully fetched SVG content.');
+    
+        // Embed the raw SVG content directly. This bypasses issues with
+        // DOMParser and relative paths.
+        container.innerHTML = svgText;
+    
+        const svgElement = container.querySelector('svg');
+        if (!svgElement) {
+          console.error('No <svg> element found in the fetched content.');
+          throw new Error('No SVG element found.');
+        }
+    
+        svgElement.id = 'modalSVG';
+        // Ensure the SVG scales and maintains its aspect ratio
+        svgElement.style.maxWidth = '100%';
+        svgElement.style.height = 'auto'; // Ensures aspect ratio is maintained
+        svgElement.style.maxHeight = '90vh';
+    
+        // Handle interactive layer
+        if (item.layer) {
+          const layerElement = svgElement.querySelector(`#${item.layer}`);
+          if (layerElement) {
+            console.log(`Interactive layer found: #${item.layer}`);
+            layerElement.style.cursor = 'pointer';
+            layerElement.classList.add('interactive-layer');
+    
+            layerElement.addEventListener('click', (e) => {
+              e.stopPropagation();
+              this.animateLayer(layerElement);
+            });
+    
+            layerElement.addEventListener('mouseenter', () => {
+              layerElement.style.filter = 'brightness(1.2)';
+            });
+    
+            layerElement.addEventListener('mouseleave', () => {
+              layerElement.style.filter = 'brightness(1)';
+            });
+          } else {
+            console.warn(`Layer #${item.layer} not found inside SVG`);
+          }
+        }
+        console.log('Interactive SVG loaded and ready.');
+    
+      } catch (error) {
+        console.error('Failed to load interactive SVG:', error);
+        // Fallback in case of any error
+        const img = document.createElement('img');
+        img.src = item.image;
+        img.alt = item.title;
+        img.id = 'modalImage';
+        container.innerHTML = '';
+        container.appendChild(img);
       }
+    }
       
   
     animateLayer(layerElement) {
