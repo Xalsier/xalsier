@@ -74,3 +74,42 @@ function updateArchiveHeader() {
   const count = getArchiveLength()
   header.textContent = `${count} Item${count !== 1 ? "s" : ""}`
 }
+
+function addValidSrcTag() {
+  // Check if the global variable ARCHIVE_ITEMS exists and is an array
+  if (typeof ARCHIVE_ITEMS === 'undefined' || !Array.isArray(ARCHIVE_ITEMS)) {
+    console.error("ARCHIVE_ITEMS global variable is not defined or is not an array.");
+    return;
+  }
+
+  // Iterate over each item in the ARCHIVE_ITEMS array.
+  ARCHIVE_ITEMS.forEach(item => {
+    // Ensure the item has a tags array.
+    if (!item.tags) {
+      item.tags = [];
+    }
+    
+    // Check if the item's image property is a non-empty string.
+    // The trim() method is used to account for strings with only whitespace.
+    if (item.image && typeof item.image === 'string' && item.image.trim() !== "") {
+      // Add the "Valid SRC" tag if it doesn't already exist.
+      if (!item.tags.includes("Valid SRC")) {
+        item.tags.push("Valid SRC");
+      }
+
+      // Check for file extensions and add corresponding tags
+      const lowerCaseSrc = item.image.toLowerCase();
+      if (lowerCaseSrc.endsWith(".png")) {
+        if (!item.tags.includes("PNG")) {
+          item.tags.push("PNG");
+        }
+      } else if (lowerCaseSrc.endsWith(".jpg") || lowerCaseSrc.endsWith(".jpeg")) {
+        if (!item.tags.includes("JPG")) {
+          item.tags.push("JPG");
+        }
+      }
+    }
+  });
+}
+
+addValidSrcTag();

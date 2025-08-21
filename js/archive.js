@@ -1,6 +1,3 @@
-const DEFAULT_FILTERS = ["Recent", "Safe"];
-const BLACKLIST_FILTERS = ["Explicit", "Display Error", "Calendar", "Silhouette Project", "Whiteboard", "Traditional Art"];
-
 class ArchiveApp {
   constructor() {
     this.currentPage = 1;
