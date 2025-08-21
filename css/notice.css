@@ -1,0 +1,48 @@
+.announcement-card {
+    background-color: var(--sec-color-2);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    max-width: 600px;       /* card won’t get too wide */
+    width: calc(100% - 40px); /* always leave 20px margin on left/right */
+    margin: 20px auto;      /* 20px top/bottom, center horizontally */
+    padding: 20px;
+    font-family: sans-serif;
+    box-sizing: border-box; /* ensures padding doesn’t break width */
+  }
+  
+  .announcement-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  
+  .announcement-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  
+  .announcement-name-date {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .announcement-name {
+    color: var(--green);
+    font-weight: bold;
+    font-size: 1.2rem;
+  }
+  
+  .announcement-date {
+    color: #888888; /* gray font for the date */
+    font-size: 0.9rem;
+  }
+  
+  .announcement-message {
+    color: var(--white);
+    font-size: 1.15rem;
+    line-height: 1.6;
+  }
+  
