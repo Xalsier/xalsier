@@ -131,16 +131,24 @@ function loadItems() {
 
 // Function to filter items based on active filters
 function filterItems() {
-  const blacklistFilterActive = BLACKLIST_FILTERS.some(blacklistTag =>
+  // Grab the set of blacklist filters that are actually active
+  const activeBlacklistFilters = BLACKLIST_FILTERS.filter(blacklistTag =>
     archiveState.activeFilters.has(`tag-${blacklistTag}`) || archiveState.activeFilters.has(`history-${blacklistTag}`)
   );
 
   archiveState.filteredItems = archiveState.archiveItems.filter((item) => {
-    const itemHasBlacklistTag = BLACKLIST_FILTERS.some(blacklistTag => item.tags?.includes(blacklistTag));
-    if (itemHasBlacklistTag && !blacklistFilterActive) {
-      return false;
+    // Check which blacklist tags this item has
+    const itemBlacklistTags = BLACKLIST_FILTERS.filter(tag => item.tags?.includes(tag));
+
+    if (itemBlacklistTags.length > 0) {
+      // If the item has blacklist tags, only let it through if ALL its blacklist tags are currently active
+      const allowed = itemBlacklistTags.every(tag =>
+        activeBlacklistFilters.includes(tag)
+      );
+      if (!allowed) return false;
     }
 
+    // Apply all other active filters
     return Array.from(archiveState.activeFilters.values()).every((filter) => {
       switch (filter.type) {
         case "history":
@@ -155,6 +163,7 @@ function filterItems() {
     });
   });
 
+  // Sort if a history filter is active
   const historyFilter = Array.from(archiveState.activeFilters.values()).find((f) => f.type === "history");
   if (historyFilter) {
     if (historyFilter.name === "Recent") {
@@ -164,6 +173,7 @@ function filterItems() {
     }
   }
 }
+
 
 // Function to update character profile display
 function updateCharacterProfile() {
@@ -242,6 +252,11 @@ function createGalleryItem(item) {
   const itemElement = document.createElement("div");
   itemElement.className = "gallery-item";
   itemElement.addEventListener("click", () => openModal(item));
+
+    // ↓ NEW: Dim "Scrap" items
+    if (item.tags?.includes("Scrap") || item.filters?.includes("Scrap")) {
+      itemElement.style.opacity = "0.2";
+    }
 
   const imageContainer = document.createElement("div");
   imageContainer.className = "gallery-item-image";
@@ -380,6 +395,7 @@ function openModal(item) {
   const modalTags = document.getElementById("modalTags");
   const modalImageContainer = document.querySelector(".modal-image-container");
 
+  // Clear previous content to avoid stacking issues
   modalImageContainer.innerHTML = "";
   modalImageContainer.style.background = "var(--bg-color)";
 
@@ -411,6 +427,7 @@ function openModal(item) {
     return null;
   }
 
+  // Set modal container background based on image type
   if (item.image && item.image.startsWith("./svg/")) {
     modalImageContainer.style.background = "var(--green)";
   } else if (item.image && item.image.startsWith("./img/")) {
@@ -420,6 +437,8 @@ function openModal(item) {
   }
 
   const ytID = item.image ? extractYouTubeID(item.image) : null;
+
+  // Logic to handle different media types
   if (ytID) {
     const wrapper = document.createElement("div");
     wrapper.style.position = "relative";
@@ -439,6 +458,7 @@ function openModal(item) {
     iframe.className = "modal-video-iframe";
     wrapper.appendChild(iframe);
     modalImageContainer.appendChild(wrapper);
+
   } else if (item.image && item.image.endsWith(".mp4")) {
     const video = document.createElement("video");
     video.src = item.image;
@@ -448,19 +468,23 @@ function openModal(item) {
     video.playsInline = true;
     video.className = "modal-video";
     modalImageContainer.appendChild(video);
+
   } else if (item.image && item.image.toLowerCase().includes(".svg")) {
     loadInteractiveSVG(item, modalImageContainer);
+
   } else if (item.image) {
     const img = document.createElement("img");
     img.src = item.image;
     img.alt = item.title;
     img.id = "modalImage";
     img.onerror = () => {
+      // This part handles the case where the image fails to load
       modalImageContainer.innerHTML = "";
       modalImageContainer.appendChild(createPastelBlock(item.title));
     };
     modalImageContainer.appendChild(img);
   } else {
+    // This handles the case where there is no image source
     modalImageContainer.appendChild(createPastelBlock(item.title));
   }
 
@@ -470,11 +494,13 @@ function openModal(item) {
     month: "long",
     day: "numeric",
   });
+  
   const platformIconMap = {
     twitter: "./svg/soc/x.svg",
     bluesky: "./svg/soc/blue.svg",
     instagram: "./svg/soc/insta.svg",
   };
+  
   modalMirrors.innerHTML = "";
   item.mirrors.forEach(async (mirror) => {
     const link = document.createElement("a");
@@ -499,6 +525,7 @@ function openModal(item) {
     }
     modalMirrors.appendChild(link);
   });
+  
   modalTags.innerHTML = "";
   item.tags.forEach((tag) => {
     const tagElement = document.createElement("span");
@@ -506,6 +533,7 @@ function openModal(item) {
     tagElement.textContent = tag;
     modalTags.appendChild(tagElement);
   });
+  
   modal.style.display = "block";
   document.body.style.overflow = "hidden";
 }
@@ -520,15 +548,47 @@ async function loadInteractiveSVG(item, container) {
     const svgText = await response.text();
     console.log('Successfully fetched SVG content.');
     container.innerHTML = svgText;
+
     const svgElement = container.querySelector('svg');
     if (!svgElement) {
       console.error('No <svg> element found in the fetched content.');
       throw new Error('No SVG element found.');
     }
+
+    // Make sure the SVG fits the viewport
     svgElement.id = 'modalSVG';
     svgElement.style.maxWidth = '100%';
+    svgElement.style.width = '100%';
     svgElement.style.height = 'auto';
     svgElement.style.maxHeight = '90vh';
+    svgElement.style.display = 'block';
+    svgElement.style.margin = '0 auto';
+
+    // Fallback if the SVG doesn't have a viewBox
+    if (!svgElement.hasAttribute('viewBox') && (svgElement.hasAttribute('width') || svgElement.hasAttribute('height'))) {
+      const width = svgElement.getAttribute('width') || '100%';
+      const height = svgElement.getAttribute('height') || '100%';
+      svgElement.setAttribute('viewBox', `0 0 ${width} ${height}`);
+      console.warn('SVG missing viewBox; added viewBox for proper scaling.');
+    }
+
+    // Check for <style> errors inside SVG
+    try {
+      const styleElements = svgElement.querySelectorAll('style');
+      if (styleElements.length > 0) {
+        for (const styleEl of styleElements) {
+          const cssText = styleEl.textContent;
+          const frameErrorMatch = cssText.match(/@keyframes.*\{[^}]*\}/);
+          if (frameErrorMatch) {
+            console.warn('SVG style/frame error detected:', frameErrorMatch[0]);
+            break; // Only log the first frame error
+          }
+        }
+      }
+    } catch (styleError) {
+      console.warn('Error parsing <style> inside SVG:', styleError);
+    }
+
     if (item.layer) {
       const layerElement = svgElement.querySelector(`#${item.layer}`);
       if (layerElement) {
@@ -548,14 +608,25 @@ async function loadInteractiveSVG(item, container) {
       } else {
         console.warn(`Layer #${item.layer} not found inside SVG`);
       }
+    } else {
+      console.log('No layer attribute detected. Rendering SVG in normal mode.');
     }
+
     console.log('Interactive SVG loaded and ready.');
   } catch (error) {
     console.error('Failed to load interactive SVG:', error);
+
+    // Fallback: render as <img> and ensure it fills the viewport
     const img = document.createElement('img');
     img.src = item.image;
-    img.alt = item.title;
+    img.alt = item.title || 'SVG image';
     img.id = 'modalImage';
+    img.style.maxWidth = '100%';
+    img.style.width = '100%';
+    img.style.height = 'auto';
+    img.style.maxHeight = '90vh';
+    img.style.display = 'block';
+    img.style.margin = '0 auto';
     container.innerHTML = '';
     container.appendChild(img);
   }
@@ -563,9 +634,8 @@ async function loadInteractiveSVG(item, container) {
 
 // Function to animate a layer within an SVG
 function animateLayer(layerElement) {
-  if (layerElement.classList.contains("animating")) {
-    return;
-  }
+  if (layerElement.classList.contains("animating")) return;
+
   layerElement.classList.add("animating");
   layerElement.style.transition = "transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.8s ease-out";
   layerElement.style.transform = "translateY(-50px) scale(1.1)";
@@ -575,6 +645,7 @@ function animateLayer(layerElement) {
     layerElement.style.pointerEvents = "none";
   }, 800);
 }
+
 
 // Function to close the modal
 function closeModal() {
