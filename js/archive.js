@@ -1,6 +1,6 @@
 let archiveState = {
   currentPage: 1,
-  itemsPerPage: 9,
+  itemsPerPage: 8,
   activeFilters: new Map(),
   filteredItems: [],
   archiveItems: [],

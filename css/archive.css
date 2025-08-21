@@ -324,10 +324,6 @@
   font-size: 1.1rem;
   font-weight: 600;
   margin-bottom: 0.5rem;
-  
-}
-
-.gallery-item-title {
   color: white;
   text-shadow: 1px 1px 2px black;
 }
@@ -701,8 +697,20 @@
 
   .gallery-grid {
     grid-template-columns: repeat(2, 1fr);
+    gap:0;
   }
 
+  .filter-safe, .filter-species, .filter-svg {
+    font-size: 0.7em; /* Makes the font a bit bigger */
+    margin: 0;
+  }
+  .gallery-item-title {
+    display: none;
+  }
+
+  .gallery-item-info {
+    display:none;
+  }
 
   .search-btn {
     width: 100%;
