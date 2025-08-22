@@ -769,5 +769,86 @@
     opacity: 0;
   }
 }
+/* Version Buttons in Modal */
+.modal-versions-container {
+  display: none; /* Hidden by default */
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  position: relative;
+  z-index: 100; /* Ensure it's above other elements */
+}
 
+.version-btn {
+  border: none;
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  cursor: pointer;
+  min-width: 40px;
+  text-align: center;
+  transition: all 0.3s ease;
+}
 
+/* Base styles for inactive buttons */
+.version-btn.inactive {
+  background-color: var(--sec-color-2);
+  color: var(--white);
+  opacity: 0.8;
+}
+
+/* Base styles for active buttons */
+.version-btn.active {
+  opacity: 1;
+  cursor: pointer;
+  /* Active color is set by safe-active or explicit-active */
+}
+
+/* Safe (non-explicit) versions */
+.version-btn.safe-active {
+  background-color: var(--green);
+  color: var(--bg-color);
+}
+
+.version-btn.safe-inactive {
+  background-color: var(--sec-color-2);
+  color: var(--white);
+  opacity: 0.8;
+}
+
+/* Explicit versions */
+.version-btn.explicit-active {
+  background-color: #FF5C5C; /* Pastel red */
+  color: var(--white);
+}
+
+.version-btn.explicit-inactive {
+  background-color: rgba(255, 92, 92, 0.2);
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* Hover effects */
+.version-btn.inactive:hover {
+  opacity: 1;
+}
+
+.version-btn.explicit-inactive:hover {
+  background-color: rgba(255, 92, 92, 0.4);
+}
+
+@keyframes popIn {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+#imageModal.modal-pop-in {
+  animation: popIn 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}

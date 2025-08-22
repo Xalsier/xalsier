@@ -281,16 +281,16 @@ async function createStaticSvgElement(url, altText) {
   }
 }
 
-// Function to create a single gallery item
+// Function to create a single gallery item with SVG error handling
 function createGalleryItem(item) {
   const itemElement = document.createElement("div");
   itemElement.className = "gallery-item";
   itemElement.addEventListener("click", () => openModal(item));
 
-    // ↓ NEW: Dim "Scrap" items
-    if (item.tags?.includes("Scrap") || item.filters?.includes("Scrap")) {
-      itemElement.style.opacity = "0.2";
-    }
+  // Dim "Scrap" items
+  if (item.tags?.includes("Scrap") || item.filters?.includes("Scrap")) {
+    itemElement.style.opacity = "0.2";
+  }
 
   const imageContainer = document.createElement("div");
   imageContainer.className = "gallery-item-image";
@@ -313,7 +313,7 @@ function createGalleryItem(item) {
 
   let thumbSrc = item.thumb || "";
 
-  // New logic for YouTube thumbnails
+  // Logic for YouTube thumbnails
   if (isYouTube) {
     const youtubeId = getYouTubeId(item.image);
     if (youtubeId) {
@@ -345,11 +345,10 @@ function createGalleryItem(item) {
     if (shouldBlur) img.classList.add("blurred-thumbnail");
     imageContainer.appendChild(img);
   } else if (isSvg) {
-    // START of the new SVG logic for gallery thumbnails
+    // START of the new SVG logic for gallery thumbnails with error handling
     const placeholder = createPastelBlock();
     imageContainer.appendChild(placeholder);
-    
-    // Asynchronously create the static SVG image and replace the placeholder
+  
     createStaticSvgElement(item.image, item.title)
       .then(staticImg => {
         if (staticImg) {
@@ -357,18 +356,65 @@ function createGalleryItem(item) {
           if (shouldBlur) staticImg.classList.add("blurred-thumbnail");
           imageContainer.appendChild(staticImg);
         } else {
-          missingImageError = true;
-          imageContainer.innerHTML = "";
-          imageContainer.appendChild(createPastelBlock()); // Fallback to a placeholder
+          // If the static SVG creation failed, try to load an earlier version
+          const [collectionId, currentIndex] = item.ver || [];
+          if (collectionId && currentIndex > 1) {
+            console.warn(`SVG thumbnail failed for: ${item.title}. Trying to load earlier version.`);
+            const previousVersion = ARCHIVE_ITEMS.find(i => i.ver && i.ver[0] === collectionId && i.ver[1] === currentIndex - 1);
+            if (previousVersion) {
+              const previousGalleryItem = createGalleryItem(previousVersion);
+              // We need to replace the content of the current item with the content of the previous one
+              // A simple way is to clear the container and append the new content
+              imageContainer.innerHTML = '';
+              imageContainer.appendChild(previousGalleryItem.querySelector('.gallery-item-image').firstChild);
+              // Update the click handler to open the new version
+              itemElement.removeEventListener('click', () => openModal(item));
+              itemElement.addEventListener('click', () => openModal(previousVersion));
+              // Note: the info container won't be updated, but that's a small trade-off for this fix
+            } else {
+              // Fallback if previous version not found
+              missingImageError = true;
+              console.error(`Earlier SVG version not found for: ${item.title}`);
+              archiveState.errors.push(`SVG failed to render: ${item.title}`);
+              imageContainer.innerHTML = "";
+              imageContainer.appendChild(createPastelBlock());
+            }
+          } else {
+            // Fallback if no versioning info or first version
+            missingImageError = true;
+            console.error(`SVG thumbnail failed for: ${item.title} (${item.image})`);
+            archiveState.errors.push(`SVG failed to render: ${item.title}`);
+            imageContainer.innerHTML = "";
+            imageContainer.appendChild(createPastelBlock()); // Fallback
+          }
         }
       })
       .catch(error => {
-        console.error("Error creating static SVG thumbnail:", error);
+        // The catch block now also tries the versioning fallback
         missingImageError = true;
-        imageContainer.innerHTML = "";
-        imageContainer.appendChild(createPastelBlock()); // Fallback on error
+        console.error(`Error creating static SVG thumbnail for ${item.title}:`, error);
+        archiveState.errors.push(`SVG failed to render: ${item.title}`);
+        
+        const [collectionId, currentIndex] = item.ver || [];
+        if (collectionId && currentIndex > 1) {
+          console.warn(`SVG thumbnail failed in catch block for: ${item.title}. Trying to load earlier version.`);
+          const previousVersion = ARCHIVE_ITEMS.find(i => i.ver && i.ver[0] === collectionId && i.ver[1] === currentIndex - 1);
+          if (previousVersion) {
+            const previousGalleryItem = createGalleryItem(previousVersion);
+            imageContainer.innerHTML = '';
+            imageContainer.appendChild(previousGalleryItem.querySelector('.gallery-item-image').firstChild);
+            itemElement.removeEventListener('click', () => openModal(item));
+            itemElement.addEventListener('click', () => openModal(previousVersion));
+          } else {
+            imageContainer.innerHTML = "";
+            imageContainer.appendChild(createPastelBlock());
+          }
+        } else {
+          imageContainer.innerHTML = "";
+          imageContainer.appendChild(createPastelBlock());
+        }
       });
-    // END of new SVG logic
+    // END of SVG logic
   } else {
     thumbSrc = item.thumb || item.image;
     if (thumbSrc) {
@@ -396,7 +442,7 @@ function createGalleryItem(item) {
   const primaryDisplayTag = itemMetaFilter || "";
   const secondaryDisplayTag = (item.species && item.species.length > 0) ? item.species[0] : "";
   
-  // START of the updated logic for the third display tag
+  // Updated logic for the third display tag
   let animationTag = "";
   let animationClass = "";
   if (item.tags?.includes("SMIL")) {
@@ -409,7 +455,6 @@ function createGalleryItem(item) {
     animationTag = "SVG";
     animationClass = "filter-svg";
   }
-  // END of the updated logic
   
   const fourthDisplayTag = missingImageError ? "Missing Image" : "";
 
@@ -444,13 +489,12 @@ function createGalleryItem(item) {
     const tagEl = document.createElement("div");
     tagEl.className = `gallery-item-filter filter-explicit`;
     tagEl.textContent = fourthDisplayTag;
-    infoContainer.appendChild(tagEl);
   }
+  
   itemElement.appendChild(imageContainer);
   itemElement.appendChild(infoContainer);
   return itemElement;
 }
-
 // Function to render the pagination controls
 function renderPagination() {
   const pagination = document.getElementById("pagination");
@@ -485,6 +529,17 @@ function changePage(page) {
   });
 }
 
+// Function to close the modal
+function closeModal() {
+  const modal = document.getElementById("imageModal");
+  modal.style.display = "none";
+  modal.classList.remove("modal-pop-in"); // Remove the animation class
+  document.body.style.overflow = "";
+  document.getElementById("modalTags").style.display = "none";
+  document.getElementById("viewTagsBtn").textContent = "View Tags";
+}
+
+// Function to open the modal with a brief pop-in animation
 function openModal(item) {
   const modal = document.getElementById("imageModal");
   const modalTitle = document.getElementById("modalTitle");
@@ -492,10 +547,16 @@ function openModal(item) {
   const modalMirrors = document.getElementById("modalMirrors");
   const modalTags = document.getElementById("modalTags");
   const modalImageContainer = document.querySelector(".modal-image-container");
+  const modalVersionsContainer = document.getElementById("modalVersions");
 
   // Clear previous content to avoid stacking issues
   modalImageContainer.innerHTML = "";
   modalImageContainer.style.background = "var(--bg-color)";
+
+  // Clear previous versions
+  if (modalVersionsContainer) {
+    modalVersionsContainer.innerHTML = "";
+  }
 
   const createPastelBlock = (text = "") => {
     const block = document.createElement("div");
@@ -592,13 +653,53 @@ function openModal(item) {
     month: "long",
     day: "numeric",
   });
-  
+
+  // Handle versions
+  if (item.ver && item.ver.length === 2) {
+    const [collectionId, currentIndex] = item.ver;
+    const versionCollection = ARCHIVE_ITEMS.filter(i => i.ver && i.ver[0] === collectionId);
+
+    // Sort versions by their index
+    versionCollection.sort((a, b) => a.ver[1] - b.ver[1]);
+
+    if (modalVersionsContainer) {
+      modalVersionsContainer.style.display = "flex";
+      modalVersionsContainer.innerHTML = "";
+      
+      const currentVersionId = `${collectionId}-${currentIndex}`;
+
+      versionCollection.forEach((version, index) => {
+        const versionButton = document.createElement("button");
+        versionButton.className = "version-btn";
+        versionButton.textContent = `v${index + 1}`;
+
+        // Create a unique ID for the version and compare it to the current version's ID
+        const isCurrentActive = `${version.ver[0]}-${version.ver[1]}` === currentVersionId;
+        const isExplicit = version.tags && version.tags.includes("Explicit");
+
+        versionButton.classList.add(isCurrentActive ? "active" : "inactive");
+        if (isExplicit) {
+          versionButton.classList.add(isCurrentActive ? "explicit-active" : "explicit-inactive");
+        } else {
+          versionButton.classList.add(isCurrentActive ? "safe-active" : "safe-inactive");
+        }
+
+        versionButton.addEventListener("click", () => {
+          openModal(version);
+        });
+        modalVersionsContainer.appendChild(versionButton);
+      });
+    }
+  } else if (modalVersionsContainer) {
+    modalVersionsContainer.style.display = "none";
+  }
+
   const platformIconMap = {
     twitter: "./svg/soc/x.svg",
     bluesky: "./svg/soc/blue.svg",
     instagram: "./svg/soc/insta.svg",
   };
-  
+
   modalMirrors.innerHTML = "";
   item.mirrors.forEach(async (mirror) => {
     const link = document.createElement("a");
@@ -623,7 +724,7 @@ function openModal(item) {
     }
     modalMirrors.appendChild(link);
   });
-  
+
   modalTags.innerHTML = "";
   item.tags.forEach((tag) => {
     const tagElement = document.createElement("span");
@@ -631,11 +732,13 @@ function openModal(item) {
     tagElement.textContent = tag;
     modalTags.appendChild(tagElement);
   });
-  
+
   // Display tags regardless
   modalTags.style.display = "flex";
-  
+
+  // Display the modal and add the animation class
   modal.style.display = "block";
+  modal.classList.add("modal-pop-in");
   document.body.style.overflow = "hidden";
 }
 
@@ -692,27 +795,36 @@ async function loadInteractiveSVG(item, container) {
     }
 
     if (item.layer) {
-      const layerElement = svgElement.querySelector(`#${item.layer}`);
-      if (layerElement) {
-        console.log(`Interactive layer found: #${item.layer}`);
-        layerElement.style.cursor = 'pointer';
-        layerElement.classList.add('interactive-layer');
-        layerElement.addEventListener('click', (e) => {
-          e.stopPropagation();
-          animateLayer(layerElement);
-        });
-        layerElement.addEventListener('mouseenter', () => {
-          layerElement.style.filter = 'brightness(1.2)';
-        });
-        layerElement.addEventListener('mouseleave', () => {
-          layerElement.style.filter = 'brightness(1)';
-        });
-      } else {
-        console.warn(`Layer #${item.layer} not found inside SVG`);
-      }
+      // Normalize to an array in case item.layer is a single string
+      const layers = Array.isArray(item.layer) ? item.layer : [item.layer];
+    
+      layers.forEach(layerId => {
+        const layerElement = svgElement.querySelector(`#${layerId}`);
+        if (layerElement) {
+          console.log(`Interactive layer found: #${layerId}`);
+          layerElement.style.cursor = 'pointer';
+          layerElement.classList.add('interactive-layer');
+    
+          layerElement.addEventListener('click', (e) => {
+            e.stopPropagation();
+            animateLayer(layerElement);
+          });
+    
+          layerElement.addEventListener('mouseenter', () => {
+            layerElement.style.filter = 'brightness(1.2)';
+          });
+    
+          layerElement.addEventListener('mouseleave', () => {
+            layerElement.style.filter = 'brightness(1)';
+          });
+        } else {
+          console.warn(`Layer #${layerId} not found inside SVG`);
+        }
+      });
     } else {
       console.log('No layer attribute detected. Rendering SVG in normal mode.');
     }
+    
 
     console.log('Interactive SVG loaded and ready.');
   } catch (error) {
@@ -749,14 +861,6 @@ function animateLayer(layerElement) {
 }
 
 
-// Function to close the modal
-function closeModal() {
-  const modal = document.getElementById("imageModal");
-  modal.style.display = "none";
-  document.body.style.overflow = "";
-  document.getElementById("modalTags").style.display = "none";
-  document.getElementById("viewTagsBtn").textContent = "View Tags";
-}
 
 // Function to toggle the visibility of modal tags
 function toggleTags() {
