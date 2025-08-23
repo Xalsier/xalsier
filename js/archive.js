@@ -7,6 +7,8 @@ let archiveState = {
   isSearching: false,
   errors: [],
   hasSearched: false,
+  // Add a flag to track if the explicit warning has been shown and accepted
+  showWarning: false,
 };
 
 // Function to initialize the application state and event listeners
@@ -61,6 +63,26 @@ function handleFilterChange(filterValue, selectElement) {
   const [filterType, filterName] = filterValue.split(":");
   const specialTypes = ["project", "background", "filter", "species", "gender", "bodyType", "furColor"];
   const newFilterType = specialTypes.includes(filterType) ? "tag" : filterType;
+
+  // Check for the Explicit tag and show warning if needed
+  if (filterName === "Explicit" && !archiveState.showWarning) {
+    const warningModal = document.getElementById("warningModal");
+    warningModal.classList.remove("hidden");
+    // Add event listener to "Okay" button inside the modal to handle the explicit filter
+    document.getElementById("warningOkayBtn").addEventListener("click", () => {
+      archiveState.showWarning = true;
+      warningModal.classList.add("hidden");
+      // Re-run the filter change to apply the "Explicit" filter
+      handleFilterChange(filterValue, selectElement);
+      performSearch();
+    }, { once: true });
+    // Add event listener for "Leave" button to refresh the page
+    document.getElementById("warningLeaveBtn").addEventListener("click", () => {
+      window.location.reload();
+    }, { once: true });
+    selectElement.value = ""; // Clear the selection
+    return; // Stop further execution of this function
+  }
 
   const filterId = `${newFilterType}-${filterName}`;
 
@@ -523,7 +545,7 @@ function changePage(page) {
   archiveState.currentPage = page;
   renderGallery();
   renderPagination();
-  document.getElementById("galleryGrid").scrollIntoView({
+  document.getElementById("galleryGrid").scroll-into-view({
     behavior: "smooth",
     block: "start",
   });
@@ -541,6 +563,24 @@ function closeModal() {
 
 // Function to open the modal with a brief pop-in animation
 function openModal(item) {
+  // Check if the warning needs to be displayed
+  const isExplicit = item.tags?.includes("Explicit") || item.filters?.includes("Explicit");
+  if (isExplicit && !archiveState.showWarning) {
+    const warningModal = document.getElementById("warningModal");
+    warningModal.classList.remove("hidden");
+    // Add an event listener to the "Okay" button
+    document.getElementById("warningOkayBtn").addEventListener("click", () => {
+      archiveState.showWarning = true;
+      warningModal.classList.add("hidden");
+      openModal(item); // Re-run openModal to show the item
+    }, { once: true });
+    // Add an event listener to the "Leave" button
+    document.getElementById("warningLeaveBtn").addEventListener("click", () => {
+      window.location.reload();
+    }, { once: true });
+    return; // Exit the function to prevent the image modal from opening
+  }
+
   const modal = document.getElementById("imageModal");
   const modalTitle = document.getElementById("modalTitle");
   const modalDate = document.getElementById("modalDate");
@@ -770,11 +810,15 @@ async function loadInteractiveSVG(item, container) {
     svgElement.style.margin = '0 auto';
 
     // Fallback if the SVG doesn't have a viewBox
-    if (!svgElement.hasAttribute('viewBox') && (svgElement.hasAttribute('width') || svgElement.hasAttribute('height'))) {
-      const width = svgElement.getAttribute('width') || '100%';
-      const height = svgElement.getAttribute('height') || '100%';
+    if (svgElement.hasAttribute('viewBox')) {
+      // SVG has viewBox, no need to add one.
+    } else if (svgElement.hasAttribute('width') && svgElement.hasAttribute('height')) {
+      const width = svgElement.getAttribute('width');
+      const height = svgElement.getAttribute('height');
       svgElement.setAttribute('viewBox', `0 0 ${width} ${height}`);
-      console.warn('SVG missing viewBox; added viewBox for proper scaling.');
+      console.warn('SVG missing viewBox; added viewBox from width and height attributes.');
+    } else {
+      console.warn('SVG missing viewBox and no width/height attributes to infer from.');
     }
 
     // Check for <style> errors inside SVG

@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="./css/archive.css">
   <link rel="stylesheet" href="./css/index.css">
   <link rel="stylesheet" href="./css/notice.css">
+  <link rel="stylesheet" href="./css/warning.css">
 </head>
 <body>
   <header style="text-align: center;">
@@ -163,6 +164,15 @@
       </div>
     </div>
 
+    <div id="warningModal" class="modal-overlay hidden">
+      <div class="modal-warn-content modal-large">
+          <p>You must be 18+ or older to view explicit content.</p>
+          <div class="modal-buttons">
+              <button id="warningOkayBtn">Okay</button>
+              <button id="warningLeaveBtn">Return</button>
+          </div>
+      </div>
+  </div>
 
   <footer>
     <div style="display:flex;flex-direction: row;gap:20px;">

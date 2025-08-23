@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modal Squares</title>
+    <style>
+        /* Global variables provided by the user */
+        :root {
+            --bg-color: #101217;
+            --sec-color: #1a1d24;
+            --sec-color-2: #2a2d35;
+            --green: rgb(86, 222, 147);
+            --white: #ffffff;
+            --border-radius: 12px;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        /* Basic body and font styling */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--white);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        /* Container for the main button */
+        .button-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Styling for the button */
+        button {
+            padding: 12px 24px;
+            border: none;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+            background-color: var(--sec-color);
+            color: var(--white);
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Styling for the modal overlay, which covers the entire screen */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 1;
+            transition: opacity 0.3s ease-in-out;
+            z-index: 1000;
+        }
+
+        /* Hidden class to control visibility with JavaScript */
+        .modal-overlay.hidden {
+            opacity: 0;
+            pointer-events: none; /* Disables clicks when hidden */
+        }
+
+        /* Styling for the modal content box */
+        .modal-content {
+            background-color: var(--green);
+            color: var(--sec-color);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            text-align: center;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            transform: scale(1);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        /* Class for the large modal's size */
+        .modal-large .modal-content {
+            width: 500px;
+            height: 500px;
+        }
+
+        .modal-content p {
+            font-size: 1.25rem;
+            font-weight: bold;
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+        }
+
+        .modal-buttons {
+            display: flex;
+            justify-content: space-around;
+            gap: 10px;
+        }
+
+        .modal-buttons button {
+            background-color: var(--sec-color-2);
+            color: var(--white);
+            flex-grow: 1;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Main button to trigger the modal, now always visible -->
+    <div class="button-container">
+        <button id="largeBtn">Large</button>
+    </div>
+
+    <!-- The large modal for all screens -->
+    <div id="largeModal" class="modal-overlay hidden">
+        <div class="modal-content modal-large">
+            <p>You must be 18+ or older to view this content.</p>
+            <div class="modal-buttons">
+                <button id="largeConfirmBtn">I am</button>
+                <button id="largeReturnBtn">Return</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Get references to the button and modal elements
+        const largeBtn = document.getElementById('largeBtn');
+        const largeModal = document.getElementById('largeModal');
+        const largeConfirmBtn = document.getElementById('largeConfirmBtn');
+        const largeReturnBtn = document.getElementById('largeReturnBtn');
+
+        // Function to show the modal
+        function showModal(modalElement) {
+            modalElement.classList.remove('hidden');
+        }
+
+        // Function to hide the modal
+        function hideModal(modalElement) {
+            modalElement.classList.add('hidden');
+        }
+
+        // Event listener for the "Large" button
+        largeBtn.addEventListener('click', () => {
+            showModal(largeModal);
+        });
+
+        // Event listener for the "I am" and "Return" buttons in the modal
+        largeConfirmBtn.addEventListener('click', () => {
+            hideModal(largeModal);
+            // In a real application, you would proceed to the content here
+        });
+        largeReturnBtn.addEventListener('click', () => {
+            hideModal(largeModal);
+        });
+    </script>
+
+</body>
+</html>
