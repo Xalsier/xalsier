@@ -69,7 +69,7 @@
             height: 500px;
         }
 
-        .modal-content p {
+        .modal-content strong {
             font-size: 1.25rem;
             font-weight: bold;
             flex-grow: 1;
