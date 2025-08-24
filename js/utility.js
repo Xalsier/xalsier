@@ -1,4 +1,4 @@
-const pageVisits = 90; 
+const pageVisits = 94; 
 
 const socialLinks = [
   { href: "https://x.com/Xalsier", src: "./svg/soc/x.svg", alt: "X / Twitter" },
