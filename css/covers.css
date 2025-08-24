@@ -298,20 +298,7 @@
     font-weight: 600;
     margin-bottom: 1rem;
   }
-  
-  .social-links {
-    margin: 0.5rem 0;
-  }
-  
-  .social-links a {
-    color: var(--white);
-    text-decoration: none;
-    transition: var(--transition);
-  }
-  
-  .social-links a:hover {
-    color: var(--green);
-  }
+
   
   /* Fade-in Animation */
   .fade-in {

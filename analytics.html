@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="./css/app.css">
 <link rel="stylesheet" href="./exp/testA.css">
 <link rel="stylesheet" href="./exp/pen2/testB.css">
+<link rel="stylesheet" href="./css/infographic.css">
 </head>
 <body>
 <header>
@@ -39,7 +40,7 @@
   <section class="filter-section">
     <div class="nav-tabs" id="channelTabs">
       <button class="nav-tab active" data-channel="rawr-folder">Rawr Folder</button>
-      <button class="nav-tab" data-channel="social-media">Social Media</button>
+      <button class="nav-tab" data-channel="social-media">Coding Projects</button>
     </div>
   </section>
 
@@ -97,8 +98,8 @@
   <!-- Removed fade-in class from social media content -->
   <section class="social-media-content" id="social-media-content" style="display: none;">
     <div class="no-content">
-      <h2>Social Media Analytics</h2>
-      <p>No content available for now</p>
+      <h2>Coding Project Analytics</h2>
+      <div id="timeline-infographic" class="timeline-infographic"></div>
     </div>
   </section>
 </main>
@@ -113,6 +114,7 @@
     <a href="analytics.html">Analytics</a>
   </div>
   <div class="social-bar" id="socialBar"></div>
+  <div id="visitsContainer"></div>
 </footer>
 
 <!-- Updated script loading order with con_archive.js first -->
@@ -122,7 +124,8 @@
 <script src="./js/select.js"></script>
 <script src="./exp/testA.js"></script>
 <script src="./exp/pen2/testB.js"></script>
-
+<script src="./con/con_proj.js"></script>
+<script src="./js/infographic.js"></script>
 <!-- Added tab switching functionality -->
 <script>
 document.addEventListener('DOMContentLoaded', function() {

@@ -381,18 +381,6 @@ body::-webkit-scrollbar {
       grid-template-columns: 1fr;
     }
   }
-
-
-  footer div a {
-    display: flex;
-  }
-
-  footer div {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    padding: 1em;
-  }
   
   /* Modal */
   .modal {
