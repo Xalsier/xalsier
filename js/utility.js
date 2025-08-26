@@ -100,12 +100,8 @@ function addValidSrcTag() {
     }
 
     // Check if the item's image property is a non-empty string.
-    // The trim() method is used to account for strings with only whitespace.
     if (item.image && typeof item.image === 'string' && item.image.trim() !== "") {
-      // Add the "Valid SRC" tag if it doesn't already exist.
-      if (!item.tags.includes("Valid SRC")) {
-        item.tags.push("Valid SRC");
-      }
+
 
       // Check for file extensions and add corresponding tags
       const lowerCaseSrc = item.image.toLowerCase();
@@ -119,7 +115,22 @@ function addValidSrcTag() {
         }
       }
     }
+
+    // Check for missing alt text
+    if (!item.alt || typeof item.alt !== "string" || item.alt.trim() === "") {
+      if (!item.tags.includes("Alt Text Missing")) {
+        item.tags.push("Alt Text Missing");
+      }
+    }
+
+    // Check for missing description
+    if (!item.desc || typeof item.desc !== "string" || item.desc.trim() === "") {
+      if (!item.tags.includes("Description Missing")) {
+        item.tags.push("Description Missing");
+      }
+    }
   });
 }
+
 
 addValidSrcTag();

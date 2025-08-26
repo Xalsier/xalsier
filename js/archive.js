@@ -776,6 +776,26 @@ function openModal(item) {
   // Display tags regardless
   modalTags.style.display = "flex";
 
+  const modalAltDesc = document.getElementById("modalAltDesc");
+
+// Clear alt/desc each time
+modalAltDesc.innerHTML = "";
+
+// Add alt text if it exists
+if (item.alt) {
+  const altPara = document.createElement("p");
+  altPara.innerHTML = `<strong>Alt:</strong> ${item.alt}`;
+  modalAltDesc.appendChild(altPara);
+}
+
+// Add description if it exists
+if (item.desc) {
+  const descPara = document.createElement("p");
+  descPara.innerHTML = `<strong>Description:</strong> ${item.desc}`;
+  modalAltDesc.appendChild(descPara);
+}
+
+
   // Display the modal and add the animation class
   modal.style.display = "block";
   modal.classList.add("modal-pop-in");

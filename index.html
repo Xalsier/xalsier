@@ -142,27 +142,30 @@
   
     </div>
   
-    <!-- Image Expansion Modal -->
-    <div class="image-modal" id="imageModal">
-      <div class="modal-backdrop"></div>
-      <div class="modal-content">
-        <button class="modal-close" id="modalClose">&times;</button>
-        <div class="modal-image-container">
-          <img id="modalImage" alt="">
-        </div>
-        <div class="modal-info">
-          <h3 id="modalTitle"></h3>
-          <div class="modal-meta">
-            <p><strong>Created:</strong> <span id="modalDate"></span></p>
-          </div>
-          <div class="modal-versions-container" id="modalVersions"></div>
-          <div class="modal-tags-section">
-            <div class="modal-tags" id="modalTags" ></div>
-          </div>
-          <div class="modal-mirrors" id="modalMirrors"></div>
-        </div>
-      </div>
+<!-- Image Expansion Modal -->
+<div class="image-modal" id="imageModal">
+  <div class="modal-backdrop"></div>
+  <div class="modal-content">
+    <button class="modal-close" id="modalClose">&times;</button>
+    <div class="modal-image-container">
+      <img id="modalImage" alt="">
     </div>
+    <div class="modal-info">
+      <h3 id="modalTitle"></h3>
+      <div class="modal-meta">
+        <p><strong style="text-align:left;">Created:</strong> <span id="modalDate"></span></p>
+      </div>
+      <div class="modal-versions-container" id="modalVersions"></div>
+      <div class="modal-tags-section">
+        <div class="modal-tags" id="modalTags"></div>
+      </div>
+      <!-- Alt/Desc insert point -->
+      <div id="modalAltDesc"></div>
+      <div class="modal-mirrors" id="modalMirrors"></div>
+    </div>
+  </div>
+</div>
+
 
     <div id="warningModal" class="modal-overlay hidden">
       <div class="modal-warn-content modal-large">
