@@ -367,76 +367,69 @@ function createGalleryItem(item) {
     if (shouldBlur) img.classList.add("blurred-thumbnail");
     imageContainer.appendChild(img);
   } else if (isSvg) {
-    // START of the new SVG logic for gallery thumbnails with error handling
+    // Placeholder while trying to fetch SVG
     const placeholder = createPastelBlock();
     imageContainer.appendChild(placeholder);
   
     createStaticSvgElement(item.image, item.title)
       .then(staticImg => {
         if (staticImg) {
-          imageContainer.innerHTML = ""; // Clear placeholder
+          imageContainer.innerHTML = "";
           if (shouldBlur) staticImg.classList.add("blurred-thumbnail");
           imageContainer.appendChild(staticImg);
         } else {
-          // If the static SVG creation failed, try to load an earlier version
-          const [collectionId, currentIndex] = item.ver || [];
-          if (collectionId && currentIndex > 1) {
-            console.warn(`SVG thumbnail failed for: ${item.title}. Trying to load earlier version.`);
-            const previousVersion = ARCHIVE_ITEMS.find(i => i.ver && i.ver[0] === collectionId && i.ver[1] === currentIndex - 1);
-            if (previousVersion) {
-              const previousGalleryItem = createGalleryItem(previousVersion);
-              // We need to replace the content of the current item with the content of the previous one
-              // A simple way is to clear the container and append the new content
-              imageContainer.innerHTML = '';
-              imageContainer.appendChild(previousGalleryItem.querySelector('.gallery-item-image').firstChild);
-              // Update the click handler to open the new version
-              itemElement.removeEventListener('click', () => openModal(item));
-              itemElement.addEventListener('click', () => openModal(previousVersion));
-              // Note: the info container won't be updated, but that's a small trade-off for this fix
-            } else {
-              // Fallback if previous version not found
-              missingImageError = true;
-              console.error(`Earlier SVG version not found for: ${item.title}`);
-              archiveState.errors.push(`SVG failed to render: ${item.title}`);
-              imageContainer.innerHTML = "";
-              imageContainer.appendChild(createPastelBlock());
-            }
-          } else {
-            // Fallback if no versioning info or first version
-            missingImageError = true;
-            console.error(`SVG thumbnail failed for: ${item.title} (${item.image})`);
-            archiveState.errors.push(`SVG failed to render: ${item.title}`);
-            imageContainer.innerHTML = "";
-            imageContainer.appendChild(createPastelBlock()); // Fallback
-          }
+          // SVG parsed but was empty/bad
+          missingImageError = true;
+          const msg = `SVG thumbnail returned empty for: ${item.title} (${item.image})`;
+          console.error(msg);
+          archiveState.errors.push(msg);
+          imageContainer.innerHTML = "";
+          imageContainer.appendChild(createPastelBlock("SVG failed"));
         }
       })
-      .catch(error => {
-        // The catch block now also tries the versioning fallback
+      .catch(async error => {
         missingImageError = true;
         console.error(`Error creating static SVG thumbnail for ${item.title}:`, error);
-        archiveState.errors.push(`SVG failed to render: ${item.title}`);
-        
-        const [collectionId, currentIndex] = item.ver || [];
-        if (collectionId && currentIndex > 1) {
-          console.warn(`SVG thumbnail failed in catch block for: ${item.title}. Trying to load earlier version.`);
-          const previousVersion = ARCHIVE_ITEMS.find(i => i.ver && i.ver[0] === collectionId && i.ver[1] === currentIndex - 1);
-          if (previousVersion) {
-            const previousGalleryItem = createGalleryItem(previousVersion);
-            imageContainer.innerHTML = '';
-            imageContainer.appendChild(previousGalleryItem.querySelector('.gallery-item-image').firstChild);
-            itemElement.removeEventListener('click', () => openModal(item));
-            itemElement.addEventListener('click', () => openModal(previousVersion));
-          } else {
-            imageContainer.innerHTML = "";
-            imageContainer.appendChild(createPastelBlock());
-          }
-        } else {
-          imageContainer.innerHTML = "";
-          imageContainer.appendChild(createPastelBlock());
+      
+        try {
+          // Try to re-fetch the raw file so we can log what actually came back
+          const debugResponse = await fetch(item.image);
+          const debugText = await debugResponse.text();
+          console.group(`SVG Debug Info: ${item.title}`);
+          console.error("Original error:", error);
+          console.log("URL:", debugResponse.url);
+          console.log("Status:", debugResponse.status);
+          console.log("Content-Type:", debugResponse.headers.get("content-type"));
+          console.log("First 200 chars of response:", debugText.slice(0, 200));
+          console.groupEnd();
+        } catch (debugError) {
+          console.warn("Failed to fetch SVG for debugging:", debugError);
         }
+      
+        archiveState.errors.push(
+          `SVG failed: ${item.title} (${item.image}) → ${error.message}`
+        );
+      
+        // Retry once in case of transient fetch/parsing error
+        try {
+          console.warn(`Retrying SVG load for ${item.title}...`);
+          const staticImgRetry = await createStaticSvgElement(item.image, item.title);
+          if (staticImgRetry) {
+            imageContainer.innerHTML = "";
+            if (shouldBlur) staticImgRetry.classList.add("blurred-thumbnail");
+            imageContainer.appendChild(staticImgRetry);
+            return; // Success on retry
+          }
+        } catch (retryError) {
+          console.error(`Retry also failed for ${item.title}:`, retryError);
+          archiveState.errors.push(`Retry failed for SVG: ${item.title}`);
+        }
+      
+        // If retry failed, fall back to pastel block
+        imageContainer.innerHTML = "";
+        imageContainer.appendChild(createPastelBlock("SVG error"));
       });
-    // END of SVG logic
+      
   } else {
     thumbSrc = item.thumb || item.image;
     if (thumbSrc) {
