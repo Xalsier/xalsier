@@ -24,45 +24,45 @@ function updateCharacterProfile() {
 }
 
 function showCharacterProfile(character) {
-    const profileImage = document.getElementById("profileImage");
-    const profileBackground = document.getElementById("profileBackground");
+  const profileImage = document.getElementById("profileImage");
+  const profileBackground = document.getElementById("profileBackground");
+  const profileMarkdown = document.getElementById("profileMarkdown");
 
-    // Handle image and no-image placeholder
-    if (character.image) {
-      profileImage.src = character.image;
-      profileImage.classList.remove('no-image');
-    } else {
-      profileImage.src = '';
-      profileImage.classList.add('no-image');
-    }
-    
-    // Use optional chaining and nullish coalescing for safe access
-    document.getElementById("profileName").textContent = character.name || "Unnamed";
-    document.getElementById("profileProject").textContent = character.project || "N/A";
-    document.getElementById("profileDescription").textContent = character.description || "No description provided.";
+  // image
+  if (character.image) {
+    profileImage.src = character.image;
+    profileImage.classList.remove('no-image');
+  } else {
+    profileImage.src = '';
+    profileImage.classList.add('no-image');
+  }
 
-    // Handle background and markdown content
-    if (character.markdown) {
-      profileBackground.innerHTML = "Loading..."; // Placeholder
-      loadMarkdownContent(`./md/${character.markdown}`).then(html => {
-        profileBackground.innerHTML = html;
-      });
-    } else {
-      profileBackground.textContent = character.background || "No background story.";
-    }
+  // basic info
+  document.getElementById("profileName").textContent = character.name || "Unnamed";
+  document.getElementById("profileProject").textContent = character.project || "N/A";
 
-    const traitsContainer = document.getElementById("profileTraits");
-    traitsContainer.innerHTML = "";
-    
-    if (character.traits) {
-      character.traits.forEach((trait) => {
-        const traitTag = document.createElement("span");
-        traitTag.className = "trait-tag";
-        traitTag.textContent = trait;
-        traitsContainer.appendChild(traitTag);
-      });
-    }
+  // markdown / story
+  profileMarkdown.innerHTML = ""; // clear
+  if (character.markdown) {
+    profileMarkdown.innerHTML = "Loading...";
+    loadMarkdownContent(`./md/${character.markdown}`).then(html => {
+      profileMarkdown.innerHTML = html;
+    });
+  }
+
+  // traits
+  const traitsContainer = document.getElementById("profileTraits");
+  traitsContainer.innerHTML = "";
+  if (character.traits) {
+    character.traits.forEach((trait) => {
+      const traitTag = document.createElement("span");
+      traitTag.className = "trait-tag";
+      traitTag.textContent = trait;
+      traitsContainer.appendChild(traitTag);
+    });
+  }
 }
+
 
 // A simple, native JavaScript markdown handler
 async function loadMarkdownContent(filePath) {

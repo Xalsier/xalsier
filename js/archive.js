@@ -28,6 +28,7 @@ function initApp() {
   showGallery();
   renderGallery();
   renderPagination();
+  updateCharacterProfile();
 }
 
 function setupEventListeners() {

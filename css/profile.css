@@ -72,3 +72,68 @@
     font-size: 0.9rem;
     font-weight: 600;
   }
+
+  .character-markdown {
+    background-color: var(--sec-color);
+    color: var(--white);
+    padding: 1.25rem;
+    margin-top: 1.5rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    line-height: 1.75;         /* more breathing room */
+    font-size: 1rem;
+    font-weight: 500;          /* slight bump for readability */
+    max-width: 100%;
+    overflow-wrap: break-word;
+  }
+  
+  .character-markdown h1,
+  .character-markdown h2,
+  .character-markdown h3 {
+    margin: 1rem 0 0.5rem;
+    font-weight: 600;          /* stronger than body text */
+    line-height: 1.4;
+  }
+  
+  .character-markdown h1 { font-size: 1.5rem; color: var(--green); }
+  .character-markdown h2 { font-size: 1.25rem; color: var(--green); }
+  .character-markdown h3 { font-size: 1.1rem; color: var(--green); }
+  
+  .character-markdown p {
+    margin: 0.85rem 0;
+  }
+  
+  .character-markdown strong {
+    color: var(--green);
+    font-weight: 600;
+  }
+  
+  .character-markdown em {
+    font-style: italic;
+    opacity: 0.9;
+  }
+  
+  .character-markdown ul,
+  .character-markdown ol {
+    margin: 0.85rem 0 0.85rem 1.25rem;
+    padding-left: 1rem;
+  }
+  
+  .character-markdown li {
+    margin-bottom: 0.5rem;
+  }
+  
+  /* Mobile optimizations */
+  @media (max-width: 600px) {
+    .character-markdown {
+      padding: 1rem;
+      font-size: 1rem;
+      font-weight: 500;
+      line-height: 1.65;       /* slightly tighter on mobile */
+    }
+  
+    .character-markdown h1 { font-size: 1.3rem; }
+    .character-markdown h2 { font-size: 1.15rem; }
+    .character-markdown h3 { font-size: 1rem; }
+  }
+  
