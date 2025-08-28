@@ -33,36 +33,28 @@
   </div>
 
   <main class="container">
-    <!-- Character Research Section -->
-    <section class="section fade-in" id="character-research">
-      <div class="section-header">
-        <h2>Character Research</h2>
-        <p class="section-desc">Book's that I'm reading to improve my writing of a character.</p>
-      </div>
-      
-      <div class="character-groups">
-        <div class="character-group fade-in">
-          <div class="book-status-container">
-            <div class="status-section">
-              <h4>Currently Reading</h4>
-              <div class="book-list" id="roxie-currently-reading"></div>
-            </div>
-            <div class="status-section">
-              <h4>Want to Read</h4>
-              <div class="book-list" id="roxie-want-to-read"></div>
-            </div>
-            <div class="status-section">
-              <h4>Completed</h4>
-              <div class="book-list" id="roxie-completed"></div>
-            </div>
-          </div>
-        </div>
-      
-      </div>
-    </section>
-
 
     <!-- Manga & Comics Section -->
+
+
+    <!-- Unsorted Bookshelf Section -->
+    <section class="section fade-in" id="unsorted">
+      <div class="section-header">
+        <h2>Bookshelf</h2>
+      </div>
+      
+      <div class="filter-buttons" id="filterButtons">
+        <button class="filter-btn" data-tag="All">All</button>
+        <button class="filter-btn" data-tag="Philosophy">Philosophy</button>
+        <button class="filter-btn" data-tag="Psychology">Psychology</button>
+        <button class="filter-btn" data-tag="History">History</button>
+        <button class="filter-btn active" data-tag="Postcolonial Studies">Postcolonial Studies</button>
+        <button class="filter-btn" data-tag="Disability">Disability</button>
+      </div>
+
+      <div class="book-grid fade-in" id="unsorted-books"></div>
+    </section>
+
     <section class="section fade-in" id="manga-comics">
       <div class="section-header">
         <h2>Manga & Comic Reviews</h2>
@@ -89,24 +81,6 @@
       </div>
     </section>
 
-    <!-- Unsorted Bookshelf Section -->
-    <section class="section fade-in" id="unsorted">
-      <div class="section-header">
-        <h2>Unsorted Bookshelf</h2>
-        <p class="section-desc">All other books I've read</p>
-      </div>
-      
-      <div class="filter-buttons" id="filterButtons">
-        <button class="filter-btn" data-tag="All">All</button>
-        <button class="filter-btn" data-tag="Philosophy">Philosophy</button>
-        <button class="filter-btn active" data-tag="Psychology">Psychology</button>
-        <button class="filter-btn" data-tag="History">History</button>
-        <button class="filter-btn" data-tag="Plays">Plays</button>
-        <button class="filter-btn" data-tag="Disability">Disability</button>
-      </div>
-
-      <div class="book-grid fade-in" id="unsorted-books"></div>
-    </section>
   </main>
 
   <!-- Review Modal -->
