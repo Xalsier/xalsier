@@ -130,75 +130,6 @@
   background: #5f27cd;
 }
 
-/* Character Profile Section */
-.character-profile-section {
-  max-width: 1200px;
-  margin: 2rem auto;
-  padding: 0 1rem;
-}
-
-.character-profile-card {
-  background: var(--sec-color);
-  border-radius: var(--border-radius);
-  padding: 2rem;
-  box-shadow: var(--shadow);
-}
-
-.character-header {
-  display: flex;
-  align-items: center;
-  gap: 2rem;
-  margin-bottom: 2rem;
-}
-
-.character-header img {
-  width: 150px;
-  height: 150px;
-  object-fit: cover;
-  border-radius: var(--border-radius);
-  box-shadow: var(--shadow);
-}
-
-.character-info h2 {
-  color: var(--green);
-  font-size: 2rem;
-  margin-bottom: 0.5rem;
-}
-
-.character-info p {
-  color: var(--white);
-  font-size: 1.1rem;
-  margin-bottom: 0.5rem;
-}
-
-.character-details {
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  gap: 2rem;
-}
-
-.character-traits h3,
-.character-background h3 {
-  color: var(--green);
-  font-size: 1.2rem;
-  margin-bottom: 1rem;
-}
-
-.character-traits div {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-}
-
-.trait-tag {
-  background: var(--green);
-  color: var(--bg-color);
-  padding: 0.3rem 0.8rem;
-  border-radius: 15px;
-  font-size: 0.9rem;
-  font-weight: 600;
-}
-
 /* Gallery Section - Hidden by default */
 .gallery-section {
   max-width: 1200px;
@@ -851,4 +782,16 @@
 
 #imageModal.modal-pop-in {
   animation: popIn 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+/* Add this CSS for the fade-in and scale-up effect */
+.gallery-item-image img {
+  opacity: 0;
+  transform: scale(0.95);
+  transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+}
+
+.gallery-item-image img.loaded {
+  opacity: 1;
+  transform: scale(1);
 }

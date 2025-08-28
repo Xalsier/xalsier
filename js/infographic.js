@@ -175,5 +175,3 @@ function renderInfographic() {
   });
   container.appendChild(svg);
 }
-renderInfographic();
-window.addEventListener('resize', renderInfographic);

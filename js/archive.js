@@ -7,15 +7,12 @@ let archiveState = {
   isSearching: false,
   errors: [],
   hasSearched: false,
-  // Add a flag to track if the explicit warning has been shown and accepted
   showWarning: false,
 };
 
-// Function to initialize the application state and event listeners
 function initApp() {
   setupEventListeners();
   loadItems();
-  // This loop now assumes 'Safe' is a tag
   DEFAULT_FILTERS.forEach((filterName) => {
     const filterType = filterName === "Recent" ? "history" : "tag";
     const filterId = `${filterType}-${filterName}`;
@@ -194,49 +191,35 @@ function filterItems() {
   }
 }
 
-
-// Function to update character profile display
-function updateCharacterProfile() {
-  const characterFilters = Array.from(archiveState.activeFilters.values()).filter((f) => f.type === "character");
-  const profileSection = document.getElementById("characterProfileSection");
-  if (characterFilters.length === 1) {
-    const characterName = characterFilters[0].name;
-    const characterInfo = characterData && characterData[characterName];
-    if (characterInfo) {
-      showCharacterProfile(characterInfo);
-      profileSection.style.display = "block";
-    } else {
-      profileSection.style.display = "none";
-    }
-  } else {
-    profileSection.style.display = "none";
-  }
-}
-
-// Function to display character profile information
-function showCharacterProfile(character) {
-  document.getElementById("profileImage").src = character.image;
-  document.getElementById("profileName").textContent = character.name;
-  document.getElementById("profileProject").textContent = character.project;
-  document.getElementById("profileDescription").textContent = character.description;
-  document.getElementById("profileBackground").textContent = character.background;
-  const traitsContainer = document.getElementById("profileTraits");
-  traitsContainer.innerHTML = "";
-  character.traits.forEach((trait) => {
-    const traitTag = document.createElement("span");
-    traitTag.className = "trait-tag";
-    traitTag.textContent = trait;
-    traitsContainer.appendChild(traitTag);
-  });
-}
-
 // Function to show the gallery section
 function showGallery() {
   const gallerySection = document.getElementById("gallerySection");
   gallerySection.classList.add("visible");
 }
 
-// Function to render the gallery items for the current page
+// Function to handle lazy loading of images
+function handleLazyLoading() {
+  const lazyImages = document.querySelectorAll(".lazy-load");
+
+  const observer = new IntersectionObserver((entries, observer) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const img = entry.target;
+        img.src = img.dataset.src; // Set the image source
+        observer.unobserve(img); // Stop observing the image
+      }
+    });
+  }, {
+    rootMargin: "0px 0px 100px 0px", // Load images 100px before they enter the viewport
+    threshold: 0.01
+  });
+
+  lazyImages.forEach((img) => {
+    observer.observe(img);
+  });
+}
+
+// Update renderGallery to call the new lazy loading function
 function renderGallery() {
   const grid = document.getElementById("galleryGrid");
   const startIndex = (archiveState.currentPage - 1) * archiveState.itemsPerPage;
@@ -251,6 +234,9 @@ function renderGallery() {
     const galleryItem = createGalleryItem(item);
     grid.appendChild(galleryItem);
   });
+
+  // Call the lazy loading handler after the gallery is rendered
+  handleLazyLoading();
 }
 
 // Function to get the YouTube video ID from a URL
@@ -343,26 +329,34 @@ function createGalleryItem(item) {
       thumbSrc = `https://img.youtube.com/vi/${youtubeId}/maxresdefault.jpg`;
     }
     const img = document.createElement("img");
-    img.src = thumbSrc;
+    img.dataset.src = thumbSrc; // Use data-src for lazy loading
     img.alt = item.title;
+    img.classList.add("lazy-load"); // Add lazy-load class
     img.onerror = () => {
       console.warn("Thumbnail failed to load, falling back to placeholder.");
       missingImageError = true;
       imageContainer.innerHTML = "";
       imageContainer.appendChild(createPastelBlock());
     };
+    img.onload = () => {
+      img.classList.add("loaded"); // Add loaded class on load
+    };
     if (shouldBlur) img.classList.add("blurred-thumbnail");
     imageContainer.appendChild(img);
   } else if (isVideo) {
     thumbSrc = item.thumb || "./img/video-thumb.png";
     const img = document.createElement("img");
-    img.src = thumbSrc;
+    img.dataset.src = thumbSrc; // Use data-src for lazy loading
     img.alt = item.title;
+    img.classList.add("lazy-load"); // Add lazy-load class
     img.onerror = () => {
       console.warn("Thumbnail failed to load, falling back to placeholder.");
       missingImageError = true;
       imageContainer.innerHTML = "";
       imageContainer.appendChild(createPastelBlock());
+    };
+    img.onload = () => {
+      img.classList.add("loaded"); // Add loaded class on load
     };
     if (shouldBlur) img.classList.add("blurred-thumbnail");
     imageContainer.appendChild(img);
@@ -370,12 +364,20 @@ function createGalleryItem(item) {
     // Placeholder while trying to fetch SVG
     const placeholder = createPastelBlock();
     imageContainer.appendChild(placeholder);
-  
+
     createStaticSvgElement(item.image, item.title)
       .then(staticImg => {
         if (staticImg) {
           imageContainer.innerHTML = "";
           if (shouldBlur) staticImg.classList.add("blurred-thumbnail");
+          // Add lazy-load class for the fade-in effect
+          staticImg.classList.add("lazy-load");
+          // The onload event for a data URL fires immediately after appending
+          staticImg.onload = () => {
+            staticImg.classList.add("loaded"); // Add loaded class on load
+          };
+          // **CRITICAL FIX:** Do NOT remove the src attribute.
+          // The data URL is already the image source.
           imageContainer.appendChild(staticImg);
         } else {
           // SVG parsed but was empty/bad
@@ -390,7 +392,7 @@ function createGalleryItem(item) {
       .catch(async error => {
         missingImageError = true;
         console.error(`Error creating static SVG thumbnail for ${item.title}:`, error);
-      
+
         try {
           // Try to re-fetch the raw file so we can log what actually came back
           const debugResponse = await fetch(item.image);
@@ -405,11 +407,11 @@ function createGalleryItem(item) {
         } catch (debugError) {
           console.warn("Failed to fetch SVG for debugging:", debugError);
         }
-      
+
         archiveState.errors.push(
           `SVG failed: ${item.title} (${item.image}) → ${error.message}`
         );
-      
+
         // Retry once in case of transient fetch/parsing error
         try {
           console.warn(`Retrying SVG load for ${item.title}...`);
@@ -417,6 +419,10 @@ function createGalleryItem(item) {
           if (staticImgRetry) {
             imageContainer.innerHTML = "";
             if (shouldBlur) staticImgRetry.classList.add("blurred-thumbnail");
+            staticImgRetry.classList.add("lazy-load"); // Add lazy-load class
+            staticImgRetry.onload = () => {
+              staticImgRetry.classList.add("loaded");
+            };
             imageContainer.appendChild(staticImgRetry);
             return; // Success on retry
           }
@@ -424,23 +430,27 @@ function createGalleryItem(item) {
           console.error(`Retry also failed for ${item.title}:`, retryError);
           archiveState.errors.push(`Retry failed for SVG: ${item.title}`);
         }
-      
+
         // If retry failed, fall back to pastel block
         imageContainer.innerHTML = "";
         imageContainer.appendChild(createPastelBlock("SVG error"));
       });
-      
+
   } else {
     thumbSrc = item.thumb || item.image;
     if (thumbSrc) {
       const img = document.createElement("img");
-      img.src = thumbSrc;
+      img.dataset.src = thumbSrc; // Use data-src for lazy loading
       img.alt = item.title;
+      img.classList.add("lazy-load"); // Add lazy-load class
       img.onerror = () => {
         console.warn("Thumbnail failed to load, falling back to placeholder.");
         missingImageError = true;
         imageContainer.innerHTML = "";
         imageContainer.appendChild(createPastelBlock());
+      };
+      img.onload = () => {
+        img.classList.add("loaded"); // Add loaded class on load
       };
       if (shouldBlur) img.classList.add("blurred-thumbnail");
       imageContainer.appendChild(img);
@@ -456,7 +466,7 @@ function createGalleryItem(item) {
   const itemMetaFilter = item.filters && item.filters.find((f) => metaFilters.includes(f) && f !== "Safe");
   const primaryDisplayTag = itemMetaFilter || "";
   const secondaryDisplayTag = (item.species && item.species.length > 0) ? item.species[0] : "";
-  
+
   // Updated logic for the third display tag
   let animationTag = "";
   let animationClass = "";
@@ -470,7 +480,7 @@ function createGalleryItem(item) {
     animationTag = "SVG";
     animationClass = "filter-svg";
   }
-  
+
   const fourthDisplayTag = missingImageError ? "Missing Image" : "";
 
   const filterStatusForClass = item.filters && item.filters.length > 0 ? item.filters[0] : "Unknown";
@@ -491,7 +501,7 @@ function createGalleryItem(item) {
     tagEl.textContent = secondaryDisplayTag;
     infoContainer.appendChild(tagEl);
   }
-  
+
   // Use the new animationTag variable here
   if (animationTag) {
     const tagEl = document.createElement("div");
@@ -499,13 +509,13 @@ function createGalleryItem(item) {
     tagEl.textContent = animationTag;
     infoContainer.appendChild(tagEl);
   }
-  
+
   if (fourthDisplayTag) {
     const tagEl = document.createElement("div");
     tagEl.className = `gallery-item-filter filter-explicit`;
     tagEl.textContent = fourthDisplayTag;
   }
-  
+
   itemElement.appendChild(imageContainer);
   itemElement.appendChild(infoContainer);
   return itemElement;
