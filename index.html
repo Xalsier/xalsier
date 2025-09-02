@@ -8,9 +8,10 @@
   <link rel="stylesheet" href="./css/global.css">
   <link rel="stylesheet" href="./css/archive.css">
   <link rel="stylesheet" href="./css/index.css">
-  <link rel="stylesheet" href="./css/notice.css">
-  <link rel="stylesheet" href="./css/warning.css">
-  <link rel="stylesheet" href="./css/profile.css">
+  <link rel="stylesheet" href="./css/index/notice.css">
+  <link rel="stylesheet" href="./css/index/warning.css">
+  <link rel="stylesheet" href="./css/index/profile.css">
+  <link rel="stylesheet" href="./css/index/markdown.css">
 </head>
 
 <body>
@@ -39,20 +40,17 @@
   <div class="announcement-card">
     <div class="announcement-header">
       <img 
-        title="(Fuwa) Xalsier's profile on Social Media." 
-        alt="A drawing of the character Fuwa, an anthropomorphic rabbit. Xalsier's main profile image on social media." 
+        id="announcement-avatar"
         class="announcement-avatar" 
-        src="./thumb/fuwa.jpg">
+        src="" 
+        alt=""
+        title="">
       <div class="announcement-name-date">
-        <span class="announcement-name">Xalsier</span>
-        <span class="announcement-date">August 21, 2025</span>
+        <span id="announcement-name" class="announcement-name"></span>
+        <span id="announcement-date" class="announcement-date"></span>
       </div>
     </div>
-    <div class="announcement-message">
-      Birth by Memory is undergoing another rewrite/hiatus! 
-      The page for the time being will be redirected here in the meantime!
-      <br><br>
-      The prologue for my work in progress short story is out! If you'd like to read it, select "Untitled Project" by the Meta Select!
+    <div class="announcement-message" id="announcement-message">
     </div>
   </div>
   
@@ -205,6 +203,7 @@
   <script src="./js/utility.js"></script>
   <script src="./js/select.js"></script>
   <script src="./js/utility/articles.js"></script>
+  <script src="./js/utility/notice.js"></script>
   <script src="./js/archive.js"></script>
 </body>
 </html>
