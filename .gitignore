@@ -7,6 +7,7 @@
 /con/
 /thumb/
 /md/
+/game/
 
 # Redirects
 characters.html
@@ -17,3 +18,7 @@ rep.txt
 faq.txt
 
 _headers
+
+blackjack.html
+/js/blackjack/
+/json/blackjack/

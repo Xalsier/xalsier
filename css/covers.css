@@ -282,15 +282,7 @@
     color: var(--white);
     text-decoration: underline;
   }
-  
-  /* Footer */
-  footer {
-    margin-top: 6rem;
-    padding: 3rem 1rem;
-    text-align: center;
-    background: var(--sec-color);
-    border-top: 1px solid var(--sec-color-2);
-  }
+
   
   .mirrors {
     color: var(--green);
