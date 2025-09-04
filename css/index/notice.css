@@ -1,5 +1,5 @@
 .announcement-card {
-    background-color: var(--sec-color-2);
+    background-color: var(--sec-color);
     border-radius: var(--border-radius);
     box-shadow: var(--shadow);
     max-width: 600px;       /* card won’t get too wide */

@@ -548,7 +548,7 @@
 }
 
 .search-btn:hover {
-  background: var(--white);
+  background: #4ade80;
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(86, 222, 147, 0.3);
 }
@@ -628,7 +628,7 @@
 
   .gallery-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap:0;
+    gap:20px;
   }
 
   .filter-safe, .filter-species, .filter-svg {
