@@ -1,5 +1,26 @@
 document.addEventListener('DOMContentLoaded', () => {
 
+
+    function getCanonicalName(platform) {
+        const lowerCasePlatform = platform.toLowerCase();
+        switch (lowerCasePlatform) {
+            case 'furaffinity': return 'Furaffinity';
+            case 'reddit': return 'Reddit';
+            case 'instagram': return 'Instagram';
+            case 'twitter': return 'Twitter';
+            case 'deviantart': return 'DeviantArt';
+            case 'bluesky': return 'Bluesky';
+            case 'tumblr': return 'Tumblr';
+            case 'e621': return 'e621';
+            case 'steam': return 'Steam';
+            case 'newgrounds': return 'Newgrounds';
+            case 'youtube': return 'Youtube';
+            case 'wikifur': return 'Wikifur';
+            case 'github': return 'Github';
+            default: return platform;
+        }
+    }
+
     function processDataForChart(archiveItems) {
         const platformCounts = new Map();
 
@@ -7,8 +28,9 @@ document.addEventListener('DOMContentLoaded', () => {
             if (item.mirrors && Array.isArray(item.mirrors)) {
                 item.mirrors.forEach(mirror => {
                     if (mirror.platform) {
-                        const count = platformCounts.get(mirror.platform) || 0;
-                        platformCounts.set(mirror.platform, count + 1);
+                        const canonicalPlatform = getCanonicalName(mirror.platform);
+                        const count = platformCounts.get(canonicalPlatform) || 0;
+                        platformCounts.set(canonicalPlatform, count + 1);
                     }
                 });
             }
@@ -24,11 +46,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const allData = processDataForChart(ARCHIVE_ITEMS);
 
     const svg = document.querySelector('.bar-chart-svg');
-    const titleEl = document.querySelector('.chart-title');
+    const titleEl = document.querySelector('.bar-chart-title');
     const minusBtn = document.getElementById('minus-btn');
     const plusBtn = document.getElementById('plus-btn');
 
-    let currentBarCount = Math.min(9, allData.length); // Start with top 9 or max available
+    let currentBarCount = Math.min(9, allData.length);
 
     function renderChart(dataToDisplay) {
         // Clear existing chart content
