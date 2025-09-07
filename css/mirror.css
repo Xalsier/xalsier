@@ -1,0 +1,88 @@
+.bar-chart-container {
+    background-color: var(--sec-color);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    padding: 24px;
+    margin: 2rem auto;
+    width: 100%;
+    max-width: 700px;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.chart-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--white);
+    margin-bottom: 16px;
+}
+
+.bar-chart-svg {
+    width: 100%;
+    height: 350px;
+    border-radius: 8px;
+}
+
+.grid-line {
+    stroke: #333;
+    stroke-width: 1px;
+}
+
+.bar {
+    fill: var(--green);
+    transition: var(--transition);
+    transform-origin: bottom;
+}
+
+.bar:hover {
+    fill: #4cbf94; /* A lighter green for hover */
+    transform: translateY(-5px);
+}
+
+.label-text {
+    font-size: 0.875rem;
+    fill: #a0aec0; /* Light gray for visibility */
+}
+
+.tooltip {
+    position: absolute;
+    background-color: var(--sec-color-2);
+    color: var(--white);
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 0.875rem;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    transform: translate(-50%, -10px);
+    white-space: nowrap;
+}
+
+.controls {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    display: flex;
+    gap: 8px;
+}
+
+.control-btn {
+    background-color: var(--sec-color-2);
+    color: var(--white);
+    border: none;
+    border-radius: 6px;
+    width: 32px;
+    height: 32px;
+    font-size: 1.25rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.control-btn:disabled {
+    background-color: #444;
+    cursor: not-allowed;
+}
+
+.control-btn:hover:not(:disabled) {
+    background-color: #4a4d55;
+}

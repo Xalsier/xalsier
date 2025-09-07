@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="./css/index.css">
 <link rel="stylesheet" href="./css/global.css">
 <link rel="stylesheet" href="./css/app.css">
+<link rel="stylesheet" href="./css/mirror.css">
 <link rel="stylesheet" href="./exp/testA.css">
 <link rel="stylesheet" href="./exp/pen2/testB.css">
 <link rel="stylesheet" href="./css/infographic.css">
@@ -86,6 +87,15 @@
       <div id="heatmap"></div>
     </div>
 
+    <div class="bar-chart-container">
+      <div class="chart-title">Top Mirror Dependencies</div>
+      <div class="controls">
+          <button class="control-btn" id="minus-btn">-</button>
+          <button class="control-btn" id="plus-btn">+</button>
+      </div>
+      <svg class="bar-chart-svg"></svg>
+  </div>
+
     <div style="width: 100%; display: flex; justify-content: center;flex-direction:column; padding: 20px;margin-top: 30px;">
         <h1 style="color: var(--green);">Rawr Folder Stats:</h1>
         <div style="display:flex;flex-direction:row;width:100%;gap:20px;text-align: center;justify-content: center;font-size: 1.5em;">
@@ -132,6 +142,7 @@
 <script src="./con/library.js"></script>
 <script src="./js/utility.js"></script>
 <script src="./js/select.js"></script>
+<script src="./js/mirror.js"></script>
 <script src="./exp/testA.js"></script>
 <script src="./exp/pen2/testB.js"></script>
 <script src="./con/con_proj.js"></script>
