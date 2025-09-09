@@ -127,19 +127,7 @@
                 </section>
 
                 <!-- Converted table to card format for better mobile experience -->
-                <div class="upcoming-works fade-in">
-                    <h2>Upcoming Written Works</h2>
-                    <div class="works-cards">
-                        <div class="work-card">
-                            <div class="work-card-header">
-                                <h3 class="work-title">Short Story</h3>
-                                <span class="work-genre">Adult, Romance, Furry</span>
-                            </div>
-                            <p class="work-description">Following Elaine Prowler (Lion) and Spencer Erichson (Fox).</p>
-                            <div class="work-notes">*Est 2500 words. TBA 2025</div>
-                        </div>
-                    </div>
-                </div>
+                <div id="works-container"></div>
 
                 <!-- Stripped schema attributes from profile cards and restructured for better mobile flex -->
                 <div class="profile-section fade-in">
@@ -253,6 +241,8 @@
         <div id="visitsContainer"></div>
     </footer>
     <script src="./js/utility.js"></script>
+    <script src="./con/work_data.js"></script>
+    <script src="./js/utility/work.js"></script>
     <script>
         // Modal functionality
         function toggleModal(show) {
