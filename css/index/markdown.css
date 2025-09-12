@@ -15,3 +15,7 @@
     box-shadow: var(--shadow);
     transition: var(--transition);
 }
+
+h2 {
+    color: var(--green);
+}
