@@ -9,8 +9,12 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://xalsier.com/untitled</loc>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://xalsier.com/reviews</loc>
-    <priority>0.7</priority>
+    <priority>0.5</priority>
   </url>
   <url>
     <loc>https://xalsier.com/projects</loc>

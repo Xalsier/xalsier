@@ -52,7 +52,6 @@ function setupEventListeners() {
       closeModal();
     }
   });
-  document.getElementById("searchBtn").addEventListener("click", performSearch);
 }
 
 // Function to handle filter changes and update the state
@@ -322,7 +321,6 @@ function createGalleryItem(item) {
 
   let thumbSrc = item.thumb || "";
 
-  // Logic for YouTube thumbnails
   if (isYouTube) {
     const youtubeId = getYouTubeId(item.image);
     if (youtubeId) {
@@ -845,7 +843,6 @@ async function loadInteractiveSVG(item, container) {
       console.warn('SVG missing viewBox and no width/height attributes to infer from.');
     }
 
-    // Check for <style> errors inside SVG
     try {
       const styleElements = svgElement.querySelectorAll('style');
       if (styleElements.length > 0) {
@@ -863,7 +860,6 @@ async function loadInteractiveSVG(item, container) {
     }
 
     if (item.layer) {
-      // Normalize to an array in case item.layer is a single string
       const layers = Array.isArray(item.layer) ? item.layer : [item.layer];
     
       layers.forEach(layerId => {
@@ -972,7 +968,6 @@ async function performSearch() {
   }, 40);
 }
 
-// Function to complete the search and update the display
 function completeSearch() {
   const searchBtn = document.getElementById("searchBtn");
   const progressContainer = document.getElementById("progressContainer");
@@ -994,7 +989,6 @@ function completeSearch() {
   }, 1500);
 }
 
-// Function to validate the search results
 function validateSearch() {
   archiveState.errors = [];
   const itemsWithoutSrc = archiveState.filteredItems.filter((item) => !item.image || item.image.trim() === "");
@@ -1045,8 +1039,4 @@ function validateSearch() {
     archiveState.errors.push("Some items are missing required tag data.");
   }
 }
-
-// Kick off the application when the DOM is ready
-document.addEventListener("DOMContentLoaded", () => {
-  initApp();
-});
+initApp();

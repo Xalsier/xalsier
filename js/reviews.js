@@ -1,4 +1,4 @@
-let activeTag = "Postcolonial Studies"
+let activeTag = "Feminism"
 
 // Intersection Observer for fade-in animations
 const observerOptions = {
