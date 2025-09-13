@@ -9,6 +9,7 @@ body {
     height: 100vh;
     width: 100%;
     position: relative;
+    overflow: hidden;
   }
   
   .blackjack-div {
@@ -163,13 +164,33 @@ body {
     transform: translateY(0);
   }
   
-  /* Updated player cards container for better positioning */
-  .player-cards-container {
+  .paw {
     position: absolute;
-    bottom: 20px;
-    left: 20px;
     z-index: 1000;
-  }
+    bottom: 30px;
+    left: 30px;
+    pointer-events: none;
+}
+
+/* Animation for the floating effect */
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-40px);
+    }
+}
+
+/* Updated player cards container for better positioning and floating effect */
+.player-cards-container {
+    position: absolute;
+    scale: 1.3;
+    bottom: 10px;
+    left: 30px;
+    z-index: 1000;
+    animation: float 3s ease-in-out infinite;
+}
   
   .your-cards {
     display: flex;
@@ -234,6 +255,10 @@ body {
     width: 240px;
     height: 336px;
     position: relative;
+  }
+
+  .card:active {
+    z-index: 2000;
   }
   
   #player-profile,
