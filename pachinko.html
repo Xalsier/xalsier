@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>パチンコ 2023 (Buggy)</title>
+<link rel="stylesheet" type="text/css" href="./css/covers.css">
+<link rel="stylesheet" type="text/css" href="./css/index.css">
+<link rel="stylesheet" type="text/css" href="./css/global.css">
+<link rel="stylesheet" type="text/css" href="./css/app.css">
+<link rel="stylesheet" type="text/css" href="./css/blackjack/cards.css">
+<link rel="stylesheet" type="text/css" href="./css/pac/pac.css">
+</head>
+<body>
+    <header>
+        <h1>パチンコ 2023 (Buggy)</h1>
+        <div class="subtitle" onclick="toggleModal(true)">Explore</div>
+      </header>
+      
+      <div class="modal" onclick="toggleModal(false)" id="navModal">
+        <div class="modal-content" onclick="event.stopPropagation()">
+          <select onchange="navigate(this)">
+            <option value="index.html">Rawr Folder</option>
+            <optgroup label="Explore">
+            <option value="bio.html">Biography</option>
+            <option value="reviews.html">Book Reviews</option>
+            <option value="projects.html">Coding Projects</option>
+            <option value="analytics.html">Analytics (WIP)</option>
+            <option value="youtube.html">YouTube</option>
+          </optgroup>
+          <optgroup label="Short Stories">
+            <option value="breath.html">Last Breath</option>
+            <option value="untitled.html">Untitled Project (WIP)</option>
+          </optgroup>
+          <optgroup label="Games">
+              <option value="blackjack.html">Blackjack Trouble (WIP)</option>
+              <option value="pachinko.html">パチンコ 2023 (Buggy)</option>
+          </optgroup>
+          </select>
+        </div>
+      </div>
+      
+      <main class="container">
+        <div id="game-menu" style="visibility: visible">
+            <div id="menu-container">
+                <button id="start-game-button" aria-label="Play No-Dachi">Play No-Dachi</button>
+                <button id="build-game-button" aria-label="Build">Build</button>
+            </div>
+        </div>
+        <div id="game-wrapper" style="position: relative; z-index: 2; visibility: hidden;"> <!-- Change here -->
+            <div id="game-container">
+                <div id="container">
+                    <div id="heat"></div>
+                </div>
+                <canvas id="pachinkoCanvas" width="300" height="300"></canvas>
+                <div id="rightContainer">
+                    <div class="ball inactive"></div>
+                    <div class="ball inactive"></div>
+                    <div class="ball inactive"></div>
+                    <div class="ball inactive"></div>
+                    <div class="ball inactive"></div>
+                    <div class="ball inactive"></div>
+                    <div class="ball inactive"></div>
+                    <div class="ball inactive"></div>
+                    <div class="ball inactive"></div>
+                </div>
+            </div>
+            <div id="pac-button-container">
+                <button id="button1" aria-label="Throw">O</button>
+                <button id="button2" aria-label="Purchase" value="10">10</button>
+                <button id="button3" aria-label="Convert" value="30">30</button>
+                <button id="button4" aria-label="Menu">X</button>
+            </div>
+        </div>
+    </main>
+
+      
+      <footer>
+          <div style="display:flex;flex-direction: row;gap:20px;">
+              <a href="index.html">Artwork Index</a>
+              <a href="bio.html">Biography</a>
+              <a href="reviews.html">Book Reviews</a>
+              <a href="projects.html">Projects</a>
+              <a href="youtube.html">YouTube Videos</a>
+              <a href="analytics.html">Analytics</a>
+            </div>
+        <div class="social-bar" id="socialBar"></div>
+        <div id="visitsContainer"></div>
+      </footer>
+
+<script src="./js/utility.js"></script>
+<script src="./js/pac/game.js"></script>
+</body>
+</html>
