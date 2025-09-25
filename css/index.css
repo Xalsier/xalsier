@@ -1,5 +1,6 @@
 @import url("./footer.css");
-
+@import url("./global.css");
+@import url("./sidebar.css");
 :root {
   --bg-color: #181825;
   --sec-color: #121219;

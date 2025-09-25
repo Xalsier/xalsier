@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Xalsier.com</title>
   <meta name="description" content="Rawr Folder: A searchable furry-themed gallery of Xalsier's artwork and other project media.">
-  <link rel="stylesheet" href="./css/global.css">
   <link rel="stylesheet" href="./css/archive.css">
   <link rel="stylesheet" href="./css/index.css">
   <link rel="stylesheet" href="./css/index/notice.css">
@@ -173,7 +172,7 @@
 </div>
 
 
-    <div id="warningModal" class="modal-overlay hidden">
+  <div id="warningModal" class="modal-overlay hidden">
       <div class="modal-warn-content modal-large">
           <strong>You must be 18+ or older to view explicit content.</strong>
           <div class="modal-buttons">
@@ -193,15 +192,13 @@
       <a href="projects.html">Projects</a>
       <a href="youtube.html">YouTube Videos</a>
       <a href="analytics.html">Analytics</a>
+      <a href="notice.html">Notices</a>
     </div>
     <div id="socialBar"></div>
   <div id="visitsContainer"></div>
   </footer>
   
-  <!-- Load configuration and utility first -->
   <script src="./con/library.js"></script>
-  
-  <!-- Then load your existing scripts -->
   <script src="./con/filters.js"></script>
   <script src="./con/char.js"></script>
   <script src="./con/con_archive.js"></script>
@@ -210,35 +207,6 @@
   <script src="./js/utility/articles.js"></script>
   <script src="./js/utility/notice.js"></script>
   <script src="./js/archive.js"></script>
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const announcement = document.querySelector(".announcement-card");
-    const selects = document.querySelector(".filter-section");
-    const gallery = document.querySelector(".gallery-section");
-    const footer = document.querySelector("footer");
-
-    // Step 1: show announcement
-    setTimeout(() => {
-      announcement.classList.add("fade-in");
-
-      // Step 2: show selects
-      setTimeout(() => {
-        selects.classList.add("pop-in");
-
-        // Step 3: show gallery
-        setTimeout(() => {
-          gallery.classList.add("pop-in");
-
-          // Step 4: show footer
-          setTimeout(() => {
-            footer.classList.add("pop-in");
-          }, 500);
-        }, 500);
-      }, 200);
-    }, 200); // slight delay so body isn’t empty-flash
-  });
-</script>
-
-  
+  <script src="./js/utility/prog.js"></script>  
 </body>
 </html>
