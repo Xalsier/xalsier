@@ -73,17 +73,6 @@
   animation: cardSpin 0.6s ease-in-out;
 }
 
-:root {
-  --bg-color: #181825;
-  --sec-color: #121219;
-  --sec-color-2: #2a2d35;
-  --green: rgb(86, 222, 147);
-  --white: #ffffff;
-  --border-radius: 12px;
-  --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  --transition: all 0.3s ease;
-}
-
 html,
 body {
   max-width: 100%;

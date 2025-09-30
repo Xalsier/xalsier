@@ -327,7 +327,7 @@ select {
 
 .volume-slot {
   aspect-ratio: 1;
-  background: var(--sec-color-2);
+  background: var(--bg-color);
   border-radius: 6px;
   display: flex;
   align-items: center;
