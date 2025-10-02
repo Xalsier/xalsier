@@ -3,7 +3,7 @@
    - Update MAX_NOTICE_INDEX when you add new md files (e.g., change to 6 if you add 6.md)
 */
 
-const MAX_NOTICE_INDEX = 6;      // <-- update this when you add new notices (5 means files 0.md..5.md exist)
+const MAX_NOTICE_INDEX = 7;      // <-- update this when you add new notices (5 means files 0.md..5.md exist)
 const NOTICE_DIR = './md/not/';  // base path for your .md files
 const NOTICE_FILE = idx => `${NOTICE_DIR}${idx}.md`;
 
