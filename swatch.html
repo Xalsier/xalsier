@@ -1,16 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Notice Archive</title>
-  <meta name="description" content="An archive of previous notices and announcements on the Rawr Folder's front page.">
-  <link rel="stylesheet" href="./css/index.css">
-  <link rel="stylesheet" href="./css/index/notice.css">
-  <link rel="stylesheet" href="./css/index/profile.css">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Swatch Randomizer</title>
+<link rel="stylesheet" type="text/css" href="./css/index.css">
+<link rel="stylesheet" type="text/css" href="./css/swatch.css">
 </head>
-
-<body data-archive="true">
+<body>
     <header class="page-header" style="text-align: center;">
         <div class="header-left">
           <button id="sidebarToggle" class="sidebar-toggle" aria-label="Open navigation" aria-expanded="false" title="Open navigation">
@@ -22,10 +19,10 @@
         </div>
     
         <div class="header-center">
-          <h1>Notice Archive</h1>
+          <h1>Swatch Randomizer</h1>
         </div>
     </header>
-
+    
     <div id="sidebarOverlay" class="sidebar-overlay" data-open="false" aria-hidden="true"></div>
     <nav id="siteSidebar" class="site-sidebar" aria-hidden="true" aria-labelledby="sidebarToggle" data-open="false">
       <div class="sidebar-inner" role="navigation" aria-label="Site navigation">
@@ -43,7 +40,7 @@
               <li><a href="analytics.html">Analytics (WIP)</a></li>
             </ul>
           </div>
-  
+    
           <div class="sidebar-group" data-open="true" id="group-stories">
             <button class="group-toggle" aria-expanded="true">Short Stories</button>
             <ul class="group-list">
@@ -51,7 +48,7 @@
               <li><a href="untitled.html">Untitled Project (WIP)</a></li>
             </ul>
           </div>
-  
+    
           <div class="sidebar-group" data-open="false" id="group-games">
             <button class="group-toggle" aria-expanded="false">Projects</button>
             <ul class="group-list">
@@ -61,7 +58,7 @@
 
             </ul>
           </div>
-  
+    
           <div class="sidebar-group" data-open="true" id="group-other">
             <button class="group-toggle" aria-expanded="true">Other Archives</button>
             <ul class="group-list">
@@ -70,28 +67,41 @@
             </ul>
           </div>
         </div>
-  
+    
         <div class="sidebar-footer">
           <button id="sidebarCloseBtn" class="sidebar-close" aria-label="Close navigation">Close</button>
         </div>
       </div>
     </nav>
-  <br>
-  <div id="announcement-container"></div>
+      
+    <main class="container">
+        <div id="swatch-game">
+            <div id="main-menu" class="game-screen active">
+                <div class="menu-controls">
+                    <button id="time-button" class="game-button">Time: 5m</button>
+                    <button id="theme-button" class="game-button">Theme: Unsorted</button>
+                    <button id="start-button" class="game-button primary">Start</button>
+                </div>
+            </div>
+    
+            <div id="game-screen" class="game-screen">
+                <div id="timer-display" class="timer-display"></div>
+                
+                <div id="swatch-grid">
+                    </div>
+                
+                <p id="copy-message" class="copy-message"></p>
+            </div>
+        </div>
+    </main>
 
+      
+      <footer>
+        <div class="social-bar" id="socialBar"></div>
+      </footer>
 
-  <footer>
-    <div id="socialBar"></div>
-  </footer>
-  
-  <script src="./con/library.js"></script>
-  <script src="./con/filters.js"></script>
-  <script src="./con/char.js"></script>
-  <script src="./con/con_archive.js"></script>
-  <script src="./js/utility.js"></script>
-  <script src="./js/sidebar.js"></script>
-  <script src="./js/select.js"></script>
-  <script src="./js/utility/articles.js"></script>
-  <script src="./js/utility/notice.js"></script>
+<script src="./js/utility.js"></script>
+<script src="./js/swatch.js"></script>
+<script src="./js/sidebar.js"></script>
 </body>
 </html>

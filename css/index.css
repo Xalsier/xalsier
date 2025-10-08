@@ -1,7 +1,7 @@
-@import url("./footer.css");
-@import url("./global.css");
-@import url("./global2.css");
-@import url("./sidebar.css");
+@import url("./globals/footer.css");
+@import url("./globals/global.css");
+@import url("./globals/global2.css");
+@import url("./globals/sidebar.css");
 :root {
   --bg-color: #131732;
   --sec-color: #282c47;
@@ -13,7 +13,6 @@
   --transition: all 0.3s ease;
 }
 
-/* Fixed overflow issues for mobile */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -148,7 +147,6 @@ select {
   min-width: 0;
 }
 
-/* Responsive Layout */
 @media (min-width: 600px) {
   .artwork-list {
     grid-template-columns: repeat(2, 1fr);
@@ -161,7 +159,6 @@ select {
   }
 }
 
-/* Mobile-specific overflow fixes */
 @media (max-width: 768px) {
   .art-text {
     font-size: 1.5rem;
