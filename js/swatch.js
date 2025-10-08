@@ -212,8 +212,8 @@ function updateGridLayout(size) {
                 copyMessage.style.opacity = '0';
             }, 1500);
 
-            // Generate a NEW palette (randomly selected) immediately after copying
-            renderNewPalette(false); 
+            // Removed the line 'renderNewPalette(false);' 
+            // The palette now only switches on timer click (or game start).
             
         } catch (err) {
             console.error('Could not copy text: ', err);
