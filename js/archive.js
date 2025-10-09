@@ -294,12 +294,6 @@ function createGalleryItem(item) {
   const itemElement = document.createElement("div");
   itemElement.className = "gallery-item";
   itemElement.addEventListener("click", () => openModal(item));
-
-  // Dim "Scrap" items
-  if (item.tags?.includes("Scrap") || item.filters?.includes("Scrap")) {
-    itemElement.style.opacity = "0.2";
-  }
-
   const imageContainer = document.createElement("div");
   imageContainer.className = "gallery-item-image";
   const isVideo = item.image && item.image.endsWith(".mp4");
