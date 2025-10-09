@@ -9,7 +9,7 @@
 /cover.html         /youtube    301
 /covers.html        /youtube    301
 /review.html        /reviews    301
-/project.html       /projects   301
+/project.html       /           301
 /drawings.html      /           301
 /data.html          /analytics  301
 /stats.html         /analytics  301
@@ -27,7 +27,7 @@
 /cover              /youtube    301
 /covers             /youtube    301
 /review             /reviews    301
-/project            /projects   301
+/project            /           301
 /drawings           /           301
 /yt                 /youtube    301
 /piano              /youtube    301

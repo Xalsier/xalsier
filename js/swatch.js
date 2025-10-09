@@ -19,13 +19,14 @@ document.addEventListener('DOMContentLoaded', () => {
             ['#ECE0CB', '#DBCDBE', '#B3A899', '#453D31', '#0E0C07', '#ECE0CB'],
         ],
         'Unsorted': [
-            ['#131732', '#282C47', '#56DE93', '#FFFFFF', '#FFFFFF', '#FFFFFF']
+            ['#131732', '#282C47', '#56DE93', '#FFFFFF', '#FFFFFF', '#FFFFFF'], // Site Colors
+            ['#3C3849', '#222131', '#110F1D', '#A97061', '#F8AB75', '#D9645F'], // Halloween
         ],
         'Werewolf': [
             ['#000000', '#D6C8C8', '#D7D2CC', '#887A79', '#5A504E',  '#2A2220'],
             ['#3E2322', '#532F17', '#724526', '#996C4D', '#9A806A', '#FFE1D9'],
             ['#FFFDED', '#F9D5A8', '#BA6C50', '#974833', '#6C241F', '#34011D'],
-
+            ['#2B1716', '#572B28', '#76433E', '#CB9677', '#E9C2A5', '#F4D3C0'],
         ],
         'Blue Monocolor': [
             ['#444853', '#E7E9F8', '#FFFFFF', '#BFCADE', '#7E91B2', '#9BACC8'],

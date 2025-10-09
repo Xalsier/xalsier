@@ -58,25 +58,23 @@
     align-items: center;
     justify-content: center;
     border: none;
-    background: transparent;
     padding: 6px;
     cursor: pointer;
     border-radius: 10px;
-    transition: background 180ms, transform 300ms ease-out;
-  }
-  
-  .sidebar-toggle:focus {
-    outline: none;
-  }
-  
-  .sidebar-toggle:hover {
-    background: rgba(255, 255, 255, 0.05);
-    transform: scale(1.1) rotate(2deg);
+    transition: background-color 180ms, transform 300ms ease-out;
   }
   
   /* ⚠️ ADDED FIX: Make the SVG ignore mouse events so hover applies to the button */
   .sidebar-toggle svg {
-      pointer-events: none;
+    pointer-events: none;
+    fill: #070a15;
+    background-color: var(--green);
+    border-radius: 5px;
+    scale: 1.5;
+  }
+
+  .sidebar-toggle:hover {
+    scale: 0.9;
   }
   
   .sidebar-group {

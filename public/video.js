@@ -2,11 +2,6 @@
 const channelData = {
   xalsier: [
     {
-      title: "VN Project (i guess)",
-      date: "July 18, 2025",
-      embedId: "https://www.youtube.com/shorts/-kMuzkmYWF8"
-    },
-    {
       title: "Lion Kemono Process",
       date: "July 16, 2025",
       embedId: "https://youtube.com/shorts/9NruhP-63dY?feature=share"
