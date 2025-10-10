@@ -23,3 +23,83 @@ h2, h3 {
 ul {
     margin-left: 20px;
 }
+
+/* Table of Contents - Card UI */
+.table-of-contents {
+    background-color: var(--sec-color);
+    border: 1px solid var(--sec-color-2);
+    border-radius: var(--border-radius);
+    padding: 24px;
+    margin-bottom: 40px;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+  }
+  
+  .table-of-contents:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+  }
+  
+  .table-of-contents h2 {
+    color: var(--green);
+    font-size: 1.5rem;
+    margin-top: 0;
+    margin-bottom: 16px;
+    border-bottom: 2px solid var(--sec-color-2);
+    padding-bottom: 8px;
+  }
+  
+  .table-of-contents ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .table-of-contents li {
+    margin-bottom: 12px;
+    font-size: 1.1rem;
+  }
+  
+  /* Flexbox container for list items with dates */
+  .table-of-contents li.has-date a {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .table-of-contents a {
+    color: var(--green);
+    text-decoration: none;
+    display: block;
+    padding: 8px 12px;
+    border-radius: 8px;
+    transition: var(--transition);
+  }
+  
+  .table-of-contents a:hover,
+  .table-of-contents a:focus {
+    background-color: var(--green);
+    color: var(--sec-color);
+    transform: translateX(5px);
+  }
+  
+  /* Style for the release date span */
+  .table-of-contents .release-date {
+    color: #888; /* A subtle, muted color */
+    font-size: 0.9em;
+    font-weight: normal;
+    transition: var(--transition);
+  }
+  
+  /* Optional: change date color on hover for better visibility */
+  .table-of-contents a:hover .release-date {
+    color: var(--sec-color); /* Matches the hover color of the link */
+  }
+  
+  /* Media query for mobile view */
+  @media (max-width: 600px) {
+    .table-of-contents li.has-date a {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }

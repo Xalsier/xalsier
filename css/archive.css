@@ -312,6 +312,19 @@
   font-size: 1rem;
 }
 
+/* Example CSS for the page indicator */
+.page-indicator {
+  padding: 0.75rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--green);
+  border-radius: var(--border-radius);
+  /* You can adjust font-size, color, etc. */
+  font-weight: bold;
+  color: var(--sec-color-2); /* Assuming you have a text color variable */
+}
+
 .page-btn:hover:not(:disabled) {
   background: var(--green);
   color: var(--bg-color);

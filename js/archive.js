@@ -516,21 +516,26 @@ function createGalleryItem(item) {
 // Function to render the pagination controls
 function renderPagination() {
   const pagination = document.getElementById("pagination");
-  const totalPages = Math.ceil(archiveState.filteredItems.length / archiveState.itemsPerPage);
+  const totalItems = archiveState.filteredItems.length;
+  // Calculate total pages
+  const totalPages = Math.ceil(totalItems / archiveState.itemsPerPage);
+  
   if (totalPages <= 1) {
     pagination.innerHTML = "";
     return;
   }
+  
   let paginationHTML = "";
+  
+  // Left Arrow (Previous Page)
   paginationHTML += `<button class="page-btn" ${archiveState.currentPage === 1 ? "disabled" : ""} onclick="changePage(${archiveState.currentPage - 1})">←</button>`;
-  for (let i = 1; i <= totalPages; i++) {
-    if (i === 1 || i === totalPages || (i >= archiveState.currentPage - 1 && i <= archiveState.currentPage + 1)) {
-      paginationHTML += `<button class="page-btn ${i === archiveState.currentPage ? "active" : ""}" onclick="changePage(${i})">${i}</button>`;
-    } else if (i === archiveState.currentPage - 2 || i === archiveState.currentPage + 2) {
-      paginationHTML += `<span class="page-btn" style="cursor: default;">...</span>`;
-    }
-  }
+  
+  // Current Page Indicator (e.g., "Page 5 of 10")
+  paginationHTML += `<span class="page-indicator">Page ${archiveState.currentPage} of ${totalPages}</span>`;
+  
+  // Right Arrow (Next Page)
   paginationHTML += `<button class="page-btn" ${archiveState.currentPage === totalPages ? "disabled" : ""} onclick="changePage(${archiveState.currentPage + 1})">→</button>`;
+  
   pagination.innerHTML = paginationHTML;
 }
 
@@ -541,7 +546,8 @@ function changePage(page) {
   archiveState.currentPage = page;
   renderGallery();
   renderPagination();
-  document.getElementById("galleryGrid").scroll-into-view({
+  // Note: I've corrected a typo here from 'scroll-into-view' to 'scrollIntoView'
+  document.getElementById("galleryGrid").scrollIntoView({
     behavior: "smooth",
     block: "start",
   });
