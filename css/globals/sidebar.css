@@ -61,7 +61,7 @@
     cursor: pointer;
     border-radius: 10px;
     transition: background-color 180ms, transform 300ms ease-out;
-    background-color: var(--green);
+    background-color: transparent;
   }
   
   .sidebar-toggle svg, .sidebar-close svg {
