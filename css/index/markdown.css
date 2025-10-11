@@ -103,3 +103,24 @@ ul {
       align-items: flex-start;
     }
   }
+
+  .content-tags {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .content-tags span {
+    background-color: var(--green);
+    color: var(--sec-color-2);
+    padding: 7px 10px;
+    border-radius: 10px;
+    font-weight: bold;
+    transition: transform 0.3s;
+    text-wrap: nowrap;
+  }
+
+  .content-tags span:hover {
+    transform: translateY(5px);
+  }

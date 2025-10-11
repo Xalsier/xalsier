@@ -67,6 +67,7 @@
   .sidebar-toggle svg, .sidebar-close svg {
     pointer-events: none;
     fill: #070a15;
+    cursor: pointer;
     background-color: var(--green);
     border-radius: 5px;
     scale: 1.5;
