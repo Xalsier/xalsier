@@ -119,13 +119,6 @@ h2 {
   border-bottom: 2px solid var(--sec-color-2);
 }
 
-a,
-b {
-  color: var(--green);
-  text-decoration: none;
-  font-weight: bold;
-}
-
 .subtitle {
   color: var(--white);
   font-size: 1.2rem;
