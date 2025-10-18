@@ -1,0 +1,94 @@
+/* Character Section Styles */
+.character-section {
+    margin-bottom: 40px;
+  }
+  
+  /* Simplified to one square per character with alternating layout */
+  .character-grid {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+    margin-bottom: 30px;
+    padding: 20px 0;
+  }
+  
+  .character-square {
+    width: 200px;
+    height: 200px;
+    background-color: var(--green);
+    border-radius: 20px;
+    transition: var(--transition);
+    box-shadow: var(--shadow);
+    flex-shrink: 0;
+  }
+  
+  .character-square:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(86, 222, 147, 0.3);
+  }
+  
+  .character-name {
+    font-size: 3rem;
+    font-weight: bold;
+    color: var(--green);
+    text-align: center;
+    flex-grow: 1;
+    line-height: 1.2;
+  }
+  
+  /* Reverse layout swaps the order */
+  .character-grid.reverse {
+    flex-direction: row-reverse;
+  }
+  
+  /* Mobile responsiveness */
+  @media (max-width: 768px) {
+    .character-square {
+      width: 150px;
+      height: 150px;
+    }
+  
+    .character-name {
+      font-size: 2.5rem;
+    }
+  
+    .character-grid {
+      gap: 20px;
+    }
+  }
+  
+  @media (max-width: 600px) {
+    .character-square {
+      width: 120px;
+      height: 120px;
+      border-radius: 15px;
+    }
+  
+    .character-name {
+      font-size: 2rem;
+    }
+  
+    .character-grid {
+      gap: 15px;
+      padding: 15px 0;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .character-square {
+      width: 100px;
+      height: 100px;
+      border-radius: 12px;
+    }
+  
+    .character-name {
+      font-size: 1.5rem;
+    }
+  
+    .character-grid {
+      gap: 10px;
+      padding: 10px 0;
+    }
+  }
+  
