@@ -114,9 +114,7 @@ ul {
   }
 
   .content-tags span {
-    background-color: var(--green);
-    color: var(--sec-color-2);
-    padding: 7px 10px;
+    color: var(--green);
     border-radius: 10px;
     font-weight: bold;
     transition: transform 0.3s;
@@ -125,4 +123,5 @@ ul {
 
   .content-tags span:hover {
     transform: translateY(5px);
+    color: white;
   }
