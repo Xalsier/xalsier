@@ -498,8 +498,14 @@ h2 {
 /* Featured Art Layout on Desktop */
 @media (min-width: 1024px) {
   .biography-grid {
-    grid-template-columns: 1fr 2fr;
-    gap: 3rem;
+    width: 768px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .biography-container {
+    display: flex;
+    justify-content: center;
   }
 
   .image-placeholder {
@@ -575,4 +581,53 @@ h2 {
     max-width: 100%;
     margin: 2rem auto;
   }
+}
+
+/* Card Container: Use flexbox for horizontal layout (cover left, content right) */
+.work-card {
+  display: flex; /* Enables flex container */
+  border-radius: 8px; /* Apply rounding to the whole card */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden; /* Important: Ensures child rounding is contained */
+  margin-bottom: 20px;
+  /* You may want to set a max-width */
+}
+
+/* Cover Art Container: The full-height rectangle on the left */
+.work-cover-container {
+  /* Set a fixed or proportional width for the cover section */
+  flex: 0 0 150px; /* Do not grow, do not shrink, base width 100px */
+  max-height: 100%; /* Take up the full height of the card */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Apply border radius only to the left sides */
+  border-radius: 5px;
+  overflow: hidden; /* Ensures the image within is contained */
+}
+
+/* Green background when no cover image is provided */
+.work-cover-container.no-cover-art {
+  background-color: var(--green);
+}
+
+/* Cover Image Styling: Make it fit and cover the container */
+.work-cover-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensures the image covers the area without distortion */
+}
+
+/* Content Container: Takes up the remaining space */
+.work-content {
+  flex-grow: 1; /* Allows the content to fill the remaining width */
+  padding: 15px; /* Add some padding around the text content */
+}
+
+/* Optional: Minor adjustments for header and other elements */
+.work-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 10px;
 }
