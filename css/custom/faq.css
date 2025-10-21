@@ -1,125 +1,192 @@
 /* FAQ Section Styles */
 .faq-section {
-    margin: 2rem 0;
-    padding: 1.5rem;
-    border-radius: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-  }
-  
-  .faq-section h2 {
-    color: #ffffff;
-    font-size: 1.8rem;
-    margin-bottom: 1.5rem;
-    text-align: center;
-    font-weight: 600;
-  }
-  
-  .faq-item {
-    margin-bottom: 1.5rem;
-    padding: 1rem;
-    border-radius: 8px;
-    background-color: var(--green);
-    color: var(--sec-color-2);
-    border-left: 3px solid var(--green);
-    transition: all 0.3s ease;
-  }
-  
-  .faq-item:hover {
-    background: rgba(255, 255, 255, 0.08);
-    color:white;
-    transform: translateX(5px);
-  }
-  
-  .faq-question {
-    color: var(--sec-color-2);
-    font-size: 1.1rem;
-    font-weight: 600;
-    margin-bottom: 0.8rem;
-    line-height: 1.4;
-  }
+  margin: 2rem 0;
+  padding: 1.5rem;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+}
 
-  .faq-item:hover > .faq-question, .faq-item:hover > .faq-answer {
-    color:white;
-  }
-  
-  .faq-answer {
-    color: var(--sec-color-2);
-    font-size: 1.1rem;
-    line-height: 1.6;
-    margin-bottom: 0.5rem;
-  }
-  
-  .faq-reference {
-    color: var(--green);
-    text-decoration: none;
-    font-size: 0.8rem;
-    vertical-align: super;
-    font-weight: 600;
-    margin-left: 2px;
-  }
-  
-  .faq-reference:hover {
-    color: var(--green);
-    text-decoration: underline;
-  }
-  
-  .faq-extra-info {
-    color: #888888;
-    font-size: 0.8rem;
-    font-style: italic;
-    margin-top: 0.5rem;
-  }
-  
-  /* Mobile Responsiveness */
-  @media (max-width: 768px) {
-    .faq-section {
+.faq-section h2 {
+  color: #ffffff;
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  font-weight: 600;
+}
+
+.faq-item {
+  margin-bottom: 1.5rem;
+  padding: 0; /* Remove padding here, move it to question/answer */
+  border-radius: 8px;
+  background-color: transparent; /* Use transparent or a specific color for the item container */
+  color: var(--sec-color-2);
+  border-left: 3px solid var(--green);
+  transition: all 0.3s ease;
+  overflow: hidden; /* ESSENTIAL: Hides the answer content outside the max-height */
+}
+
+/* Updated hover style for the item */
+.faq-item:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: white;
+  transform: translateX(5px);
+}
+
+/* FAQ Question Styles - The visible/clickable part */
+.faq-question {
+  color: var(--sec-color-2);
+  font-size: 1.1rem;
+  font-weight: 600;
+  line-height: 1.4;
+  padding: 1rem; /* Added padding back to the question */
+  margin: 0; /* Important: Removes default h3 margin */
+  cursor: pointer; /* Indicates interactivity */
+  position: relative;
+  user-select: none;
+  background-color: var(--green); /* Use the green color you had on faq-item */
+  transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+/* Indicator Icon (Plus/Minus) */
+.faq-question::after {
+  content: '+'; /* Plus sign for closed state */
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.5rem;
+  font-weight: 300;
+  transition: transform 0.3s ease;
+}
+
+/* Question style when the item is active/open */
+.faq-item.active .faq-question {
+  background-color: rgba(255, 255, 255, 0.08); /* A different background for the active state */
+  color: white;
+}
+
+/* Icon change on active state */
+.faq-item.active .faq-question::after {
+  content: '−'; /* Minus sign for open state */
+}
+
+/* Hover styles for question */
+.faq-item:hover > .faq-question {
+  color: white;
+  background-color: rgba(255, 255, 255, 0.12); /* Slightly darker hover for question */
+}
+
+/* FAQ Answer Styles - The hidden/animated part */
+.faq-answer {
+  /* KEY ACCORDION PROPERTIES */
+  max-height: 0; /* Initially hidden */
+  overflow: hidden;
+  padding: 0 1rem; /* Horizontal padding, no vertical padding when closed */
+  transition: max-height 0.4s ease-out, padding 0.4s ease-out; /* Smooth open/close */
+  background-color: rgba(0, 0, 0, 0.2); /* Optional: Slight background for contrast */
+}
+
+/* Paragraph inside the answer needs bottom margin/padding for spacing */
+.faq-answer p {
+  color: var(--sec-color-2);
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin: 0; /* Remove default paragraph margin */
+  padding-top: 1rem; /* Add spacing at the top of the content */
+  padding-bottom: 1rem; /* Add spacing at the bottom of the content */
+}
+
+/* Open State: The answer is visible */
+.faq-item.active .faq-answer {
+  max-height: 500px; /* Needs to be larger than the tallest possible answer */
+  padding-top: 0; /* Padding is handled by the paragraph element */
+  padding-bottom: 0; /* Padding is handled by the paragraph element */
+}
+
+/* Adjust colors for active/hover state elements */
+.faq-item.active .faq-answer p {
+  color: white; /* Change answer text to white when active */
+}
+
+.faq-item:hover .faq-answer p {
+  color: white; /* Ensure answer text stays white on hover */
+}
+
+
+/* Your existing styles for reference and extra info */
+.faq-reference {
+  color: var(--green);
+  text-decoration: none;
+  font-size: 0.8rem;
+  vertical-align: super;
+  font-weight: 600;
+  margin-left: 2px;
+}
+
+.faq-reference:hover {
+  color: var(--green);
+  text-decoration: underline;
+}
+
+.faq-extra-info {
+  color: #888888;
+  font-size: 0.8rem;
+  font-style: italic;
+  margin-top: 0.5rem;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .faq-section {
       margin: 1rem 0;
       padding: 1rem;
       border-radius: 8px;
-    }
-  
-    .faq-section h2 {
+  }
+
+  .faq-section h2 {
       font-size: 1.5rem;
       margin-bottom: 1rem;
-    }
-  
-    .faq-item {
-      padding: 0.8rem;
-      margin-bottom: 1rem;
-    }
-  
-    .faq-question {
-      font-size: 1rem;
-      margin-bottom: 0.6rem;
-    }
-  
-    .faq-answer {
-      font-size: 0.9rem;
-    }
-  
-    .faq-item:hover {
-      transform: none;
-    }
   }
-  
-  @media (max-width: 480px) {
-    .faq-section {
+
+  .faq-item {
+      margin-bottom: 1rem;
+  }
+
+  .faq-question {
+      padding: 0.8rem;
+      font-size: 1rem;
+  }
+
+  .faq-answer p {
+      font-size: 0.9rem;
+      padding-top: 0.8rem;
+      padding-bottom: 0.8rem;
+  }
+
+  .faq-item:hover {
+      transform: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .faq-section {
       padding: 0.8rem;
       margin: 0.8rem 0;
-    }
-  
-    .faq-item {
-      padding: 0.6rem;
-      border-left-width: 2px;
-    }
-  
-    .faq-question {
-      font-size: 0.95rem;
-    }
-  
-    .faq-answer {
-      font-size: 0.85rem;
-    }
   }
-  
+
+  .faq-item {
+      border-left-width: 2px;
+  }
+
+  .faq-question {
+      padding: 0.6rem;
+      font-size: 0.95rem;
+  }
+
+  .faq-answer p {
+      font-size: 0.85rem;
+      padding-top: 0.6rem;
+      padding-bottom: 0.6rem;
+  }
+}
