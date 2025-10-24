@@ -14,7 +14,12 @@ function initApp() {
   setupEventListeners();
   loadItems();
   DEFAULT_FILTERS.forEach((filterName) => {
-    const filterType = filterName === "Recent" ? "history" : "tag";
+    // --- FIX APPLIED HERE ---
+    // The filter type is "history" if the name is "Recent", "Rating", or "Oldest". Otherwise, it defaults to "tag".
+    const isHistoryFilter = ["Recent", "Rating", "Oldest"].includes(filterName);
+    const filterType = isHistoryFilter ? "history" : "tag";
+    // ------------------------
+    
     const filterId = `${filterType}-${filterName}`;
     archiveState.activeFilters.set(filterId, {
       type: filterType,
@@ -121,7 +126,7 @@ function renderActiveFilters() {
 function loadItems() {
   archiveState.archiveItems = ARCHIVE_ITEMS || [];
 
-  archiveState.archiveItems.forEach(item => {
+  archiveState.archiveItems.forEach((item, index) => { // Added 'index' for testing
     if (!item.tags) {
       item.tags = [];
     }
@@ -136,11 +141,30 @@ function loadItems() {
     ].filter(tag => tag && !item.tags.includes(tag));
     item.tags.push(...tagsToAdd);
 
+    // --- START: NEW RATING LOGIC & TEST RATING ---
+    
+    // TEMPORARY TEST: Set a high rating on the first item for easy sorting test
+    if (index === 0) {
+      item.rating = 3; // Set the first item to rating 3 for testing
+    }
+    
     if (!item.image || item.image.trim() === "") {
+      // All items that have a null image have a rating of 0.
+      item.rating = 0;
       if (!item.tags.includes("Display Error")) {
         item.tags.push("Display Error");
       }
+    } else {
+      // If an image exists but does not have a rating, it will have a rating of 1.
+      if (typeof item.rating === 'undefined' || item.rating === null) {
+        item.rating = 1;
+      } else {
+        // Ensure explicit rating is a number and clamped between 0 and 5.
+        // The test rating of 3 will be used here.
+        item.rating = Math.max(0, Math.min(5, Number(item.rating)));
+      }
     }
+    // --- END: NEW RATING LOGIC & TEST RATING ---
   });
 
   archiveState.filteredItems = [...archiveState.archiveItems];
@@ -185,6 +209,20 @@ function filterItems() {
   if (historyFilter) {
     if (historyFilter.name === "Recent") {
       archiveState.filteredItems.sort((a, b) => new Date(b.createdDate) - new Date(a.createdDate));
+    } else if (historyFilter.name === "Rating") {
+      // --- START: COMBINED RATING AND RECENT SORT LOGIC ---
+      archiveState.filteredItems.sort((a, b) => {
+        // 1. Sort by Rating (High to Low)
+        const ratingDifference = b.rating - a.rating;
+
+        if (ratingDifference !== 0) {
+          return ratingDifference;
+        }
+
+        // 2. Tie-breaker: If ratings are the same, sort by date (Recent/Newest first)
+        return new Date(b.createdDate) - new Date(a.createdDate);
+      });
+      // --- END: COMBINED RATING AND RECENT SORT LOGIC ---
     } else if (historyFilter.name === "Oldest") {
       archiveState.filteredItems.sort((a, b) => new Date(a.createdDate) - new Date(b.createdDate));
     }
