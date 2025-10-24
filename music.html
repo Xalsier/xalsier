@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Swatch Randomizer</title>
-<link rel="stylesheet" type="text/css" href="./css/index.css">
-<link rel="stylesheet" type="text/css" href="./css/custom/swatch.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Music Archive (WIP)</title>
+  <meta name="description" content="An archive of music that I've commissioned or worked on.">
+  <link rel="stylesheet" href="./css/index.css">
+  <link rel="stylesheet" href="./css/index/notice.css">
+  <link rel="stylesheet" href="./css/index/profile.css">
 </head>
-<body>
+
+<body data-archive="true">
     <header class="page-header" style="text-align: center;">
         <div class="header-left">
           <button id="sidebarToggle" class="sidebar-toggle" aria-label="Open navigation" aria-expanded="false" title="Open navigation">
@@ -19,10 +22,10 @@
         </div>
     
         <div class="header-center">
-          <h1>Swatch Randomizer</h1>
+          <h1>Music Archive (WIP)</h1>
         </div>
     </header>
-    
+
     <div id="sidebarOverlay" class="sidebar-overlay" data-open="false" aria-hidden="true"></div>
     <nav id="siteSidebar" class="site-sidebar" aria-hidden="true" aria-labelledby="sidebarToggle" data-open="false">
         <div class="sidebar-inner" role="navigation" aria-label="Site navigation">
@@ -70,8 +73,7 @@
                 <li><a href="notice.html">Notice Archive</a></li>
                 <li><a href="youtube.html">YouTube Archive</a></li>
                 <li><a href="music.html">Music Archive (WIP)</a></li>
-
-                    </ul>
+              </ul>
             </div>
           </div>
       
@@ -79,35 +81,12 @@
           </div>
         </div>
       </nav>
-      
-    <main class="container">
-        <div id="swatch-game">
-            <div id="main-menu" class="game-screen active">
-                <div class="menu-controls">
-                    <button id="time-button" class="game-button">Time: 5m</button>
-                    <button id="theme-button" class="game-button">Theme: Unsorted</button>
-                    <button id="start-button" class="game-button primary">Start</button>
-                </div>
-            </div>
-    
-            <div id="game-screen" class="game-screen">
-                <div id="timer-display" class="timer-display"></div>
-                
-                <div id="swatch-grid">
-                    </div>
-                
-                <p id="copy-message" class="copy-message"></p>
-            </div>
-        </div>
-    </main>
-
-      
-      <footer>
-        <div class="social-bar" id="socialBar"></div>
-      </footer>
-
-<script src="./js/utility.js"></script>
-<script src="./js/swatch.js"></script>
-<script src="./js/sidebar.js"></script>
+  <br>
+  <div id="announcement-container"></div>
+  <footer>
+    <div id="socialBar"></div>
+  </footer>
+  <script src="./js/utility.js"></script>
+  <script src="./js/sidebar.js"></script>
 </body>
 </html>
