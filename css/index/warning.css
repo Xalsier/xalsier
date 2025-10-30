@@ -39,7 +39,7 @@
             align-items: center;
             opacity: 1;
             transition: opacity 0.3s ease-in-out;
-            z-index: 1000;
+            z-index: 100000;
         }
 
         /* Hidden class to control visibility with JavaScript */

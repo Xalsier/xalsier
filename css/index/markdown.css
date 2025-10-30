@@ -87,9 +87,9 @@ ul {
   
   /* Style for the release date span */
   .table-of-contents .release-date {
-    color: #888; /* A subtle, muted color */
+    color: #ffffff; /* A subtle, muted color */
     font-size: 0.9em;
-    font-weight: normal;
+    font-weight: bold;
     transition: var(--transition);
   }
   
