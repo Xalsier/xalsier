@@ -289,10 +289,6 @@ function showReviewModal(book) {
     modalHTML += `<div class="mini-quote">"${book.mini}"</div>`
   }
 
-  if (book.tags) {
-    modalHTML += `<p style="margin-top: 20px;"><strong>Tags:</strong> ${book.tags.join(", ")}</p>`
-  }
-
   content.innerHTML = modalHTML
   modal.style.display = "flex"
 }
