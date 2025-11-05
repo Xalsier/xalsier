@@ -9,7 +9,7 @@ const NOTICE_FILE = idx => `${NOTICE_DIR}${idx}.md`;
 
 // prefer the announcementData defined in utility.js; fallback to a safe default
 const ANNOUNCEMENT_DATA = window.announcementData || {
-  avatarSrc: './thumb/fuwa.jpg',
+  avatarSrc: './thumb/fuwa35.svg',
   avatarTitle: "(Fuwa) Xalsier's profile on Social Media.",
   avatarAlt: 'A drawing of the character Fuwa.',
   name: 'Xalsier'
