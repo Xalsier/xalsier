@@ -125,19 +125,6 @@ ul {
     transform: translateY(5px);
     color: white;
   }
-
-  :root {
-    --bg-color: #131732;
-    --sec-color: #282c47;
-    --sec-color-2: #2a2d35;
-    --green: rgb(86, 222, 147);
-    --white: #ffffff;
-    --border-radius: 12px;
-    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    --transition: all 0.3s ease;
-    /* New Variable for Timeline Line Color */
-
-  }
   
   /* --- New Timeline Styles --- */
   
@@ -202,7 +189,3 @@ ul {
     min-width: 50px; /* Give the date a fixed width for alignment */
   }
   
-  /* Optional: Clean up the default <br> from your original structure */
-  .table-of-contents br {
-      display: none;
-  }
