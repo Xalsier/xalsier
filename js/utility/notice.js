@@ -1,7 +1,7 @@
 const NOTICE_DIR = './md/not/';
 const NOTICE_FILE = idx => `${NOTICE_DIR}${idx}.md`;
 
-const DEFAULT_MAX_NOTICE_INDEX = 15;
+const DEFAULT_MAX_NOTICE_INDEX = 12;
 
 const ANNOUNCEMENT_DATA = window.announcementData || {
   avatarSrc: './thumb/fuwa35.svg',
@@ -104,46 +104,18 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   async function loadAllNotices() {
+    // Load 0.md first (for the static card)
     await loadAndRender(0, true).catch(() => {});
 
     if (!isArchive) return;
 
-    let maxIndex = DEFAULT_MAX_NOTICE_INDEX;
-    let currentIdx = 1;
-    let dynamicIndexFound = false;
-
-    while (true) {
-      try {
-        const response = await fetch(NOTICE_FILE(currentIdx));
-        if (!response.ok) {
-          maxIndex = currentIdx - 1;
-          dynamicIndexFound = true;
-          break;
-        }
-        currentIdx++;
-        if (currentIdx > DEFAULT_MAX_NOTICE_INDEX + 50) {
-            break;
-        }
-      } catch (err) {
-        maxIndex = currentIdx - 1;
-        dynamicIndexFound = true;
-        break;
-      }
-    }
-
-    if (dynamicIndexFound === false && currentIdx > DEFAULT_MAX_NOTICE_INDEX) {
-      maxIndex = DEFAULT_MAX_NOTICE_INDEX;
-      console.warn('Dynamic notice index check failed to find a definitive stop; using DEFAULT_MAX_NOTICE_INDEX.');
-    } else if (dynamicIndexFound === true) {
-      console.info(`Dynamic notice index found: ${maxIndex}`);
-    } else {
-        maxIndex = DEFAULT_MAX_NOTICE_INDEX;
-    }
-
-    const finalMaxIndex = dynamicIndexFound ? maxIndex : DEFAULT_MAX_NOTICE_INDEX;
+    // Use the static index for the maximum count
+    const maxIndex = DEFAULT_MAX_NOTICE_INDEX;
 
     let promise = Promise.resolve();
-    for (let i = finalMaxIndex; i >= 1; i--) {
+    // Iterate backwards from the static maximum down to 1
+    for (let i = maxIndex; i >= 1; i--) {
+      // Load sequentially, continuing the chain even if a specific file fails to load
       promise = promise.then(() => loadAndRender(i, false).catch(err => {
         console.warn(`Notice file not found: ${NOTICE_FILE(i)} - Continuing to previous index...`);
       }));
