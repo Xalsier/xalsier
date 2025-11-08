@@ -1,6 +1,8 @@
 const NOTICE_DIR = './md/not/';
 const NOTICE_FILE = idx => `${NOTICE_DIR}${idx}.md`;
 
+const DEFAULT_MAX_NOTICE_INDEX = 15;
+
 const ANNOUNCEMENT_DATA = window.announcementData || {
   avatarSrc: './thumb/fuwa35.svg',
   avatarTitle: "(Fuwa) Xalsier's profile on Social Media.",
@@ -54,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
       </div>
       <div class="announcement-message">${htmlContent}</div>
       <div class="announcement-footer">
-        <a href="./notice.html" class="announcement-history-link"></a>
+        <a href="./notice.html" class="announcement-history-link">Previous</a>
       </div>
     `;
     return card;
@@ -80,7 +82,6 @@ document.addEventListener('DOMContentLoaded', () => {
             staticDate.textContent = dateString;
             staticMessage.innerHTML = html;
 
-            // Add the History link to the static card's footer area if it's the first notice (0.md)
             let staticFooter = staticCard ? staticCard.querySelector('.announcement-footer') : null;
             if (!staticFooter) {
                 staticFooter = document.createElement('div');
@@ -107,28 +108,44 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (!isArchive) return;
 
-    let maxIndex = 0;
+    let maxIndex = DEFAULT_MAX_NOTICE_INDEX;
     let currentIdx = 1;
+    let dynamicIndexFound = false;
 
     while (true) {
       try {
         const response = await fetch(NOTICE_FILE(currentIdx));
         if (!response.ok) {
           maxIndex = currentIdx - 1;
+          dynamicIndexFound = true;
           break;
         }
         currentIdx++;
+        if (currentIdx > DEFAULT_MAX_NOTICE_INDEX + 50) {
+            break;
+        }
       } catch (err) {
         maxIndex = currentIdx - 1;
+        dynamicIndexFound = true;
         break;
       }
     }
 
+    if (dynamicIndexFound === false && currentIdx > DEFAULT_MAX_NOTICE_INDEX) {
+      maxIndex = DEFAULT_MAX_NOTICE_INDEX;
+      console.warn('Dynamic notice index check failed to find a definitive stop; using DEFAULT_MAX_NOTICE_INDEX.');
+    } else if (dynamicIndexFound === true) {
+      console.info(`Dynamic notice index found: ${maxIndex}`);
+    } else {
+        maxIndex = DEFAULT_MAX_NOTICE_INDEX;
+    }
+
+    const finalMaxIndex = dynamicIndexFound ? maxIndex : DEFAULT_MAX_NOTICE_INDEX;
+
     let promise = Promise.resolve();
-    for (let i = maxIndex; i >= 1; i--) {
+    for (let i = finalMaxIndex; i >= 1; i--) {
       promise = promise.then(() => loadAndRender(i, false).catch(err => {
-        console.warn(`Notice file not found: ${NOTICE_FILE(i)}`);
-        return Promise.reject(err);
+        console.warn(`Notice file not found: ${NOTICE_FILE(i)} - Continuing to previous index...`);
       }));
     }
   }
