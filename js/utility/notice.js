@@ -1,13 +1,6 @@
-/* notice.js
-   - Put this at ./js/utility/notice.js (or replace your current file)
-   - Update MAX_NOTICE_INDEX when you add new md files (e.g., change to 6 if you add 6.md)
-*/
-
-const MAX_NOTICE_INDEX = 11;      // <-- update this when you add new notices (5 means files 0.md..5.md exist)
-const NOTICE_DIR = './md/not/';  // base path for your .md files
+const NOTICE_DIR = './md/not/';
 const NOTICE_FILE = idx => `${NOTICE_DIR}${idx}.md`;
 
-// prefer the announcementData defined in utility.js; fallback to a safe default
 const ANNOUNCEMENT_DATA = window.announcementData || {
   avatarSrc: './thumb/fuwa35.svg',
   avatarTitle: "(Fuwa) Xalsier's profile on Social Media.",
@@ -19,15 +12,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const body = document.body || document.getElementsByTagName('body')[0];
   const isArchive = (body && (body.dataset && body.dataset.archive === 'true')) || body.getAttribute && body.getAttribute('data-archive') === 'true';
 
-  // DOM references for the static card (index.html uses these IDs)
   const staticAvatar = document.getElementById('announcement-avatar');
   const staticName = document.getElementById('announcement-name');
   const staticDate = document.getElementById('announcement-date');
   const staticMessage = document.getElementById('announcement-message');
   const staticCard = staticMessage ? staticMessage.closest('.announcement-card') : document.querySelector('.announcement-card');
 
-  // Ensure avatar + name are set on the static card immediately (utility.js probably already does this,
-  // but harmless to set again to keep archive / non-archive consistent)
   if (staticAvatar) {
     staticAvatar.src = ANNOUNCEMENT_DATA.avatarSrc;
     staticAvatar.title = ANNOUNCEMENT_DATA.avatarTitle;
@@ -35,14 +25,12 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   if (staticName) staticName.textContent = ANNOUNCEMENT_DATA.name;
 
-  // simple parser: extracts date from {{date}} at top and converts paragraphs to <p> blocks
   function parseMarkdown(markdown) {
     const dateRegex = /^\s*{{\s*([^}]+)\s*}}/m;
     const match = markdown.match(dateRegex);
     const dateString = match ? match[1].trim() : 'Date not found';
     let content = markdown.replace(dateRegex, '').trim();
 
-    // break into paragraphs on blank lines, preserve single-line breaks as <br>
     const paragraphs = content
       .split(/\n\s*\n/)
       .map(p => p.trim())
@@ -65,11 +53,13 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
       </div>
       <div class="announcement-message">${htmlContent}</div>
+      <div class="announcement-footer">
+        <a href="./notice.html" class="announcement-history-link"></a>
+      </div>
     `;
     return card;
   }
 
-  // append logic: prefer the parent of the static card, otherwise an #announcement-container, otherwise body
   function getAppendParent() {
     if (staticCard && staticCard.parentNode) return staticCard.parentNode;
     const explicitContainer = document.getElementById('announcement-container');
@@ -77,20 +67,30 @@ document.addEventListener('DOMContentLoaded', () => {
     return document.body;
   }
 
-  // load a single notice .md and either fill static card (if index===0 and static exists) OR create+append a new card
   function loadAndRender(index, useStaticForZero = false) {
     const path = NOTICE_FILE(index);
     return fetch(path)
       .then(response => {
         if (!response.ok) {
-          console.warn(`Notice file not found: ${path} (status ${response.status})`);
-          return null;
+          throw new Error(`Notice file not found: ${path} (status ${response.status})`);
         }
         return response.text().then(md => {
           const { dateString, html } = parseMarkdown(md);
           if (useStaticForZero && staticMessage && staticDate) {
             staticDate.textContent = dateString;
             staticMessage.innerHTML = html;
+
+            // Add the History link to the static card's footer area if it's the first notice (0.md)
+            let staticFooter = staticCard ? staticCard.querySelector('.announcement-footer') : null;
+            if (!staticFooter) {
+                staticFooter = document.createElement('div');
+                staticFooter.className = 'announcement-footer';
+                if (staticCard) staticCard.appendChild(staticFooter);
+            }
+            if (staticFooter && !staticFooter.querySelector('.announcement-history-link')) {
+                staticFooter.innerHTML = `<a href="./notice.html" class="announcement-history-link">Previous</a>`;
+            }
+
             return { index, usedStatic: true };
           } else {
             const card = createAnnouncementCardHTML(dateString, html);
@@ -99,24 +99,49 @@ document.addEventListener('DOMContentLoaded', () => {
             return { index, usedStatic: false };
           }
         });
-      })
-      .catch(err => {
-        console.error('Error fetching notice:', path, err);
-        return null;
       });
   }
 
-  if (isArchive) {
-    // Required order: 0, MAX, MAX-1, ..., 1
-    const sequence = [0];
-    for (let i = MAX_NOTICE_INDEX; i >= 1; i--) sequence.push(i);
+  async function loadAllNotices() {
+    await loadAndRender(0, true).catch(() => {});
 
-    // Load sequentially to guarantee DOM insertion order (no race condition)
-    sequence.reduce((promise, idx) => {
-      return promise.then(() => loadAndRender(idx, idx === 0));
-    }, Promise.resolve());
+    if (!isArchive) return;
+
+    let maxIndex = 0;
+    let currentIdx = 1;
+
+    while (true) {
+      try {
+        const response = await fetch(NOTICE_FILE(currentIdx));
+        if (!response.ok) {
+          maxIndex = currentIdx - 1;
+          break;
+        }
+        currentIdx++;
+      } catch (err) {
+        maxIndex = currentIdx - 1;
+        break;
+      }
+    }
+
+    let promise = Promise.resolve();
+    for (let i = maxIndex; i >= 1; i--) {
+      promise = promise.then(() => loadAndRender(i, false).catch(err => {
+        console.warn(`Notice file not found: ${NOTICE_FILE(i)}`);
+        return Promise.reject(err);
+      }));
+    }
+  }
+
+  async function loadStaticNotice() {
+    await loadAndRender(0, true).catch(err => {
+      console.error('Error fetching notice 0.md:', err);
+    });
+  }
+
+  if (isArchive) {
+    loadAllNotices();
   } else {
-    // non-archive: only fill the static card with 0.md (do not create extra cards or alter the DOM layout)
-    loadAndRender(0, true);
+    loadStaticNotice();
   }
 });
