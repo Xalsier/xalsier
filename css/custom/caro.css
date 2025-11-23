@@ -1,0 +1,116 @@
+        /*
+         * Global Variables and Resets
+         */
+         :root {
+            --bg-color: #131732;
+            --sec-color: #282c47;
+            --sec-color-2: #2a2d35;
+            --green: rgb(86, 222, 147);
+            --white: #ffffff;
+            --border-radius: 12px;
+            --shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+            --transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --arrow-size: 3rem;
+        }
+
+
+
+        .caro-container {
+            display: flex;
+            width: 100%;
+            justify-content: center;
+        }
+
+        .carousel-wrapper {
+            position: relative;
+            width: 950px;
+            display: flex;
+            flex-direction: column;
+            max-width: 800px; /* Max size for desktop view */
+            box-shadow: var(--shadow);
+            border-radius: var(--border-radius);
+            background-color: var(--sec-color);
+            padding: 20px;
+            margin: 20px;
+            justify-content: center;
+        }
+
+        /*
+         * 1. TRACK CONTAINER: Enable Scroll Snap
+         */
+        .carousel-track-container {
+            overflow: hidden;
+            width: 750px;
+            overflow-x: scroll; /* Enable horizontal scrolling */
+            scroll-snap-type: x mandatory; /* Force snapping to slide boundaries */
+            border-radius: var(--border-radius);
+            margin-bottom: 20px;
+            background-color: var(--bg-color);
+            position: relative;
+            /* Hide Scrollbar for a cleaner look */
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+        .carousel-track-container::-webkit-scrollbar {
+            display: none; /* Hide scrollbar for Chrome/Safari/Opera */
+        }
+
+        /*
+         * 2. TRACK: Allow content to dictate width
+         */
+        .carousel-track {
+            display: flex;
+            width: fit-content;
+        }
+
+        /*
+         * 3. ITEM: Define snap point and 100% width
+         */
+        .carousel-item {
+            width: 750px; /* Important: Each item is 100% of the visible container */
+            flex-shrink: 0;
+            scroll-snap-align: start; /* Snap point at the start of the item */
+            padding: 30px;
+            box-sizing: border-box;
+            text-align: center;
+            height: 350px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+
+
+        .dots-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            padding: 10px 0;
+        }
+
+        .dot {
+            width: 20px;
+            height: 20px;
+            background-color: var(--bg-color);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: var(--transition);
+            border: 2px solid transparent;
+        }
+
+        .dot.active {
+            background-color: var(--green);
+            transform: scale(1.2);
+        }
+
+        .dot:hover {
+            background-color: var(--green);
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 600px) {
+            .carousel-wrapper {
+                scale: 0.7;
+            }
+        }

@@ -6,6 +6,7 @@
   <title>Xalsier.com</title>
   <meta name="description" content="Rawr Folder: A searchable furry-themed gallery of Xalsier's artwork and other project media.">
   <link rel="stylesheet" href="./css/custom/archive.css">
+  <link rel="stylesheet" href="./css/custom/caro.css">
   <link rel="stylesheet" href="./css/index.css">
   <link rel="stylesheet" href="./css/index/notice.css">
   <link rel="stylesheet" href="./css/index/warning.css">
@@ -86,22 +87,61 @@
   </div>
 </nav>
   <br>
-  <div class="announcement-card">
-    <div class="announcement-header">
-      <img 
-        id="announcement-avatar"
-        class="announcement-avatar" 
-        src="" 
-        alt=""
-        title="">
-      <div class="announcement-name-date">
-        <span id="announcement-name" class="announcement-name"></span>
-        <span id="announcement-date" class="announcement-date"></span>
-      </div>
+<div class="caro-container">
+  <div id="carousel" class="carousel-wrapper">
+    <h1 style="text-align: center; color: var(--green); margin-bottom: 25px;">Notifications</h1>
+    <div class="carousel-track-container">
+        <div class="carousel-track">
+            <!-- Card 1 -->
+            <div class="carousel-item">
+              <div class="announcement-card">
+                <div class="announcement-header">
+                  <img 
+                    id="announcement-avatar"
+                    class="announcement-avatar" 
+                    src="" 
+                    alt=""
+                    title="">
+                  <div class="announcement-name-date">
+                    <span id="announcement-name" class="announcement-name"></span>
+                    <span id="announcement-date" class="announcement-date"></span>
+                  </div>
+                </div>
+                <div class="announcement-message" id="announcement-message">
+                </div>
+              </div>
+            </div>
+            <!-- Card 2 -->
+            <div class="carousel-item">
+                <h2>Featured Art</h2>
+                <br>
+                <img height="200px" src="./lib/un/oneshot.svg">
+            </div>
+            <!-- Card 3 -->
+            <div class="carousel-item">
+                <h2>Roadmap</h2>
+                <br>
+                <p>● November 23rd. Front Cover Finalized.</p>
+                <br>
+                <p>● December 1st. 3rd Pass Editing Finalized.</p>
+                <br>
+                <p>● December 8th. Book Release Deadline.</p>
+                <br>
+                <p>● ???. Act 3 Comic Start Date. (Low Priority)</p>
+                <br>
+            </div>
+        </div>
     </div>
-    <div class="announcement-message" id="announcement-message">
+
+    <!-- Navigation Dots -->
+    <div class="dots-container">
+        <div class="dot active" data-index="0" aria-label="Go to slide 1"></div>
+        <div class="dot" data-index="1" aria-label="Go to slide 2"></div>
+        <div class="dot" data-index="2" aria-label="Go to slide 3"></div>
     </div>
-  </div>
+</div>
+</div>
+
 
     <!-- Filter Section -->
     <div class="filter-section">
@@ -233,6 +273,7 @@
   
   <script src="./con/library.js"></script>
   <script src="./con/filters.js"></script>
+  <script src="./con/plugin/caro.js"></script>
   <script src="./con/char.js"></script>
   <script src="./con/con_archive.js"></script>
   <script src="./js/utility.js"></script>
