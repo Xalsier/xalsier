@@ -32,20 +32,20 @@
     <loc>https://xalsier.com/swatch</loc>
     <priority>0.3</priority>
   </url>
-    <url>
-    <loc>https://xalsier.com/notice</loc>
+  <url>
+    <loc>https://xalsier.com/archive/notice</loc>
     <priority>0.2</priority>
-  </url>
-    <url>
-    <loc>https://xalsier.com/youtube</loc>
-    <priority>0.3</priority>
   </url>
   <url>
     <loc>https://xalsier.com/pachinko</loc>
     <priority>0.1</priority>
   </url>
+  <url>
+    <loc>https://xalsier.com/archive/youtube</loc>
+    <priority>0.1</priority>
+  </url>
     <url>
-    <loc>https://xalsier.com/music</loc>
+    <loc>https://xalsier.com/archive/music</loc>
     <priority>0.1</priority>
   </url>
 </urlset>

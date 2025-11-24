@@ -1,9 +1,0 @@
-+ Projects
-!!! High Priority
-!! Medium Priority
-! Low Priority
-
-+ Analytics (./exp/testA)
-- !!! Distribution of Tag Data (In Progress)
-- !! User Interface Clean Up (Not Done)
-- ! Collect (Like) Data for my Furaffinity (Not Done)
