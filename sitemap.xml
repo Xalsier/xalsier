@@ -25,20 +25,8 @@
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://xalsier.com/blackjack</loc>
-    <priority>0.3</priority>
-  </url>
-    <url>
-    <loc>https://xalsier.com/swatch</loc>
-    <priority>0.3</priority>
-  </url>
-  <url>
     <loc>https://xalsier.com/archive/notice</loc>
     <priority>0.2</priority>
-  </url>
-  <url>
-    <loc>https://xalsier.com/pachinko</loc>
-    <priority>0.1</priority>
   </url>
   <url>
     <loc>https://xalsier.com/archive/youtube</loc>
