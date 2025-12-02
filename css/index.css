@@ -219,3 +219,23 @@ select {
   color: var(--bg-color);
   box-shadow: 0 4px 8px rgba(86, 222, 147, 0.3);
 }
+
+ul {
+  display: block;
+  visibility: visible;
+  margin: 1em 0; 
+  padding-left: 40px; 
+  z-index: auto; 
+  position: static; 
+}
+
+
+li {
+  display: list-item; 
+  visibility: visible;
+  margin-left: 30px;
+  color: var(--green);
+  font-weight: bold;
+  list-style-type: disc;
+  list-style-position: outside;
+}
