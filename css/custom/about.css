@@ -133,6 +133,7 @@ h2 {
   transform: translateY(-2px);
 }
 
+
 /* Biography Specific Styles */
 .biography-container {
   max-width: 1200px;
@@ -247,9 +248,13 @@ h2 {
   border-radius: var(--border-radius);
   padding: 1.5rem;
   box-shadow: var(--shadow);
-  width: 100%;
   max-width: 100%;
   box-sizing: border-box;
+}
+
+.short-bio-section {
+  width: 100%;
+  padding: 1.5rem;
 }
 
 .profile-cards-grid {
