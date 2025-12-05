@@ -24,7 +24,7 @@
     max-width: 800px;
     box-shadow: var(--shadow);
     border-radius: var(--border-radius);
-    background-color: var(--sec-color);
+    background-color: #131732;
     padding: 20px;
     margin: 20px;
     justify-content: center;
@@ -87,7 +87,7 @@
 .dot {
     width: 20px;
     height: 20px;
-    background-color: var(--bg-color);
+    background-color: #282c47;
     border-radius: 50%;
     cursor: pointer;
     transition: var(--transition);
