@@ -249,7 +249,7 @@ function handleLazyLoading() {
     });
   }, {
     rootMargin: "0px 0px 100px 0px", // Load images 100px before they enter the viewport
-    threshold: 0.01
+    threshold: 1.00
   });
 
   lazyImages.forEach((img) => {
