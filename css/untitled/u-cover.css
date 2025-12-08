@@ -1,0 +1,18 @@
+.untitled-cover {
+    max-width: 600px;
+    display: flex;
+    justify-content: center;
+}
+
+.untitled-cover img {
+    border-radius: 20px;
+    width: 100%; 
+    display: flex;
+}
+
+@media (max-width: 600px) {
+    .untitled-cover img {
+        /* On mobile screens <= 600px, set the image width to 90% of the viewport width (90vw) */
+        width: 90vw;
+    }
+}

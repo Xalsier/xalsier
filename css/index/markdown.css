@@ -122,6 +122,11 @@ ul {
     .table-of-contents li.has-date a {
       flex-direction: column;
       align-items: flex-start;
+
+    }
+
+    .table-of-contents {
+      width: 90vw;
     }
   }
 
