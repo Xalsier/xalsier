@@ -36,3 +36,11 @@ h2, h3 {
 ul {
     margin-left: 20px;
 }
+
+  /* Media query for mobile view */
+  @media (max-width: 600px) {
+    .character-markdown {
+        background-color: var(--bg-color);
+    }
+
+  }

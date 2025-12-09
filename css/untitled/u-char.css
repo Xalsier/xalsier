@@ -14,8 +14,8 @@
   }
   
   .character-square {
-    width: 400px;
-    height: 400px;
+    width: 100%; /* The width will determine the size */
+    aspect-ratio: 1 / 1; 
     background-color: var(--green);
     border-radius: 20px;
     transition: var(--transition);
@@ -35,11 +35,6 @@
     text-align: center;
     flex-grow: 1;
     line-height: 1.2;
-  }
-  
-  /* Reverse layout swaps the order */
-  .character-grid.reverse {
-    flex-direction: row-reverse;
   }
   
 

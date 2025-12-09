@@ -1,0 +1,19 @@
+
+.content-tags {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .content-tags span {
+    color: var(--green);
+    border-radius: 10px;
+    font-weight: bold;
+    transition: transform 0.3s;
+  }
+
+  .content-tags span:hover {
+    transform: translateY(5px);
+    color: white;
+  }
