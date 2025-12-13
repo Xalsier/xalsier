@@ -57,7 +57,6 @@
     scroll-snap-align: start;
     padding: 30px;
     box-sizing: border-box;
-    text-align: center;
     height: 350px;
     display: flex;
     flex-direction: column;
