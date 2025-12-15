@@ -8,6 +8,8 @@
 /thumb/
 /md/
 /game/
+/js/blackjack/
+/json/blackjack/
 
 # Redirects
 characters.html
@@ -23,8 +25,3 @@ blackjack.html
 untitled.html
 breath.html
 contact.html
-
-
-/js/blackjack/
-/json/blackjack/
-/pdf/
