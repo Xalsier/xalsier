@@ -1,7 +1,9 @@
 .announcement-card {
-    background-color: var(--sec-color);
+    padding-left: 0px;
+    background-color: var(--green);
     border-radius: var(--border-radius);
     box-shadow: var(--shadow);
+    text-align: left;
     max-width: 600px;       /* card won’t get too wide */
     width: calc(100% - 40px); /* always leave 20px margin on left/right */
     margin: 20px auto;      /* 20px top/bottom, center horizontally */
@@ -21,6 +23,7 @@
     width: 40px;
     height: 40px;
     border-radius: 50%;
+    border: solid 4px var(--bg-color);
     object-fit: cover;
   }
   
@@ -30,22 +33,30 @@
   }
   
   .announcement-name {
-    color: var(--green);
+    color:  var(--bg-color);
     font-weight: bold;
     font-size: 1.2rem;
   }
   
   .announcement-date {
-    color: #888888; /* gray font for the date */
+    color: var(--bg-color); /* gray font for the date */
     font-size: 0.9rem;
   }
   
-  .announcement-message {
-    color: var(--white);
+  .announcement-message, .announcement-history-link {
+    color:  var(--bg-color);
+    text-align: left;
+    font-weight:bold;
     font-size: 1.15rem;
     line-height: 1.6;
   }
   
   .announcement-footer {
     margin-top:10px;
+    color: var(--bg-color);
+  }
+
+  .announcement-card a {
+    color: var(--sec-color);
+    text-decoration: underline 3px;
   }
