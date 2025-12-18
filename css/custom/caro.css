@@ -77,6 +77,18 @@
     }
 }
 
+@keyframes pulse2 {
+    0% {
+        box-shadow: 0 0 0 0 #282c47;;
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(86, 222, 147, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(86, 222, 147, 0);
+    }
+}
+
 .dots-container {
     display: flex;
     justify-content: center;
@@ -127,7 +139,7 @@
     position: absolute;
     top: 0;
     bottom: 0;
-    left: 42px;
+    left: 202px;
     width: 8px;
     background-color: var(--bg-color);
 }
@@ -147,7 +159,7 @@
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    left: 0px;
+    left: 159px;
     top: 5px;
     background-color: var(--bg-color);
     border: 2px solid var(--sec-color-2);
@@ -157,14 +169,14 @@
 .timeline-item.active::before {
     background-color: var(--bg-color);
     width: 20px;
-    animation: pulse 1.5s infinite; 
+    animation: pulse2 1.5s infinite; 
     height: 20px;
-    left: -6px;
+    left: 154px;
     top: -2px;
 }
 
 .timeline-date {
-    font-weight: bold;
+    font-weight:bold;
     color: var(--bg-color);
     /* NEW: Set a fixed width to ensure the content following it aligns perfectly */
     display: inline-block;
