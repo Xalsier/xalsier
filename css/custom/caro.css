@@ -58,7 +58,7 @@
     scroll-snap-align: start;
     padding: 30px;
     box-sizing: border-box;
-    height: 350px;
+    height: 450px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -124,61 +124,185 @@
     }
 }
 
-.timeline-container {
-    position: relative;
-    padding-left: 0px;
-    background-color: var(--green);
-    padding: 40px;
-    border-radius: 20px;
-    color: var(--bg-color);
-    font-weight:bold;
-}
 
-.timeline-container::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 202px;
-    width: 8px;
-    background-color: var(--bg-color);
-}
 
-.timeline-item {
-    position: relative;
-    padding-bottom: 20px;
-    padding-left: 30px;
-    margin-top: 10px;
-    /* Reset text alignment for cleaner flow */
-    text-align: left; 
-}
+        /* --- ROADMAP CARD CONFORMITY --- */
+        .roadmap-card {
+            background-color: var(--green);
+            border-radius: 20px; /* Kept your specific card rounding */
+            padding: 20px;
+            color: var(--bg-color);
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+            width: 500px; /* Conforms to your requirement */
+            height: auto;
+            max-height: 400px; /* Ensures it stays within carousel-item */
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            box-sizing: border-box;
+        }
 
-.timeline-item::before {
-    content: '';
-    position: absolute;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    left: 159px;
-    top: 5px;
-    background-color: var(--bg-color);
-    border: 2px solid var(--sec-color-2);
-    z-index: 1;
-}
+        .roadmap-card h2 {
+            margin: 0;
+            font-size: 1.3rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-align: center;
+            color: var(--bg-color);
+            font-weight: 800;
+        }
 
-.timeline-item.active::before {
-    background-color: var(--bg-color);
-    width: 20px;
-    animation: pulse2 1.5s infinite; 
-    height: 20px;
-    left: 154px;
-    top: -2px;
-}
+        /* Timeline Logic */
+        .timeline-wrapper {
+            position: relative;
+            padding: 5px 0;
+            height: 130px; 
+            overflow: hidden;
+        }
 
-.timeline-date {
-    font-weight:bold;
-    color: var(--bg-color);
-    /* NEW: Set a fixed width to ensure the content following it aligns perfectly */
-    display: inline-block;
-    width: 160px; /* Increased width to provide good spacing */
-}
+        /* The vertical line */
+        .timeline-wrapper::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 110px; 
+            width: 6px;
+            background-color: var(--bg-color);
+            opacity: 0.3;
+            border-radius: 10px;
+            transform: translateX(-50%);
+        }
+
+        .timeline-list {
+            position: relative;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            transition: transform 1s ease-in-out;
+            transform: translateY(0);
+        }
+
+        .animate-slide .timeline-list {
+            transform: translateY(-60px);
+        }
+
+        .timeline-item {
+            display: flex;
+            align-items: center;
+            height: 60px;
+            position: relative;
+            opacity: 1;
+            transition: opacity 0.5s ease;
+        }
+
+        /* Perfectly Centered Dot */
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            left: 110px; /* Matches line 'left' */
+            width: 14px;
+            height: 14px;
+            background-color: var(--bg-color);
+            border: 3px solid var(--green);
+            border-radius: 50%;
+            z-index: 2;
+            transition: var(--transition);
+            transform: translate(-50%, 0); /* Perfect centering on the 6px line */
+        }
+
+        .timeline-item.past { opacity: 0.4; }
+        .timeline-item.active { font-weight: 900; }
+
+        .timeline-item.active::after {
+            background-color: var(--bg-color);
+            width: 20px;
+            height: 20px;
+            box-shadow: 0 0 0 5px rgba(19, 23, 50, 0.2);
+            animation: pulse-dark 2s infinite;
+            transform: translate(-50%, 0);
+        }
+
+        .timeline-date {
+            width: 110px; 
+            text-align: right;
+            padding-right: 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            box-sizing: border-box;
+        }
+
+        .timeline-content {
+            padding-left: 20px;
+            font-size: 0.95rem;
+            flex: 1;
+        }
+
+        /* Footer Progress Section */
+        .roadmap-footer {
+            background: rgba(19, 23, 50, 0.15);
+            padding: 15px;
+            border-radius: 15px;
+            transition: opacity 0.4s ease;
+        }
+
+        .fade-out { opacity: 0; }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+            font-weight: 800;
+            font-size: 0.9rem;
+            color: var(--bg-color);
+        }
+
+        .progress-container {
+            width: 100%;
+            height: 12px;
+            background: rgba(19, 23, 50, 0.2);
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: var(--bg-color);
+            width: 0%;
+            border-radius: 10px;
+            transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .phase-info {
+            margin-top: 10px;
+            font-size: 0.85rem;
+            text-align: center;
+            min-height: 1.2rem;
+            font-weight: 600;
+            color: rgba(19, 23, 50, 0.85);
+        }
+
+        @keyframes pulse-dark {
+            0% { box-shadow: 0 0 0 0 rgba(19, 23, 50, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(19, 23, 50, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(19, 23, 50, 0); }
+        }
+
+        .animate-slide .timeline-item:first-child {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+
+        @media (max-width: 600px) {
+            .carousel-wrapper, .carousel-item, .caro-container  { 
+                display:none; 
+            }
+            .roadmap-card {
+                display: none;
+            }
+
+        }

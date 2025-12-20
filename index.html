@@ -87,6 +87,49 @@
   <div id="carousel" class="carousel-wrapper" style="display:flex;flex-direction: column;width: 100%;">
     <div class="carousel-track-container">
         <div class="carousel-track">
+          <div class="carousel-item">
+            <div class="roadmap-card" id="roadmapCard">
+              <h2>Comic Roadmap</h2>
+      
+              <div class="timeline-wrapper">
+                  <div class="timeline-list">
+                      <div class="timeline-item past">
+                          <span class="timeline-date">Dec 9th</span>
+                          <span class="timeline-content">Page 1 Release</span>
+                      </div>
+                      <div class="timeline-item active">
+                          <span class="timeline-date">Dec 20th</span>
+                          <span class="timeline-content">Page 2 Release</span>
+                      </div>
+                      <div class="timeline-item">
+                          <span class="timeline-date">TBD</span>
+                          <span class="timeline-content">Page 3 Release</span>
+                      </div>
+                      <div class="timeline-item">
+                          <span class="timeline-date">TBD</span>
+                          <span class="timeline-content">Page 4 Release</span>
+                      </div>
+                      <div class="timeline-item">
+                          <span class="timeline-date">TBD</span>
+                          <span class="timeline-content">Future Batch</span>
+                      </div>
+                  </div>
+              </div>
+      
+              <div class="roadmap-footer" id="footerSection">
+                  <div class="progress-header">
+                      <span id="phaseName">Break</span>
+                      <span id="percentText">10%</span>
+                  </div>
+                  <div class="progress-container">
+                      <div class="progress-bar" id="progressBar"></div>
+                  </div>
+                  <div class="phase-info" id="phaseDesc">
+                      1-2 Days
+                  </div>
+              </div>
+          </div>
+          </div>
             <!-- Card 1 -->
 
 
@@ -115,28 +158,6 @@
                 <img height="200px" src="./lib/un/oneshot.svg">
             </div>
             <!-- Card 3 -->
-            <div class="carousel-item">
-                <h2>December Roadmap</h2>
-                <br>
-                <div class="timeline-container">
-    
-                  <div class="timeline-item active">
-                    <span class="timeline-date">December 1st </span>Web Release for SP:O
-                  </div>
-              
-                  <div class="timeline-item">
-                    <span class="timeline-date">December 7th. </span>1st Batch of SP:O Act 3 Comic Page(s)
-                  </div>
-              
-                  <div class="timeline-item">
-                    <span class="timeline-date">December 14th. </span>2nd Batch of SP:O Act 3 Comic Page(s)
-                  </div>
-            
-                  <div class="timeline-item">
-                    <span class="timeline-date">December 21st</span>3rd Batch of SP:O Act 3 Comic Page(s)
-                  </div>
-                </div>
-            </div>
         </div>
     </div>
 
@@ -293,5 +314,6 @@
   <script src="./js/utility/prog.js"></script>  
   <script src="./js/sidebar.js"></script>
   <script src="./js/plugin/bg.js"></script>
+  <script src="./js/plugin/roadmap.js"></script>
 </body>
 </html>
