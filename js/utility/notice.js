@@ -51,11 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     let footerHTML = '';
     if (!isArchive) {
-      footerHTML = `
-        <div class="announcement-footer">
-          <a href="${historyLinkHref}" class="announcement-history-link">Previous</a>
-        </div>
-      `;
+      footerHTML = `<div class="announcement-footer"><a href="${historyLinkHref}" class="announcement-history-link">Previous</a></div>`;
     }
 
     const card = document.createElement('div');
@@ -81,68 +77,55 @@ document.addEventListener('DOMContentLoaded', () => {
     return document.body;
   }
 
-  function loadAndRender(index, useStaticForZero = false) {
+  async function loadAndRender(index, useStaticForZero = false) {
     const path = NOTICE_FILE(index);
-    return fetch(path)
-      .then(response => {
-        const contentType = response.headers.get("content-type");
-        if (!response.ok || (contentType && contentType.includes("text/html"))) {
-          throw new Error(`Invalid file at ${path}`);
+    const response = await fetch(path);
+    
+    const contentType = response.headers.get("content-type") || "";
+    if (!response.ok || contentType.includes("text/html")) {
+      throw new Error("Not a valid notice file");
+    }
+
+    const md = await response.text();
+    const { dateString, html } = parseMarkdown(md);
+
+    if (useStaticForZero && staticMessage && staticDate) {
+      staticDate.textContent = dateString;
+      staticMessage.innerHTML = html;
+
+      if (!isArchive) {
+        let staticFooter = staticCard.querySelector('.announcement-footer');
+        if (!staticFooter) {
+          staticFooter = document.createElement('div');
+          staticFooter.className = 'announcement-footer';
+          staticCard.appendChild(staticFooter);
         }
-        return response.text();
-      })
-      .then(md => {
-        const { dateString, html } = parseMarkdown(md);
-
-        if (useStaticForZero && staticMessage && staticDate) {
-          staticDate.textContent = dateString;
-          staticMessage.innerHTML = html;
-
-          let staticFooter = staticCard ? staticCard.querySelector('.announcement-footer') : null;
-          
-          if (!isArchive) {
-              if (!staticFooter) {
-                  staticFooter = document.createElement('div');
-                  staticFooter.className = 'announcement-footer';
-                  if (staticCard) staticCard.appendChild(staticFooter);
-              }
-              if (staticFooter && !staticFooter.querySelector('.announcement-history-link')) {
-                  const historyLinkHref = './archive/notice.html';
-                  staticFooter.innerHTML = `<a href="${historyLinkHref}" class="announcement-history-link">Previous</a>`;
-              }
-          } else if (staticFooter) {
-              staticFooter.innerHTML = '';
-          }
-
-          return { index, usedStatic: true };
-        } else {
-          const card = createAnnouncementCardHTML(dateString, html);
-          const parent = getAppendParent();
-          parent.appendChild(card);
-          return { index, usedStatic: false };
-        }
-      });
+        staticFooter.innerHTML = `<a href="./archive/notice.html" class="announcement-history-link">Previous</a>`;
+      }
+    } else {
+      const card = createAnnouncementCardHTML(dateString, html);
+      getAppendParent().appendChild(card);
+    }
   }
 
-  async function loadAllNotices() {
+  async function init() {
     try {
       await loadAndRender(0, true);
-    } catch (e) {}
+    } catch (e) {
+      console.warn("Notice 0 not found");
+    }
 
-    if (!isArchive) return;
-
-    for (let i = DEFAULT_MAX_NOTICE_INDEX; i >= 1; i--) {
-      try {
-        await loadAndRender(i, false);
-      } catch (err) {
-        break;
+    if (isArchive) {
+      for (let i = DEFAULT_MAX_NOTICE_INDEX; i >= 1; i--) {
+        try {
+          await loadAndRender(i, false);
+        } catch (err) {
+          // Continues to next index if one is missing, but skips HTML redirects
+          continue; 
+        }
       }
     }
   }
 
-  if (isArchive) {
-    loadAllNotices();
-  } else {
-    loadAndRender(0, true).catch(() => {});
-  }
+  init();
 });
