@@ -9,15 +9,13 @@ const ANNOUNCEMENT_DATA = window.announcementData || {
 
 document.addEventListener('DOMContentLoaded', () => {
   const body = document.body || document.getElementsByTagName('body')[0];
-  const isArchive = (body && (body.dataset && body.dataset.archive === 'true')) || body.getAttribute && body.getAttribute('data-archive') === 'true';
+  const isArchive = (body && (body.dataset && body.dataset.archive === 'true')) || (body.getAttribute && body.getAttribute('data-archive') === 'true');
 
-  // --- PATH CONSTANTS (Adjusted for Archive Mode) ---
   const AVATAR_BASE_PATH = isArchive ? '..' : '.';
   const AVATAR_SRC_PATH = `${AVATAR_BASE_PATH}/thumb/fuwa35.svg`; 
   
   const NOTICE_DIR = isArchive ? '../md/not/' : './md/not/';
   const NOTICE_FILE = idx => `${NOTICE_DIR}${idx}.md`;
-  // ----------------------------------------------------
 
   const staticAvatar = document.getElementById('announcement-avatar');
   const staticName = document.getElementById('announcement-name');
@@ -25,7 +23,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const staticMessage = document.getElementById('announcement-message');
   const staticCard = staticMessage ? staticMessage.closest('.announcement-card') : document.querySelector('.announcement-card');
 
-  // Load avatar into static card
   if (staticAvatar) {
     staticAvatar.src = AVATAR_SRC_PATH;
     staticAvatar.title = ANNOUNCEMENT_DATA.avatarTitle;
@@ -50,10 +47,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function createAnnouncementCardHTML(dateString, htmlContent) {
-    // Determine the link for the "Previous" button (which links to the archive)
     const historyLinkHref = isArchive ? '../notice.html' : './notice.html';
     
-    // --- Footer is ONLY rendered if NOT in archive mode ---
     let footerHTML = '';
     if (!isArchive) {
       footerHTML = `
@@ -62,7 +57,6 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
       `;
     }
-    // ------------------------------------------------------
 
     const card = document.createElement('div');
     card.className = 'announcement-card';
@@ -91,75 +85,64 @@ document.addEventListener('DOMContentLoaded', () => {
     const path = NOTICE_FILE(index);
     return fetch(path)
       .then(response => {
-        if (!response.ok) {
-          throw new Error(`Notice file not found: ${path} (status ${response.status})`);
+        const contentType = response.headers.get("content-type");
+        if (!response.ok || (contentType && contentType.includes("text/html"))) {
+          throw new Error(`Invalid file at ${path}`);
         }
-        return response.text().then(md => {
-          const { dateString, html } = parseMarkdown(md);
+        return response.text();
+      })
+      .then(md => {
+        const { dateString, html } = parseMarkdown(md);
 
-          if (useStaticForZero && staticMessage && staticDate) {
-            staticDate.textContent = dateString;
-            staticMessage.innerHTML = html;
+        if (useStaticForZero && staticMessage && staticDate) {
+          staticDate.textContent = dateString;
+          staticMessage.innerHTML = html;
 
-            let staticFooter = staticCard ? staticCard.querySelector('.announcement-footer') : null;
-            
-            // --- Static Card Footer Logic (Only display button if NOT archive) ---
-            if (!isArchive) {
-                if (!staticFooter) {
-                    staticFooter = document.createElement('div');
-                    staticFooter.className = 'announcement-footer';
-                    if (staticCard) staticCard.appendChild(staticFooter);
-                }
-                if (staticFooter && !staticFooter.querySelector('.announcement-history-link')) {
-                    // Link to the archive page from the main page
-                    const historyLinkHref = './archive/notice.html';
-                    staticFooter.innerHTML = `<a href="${historyLinkHref}" class="announcement-history-link">Previous</a>`;
-                }
-            } else if (staticFooter) {
-                // If in archive mode, ensure the static footer is empty
-                staticFooter.innerHTML = '';
-            }
-            // -----------------------------------------------------------------------
-
-            return { index, usedStatic: true };
-          } else {
-            // This renders all dynamically created cards
-            const card = createAnnouncementCardHTML(dateString, html);
-            const parent = getAppendParent();
-            parent.appendChild(card);
-            return { index, usedStatic: false };
+          let staticFooter = staticCard ? staticCard.querySelector('.announcement-footer') : null;
+          
+          if (!isArchive) {
+              if (!staticFooter) {
+                  staticFooter = document.createElement('div');
+                  staticFooter.className = 'announcement-footer';
+                  if (staticCard) staticCard.appendChild(staticFooter);
+              }
+              if (staticFooter && !staticFooter.querySelector('.announcement-history-link')) {
+                  const historyLinkHref = './archive/notice.html';
+                  staticFooter.innerHTML = `<a href="${historyLinkHref}" class="announcement-history-link">Previous</a>`;
+              }
+          } else if (staticFooter) {
+              staticFooter.innerHTML = '';
           }
-        });
+
+          return { index, usedStatic: true };
+        } else {
+          const card = createAnnouncementCardHTML(dateString, html);
+          const parent = getAppendParent();
+          parent.appendChild(card);
+          return { index, usedStatic: false };
+        }
       });
   }
 
   async function loadAllNotices() {
-    // Load 0.md first (for the static card, which will now have an empty footer if isArchive is true)
-    await loadAndRender(0, true).catch(() => {});
+    try {
+      await loadAndRender(0, true);
+    } catch (e) {}
 
     if (!isArchive) return;
 
-    const maxIndex = DEFAULT_MAX_NOTICE_INDEX;
-    let promise = Promise.resolve();
-    
-    // Iterate backwards from the static maximum down to 1
-    for (let i = maxIndex; i >= 1; i--) {
-      // loadAndRender(i, false) uses createAnnouncementCardHTML, which correctly omits the footer.
-      promise = promise.then(() => loadAndRender(i, false).catch(err => {
-        console.warn(`Notice file not found: ${NOTICE_FILE(i)} - Continuing to previous index...`);
-      }));
+    for (let i = DEFAULT_MAX_NOTICE_INDEX; i >= 1; i--) {
+      try {
+        await loadAndRender(i, false);
+      } catch (err) {
+        break;
+      }
     }
-  }
-
-  async function loadStaticNotice() {
-    await loadAndRender(0, true).catch(err => {
-      console.error('Error fetching notice 0.md:', err);
-    });
   }
 
   if (isArchive) {
     loadAllNotices();
   } else {
-    loadStaticNotice();
+    loadAndRender(0, true).catch(() => {});
   }
 });
