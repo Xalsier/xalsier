@@ -21,12 +21,16 @@
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://xalsier.com/analytics</loc>
-    <priority>0.4</priority>
-  </url>
-  <url>
     <loc>https://xalsier.com/contact</loc>
     <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://xalsier.com/analytics</loc>
+    <priority>0.2</priority>
+  </url>
+  <url>
+    <loc>https://xalsier.com/sitemap</loc>
+    <priority>0.2</priority>
   </url>
   <url>
     <loc>https://xalsier.com/archive/notice</loc>
