@@ -72,18 +72,35 @@ function hideLoading(elementId) {
   }
 }
 
-function getArchiveLength() {
+function getArchiveStats() {
   if (!Array.isArray(ARCHIVE_ITEMS)) {
     console.warn("ARCHIVE_ITEMS is not an array.");
-    return 0;
+    return { valid: 0, nullItems: 0 };
   }
-  return ARCHIVE_ITEMS.length;
+
+  const validItems = ARCHIVE_ITEMS.filter(item => 
+    item.image && typeof item.image === 'string' && item.image.trim() !== ""
+  ).length;
+
+  const nullItems = ARCHIVE_ITEMS.length - validItems;
+
+  return {
+    valid: validItems,
+    nullItems: nullItems
+  };
 }
 
 function updateArchiveHeader() {
   const header = document.getElementById("archive-count");
-  const count = getArchiveLength();
-  header.textContent = `${count} Item${count !== 1 ? "s" : ""}`;
+  if (!header) return;
+
+  const stats = getArchiveStats();
+  
+  // Format: "X Items (Y Null Items)"
+  const validText = `${stats.valid} Item${stats.valid !== 1 ? "s" : ""}`;
+  const nullText = `${stats.nullItems} Null Item${stats.nullItems !== 1 ? "s" : ""}`;
+  
+  header.textContent = `${validText} (${nullText})`;
 }
 
 function addValidSrcTag() {
