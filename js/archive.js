@@ -824,14 +824,14 @@ modalAltDesc.innerHTML = "";
 // Add alt text if it exists
 if (item.alt) {
   const altPara = document.createElement("p");
-  altPara.innerHTML = `<strong>Alt:</strong> ${item.alt}`;
+  altPara.innerHTML = `<strong>Alt:</strong><br> <div id="item-alt">${item.alt}</div>`;
   modalAltDesc.appendChild(altPara);
 }
 
 // Add description if it exists
 if (item.desc) {
   const descPara = document.createElement("p");
-  descPara.innerHTML = `<strong>Description:</strong> ${item.desc}`;
+  descPara.innerHTML = `<strong>Description:</strong><br> <div id="item-desc">${item.desc}</div>`;
   modalAltDesc.appendChild(descPara);
 }
 
@@ -1034,13 +1034,6 @@ function validateSearch() {
     archiveState.errors.push("I could not find what you were looking for. Missing src for all images filtered.");
   }
   const characterFilters = Array.from(archiveState.activeFilters.values()).filter((f) => f.type === "character");
-  if (characterFilters.length === 1) {
-    const characterName = characterFilters[0].name;
-    const characterInfo = characterData && characterData[characterName];
-    if (!characterInfo) {
-      archiveState.errors.push("Error. Could not display profile.");
-    }
-  }
   if (archiveState.filteredItems.length === 0 && archiveState.activeFilters.size > 0) {
     archiveState.errors.push("No results found for the selected filters.");
   }
@@ -1065,9 +1058,6 @@ function validateSearch() {
     archiveState.activeFilters.size !== new Set(Array.from(archiveState.activeFilters.values()).map((f) => f.name)).size;
   if (duplicateFilters) {
     archiveState.errors.push("Duplicate filters detected in selection.");
-  }
-  if (typeof characterData === "undefined") {
-    archiveState.errors.push("Character database failed to load.");
   }
   const invalidDates = archiveState.filteredItems.filter((item) => isNaN(new Date(item.createdDate).getTime()));
   if (invalidDates.length > 0) {

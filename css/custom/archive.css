@@ -808,3 +808,13 @@
   opacity: 1;
   transform: scale(1);
 }
+
+#item-desc, #item-alt {
+  padding:10px;
+  background-color: var(--green);
+  color:var(--bg-color);
+  border-radius:10px;
+  font-weight:bold;
+  line-height: 2em;
+  font-size: 1.3em;
+}
