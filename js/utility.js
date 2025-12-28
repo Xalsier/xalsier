@@ -131,6 +131,10 @@ function addValidSrcTag() {
         if (!item.tags.includes("JPG")) {
           item.tags.push("JPG");
         }
+      } else if (lowerCaseSrc.endsWith(".svg")) {
+        if (!item.tags.includes("SVG")) {
+          item.tags.push("SVG");
+        }
       }
     }
 
