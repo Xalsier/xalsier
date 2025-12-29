@@ -1,0 +1,4 @@
+SVGS 
+
+* Always make sure SVGs have a defined "width=" and "height=".
+* Always make sure to wrap the SVG in an artboard. 
