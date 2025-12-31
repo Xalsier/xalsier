@@ -1,0 +1,12 @@
+.sitemap {
+    padding:20px;
+    text-wrap:wrap;
+    width:100%;
+}
+
+.sitemap-section {
+    max-width: 300px;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
