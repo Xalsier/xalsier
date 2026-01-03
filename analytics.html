@@ -76,6 +76,33 @@
 
   <!-- Removed fade-in class from analytics content -->
   <section class="analytics-content" id="analytics-content">
+
+    <div class="server-limit-container" style="margin-top: 40px; padding: 20px; border: 1px solid var(--green); border-radius: 12px;">
+      <h1 style="color: var(--green);">Server Capacity</h1>
+      <p id="measurement-count" style="font-size: 0.9em; opacity: 0.8;"></p>
+      
+      <div class="progress-wrapper" style="height: 30px; width: 100%; background: #222; border-radius: 15px; overflow: hidden; display: flex; margin: 15px 0;">
+        <div id="bar-svg" style="height: 100%; transition: width 0.5s;"></div>
+        <div id="bar-avif" style="height: 100%; transition: width 0.5s;"></div>
+        <div id="bar-gif" style="height: 100%; transition: width 0.5s;"></div> <div id="bar-webp" style="height: 100%; transition: width 0.5s;"></div>
+        <div id="bar-webm" style="height: 100%; transition: width 0.5s;"></div>
+        <div id="bar-jpg" style="height: 100%; transition: width 0.5s;"></div>
+        <div id="bar-png" style="height: 100%; transition: width 0.5s;"></div>
+        <div id="bar-other" style="height: 100%; transition: width 0.5s;"></div>
+    </div>
+  
+      <div id="size-legend" style="display: flex; flex-wrap: wrap; gap: 15px; font-size: 0.9em;"></div>
+      <div style="margin-top: 10px; font-weight: bold;">
+          Total: <span id="total-size-display">0</span> / 25 MB
+      </div>
+      <div id="size-legend" style="display: flex; flex-wrap: wrap; gap: 15px; font-size: 0.9em; margin-top: 10px;">
+      </div>
+  </div>
+
+  <br>
+
+  <br>
+
     <div id="app">
       <!-- Loading State -->
       <div id="loadingContainer" class="loading-container">
@@ -185,6 +212,7 @@
 <script src="./con/library.js"></script>
 <script src="./js/utility.js"></script>
 <script src="./js/select.js"></script>
+<script src="./js/server.js"></script>
 <script src="./js/mirror.js"></script>
 <script src="./exp/testA.js"></script>
 <script src="./exp/pen2/testB.js"></script>
