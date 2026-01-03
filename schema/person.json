@@ -1,0 +1,61 @@
+{
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Xalsier",
+    "alternateName": ["Xalsier Kitsune", "ザルシア"],
+    "url": "https://xalsier.com/",
+    "image": [
+      "https://xalsier.com/thumb/fuwa.jpg"
+    ],
+    "jobTitle": ["Digital Artist", "Author"],
+    "height": {
+      "@type": "QuantitativeValue",
+      "value": "6.0",
+      "unitCode": "FT"
+    },
+    "gender": "Male", 
+    "nationality": {
+        "@type": "Country",
+        "name": "United States"
+      },
+    "knowsLanguage": ["English"],
+    "birthDate": "2003-02-01",
+    "birthPlace": "Boca Raton, FL",
+    "hasOccupation": [
+      {
+        "@type": "Occupation",
+        "name": "Digital artist"
+      },
+      {
+        "@type": "Occupation",
+        "name": "Author"
+      }
+    ],
+    "sameAs": [
+      "https://isni.org/isni/0000000529531494",
+      "https://orcid.org/0009-0003-4160-0440",
+      "https://www.linkedin.com/in/xalsier/",
+      "https://www.crunchbase.com/person/xalsier-kitsune",
+      "https://openlibrary.org/authors/OL16069362A/Xalsier_Kitsune",
+      "https://inventaire.io/entity/inv:3132f40662d2ad3a68630759bc10fded",
+      "https://www.goodreads.com/xalsier",
+      "https://www.amazon.com/stores/Xalsier-Kitsune/author/B0G54C69CK",
+      "https://www.librarything.com/author/kitsunexalsier",
+      "https://bookbrainz.org/author/4caf4294-9090-4a9c-9ae2-26203cab6b46",
+      "https://en.wikifur.com/wiki/Xalsier",
+      "https://allauthor.com/author/xalsier/",
+      "https://x.com/Xalsier",
+      "https://instagram.com/xalsier",
+      "https://bsky.app/profile/xalsier.bsky.social",
+      "https://www.youtube.com/c/Xalsier",
+      "https://www.tiktok.com/@xalsier",
+      "https://www.twitch.tv/xalsier",
+      "https://www.picarto.tv/Xalsier",
+      "https://www.furaffinity.net/user/xalsier",
+      "https://www.deviantart.com/xalsier",
+      "https://www.pixiv.net/en/users/82625291",
+      "https://ko-fi.com/xalsier",
+      "https://www.patreon.com/c/Xalsier",
+      "https://github.com/Xalsier"
+    ]
+}
