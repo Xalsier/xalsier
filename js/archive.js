@@ -1,3 +1,4 @@
+const MaxRating = 10;
 let archiveState = {
   currentPage: 1,
   itemsPerPage: 8,
@@ -9,7 +10,6 @@ let archiveState = {
   hasSearched: false,
   showWarning: false,
 };
-
 function initApp() {
   setupEventListeners();
   loadItems();
@@ -161,7 +161,7 @@ function loadItems() {
       } else {
         // Ensure explicit rating is a number and clamped between 0 and 5.
         // The test rating of 3 will be used here.
-        item.rating = Math.max(0, Math.min(5, Number(item.rating)));
+        item.rating = Math.max(0, Math.min(MaxRating, Number(item.rating)));
       }
     }
     // --- END: NEW RATING LOGIC & TEST RATING ---
