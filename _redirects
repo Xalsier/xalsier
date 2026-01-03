@@ -10,7 +10,6 @@
 /biography.html     /bio                301
 /cover.html         /archive/youtube    301
 /covers.html        /archive/youtube    301
-/review.html        /reviews            301
 /data.html          /analytics          301
 /stats.html         /analytics          301
 /stat.html          /analytics          301
@@ -32,7 +31,6 @@
 /biography          /bio                301
 /cover              /archive/youtube    301
 /covers             /archive/youtube    301
-/review             /reviews            301
 /yt                 /archive/youtube    301
 /piano              /archive/youtube    301
 /piano_covers       /archive/youtube    301
