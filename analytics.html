@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="./css/covers.css">
 <link rel="stylesheet" href="./css/index.css">
 <link rel="stylesheet" href="./css/app.css">
+<link rel="stylesheet" href="./css/custom/analytics.css">
 <link rel="stylesheet" href="./css/mirror.css">
 <link rel="stylesheet" href="./exp/testA.css">
 <link rel="stylesheet" href="./exp/pen2/testB.css">
@@ -69,7 +70,7 @@
   <section class="filter-section">
     <div class="nav-tabs" id="channelTabs">
       <button class="nav-tab active" data-channel="rawr-folder">Rawr Folder</button>
-      <button class="nav-tab" data-channel="social-media">Coding Projects</button>
+      <button class="nav-tab" data-channel="social-media">Projects</button>
       <button class="nav-tab" data-channel="website">Website</button>
     </div>
   </section>
@@ -166,8 +167,39 @@
     
   </section>
 
-  <!-- Removed fade-in class from social media content -->
   <section class="social-media-content" id="social-media-content" style="display: none;">
+    <div class="no-content">
+      <h2>Untitled Comic Analytics</h2>
+    
+      <div class="uc-legend">
+        <div class="legend-item"><span class="dot break"></span> Break</div>
+        <div class="legend-item"><span class="dot sketch"></span> Sketch</div>
+        <div class="legend-item"><span class="dot vector"></span> Vector</div>
+      </div>
+    
+      <div class="uc-analytics-body">
+        <div class="uc-row">
+          <div class="page-label">Page 1</div>
+          <div class="uc-timeline">
+            <div class="segment break" style="flex: 1;">1d</div>
+            <div class="segment sketch" style="flex: 1;">1d</div>
+            <div class="segment vector" style="flex: 1;">1d</div>
+          </div>
+          <div class="total-days">3 Days Total</div>
+        </div>
+    
+        <div class="uc-row">
+          <div class="page-label">Page 2</div>
+          <div class="uc-timeline">
+            <div class="segment break" style="flex: 5;">5d</div>
+            <div class="segment sketch" style="flex: 2;">2d</div>
+            <div class="segment vector" style="flex: 1;">1d</div>
+          </div>
+          <div class="total-days">8 Days Total</div>
+        </div>
+      </div>
+    </div>
+    <br>
     <div class="no-content">
       <h2>Coding Project Analytics</h2>
       <div id="timeline-infographic" class="timeline-infographic"></div>
