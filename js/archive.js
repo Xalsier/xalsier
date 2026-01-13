@@ -1,7 +1,7 @@
 const MaxRating = 10;
 let archiveState = {
   currentPage: 1,
-  itemsPerPage: 8,
+  itemsPerPage: 9,
   activeFilters: new Map(),
   filteredItems: [],
   archiveItems: [],
