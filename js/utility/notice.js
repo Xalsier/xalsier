@@ -1,4 +1,4 @@
-const DEFAULT_MAX_NOTICE_INDEX = 16;
+const DEFAULT_MAX_NOTICE_INDEX = 20;
 
 const ANNOUNCEMENT_DATA = window.announcementData || {
   avatarSrc: './thumb/fuwa35.svg',
