@@ -28,3 +28,4 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 });
+console.log("Toggles Set Up")

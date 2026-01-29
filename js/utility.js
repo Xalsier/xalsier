@@ -154,6 +154,4 @@ function addValidSrcTag() {
     }
   });
 }
-
-
 addValidSrcTag();
