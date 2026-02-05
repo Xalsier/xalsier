@@ -1,11 +1,5 @@
 # Redirect .html URLs
 
-/characters.html    /                   301
-/gallery.html       /                   301
-/artwork.html       /                   301
-/art.html           /                   301
-/project.html       /                   301
-/drawings.html      /                   301
 /about.html         /bio                301
 /biography.html     /bio                301
 /cover.html         /archive/youtube    301
@@ -18,15 +12,6 @@
 
 # Redirect extensionless URLs
 
-/characters         /                   301
-/gallery            /                   301
-/artwork            /                   301
-/art                /                   301
-/project            /                   301
-/drawings           /                   301
-/rawr               /                   301
-/drawing            /                   301
-/draw               /                   301
 /about              /bio                301
 /biography          /bio                301
 /cover              /archive/youtube    301
@@ -46,3 +31,4 @@
 /song               /archive/music      301
 /github             /contact            301
 /email              /contact            301
+/prion              /rorschach          301
