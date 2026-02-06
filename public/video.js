@@ -27,11 +27,6 @@ const channelData = {
   ],
   'piano-covers': [
     {
-      title: "Silent Hill - Not Tomorrow (Piano Cover)",
-      date: "Aug 6, 2025",
-      embedId: "LjMkPgaXcNc"
-    },
-    {
       title: "Chopin - Waltz in A minor - B. 150 Op Posth",
       date: "28 Aug, 2020",
       embedId: "4eKwJTrDovc"
