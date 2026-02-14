@@ -82,8 +82,11 @@ footer div {
     fill: var(--green);
 }
 
-#pageVisitsCounter {
-    color: white;
-    text-align: center;
-    width: 100%;
+.footer-nav {
+    gap:20px;
+    display:flex;
+    flex-wrap: wrap;
+    width:100%;
+    justify-content: center;
+    padding:10px;
 }
