@@ -11,9 +11,6 @@
 /js/blackjack/
 /json/blackjack/
 
-# Redirects
-characters.html
-
 # Other (Project Note files)
 
 rep.txt
@@ -28,3 +25,4 @@ contact.html
 lockjaw.html
 swallow-pines.html
 rorschach.html
+characters.html

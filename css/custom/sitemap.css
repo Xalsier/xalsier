@@ -10,3 +10,12 @@
     flex-direction: column;
     text-align: left;
 }
+
+.sitemap-section li {
+    margin-bottom: 10px;
+}
+
+li:hover {
+    transform: scale(1.2);
+    transition: transform 0.1s ease-in;
+}
