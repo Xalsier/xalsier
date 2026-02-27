@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Press Kit</title>
+  <link rel="icon" type="image/x-icon" href="./favicon.ico">
+  <link rel="stylesheet" href="./css/custom/faq.css">
+  <link rel="stylesheet" href="./css/index.css">
+</head>
+<body>
+  <header class="page-header" style="text-align: center;">
+    <div class="header-left">
+      <button id="sidebarToggle" class="sidebar-toggle" aria-label="Open navigation" aria-expanded="false" title="Open navigation">
+        <!-- your SVG -->
+        <svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 -960 960 960"   aria-hidden="true">
+          <path d="M440-690v-100q0-42 29-71t71-29h100v100q0 42-29 71t-71 29H440ZM220-450q-58 0-99-41t-41-99v-140h140q58 0 99 41t41 99v140H220ZM640-90q-39 0-74.5-12T501-135l-33 33q-11 11-28 11t-28-11q-11-11-11-28t11-28l33-33q-21-29-33-64.5T400-330q0-100 70-170.5T640-571h241v241q0 100-70.5 170T640-90Zm0-80q67 0 113-47t46-113v-160H640q-66 0-113 46.5T480-330q0 23 5.5 43.5T502-248l110-110q11-11 28-11t28 11q11 11 11 28t-11 28L558-192q18 11 38.5 16.5T640-170Zm1-161Z"/>
+        </svg>
+      </button>
+    </div>
+    <div class="header-center">
+      <h1>Press Kit</h1>
+    </div>
+</header>
+
+<div id="sidebarOverlay" class="sidebar-overlay" data-open="false" aria-hidden="true"></div>
+<nav id="siteSidebar" class="site-sidebar" aria-hidden="true" aria-labelledby="sidebarToggle" data-open="false">
+  <div class="sidebar-inner" role="navigation" aria-label="Site navigation">
+    <div class="sidebar-section">
+        <div class="sidebar-brand">
+            <a href="index.html">xalsier.com</a>
+            <button id="sidebarCloseBtn" class="sidebar-toggle" aria-label="Close navigation">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" aria-hidden="true">
+                <path d="M440-690v-100q0-42 29-71t71-29h100v100q0 42-29 71t-71 29H440ZM220-450q-58 0-99-41t-41-99v-140h140q58 0 99 41t41 99v140H220ZM640-90q-39 0-74.5-12T501-135l-33 33q-11 11-28 11t-28-11q-11-11-11-28t11-28l33-33q-21-29-33-64.5T400-330q0-100 70-170.5T640-571h241v241q0 100-70.5 170T640-90Zm0-80q67 0 113-47t46-113v-160H640q-66 0-113 46.5T480-330q0 23 5.5 43.5T502-248l110-110q11-11 28-11t28 11q11 11 11 28t-11 28L558-192q18 11 38.5 16.5T640-170Zm1-161Z"/>
+              </svg>
+            </button>
+        </div>
+          
+      <div class="sidebar-group" data-open="true" id="group-explore">
+        <button class="group-toggle" aria-expanded="false">Explore</button>
+        <ul class="group-list">
+          <li><a href="index.html">Rawr Folder</a></li>
+          <li><a href="bio.html">Biography</a></li>
+          <li><a href="analytics.html">Analytics</a></li>
+        </ul>
+      </div>
+
+      <div class="sidebar-group" data-open="true" id="group-stories">
+        <button class="group-toggle" aria-expanded="true">Series</button>
+        <ul class="group-list">
+          <li><a href="swallow-pines.html">Swallow Pines</a></li>
+        </ul>
+      </div>
+
+      <div class="sidebar-group" data-open="true" id="group-stories">
+        <button class="group-toggle" aria-expanded="true">Written works</button>
+        <ul class="group-list">
+            <li><a href="rorschach.html">Prion Rorschach</a></li>
+            <li><a href="untitled.html">Swallow Pines: One-shot</a></li>
+            <li><a style="opacity:0.5;color:grey;" href="lockjaw.html">Birth by Memory: Lockjaw</a></li>
+          </ul>
+      </div>
+
+
+    <div class="sidebar-footer">
+    </div>
+  </div>
+</nav>
+
+<center><main style="width:65%;">
+
+  <section class="faq-section">
+    <div class="faq-container">
+        <h2 class="faq-title">Bio</h2>
+        
+        <div class="faq-item">
+            <h3 class="faq-question">50 Words</h3>
+            <div class="faq-answer">
+                <p>Xalsier (born February 1, 2003), also known as Xalsier Kitsune, is the debut author of "Swallow Pines: One-shot", an adult short story featuring anthro characters and speculative alt-history. He is a digital artist, who has been producing work for the furry fandom since 2022.</p>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+</main></center>
+
+  <footer>
+    <center class="footer-nav">
+        <a style="font-size: 1.5em;" href="bio.html">About</a>
+        <a style="font-size: 1.5em;" href="socials.html">Socials</a> 
+        <a style="font-size: 1.5em;" href="contact.html">Contact</a>
+        <a style="font-size: 1.5em;" href="https://status.xalsier.com/">Site Status</a> 
+        <a style="font-size: 1.5em;" href="sitemap.html">Sitemap</a>  
+      </center>
+    <center><div style="font-size: 1.5em;width: 100%;display:flex;justify-content: center;flex-direction: column;">© Xalsier 2025-2026</div></center>
+  </footer>
+  <script src="./js/utility.js"></script>
+  <script src="./js/plugin/faq.js"></script>
+  <script src="./js/sidebar.js"></script>
+</body>
+</html>
