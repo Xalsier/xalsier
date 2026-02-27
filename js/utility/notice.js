@@ -9,6 +9,7 @@ const ANNOUNCEMENT_DATA = window.announcementData || {
 
 document.addEventListener('DOMContentLoaded', () => {
   const body = document.body || document.getElementsByTagName('body')[0];
+
   const isArchive =
     (body && body.dataset && body.dataset.archive === 'true') ||
     (body.getAttribute && body.getAttribute('data-archive') === 'true');
@@ -18,6 +19,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const NOTICE_DIR = isArchive ? '../md/not/' : './md/not/';
   const NOTICE_FILE = idx => `${NOTICE_DIR}${idx}.md`;
+
+  // 👇 Tags JSON (placed in ../json/)
+  const TAGS_FILE = isArchive ? '../json/tags.json' : './json/tags.json';
+  let TAG_MAP = {};
 
   const staticAvatar = document.getElementById('announcement-avatar');
   const staticName = document.getElementById('announcement-name');
@@ -32,7 +37,48 @@ document.addEventListener('DOMContentLoaded', () => {
     staticAvatar.title = ANNOUNCEMENT_DATA.avatarTitle;
     staticAvatar.alt = ANNOUNCEMENT_DATA.avatarAlt;
   }
-  if (staticName) staticName.textContent = ANNOUNCEMENT_DATA.name;
+
+  if (staticName) {
+    staticName.textContent = ANNOUNCEMENT_DATA.name;
+  }
+
+  /* ===========================
+     TAG LOADING
+  =========================== */
+
+  async function loadTags() {
+    try {
+      const response = await fetch(TAGS_FILE);
+      if (!response.ok) throw new Error();
+
+      const data = await response.json();
+      TAG_MAP = Object.fromEntries(data);
+    } catch {
+      console.warn('Tags JSON not found or invalid.');
+      TAG_MAP = {};
+    }
+  }
+
+  function renderTagsIntoHeader(headerElement, index) {
+    const tags = TAG_MAP[index] || [];
+    if (!tags.length) return;
+
+    let container = headerElement.querySelector('.announcement-tags');
+
+    if (!container) {
+      container = document.createElement('div');
+      container.className = 'announcement-tags';
+      headerElement.prepend(container);
+    }
+
+    container.innerHTML = tags
+      .map(tag => `<span class="announcement-tag">${tag}</span>`)
+      .join('');
+  }
+
+  /* ===========================
+     MARKDOWN PARSER
+  =========================== */
 
   function parseMarkdown(markdown) {
     const dateRegex = /^\s*{{\s*([^}]+)\s*}}/m;
@@ -41,7 +87,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let content = markdown.replace(dateRegex, '').trim();
 
-    // Mirror extraction
     const mirrorRegex = /{{\s*(X|BSKY)\s*\|\s*([^}]+)\s*}}/gi;
     const mirrors = [];
 
@@ -69,7 +114,11 @@ document.addEventListener('DOMContentLoaded', () => {
     };
   }
 
-  function createAnnouncementCardHTML(dateString, htmlContent, mirrors = []) {
+  /* ===========================
+     CARD CREATION
+  =========================== */
+
+  function createAnnouncementCardHTML(index, dateString, htmlContent, mirrors = []) {
     const historyLinkHref = isArchive ? '../notice.html' : './notice.html';
 
     const mirrorLinks = mirrors
@@ -96,6 +145,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const card = document.createElement('div');
     card.className = 'announcement-card';
+
     card.innerHTML = `
       <div class="announcement-header">
         <img
@@ -113,6 +163,10 @@ document.addEventListener('DOMContentLoaded', () => {
       ${footerHTML}
     `;
 
+    // Insert tags after header creation
+    const header = card.querySelector('.announcement-header');
+    renderTagsIntoHeader(header, index);
+
     return card;
   }
 
@@ -122,6 +176,10 @@ document.addEventListener('DOMContentLoaded', () => {
     if (explicitContainer) return explicitContainer;
     return document.body;
   }
+
+  /* ===========================
+     NOTICE LOADER
+  =========================== */
 
   async function loadAndRender(index, useStaticForZero = false) {
     const path = NOTICE_FILE(index);
@@ -138,6 +196,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if (useStaticForZero && staticMessage && staticDate) {
       staticDate.textContent = dateString;
       staticMessage.innerHTML = html;
+
+      const header = staticCard.querySelector('.announcement-header');
+      renderTagsIntoHeader(header, index);
 
       let staticFooter = staticCard.querySelector('.announcement-footer');
 
@@ -165,15 +226,21 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
       }
     } else {
-      const card = createAnnouncementCardHTML(dateString, html, mirrors);
+      const card = createAnnouncementCardHTML(index, dateString, html, mirrors);
       getAppendParent().appendChild(card);
     }
   }
 
+  /* ===========================
+     INIT
+  =========================== */
+
   async function init() {
+    await loadTags();
+
     try {
       await loadAndRender(0, true);
-    } catch (e) {
+    } catch {
       console.warn('Notice 0 not found');
     }
 

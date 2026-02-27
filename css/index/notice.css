@@ -60,3 +60,26 @@
     color: var(--sec-color);
     text-decoration: underline 3px;
   }
+
+  .announcement-header {
+    position: relative;
+  }
+  
+  .announcement-tags {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+  }
+  
+  .announcement-tag {
+    font-size: 0.75rem;
+    background-color: var(--bg-color);
+    color: var(--green);
+    font-weight: bold;
+    padding: 4px 8px;
+    border-radius: 6px;
+    white-space: nowrap;
+  }
