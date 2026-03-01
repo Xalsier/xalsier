@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    fetch('./md/story/project.md')
+    fetch('./md/story/frag.md')
         .then(response => {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
@@ -18,28 +18,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 const text = header.innerText.replace(/[^a-zA-Z0-9- ]/g, '').toLowerCase().replace(/ /g, '-');
                 header.id = text;
             });
-            
-            // Calculate word count from markdown text
-            const wordCount = markdownText
-                .replace(/[#*_`\[\]()]/g, '') // Remove markdown syntax
-                .trim()
-                .split(/\s+/)
-                .filter(word => word.length > 0).length;
-            
-            // Update word count display
-            const wordCountElement = document.getElementById('wordCount');
-            if (wordCountElement) {
-                wordCountElement.textContent = `${wordCount.toLocaleString()} Words`;
-            }
         })
         .catch(error => {
             console.error('Error fetching or parsing markdown:', error);
             document.getElementById('markdown-container').innerHTML = `<p style="color:red;">Error loading content. Please ensure the file 'untitled.md' exists in the 'md' directory.</p>`;
-            
-            // Update word count to show error
-            const wordCountElement = document.getElementById('wordCount');
-            if (wordCountElement) {
-                wordCountElement.textContent = 'Word count unavailable';
-            }
         });
 });
