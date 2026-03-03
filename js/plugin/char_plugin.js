@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
       try {
         const res = await fetch("../json/char.json");
         const data = await res.json();
-        characters = data.characters || []; // <-- use .characters
+        characters = data.characters || [];
       } catch (error) {
         console.error("Failed to load char.json:", error);
       }
@@ -23,61 +23,65 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   
     function renderCharacter(char) {
-        const imageHTML = char.src
-          ? `<img src="${char.src}" alt="${char.name}">`
-          : `<div class="image-placeholder"></div>`;
-      
-        const ageDisplay = char.age ? char.age : `<span title="18-22">College Student</span>`;
-      
-        const traitsHTML = (char.physicalTraits || []).map(createTrait).join("");
-      
-        display.innerHTML = `
-          <div class="character-card">
-            <div class="character-layout">
-              <div class="character-text">
-                <h2>${char.name}</h2>
-                <p class="blurb">${char.blurb}</p>
-      
-                <div class="info-grid">
-                  <div class="info-row">
-                    <span class="info-label">Gender</span>
-                    <span class="info-value">${char.gender}</span>
-                  </div>
-                  <div class="info-row">
-                    <span class="info-label">Sexuality</span>
-                    <span class="info-value">${char.sexuality}</span>
-                  </div>
-                  <div class="info-row">
-                    <span class="info-label">Age</span>
-                    <span class="info-value">${ageDisplay}</span>
-                  </div>
-                  <div class="info-row">
-                    <span class="info-label">Species</span>
-                    <span class="info-value">${char.species}</span>
-                  </div>
-                  <div class="info-row">
-                    <span class="info-label">Last Status Update</span>
-                    <span class="info-value">${char.lastStatusUpdate}</span>
-                  </div>
+      const imageHTML = char.src
+        ? `<img src="${char.src}" alt="${char.name}">`
+        : `<div class="image-placeholder"></div>`;
+  
+      const ageDisplay = char.age ? char.age : `<span title="18-22">College Student</span>`;
+  
+      const traitsHTML = (char.physicalTraits || []).map(createTrait).join("");
+  
+      display.innerHTML = `
+        <div class="character-card">
+          <div class="character-layout">
+            <div class="character-text">
+              <h2>${char.name}</h2>
+              <p class="blurb">${char.blurb}</p>
+  
+              <div class="info-grid">
+                <div class="info-row">
+                  <span class="info-label">Gender</span>
+                  <span class="info-value" style="color: var(--green);">${char.gender}</span>
+                </div>
+                <div class="info-row">
+                  <span class="info-label">Sexuality</span>
+                  <span class="info-value" style="color: var(--green);">${char.sexuality}</span>
+                </div>
+                <div class="info-row">
+                  <span class="info-label">Age</span>
+                  <span class="info-value" style="color: var(--green);">${ageDisplay}</span>
+                </div>
+                <div class="info-row">
+                  <span class="info-label">Species</span>
+                  <span class="info-value" style="color: var(--green);">${char.species}</span>
+                </div>
+                <div class="info-row">
+                  <span class="info-label">Last Status Update</span>
+                  <span class="info-value" style="color: var(--green);">${char.lastStatusUpdate}</span>
+                </div>
+                <div class="info-row">
+                  <span class="info-label">World Rating</span>
+                  <span class="info-value" style="color: var(--green);">${char.worldRating || "Unrated"}</span>
                 </div>
               </div>
-      
-              <div class="character-image">
-                ${imageHTML}
-              </div>
             </div>
-      
-            <hr>
-      
-            <div class="traits">
-              <h3>Physical Dossier</h3>
-              <div class="traits-container">
-                ${traitsHTML}
-              </div>
+  
+            <div class="character-image">
+              ${imageHTML}
             </div>
           </div>
-        `;
-      }
+  
+          <hr>
+  
+          <div class="traits">
+            <h3>Physical Dossier</h3>
+            <div class="traits-container">
+              ${traitsHTML || "<span>No special traits listed.</span>"}
+            </div>
+          </div>
+        </div>
+      `;
+    }
   
     select.addEventListener("change", () => {
       const selectedId = Number(select.value);
