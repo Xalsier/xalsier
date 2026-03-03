@@ -1,0 +1,126 @@
+.character-display {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .character-card {
+    background: var(--sec-color);
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    max-width: 700px;
+    width: 100%;
+    transition: var(--transition);
+  }
+  
+  .character-layout {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+  }
+  
+  .character-text {
+    flex: 1;
+  }
+  
+  .character-text h2 {
+    text-align: right;
+    margin-bottom: 0.5rem;
+  }
+  
+  .character-text .blurb {
+    text-align: right;
+    opacity: 0.8;
+    margin-bottom: 1rem;
+  }
+  
+  .info-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .info-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .info-label {
+    color: var(--white);
+    font-weight: 600;
+    text-align: left;
+  }
+  
+  .info-value {
+    color: var(--green);
+    text-align: right;
+    font-weight:bold;
+  }
+  
+  .character-image {
+    width: 180px;
+    height: 180px;
+    border-radius: 20px;
+    overflow: hidden;
+    background: var(--green);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .character-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .image-fallback {
+    width: 100%;
+    height: 100%;
+    background: var(--green);
+  }
+  
+  hr {
+    border: 1px solid var(--green);
+    margin: 15px 0;
+  }
+  
+  .traits {
+    text-align: center;
+  }
+  
+  .traits h3 {
+    margin-bottom: 0.6rem;
+  }
+  
+  .traits-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.6rem;
+  }
+  
+  .trait-tag {
+    background: var(--green);
+    color: var(--bg-color);
+    padding: 0.4rem 0.8rem;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    transition: var(--transition);
+  }
+  
+  .trait-link {
+    background: #a855f7;
+  }
+  
+  .trait-tag:hover {
+    opacity: 0.85;
+    transform: translateY(-2px);
+  }
