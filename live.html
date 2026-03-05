@@ -20,9 +20,8 @@
   overflow: visible;
 }
 
-.iframe-wrapper::before {
-  content: '';
-  position: absolute;
+.twitch {
+    content: '';
   inset: 0;
   border-radius: inherit;
   padding: 20px; 
@@ -48,7 +47,6 @@
   z-index: -1;
   box-sizing: border-box;
 }
-
 
   </style>
 </head>
@@ -117,7 +115,7 @@
 <main>
     <center>
       <div class="iframe-wrapper">
-        <iframe
+        <iframe class="twitch"
           src="https://player.twitch.tv/?channel=xalsier&parent=xalsier.com"
           style="width: clamp(320px, 80vw, 1080px); aspect-ratio:16/9; border:none;"
           allowfullscreen>
