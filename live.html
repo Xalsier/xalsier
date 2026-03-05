@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>🔴 Livestreams & Events</title>
+  <link rel="icon" type="image/x-icon" href="./favicon.ico">
+  <meta name="description" content="Xalsier's social media.">
+  <link rel="stylesheet" href="./css/index.css">
+  <style>
+    main {
+        width: 100%;
+    }
+
+.iframe-wrapper {
+  position: relative;
+  display: inline-block;
+  border-radius: 10px;
+  padding: 3px;
+  overflow: visible;
+}
+
+.iframe-wrapper::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 6px; 
+  
+  background:
+  conic-gradient(
+      from 170deg,
+      #2a7f55,
+      #56de93,
+      #a0f1c4,
+      #56de93,
+      #2a7f55
+  );
+  
+  -webkit-mask: 
+      linear-gradient(#fff 0 0) content-box, 
+      linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  mask: 
+      linear-gradient(#fff 0 0) content-box, 
+      linear-gradient(#fff 0 0);
+  z-index: -1;
+  box-sizing: border-box;
+}
+
+
+  </style>
+</head>
+<body>
+  <header class="page-header" style="text-align: center;">
+    <div class="header-left">
+      <button id="sidebarToggle" class="sidebar-toggle" aria-label="Open navigation" aria-expanded="false" title="Open navigation">
+        <!-- your SVG -->
+        <svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 -960 960 960"   aria-hidden="true">
+          <path d="M440-690v-100q0-42 29-71t71-29h100v100q0 42-29 71t-71 29H440ZM220-450q-58 0-99-41t-41-99v-140h140q58 0 99 41t41 99v140H220ZM640-90q-39 0-74.5-12T501-135l-33 33q-11 11-28 11t-28-11q-11-11-11-28t11-28l33-33q-21-29-33-64.5T400-330q0-100 70-170.5T640-571h241v241q0 100-70.5 170T640-90Zm0-80q67 0 113-47t46-113v-160H640q-66 0-113 46.5T480-330q0 23 5.5 43.5T502-248l110-110q11-11 28-11t28 11q11 11 11 28t-11 28L558-192q18 11 38.5 16.5T640-170Zm1-161Z"/>
+        </svg>
+      </button>
+    </div>
+    <div class="header-center">
+      <h1>🔴 Livestreams & Events</h1>
+    </div>
+</header>
+
+<div id="sidebarOverlay" class="sidebar-overlay" data-open="false" aria-hidden="true"></div>
+<nav id="siteSidebar" class="site-sidebar" aria-hidden="true" aria-labelledby="sidebarToggle" data-open="false">
+  <div class="sidebar-inner" role="navigation" aria-label="Site navigation">
+    <div class="sidebar-section">
+        <div class="sidebar-brand">
+            <a href="index.html">xalsier.com</a>
+            <button id="sidebarCloseBtn" class="sidebar-toggle" aria-label="Close navigation">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" aria-hidden="true">
+                <path d="M440-690v-100q0-42 29-71t71-29h100v100q0 42-29 71t-71 29H440ZM220-450q-58 0-99-41t-41-99v-140h140q58 0 99 41t41 99v140H220ZM640-90q-39 0-74.5-12T501-135l-33 33q-11 11-28 11t-28-11q-11-11-11-28t11-28l33-33q-21-29-33-64.5T400-330q0-100 70-170.5T640-571h241v241q0 100-70.5 170T640-90Zm0-80q67 0 113-47t46-113v-160H640q-66 0-113 46.5T480-330q0 23 5.5 43.5T502-248l110-110q11-11 28-11t28 11q11 11 11 28t-11 28L558-192q18 11 38.5 16.5T640-170Zm1-161Z"/>
+              </svg>
+            </button>
+        </div>
+          
+      <div class="sidebar-group" data-open="true" id="group-explore">
+        <button class="group-toggle" aria-expanded="false">Explore</button>
+        <ul class="group-list">
+          <li><a href="index.html">Rawr Folder</a></li>
+          <li><a href="bio.html">Biography</a></li>
+          <li><a href="analytics.html">Analytics</a></li>
+          <li><a href="roadmap.html">Roadmap</a></li>
+          <li><a href="characters.html">List of Characters</a></li>
+        </ul>
+      </div>
+
+      <div class="sidebar-group" data-open="true" id="group-stories">
+        <button class="group-toggle" aria-expanded="true">Series</button>
+        <ul class="group-list">
+          <li><a href="swallow-pines.html">Swallow Pines</a></li>
+        </ul>
+      </div>
+
+      <div class="sidebar-group" data-open="true" id="group-stories">
+        <button class="group-toggle" aria-expanded="true">Written works</button>
+        <ul class="group-list">
+            <li><a href="rorschach.html">Prion Rorschach</a></li>
+            <li><a href="texas.html">A Fragging in Texas</a></li>
+            <li><a href="untitled.html">Swallow Pines: One-shot</a></li>
+            <li><a style="opacity:0.5;color:grey;" href="lockjaw.html">Birth by Memory: Lockjaw</a></li>
+          </ul>
+      </div>
+
+
+    <div class="sidebar-footer">
+    </div>
+  </div>
+</nav>
+
+<main>
+    <center>
+      <div class="iframe-wrapper">
+        <iframe
+          src="https://player.twitch.tv/?channel=xalsier&parent=xalsier.com"
+          style="width: clamp(320px, 80vw, 1080px); aspect-ratio:16/9; border:none;"
+          allowfullscreen>
+        </iframe>
+      </div>
+    </center>
+  </main>
+
+  <footer>
+    <center class="footer-nav">
+        <a style="font-size: 1.5em;" href="bio.html">About</a>
+        <a style="font-size: 1.5em;" href="socials.html">Socials</a> 
+        <a style="font-size: 1.5em;" href="contact.html">Contact</a>
+        <a style="font-size: 1.5em;" href="https://status.xalsier.com/">Site Status</a> 
+        <a style="font-size: 1.5em;" href="sitemap.html">Sitemap</a>  
+      </center>
+    <center><div style="font-size: 1.5em;width: 100%;display:flex;justify-content: center;flex-direction: column;">© Xalsier 2025-2026</div></center>
+    <center><small><div style="font-size: 1.5em;width: 100%;opacity:0.6;display:flex;justify-content: center;flex-direction: column;">Page Created: January 2, 2026</div></small></center>
+  </footer>
+  <script src="./js/utility.js"></script>
+  <script src="./js/sidebar.js"></script>
+</body>
+</html>
