@@ -7,6 +7,25 @@
   <link rel="icon" type="image/x-icon" href="./favicon.ico">
   <link rel="stylesheet" href="./css/custom/faq.css">
   <link rel="stylesheet" href="./css/index.css">
+  <style>
+    .download-btn {
+      height:fit-content;
+      display:flex;
+      background-color:var(--green);
+      color:var(--bg-color);
+      width:fit-content;
+      padding:10px;
+      border-radius:5px;
+      font-weight:bold;
+      border:none;
+      cursor:pointer;
+      transition: transform 0.3s ease-in;
+    }
+
+    .download-btn:hover {
+      transform: scale(1.2);
+    }
+    </style>
 </head>
 <body>
   <header class="page-header" style="text-align: center;">
@@ -78,8 +97,16 @@
 
         <div style="width:100%;text-align: left;flex-direction: row;display:flex;gap:20px">
           <img style="border-radius:5px;display:flex;" src="./thumb/fuwa.jpg">
-          <div style="height:fit-content;display:flex;background-color:var(--green);color:var(--bg-color);width:fit-content;padding:10px;border-radius:5px;font-weight:bold;">160px</div>
-        </div>
+          <img id="sourceImg" src="./thumb/fuwa720.png" style="display:none;" crossorigin="anonymous">
+
+          <div style="display:flex;gap:10px;flex-wrap:wrap;">
+            <button class="download-btn" onclick="downloadSize(720)">720px</button>
+            <button class="download-btn" onclick="downloadSize(360)">360px</button>
+            <button class="download-btn" onclick="downloadSize(160)">160px</button>
+            <button class="download-btn" onclick="downloadSize(80)">80px</button>
+          </div>
+          
+      </div>
         <br>
         <div style="text-align:left;">If you can, please provide credit to the artist <a href="https://x.com/Maxztorr">Maxztorr</a> if you use the icon in press coverage of my work.</div>
         <br>
@@ -123,5 +150,31 @@
   <script src="./js/utility.js"></script>
   <script src="./js/plugin/faq.js"></script>
   <script src="./js/sidebar.js"></script>
+  <script>
+    function downloadSize(targetWidth) {
+      const img = document.getElementById("sourceImg");
+    
+      if (!img.complete) {
+        alert("Image still loading.");
+        return;
+      }
+    
+      const canvas = document.createElement("canvas");
+      const ctx = canvas.getContext("2d");
+    
+      const scale = targetWidth / img.naturalWidth;
+      const targetHeight = img.naturalHeight * scale;
+    
+      canvas.width = targetWidth;
+      canvas.height = targetHeight;
+    
+      ctx.drawImage(img, 0, 0, targetWidth, targetHeight);
+    
+      const link = document.createElement("a");
+      link.download = `fuwa-${targetWidth}px.png`;
+      link.href = canvas.toDataURL("image/png");
+      link.click();
+    }
+    </script>  
 </body>
 </html>
