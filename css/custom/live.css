@@ -118,14 +118,49 @@ main {
   
   /* Thumbnail (exact stream size) */
   
-  .thumb {
-    width: 320px;
-    height: 180px;
-    background: var(--green);
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-  }
+/* Thumbnail container */
+
+.thumb {
+  position: relative;
+  width: 320px;
+  height: 180px;
+  background: var(--green);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* Gradient overlay */
+
+.thumb-overlay {
+  position: absolute;
+  inset: 0;
+
+  display: flex;
+  align-items: flex-end;
+
+  background: linear-gradient(
+    to top,
+    rgba(0,0,0,0.65),
+    rgba(0,0,0,0.25),
+    rgba(0,0,0,0)
+  );
+}
+
+/* Stream title */
+
+.thumb-title {
+  color: white;
+  font-weight: bold;
+  font-size: 1.2rem;
+
+  padding: 10px;
+
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
   
   /* Metadata */
   
@@ -137,6 +172,12 @@ main {
   }
   
   /* Tag */
+
+  .tag-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
   
   .tag {
     font-size: 0.8rem;

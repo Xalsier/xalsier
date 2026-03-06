@@ -1,39 +1,119 @@
-  
-  const eyeSVG = `
-  <svg xmlns="http://www.w3.org/2000/svg" height="16px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M240-40H120q-33 0-56.5-23.5T40-120v-120h80v120h120v80Zm480 0v-80h120v-120h80v120q0 33-23.5 56.5T840-40H720ZM480-220q-120 0-217.5-71T120-480q45-118 142.5-189T480-740q120 0 217.5 71T840-480q-45 118-142.5 189T480-220Zm0-80q88 0 161-48t112-132q-39-84-112-132t-161-48q-88 0-161 48T207-480q39 84 112 132t161 48Zm0-40q58 0 99-41t41-99q0-58-41-99t-99-41q-58 0-99 41t-41 99q0 58 41 99t99 41Zm0-80q-25 0-42.5-17.5T420-480q0-25 17.5-42.5T480-540q25 0 42.5 17.5T540-480q0 25-17.5 42.5T480-420ZM40-720v-120q0-33 23.5-56.5T120-920h120v80H120v120H40Zm800 0v-120H720v-80h120q33 0 56.5 23.5T920-840v120h-80ZM480-480Z"/></svg>
-  `;
-  
-  const track = document.getElementById("streamTrack");
-  
-  streams.forEach(stream => {
-  
-    const card = document.createElement("div");
-    card.className = "card";
-  
-    const thumb = document.createElement("div");
-    thumb.className = "thumb";
-  
-    if (stream.thumb) {
-      thumb.style.backgroundImage = `url(${stream.thumb})`;
-    }
-  
-    const meta = document.createElement("div");
-    meta.className = "meta";
-  
-    meta.innerHTML = `
-      <span class="tag">${stream.tag}</span>
-  
-      <div class="stats">
-        <span class="views">
-          ${eyeSVG} ${stream.views}
-        </span>
-  
-        <span class="date">${stream.date}</span>
-      </div>
-    `;
-  
-    card.appendChild(thumb);
-    card.appendChild(meta);
-    track.appendChild(card);
-  
+let eyeSVG = "";
+
+async function loadSVG() {
+  const res = await fetch("./svg/icon/eye.svg");
+  eyeSVG = await res.text();
+}
+
+
+// STREAM DATA
+
+const streams = [
+  { title:"Bow Only Run + Consumables", tags:["Lies of P","No Mic", "PS4"], views:9, date:"March 5", thumb:"./thumb/stream/6.jpg" },
+  { title:"Ranked Zero Build (Plat III)", tags:["Fortnite","No Mic", "PS4"], views:5, date:"March 5", thumb:"./thumb/stream/1.jpg" },
+  { title:"Ranked Zero Build (Plat II)", tags:["Fortnite","No Mic", "PS4"], views:4, date:"March 3", thumb:"./thumb/stream/2.jpg" },
+  { title:"Ranked Zero Build (Plat II)", tags:["Fortnite","No Mic", "PS4"], views:7, date:"March 2", thumb:"./thumb/stream/3.jpg" },
+  { title:"Ranked Zero Build (Plat I)", tags:["Fortnite","No Mic", "PS4"], views:7, date:"March 1", thumb:"./thumb/stream/4.jpg" },
+  { title:"Ranked Zero Build (Gold III)", tags:["Fortnite","No Mic", "PS4"], views:3, date:"February 27", thumb:"./thumb/stream/5.jpg" }
+];
+
+
+// EVENT DATA
+
+const events = [
+  {
+    title: "Book AMA (VC) - Prion Rorschach",
+    tags: ["Online Convention (TEC)"],
+    views: "???",
+    date: "April 17-19",
+    thumb: ""
+  }
+];
+
+
+// CARD BUILDER
+
+function createCard(item) {
+
+  const card = document.createElement("div");
+  card.className = "card";
+
+  const thumb = document.createElement("div");
+  thumb.className = "thumb";
+
+  if (item.thumb) {
+    thumb.style.backgroundImage = `url(${item.thumb})`;
+  }
+
+  const overlay = document.createElement("div");
+  overlay.className = "thumb-overlay";
+
+  const title = document.createElement("div");
+  title.className = "thumb-title";
+  title.textContent = item.title;
+
+  overlay.appendChild(title);
+  thumb.appendChild(overlay);
+
+  const meta = document.createElement("div");
+  meta.className = "meta";
+
+
+  // TAG CONTAINER
+  const tagContainer = document.createElement("div");
+  tagContainer.className = "tag-container";
+
+  item.tags.forEach(tagText => {
+    const tag = document.createElement("span");
+    tag.className = "tag";
+    tag.textContent = tagText;
+    tagContainer.appendChild(tag);
   });
+
+
+  meta.appendChild(tagContainer);
+
+
+  const stats = document.createElement("div");
+  stats.className = "stats";
+
+  stats.innerHTML = `
+    <span class="views">
+      ${eyeSVG} ${item.views}
+    </span>
+    <span class="date">${item.date}</span>
+  `;
+
+  meta.appendChild(stats);
+
+  card.appendChild(thumb);
+  card.appendChild(meta);
+
+  return card;
+}
+
+
+// INITIALIZE PAGE
+
+async function init() {
+
+  await loadSVG();
+
+  const eventTrack = document.getElementById("eventTrack");
+  const streamTrack = document.getElementById("streamTrack");
+
+  if (eventTrack) {
+    events.forEach(event => {
+      eventTrack.appendChild(createCard(event));
+    });
+  }
+
+  if (streamTrack) {
+    streams.forEach(stream => {
+      streamTrack.appendChild(createCard(stream));
+    });
+  }
+
+}
+
+init();
