@@ -2,6 +2,7 @@
 
 ![](https://komarev.com/ghpvc/?username=Xalsier)
 
-<a href="https://xalsier.com/">My website</a>
+<a href="https://xalsier.com/">My website</a><br>
+<a href="https://leetcode.com/u/Xalsier/">Profile on LeetCode</a>
 
 ---
