@@ -6,48 +6,7 @@
   <title>🔴 Livestreams & Events</title>
   <link rel="icon" type="image/x-icon" href="./favicon.ico">
   <link rel="stylesheet" href="./css/index.css">
-  <style>
-    main {
-        width: 100%;
-    }
-
-.iframe-wrapper {
-  position: relative;
-  display: inline-block;
-  border-radius: 10px;
-  padding: 3px;
-  overflow: visible;
-}
-
-.twitch {
-    content: '';
-  inset: 0;
-  border-radius: inherit;
-  padding: 15px; 
-  
-  background:
-  conic-gradient(
-      from 170deg,
-      #2a7f55,
-      #56de93,
-      #a0f1c4,
-      #56de93,
-      #2a7f55
-  );
-  
-  -webkit-mask: 
-      linear-gradient(#fff 0 0) content-box, 
-      linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-          mask-composite: exclude;
-  mask: 
-      linear-gradient(#fff 0 0) content-box, 
-      linear-gradient(#fff 0 0);
-  z-index: -1;
-  box-sizing: border-box;
-}
-
-  </style>
+  <link rel="stylesheet" href="./css/custom/live.css">
 </head>
 <body>
   <header class="page-header" style="text-align: center;">
@@ -85,6 +44,7 @@
           <li><a href="analytics.html">Analytics</a></li>
           <li><a href="roadmap.html">Roadmap</a></li>
           <li><a href="characters.html">List of Characters</a></li>
+          <li><a href="live.html">Events & Livestreams</a></li>
         </ul>
       </div>
 
@@ -121,6 +81,12 @@
         </iframe>
       </div>
     </center>
+
+    <br>
+    <center><h2>Previous Streams</h2></center>
+    <div class="carousel">
+        <div class="track" id="streamTrack"></div>
+    </div>
   </main>
 
   <footer>
@@ -136,5 +102,6 @@
   </footer>
   <script src="./js/utility.js"></script>
   <script src="./js/sidebar.js"></script>
+  <script src="./js/plugin/stream.js"></script>
 </body>
 </html>
