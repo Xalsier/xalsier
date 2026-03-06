@@ -6,32 +6,9 @@ async function loadSVG() {
 }
 
 
-// STREAM DATA
-
-const streams = [
-  { title:"Bow Only Run + Consumables", tags:["Lies of P","No Mic", "PS4"], views:9, date:"March 5", thumb:"./thumb/stream/6.jpg" },
-  { title:"Ranked Zero Build (Plat III)", tags:["Fortnite","No Mic", "PS4"], views:5, date:"March 5", thumb:"./thumb/stream/1.jpg" },
-  { title:"Ranked Zero Build (Plat II)", tags:["Fortnite","No Mic", "PS4"], views:4, date:"March 3", thumb:"./thumb/stream/2.jpg" },
-  { title:"Ranked Zero Build (Plat II)", tags:["Fortnite","No Mic", "PS4"], views:7, date:"March 2", thumb:"./thumb/stream/3.jpg" },
-  { title:"Ranked Zero Build (Plat I)", tags:["Fortnite","No Mic", "PS4"], views:7, date:"March 1", thumb:"./thumb/stream/4.jpg" },
-  { title:"Ranked Zero Build (Gold III)", tags:["Fortnite","No Mic", "PS4"], views:3, date:"February 27", thumb:"./thumb/stream/5.jpg" }
-];
 
 
-// EVENT DATA
-
-const events = [
-  {
-    title: "Book AMA (VC) - Prion Rorschach",
-    tags: ["Online Convention (TEC)"],
-    views: "???",
-    date: "April 17-19",
-    thumb: ""
-  }
-];
-
-
-// CARD BUILDER
+/* CARD BUILDER */
 
 function createCard(item) {
 
@@ -45,6 +22,8 @@ function createCard(item) {
     thumb.style.backgroundImage = `url(${item.thumb})`;
   }
 
+  /* THUMB OVERLAY */
+
   const overlay = document.createElement("div");
   overlay.className = "thumb-overlay";
 
@@ -55,11 +34,13 @@ function createCard(item) {
   overlay.appendChild(title);
   thumb.appendChild(overlay);
 
+  /* META SECTION */
+
   const meta = document.createElement("div");
   meta.className = "meta";
 
+  /* TAG CONTAINER */
 
-  // TAG CONTAINER
   const tagContainer = document.createElement("div");
   tagContainer.className = "tag-container";
 
@@ -70,9 +51,9 @@ function createCard(item) {
     tagContainer.appendChild(tag);
   });
 
-
   meta.appendChild(tagContainer);
 
+  /* STATS */
 
   const stats = document.createElement("div");
   stats.className = "stats";
@@ -86,6 +67,22 @@ function createCard(item) {
 
   meta.appendChild(stats);
 
+  /* EVENT CLICK HANDLER */
+
+  if (item.modal) {
+
+    card.style.cursor = "pointer";
+
+    card.addEventListener("click", () => {
+      openEventPopup({
+        title: item.title,
+        synopsis: item.modal.synopsis,
+        link: item.modal.link
+      });
+    });
+
+  }
+
   card.appendChild(thumb);
   card.appendChild(meta);
 
@@ -93,7 +90,42 @@ function createCard(item) {
 }
 
 
-// INITIALIZE PAGE
+/* EVENT POPUP SYSTEM */
+
+function openEventPopup(data) {
+
+  const backdrop = document.createElement("div");
+  backdrop.className = "event-popup-backdrop";
+
+  const popup = document.createElement("div");
+  popup.className = "event-popup";
+
+  popup.innerHTML = `
+    <h2>${data.title}</h2>
+
+    <p>${data.synopsis}</p>
+
+    <a href="${data.link}" target="_blank" class="event-popup-link">
+      Link
+    </a>
+
+    <button class="event-popup-close">Close</button>
+  `;
+
+  backdrop.appendChild(popup);
+  document.body.appendChild(backdrop);
+
+  const closeBtn = popup.querySelector(".event-popup-close");
+
+  closeBtn.onclick = () => backdrop.remove();
+
+  backdrop.onclick = e => {
+    if (e.target === backdrop) backdrop.remove();
+  };
+}
+
+
+/* INITIALIZE PAGE */
 
 async function init() {
 

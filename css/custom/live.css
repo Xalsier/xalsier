@@ -213,3 +213,59 @@ main {
     opacity: 0.5;
     font-size: 0.85rem;
   }
+  .event-popup-backdrop {
+    position: fixed;
+    inset: 0;
+  
+    background: rgba(0,0,0,.7);
+  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+    z-index: 99999;
+  }
+  
+  .event-popup {
+    background: var(--bg-color);
+    border-radius: 14px;
+  
+    padding: 30px;
+    width: min(500px, 90vw);
+  
+    box-shadow: 0 10px 40px rgba(0,0,0,.6);
+  }
+  
+  .event-popup h2 {
+    margin-top: 0;
+  }
+  
+  .event-popup p {
+    white-space: pre-line;
+    line-height: 1.6;
+  }
+  
+  .event-popup-link {
+    display: inline-block;
+    margin-top: 18px;
+  
+    color: var(--green);
+    font-weight: bold;
+    text-decoration: none;
+  }
+  
+  .event-popup-close {
+    display: block;
+    margin-top: 20px;
+  
+    padding: 8px 18px;
+  
+    border: none;
+    border-radius: 8px;
+  
+    background: var(--green);
+    color: var(--bg-color);
+  
+    font-weight: bold;
+    cursor: pointer;
+  }
