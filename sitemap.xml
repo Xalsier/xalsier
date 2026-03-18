@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://xalsier.com/</loc>
     <priority>1.0</priority>
@@ -24,9 +25,14 @@
     <loc>https://xalsier.com/rorschach</loc>
     <priority>0.4</priority>
   </url>
-    <url>
+  <url>
     <loc>https://xalsier.com/lockjaw</loc>
     <priority>0.3</priority>
+    <image:image>
+      <image:loc>https://xalsier.com/lib/bio/lockjaw.webp</image:loc>
+      <image:title>Birth by Memory: Lockjaw</image:title>
+      <image:caption>Cover art for "Birth by Memory: Lockjaw", an unpublished novel.</image:caption>
+    </image:image>
   </url>
     <url>
     <loc>https://xalsier.com/socials</loc>
