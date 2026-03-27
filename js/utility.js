@@ -6,6 +6,7 @@ const socialLinks = [
   { href: "https://bsky.app/profile/xalsier.bsky.social", src: "./svg/soc/blue.svg", alt: "Bluesky" },
   { href: "https://www.youtube.com/c/Xalsier", src: "./svg/soc/red.svg", alt: "Youtube" },
  { href: "https://www.tiktok.com/@xalsier", src: "./svg/soc/tiktok.svg", alt: "TikTok" },
+ { href: "https://www.linkedin.com/in/xalsier/", src: "./svg/soc/link.svg", alt: "LinkedIn" },
 ];
 
 const socialContainer = document.getElementById("socialBar");
