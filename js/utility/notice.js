@@ -1,4 +1,4 @@
-const DEFAULT_MAX_NOTICE_INDEX = 20;
+const DEFAULT_MAX_NOTICE_INDEX = 30;
 
 const ANNOUNCEMENT_DATA = window.announcementData || {
   avatarSrc: './thumb/fuwa35.svg',
@@ -20,7 +20,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const NOTICE_DIR = isArchive ? '../md/not/' : './md/not/';
   const NOTICE_FILE = idx => `${NOTICE_DIR}${idx}.md`;
 
-  // 👇 Tags JSON (placed in ../json/)
   const TAGS_FILE = isArchive ? '../json/tags.json' : './json/tags.json';
   let TAG_MAP = {};
 
@@ -42,19 +41,13 @@ document.addEventListener('DOMContentLoaded', () => {
     staticName.textContent = ANNOUNCEMENT_DATA.name;
   }
 
-  /* ===========================
-     TAG LOADING
-  =========================== */
-
   async function loadTags() {
     try {
       const response = await fetch(TAGS_FILE);
       if (!response.ok) throw new Error();
-
       const data = await response.json();
       TAG_MAP = Object.fromEntries(data);
     } catch {
-      console.warn('Tags JSON not found or invalid.');
       TAG_MAP = {};
     }
   }
@@ -76,10 +69,6 @@ document.addEventListener('DOMContentLoaded', () => {
       .join('');
   }
 
-  /* ===========================
-     MARKDOWN PARSER
-  =========================== */
-
   function parseMarkdown(markdown) {
     const dateRegex = /^\s*{{\s*([^}]+)\s*}}/m;
     const dateMatch = markdown.match(dateRegex);
@@ -87,16 +76,33 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let content = markdown.replace(dateRegex, '').trim();
 
-    const mirrorRegex = /{{\s*(X|BSKY)\s*\|\s*([^}]+)\s*}}/gi;
+    const mirrorRegex = /{{\s*(X|BSKY|GOOD)\s*\|\s*([^}]+)\s*}}/gi;
     const mirrors = [];
 
     content = content.replace(mirrorRegex, (_, type, url) => {
       const upper = type.toUpperCase();
+
+      let label;
+      switch (upper) {
+        case 'X':
+          label = 'Tweet';
+          break;
+        case 'BSKY':
+          label = 'Bsky';
+          break;
+        case 'GOOD':
+          label = 'Goodreads';
+          break;
+        default:
+          label = upper;
+      }
+
       mirrors.push({
         type: upper,
-        label: upper === 'X' ? 'Tweet' : 'Bsky',
+        label,
         url: url.trim()
       });
+
       return '';
     });
 
@@ -113,10 +119,6 @@ document.addEventListener('DOMContentLoaded', () => {
       mirrors
     };
   }
-
-  /* ===========================
-     CARD CREATION
-  =========================== */
 
   function createAnnouncementCardHTML(index, dateString, htmlContent, mirrors = []) {
     const historyLinkHref = isArchive ? '../notice.html' : './notice.html';
@@ -163,7 +165,6 @@ document.addEventListener('DOMContentLoaded', () => {
       ${footerHTML}
     `;
 
-    // Insert tags after header creation
     const header = card.querySelector('.announcement-header');
     renderTagsIntoHeader(header, index);
 
@@ -176,10 +177,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (explicitContainer) return explicitContainer;
     return document.body;
   }
-
-  /* ===========================
-     NOTICE LOADER
-  =========================== */
 
   async function loadAndRender(index, useStaticForZero = false) {
     const path = NOTICE_FILE(index);
@@ -231,18 +228,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  /* ===========================
-     INIT
-  =========================== */
-
   async function init() {
     await loadTags();
 
     try {
       await loadAndRender(0, true);
-    } catch {
-      console.warn('Notice 0 not found');
-    }
+    } catch {}
 
     if (isArchive) {
       for (let i = DEFAULT_MAX_NOTICE_INDEX; i >= 1; i--) {
