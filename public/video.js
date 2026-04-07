@@ -27,8 +27,18 @@ const channelData = {
   ],
   'piano-covers': [
     {
+      title: "Silent Hill 2 - Mary's Theme • Piano Cover ",
+      date: "February 17, 2026",
+      embedId: "https://www.youtube.com/watch?v=44JQB6UcgoM"
+    },
+    {
+      title: "Silent Hill - Not Tomorrow • Piano Cover",
+      date: "August 6, 2025",
+      embedId: "https://www.youtube.com/watch?v=LjMkPgaXcNc"
+    },
+    {
       title: "Chopin - Waltz in A minor - B. 150 Op Posth",
-      date: "28 Aug, 2020",
+      date: "August 28, 2020",
       embedId: "4eKwJTrDovc"
     },
     {
@@ -43,7 +53,7 @@ const channelData = {
     },
     {
       title: "Eight Melodies • Piano Cover",
-      date: "29 Jan, 2020",
+      date: "January 29, 2020",
       embedId: "hUrPdxanEac"
     },
   ]
