@@ -135,7 +135,7 @@ h2 {
 
 
 /* Biography Specific Styles */
-.biography-container {
+.biography-container, .section-nav {
   max-width: 1200px;
   margin: 0 auto;
   padding: 2rem 1rem;
@@ -637,4 +637,22 @@ h2 {
   justify-content: space-between;
   align-items: baseline;
   margin-bottom: 10px;
+}
+
+.section-nav button {
+  border: none;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 25px;
+  transition: var(--transition);
+  user-select: none;
+  color: var(--sec-color);
+  background-color: #68d998;
+}
+
+.section-nav button:hover {
+  background-color:var(--sec-color);
+  color:#68d998;
 }
