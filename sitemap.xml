@@ -21,8 +21,12 @@ xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
     <priority>0.5</priority>
   </url>
   <url>
+    <loc>https://xalsier.com/silent</loc>
+    <priority>0.5</priority>
+  </url>
+  <url>
     <loc>https://xalsier.com/short-stories</loc>
-    <priority>0.2</priority>
+    <priority>0.4</priority>
   </url>
   <url>
     <loc>https://xalsier.com/swallow-pines</loc>
