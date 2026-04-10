@@ -1,0 +1,9 @@
+Markdown Plugin
+- Method 1: (Page) Ex. frag.js, silent.js
+- Method 2: (Select) Ex. rorschach.js, untitled.js
+- Template: breath.js (Unused)
+
+FAQ Plugin
+- bio.html
+- swallow-pines.html
+
