@@ -64,8 +64,8 @@ fetch('../json/education.json')
                 html += `<button class="fold-btn">Show Details</button>`;
                 html += `</div> <div class="details" style="display:none;">
                             ${lang.certificates && lang.certificates.length > 0 ? `<h4>Certificates</h4><ul>${renderList(lang.certificates)}</ul>` : ''}
-                            ${lang.courses && lang.courses.length > 0 ? `<h4>Courses</h4><ul>${renderList(lang.courses)}</ul>` : ''}
-                            ${lang.books && lang.books.length > 0 ? `<h4>Books</h4><ul>${renderList(lang.books)}</ul>` : ''}
+                            ${lang.courses && lang.courses.length > 0 ? `<h4>Courses taken</h4><ul>${renderList(lang.courses)}</ul>` : ''}
+                            ${lang.books && lang.books.length > 0 ? `<h4>Books read</h4><ul>${renderList(lang.books)}</ul>` : ''}
                         </div>`;
             } else {
                 html += `</div>`; // Close lang-header for Native/No details
