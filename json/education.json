@@ -1,0 +1,31 @@
+{
+    "languages": [
+      {
+        "name": "English",
+        "level": "Native",
+        "hasDetails": false
+      },
+      {
+        "name": "Spanish",
+        "level": "Elementary",
+        "hasDetails": true,
+        "certificates": [
+          { "label": "PBHS (2021)", "title": "Medal of Biliteracy", "url": null }
+        ],
+        "courses": [],
+        "books": []
+      },
+      {
+        "name": "Japanese",
+        "level": "Elementary",
+        "hasDetails": true,
+        "certificates": [],
+        "courses": [
+          { "label": "Udemy (2024)", "title": "JLPT N5 Level Elementary Japanese Study Course", "url": "https://www.udemy.com/course/japanese-n5-course" }
+        ],
+        "books": [
+          { "label": "Tuttle (2025)", "title": "Learning Japanese Hiragana and Katakana: A Workbook for Self-Study (Read)", "url": "https://www.goodreads.com/book/show/20736557" }
+        ]
+      }
+    ]
+  }

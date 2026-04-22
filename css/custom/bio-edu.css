@@ -1,0 +1,166 @@
+/* --- Content Containers --- */
+#education-content, 
+#overview-content {
+    transition: opacity 0.4s ease-in-out;
+    max-width: 1200px;
+    width: 100%;       /* Ensures it stretches to max-width */
+    margin: 0 auto;    /* Centers the containers */
+    box-sizing: border-box;
+}
+
+/* Specific state for Education */
+#education-content {
+    display: none;
+    opacity: 0;
+}
+
+/* --- Navigation Buttons --- */
+.section-nav {
+    max-width: 1200px;
+    margin: 0 auto 30px auto;
+    width: 100%;
+}
+
+.nav-btn {
+    padding: 12px 24px;
+    border: 1px solid var(--sec-color-2);
+    background: var(--sec-color);
+    color: var(--white);
+    cursor: pointer;
+    border-radius: var(--border-radius);
+    font-weight: 600;
+    transition: var(--transition);
+}
+
+.nav-btn:hover {
+    background: var(--sec-color-2);
+    border-color: var(--green);
+}
+
+.nav-btn.active {
+    background: var(--green);
+    color: var(--bg-color);
+    border-color: var(--green);
+}
+
+/* --- Language Cards --- */
+.lang-item {
+    background-color: var(--green);
+    color: var(--bg-color); 
+    border-radius: var(--border-radius);
+    padding: 25px;
+    margin-bottom: 20px;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.lang-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+.lang-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.lang-header strong {
+    font-size: 1.5rem;
+    letter-spacing: 0.5px;
+}
+
+/* --- Fold Button --- */
+.fold-btn {
+    background-color: var(--bg-color);
+    color: var(--white);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 30px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.fold-btn:hover {
+    opacity: 0.85;
+    transform: scale(1.05);
+}
+
+/* --- Nested Details --- */
+.details {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(16, 18, 23, 0.15);
+}
+
+.details h4 {
+    margin: 15px 0 10px 0;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-weight: 800;
+    opacity: 0.7;
+}
+
+.details ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.details li {
+    color: var(--bg-color);
+    padding: 6px 0;
+    font-size: 1rem;
+    border-bottom: 1px solid rgba(16, 18, 23, 0.05);
+}
+
+.details li:last-child {
+    border-bottom: none;
+}
+
+.details a {
+    color: var(--bg-color);
+    text-decoration: none;
+    font-weight: 600;
+    border-bottom: 2px solid var(--bg-color);
+    transition: opacity 0.2s;
+}
+
+.details a:hover {
+    opacity: 0.6;
+}
+
+/* Ensure the bold label doesn't get the underline from the link */
+.details li strong {
+    font-weight: 700;
+    margin-right: 5px;
+    color: var(--bg-color)
+}
+
+/* Specific styling for the title link */
+.details a {
+    color: var(--bg-color);
+    text-decoration: none;
+    border-bottom: 1px solid var(--bg-color); /* Clean underline for title only */
+    transition: opacity 0.2s;
+}
+
+.details a:hover {
+    opacity: 0.6;
+}
+
+/* Header for the new Certificates section */
+.details h4 {
+    margin: 15px 0 8px 0;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    font-weight: 800;
+    color: rgba(16, 18, 23, 0.7); /* Darker text for hierarchy */
+}

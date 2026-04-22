@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="./css/index.css">
     <link rel="stylesheet" href="./css/custom/faq.css">
     <link rel="stylesheet" href="./css/custom/about.css">
+    <link rel="stylesheet" href="./css/custom/bio-edu.css">
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -208,11 +209,18 @@
                 </section>
 
                 <section class="section-nav">
-                  <div style="display: flex;flex-wrap: wrap;flex-direction: row;">
-                    <button>Overview</button>
+                  <div style="display: flex;flex-wrap: wrap;flex-direction: row; gap: 20px;">
+                    <button id="btn-overview" class="nav-btn active">Overview</button>
+                    <button id="btn-education" class="nav-btn">Education</button>
                   </div>
                 </section>
 
+              <div id="education-content" style="display: none; opacity: 0;">
+                  <h2>Languages Written & Spoken</h2>
+                  <div id="language-list">
+                  </div>
+              </div>
+              <div id="overview-content">
                 <section class="featured-art-section">
                     <h2>Featured Art</h2>
                     <div class="featured-art-grid">
@@ -318,6 +326,7 @@
                         </div>
                     </div>
                 </section>
+              </div>
 
                 <!-- Moved schema data to hidden section -->
                 <div style="display:none;" itemscope itemtype="https://schema.org/Person">
@@ -356,5 +365,6 @@
     <script src="./js/biomodal.js"></script>
     <script src="./js/plugin/faq.js"></script>
     <script src="./js/sidebar.js"></script>
+    <script src="./js/nav/bio-nav.js"></script>
 </body>
 </html>
