@@ -14,6 +14,7 @@
         ],
         "courses": [],
         "books": [
+            { "label": "(2026) Innovative Language", "title": "Learn Mexican Spanish - Word Power 101", "url": "https://www.goodreads.com/book/show/229793668" },
             { "label": "(2026) Innovative Language", "title": "Learn Spanish - Word Power 101", "url": "https://www.goodreads.com/book/show/13638535" }
         ]
       },
