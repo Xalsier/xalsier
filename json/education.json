@@ -13,7 +13,9 @@
           { "label": "(2021) PBHS", "title": "Medal of Biliteracy", "url": null }
         ],
         "courses": [],
-        "books": []
+        "books": [
+            { "label": "(2026) Innovative Language", "title": "Learn Spanish - Word Power 101", "url": "https://www.goodreads.com/book/show/13638535" }
+        ]
       },
       {
         "name": "Japanese",
@@ -24,8 +26,8 @@
           { "label": "(2024) Udemy", "title": "JLPT N5 Level Elementary Japanese Study Course", "url": "https://www.udemy.com/course/japanese-n5-course" }
         ],
         "books": [
-          { "label": "(2026) Innovative Language", "title": "Learn Japanese - Word Power 101 (Read)", "url": "https://www.goodreads.com/book/show/13365668" },
-          { "label": "(2025) Tuttle", "title": "Learning Japanese Hiragana and Katakana: A Workbook for Self-Study (Read)", "url": "https://www.goodreads.com/book/show/20736557" }
+          { "label": "(2026) Innovative Language", "title": "Learn Japanese - Word Power 101", "url": "https://www.goodreads.com/book/show/13365668" },
+          { "label": "(2025) Tuttle", "title": "Learning Japanese Hiragana and Katakana: A Workbook for Self-Study", "url": "https://www.goodreads.com/book/show/20736557" }
         ]
       }
     ]
