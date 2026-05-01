@@ -8,6 +8,7 @@ const socialLinks = [
   { href: "https://www.youtube.com/c/Xalsier", src: "./svg/soc/YouTube.svg", alt: "Youtube" },
  { href: "https://www.tiktok.com/@xalsier", src: "./svg/soc/TikTok.svg", alt: "TikTok" },
  { href: "https://www.linkedin.com/in/xalsier/", src: "./svg/soc/LinkedIn.svg", alt: "LinkedIn" },
+ { href: "https://www.furaffinity.net/user/xalsier", src: "./svg/soc/FurAffinity.svg", alt: "FurAffinity" },
 ];
 
 const socialContainer = document.getElementById("socialBar");

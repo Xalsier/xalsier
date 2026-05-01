@@ -2,3 +2,6 @@ April 7, 2026 - short-stories.html // Short Stories
 March 4, 2026 - live.html // Livestreams & EVents
 March 2, 2026 - roadmap.html // Roadmap
 February 27, 2026 - press.html // Press Kit
+November 24, 2025 - music.html // Music Archive
+November 24, 2025 - notice.html // Notice Archive
+November 24, 2025 - youtube.html // YouTube Archive
