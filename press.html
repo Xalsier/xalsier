@@ -172,10 +172,12 @@
         <h2 class="faq-title">My Profile Icon</h2>
 
         <div style="width:100%;text-align: left;flex-direction: row;display:flex;gap:20px">
-          <img style="border-radius:5px;display:flex;" src="./thumb/fuwa.jpg">
-          <img id="sourceImg" src="./thumb/fuwa720.png" style="display:none;" crossorigin="anonymous">
+          <img style="border-radius:5px;display:flex;" src="./thumb/fuwa2880.png" width="160">
+          <img id="sourceImg" src="./thumb/fuwa2880.png" style="display:none;" width="160" crossorigin="anonymous">
 
           <div style="display:flex;gap:10px;flex-wrap:wrap;">
+            <button class="download-btn" onclick="downloadSize(2880)">2880px</button>
+            <button class="download-btn" onclick="downloadSize(1440)">1440px</button>
             <button class="download-btn" onclick="downloadSize(720)">720px</button>
             <button class="download-btn" onclick="downloadSize(360)">360px</button>
             <button class="download-btn" onclick="downloadSize(160)">160px</button>

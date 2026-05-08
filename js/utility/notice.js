@@ -1,7 +1,7 @@
 const DEFAULT_MAX_NOTICE_INDEX = 30;
 
 const ANNOUNCEMENT_DATA = window.announcementData || {
-  avatarSrc: './thumb/fuwa35.svg',
+  avatarSrc: './thumb/fuwa2880.png',
   avatarTitle: "(Fuwa) Xalsier's profile on Social Media.",
   avatarAlt: 'A drawing of the character Fuwa.',
   name: 'Xalsier'
