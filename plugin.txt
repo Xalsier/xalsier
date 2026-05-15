@@ -7,3 +7,19 @@ FAQ Plugin
 - bio.html
 - swallow-pines.html
 
+
+
+
+
+Carousel Plugin
+
+<link rel="stylesheet" href="./css/custom/live.css">
+<center>
+  <div class="carousel">
+    <div style="width: 500px;display:flex;flex-direction: row;gap:15px;justify-content: center;align-items: flex-end;margin-left:150px;margin-right:150px;margin-bottom:10px;">
+        <a></a>
+        <a></a>
+        <a></a>
+    </div>
+  </div>
+</center>
