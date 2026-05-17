@@ -18,6 +18,7 @@
   <link rel="stylesheet" href="./css/index/profile.css">
   <link rel="stylesheet" href="./css/index/markdown.css">
   <link rel="stylesheet" href="./css/index/start.css">
+  <link rel="stylesheet" href="./css/custom/live.css">
   <link rel="stylesheet" href="./css/bg.css">
 </head>
 
@@ -103,111 +104,16 @@
   </div>
 </nav>
   <br>
-<div class="caro-container">
-  <div id="carousel" class="carousel-wrapper" style="display:flex;flex-direction: column;width: 100%;">
-    <div class="carousel-track-container">
-        <div class="carousel-track">
 
-
-            <div class="carousel-item">
-              <div class="announcement-card">
-                <div class="announcement-header">
-                  <img 
-                    id="announcement-avatar"
-                    class="announcement-avatar" 
-                    src="" 
-                    alt=""
-                    title="">
-                  <div class="announcement-name-date">
-                    <span id="announcement-name" class="announcement-name"></span>
-                    <span id="announcement-date" class="announcement-date"></span>
-                  </div>
-                </div>
-                <div class="announcement-message" id="announcement-message">
-                </div>
-              </div>
-            </div>
-            <div class="carousel-item">
-              <div class="roadmap-card" id="roadmapCard">
-                <h2>Comic Roadmap</h2>
-        
-                <div class="timeline-wrapper">
-                    <div class="timeline-list">
-                        <div class="timeline-item past">
-                            <span class="timeline-date">Dec 9th</span>
-                            <span class="timeline-content">Page 1 Release</span>
-                        </div>
-                        <div class="timeline-item past">
-                            <span class="timeline-date">Dec 20th</span>
-                            <span class="timeline-content">Page 2 Release</span>
-                        </div>
-                        <div class="timeline-item active">
-                            <span class="timeline-date">January 14th</span>
-                            <span class="timeline-content">Cover Art Release</span>
-                        </div>
-                        <div class="timeline-item">
-                            <span class="timeline-date">TBD</span>
-                            <span class="timeline-content">Page 4 Release</span>
-                        </div>
-                        <div class="timeline-item">
-                            <span class="timeline-date">TBD</span>
-                            <span class="timeline-content">Future Batch</span>
-                        </div>
-                    </div>
-                </div>
-        
-                <div class="roadmap-footer" id="footerSection">
-                    <div class="progress-header">
-                        <span id="phaseName">Break</span>
-                        <span id="percentText">10%</span>
-                    </div>
-                    <div class="progress-container">
-                        <div class="progress-bar" id="progressBar"></div>
-                    </div>
-                    <div class="phase-info" id="phaseDesc">
-                        1-2 Days
-                    </div>
-                </div>
-            </div>
-            </div>
-              <!-- Card 1 -->
-            <!-- Card 2 -->
-            <div class="carousel-item">
-                <h2>Featured Art</h2>
-                <br>
-                <img height="200px" src="./lib/un/oneshot.svg">
-            </div>
-            <div class="carousel-item">
-              <div style="background-color:var(--green);padding:30px;border-radius:5px;width:500px;">
-                <div style="display:flex;flex-direction: row; gap: 10px;font-size: 1.5em;">
-                  <img src="./svg/icon/card.svg">
-                  <h2 style="color:var(--bg-color);">Financial Support</h2>
-                </div>
-                <br>
-                <b style="color:var(--bg-color);font-size: 1.2em;">If you would like to support my artwork or writing financially, feel free to use one of these sites.</b>
-                <br>
-                <br>
-                <div style="display:flex;flex-direction: row; gap: 10px;font-size: 1.5em; color: var(--green);">
-                    <a href="https://ko-fi.com/Xalsier" style="color:var(--bg-color);background-color: var(--bg-color);padding:10px;color:var(--green);border-radius:5px;">Ko-Fi</a> - 
-                    <a href="https://patreon.com/Xalsier" style="color:var(--bg-color);background-color: var(--bg-color);padding:10px;color:var(--green);border-radius:5px;">Patreon</a>
-                </div>
-              </div>
-          </div>
-
-            <!-- Card 3 -->
-        </div>
+  <center>
+    <div class="carousel">
+      <div style="width: 500px;display:flex;flex-direction: row;gap:15px;justify-content: center;align-items: flex-end;margin-left:150px;margin-right:150px;margin-bottom:10px;">
+          <a href="untitled.html"><img src="./lib/un/oneshot.svg" width="200px;" style="border-radius: 10px;"></a>
+          <a href="./comics/untitled.html"><img src="./lib/un/0.svg" height="270px" style="border-radius: 10px;"></a>
+          <a href="#"><img src="./lib/cover/collection.svg" height="270px" style="border-radius: 10px;"></a>
+      </div>
     </div>
-
-    <!-- Navigation Dots -->
-    <div class="dots-container">
-        <div class="dot active" data-index="0" aria-label="Go to slide 1"></div>
-        <div class="dot" data-index="1" aria-label="Go to slide 2"></div>
-        <div class="dot" data-index="2" aria-label="Go to slide 3"></div>
-        <div class="dot" data-index="3" aria-label="Go to slide 4"></div>
-    </div>
-</div>
-</div>
-
+  </center>
 
     <!-- Filter Section -->
     <div class="filter-section">
@@ -263,26 +169,7 @@
         <!-- Gallery items will be populated by JavaScript -->
       </div>
   
-      <div class="character-profile-section" id="characterProfileSection" style="display: none;">
-        <div class="character-profile-card">
-          <div class="character-header">
-            <img id="profileImage" alt="Character Image">
-            <div class="character-info">
-              <h2 id="profileName"></h2>
-              <p id="profileProject"></p>
-              <p id="profileDescription"></p>
-            </div>
-          </div>
-          <div class="character-details">
-            <div class="character-traits">
-              <h3>Traits</h3>
-              <div id="profileTraits"></div>
-            </div>
-            <div class="character-background">
-              <p id="profileBackground"></p>
-            </div>
-          </div>
-        </div>
+
       
         <!-- NEW: Markdown/story content goes here -->
         <div class="character-markdown">
@@ -348,16 +235,13 @@
   
   <script src="./con/library.js"></script>
   <script src="./con/filters.js"></script>
-  <script src="./con/plugin/caro.js"></script>
   <script src="./con/char.js"></script>
   <script src="./con/con_archive.js"></script>
   <script src="./js/utility.js"></script>
   <script src="./js/select.js"></script>
   <script src="./js/utility/articles.js"></script>
-  <script src="./js/utility/notice.js"></script>
   <script src="./js/archive.js"></script>
   <script src="./js/utility/prog.js"></script>  
   <script src="./js/sidebar.js"></script>
-  <script src="./js/plugin/roadmap.js"></script>
 </body>
 </html>

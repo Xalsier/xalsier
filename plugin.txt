@@ -13,6 +13,11 @@ FAQ Plugin
 
 Carousel Plugin
 
+Usage
+- live.html
+- swallow-pines.html
+- index.html
+
 <link rel="stylesheet" href="./css/custom/live.css">
 <center>
   <div class="carousel">

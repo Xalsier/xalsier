@@ -1,12 +1,10 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const announcement = document.querySelector(".announcement-card");
     const selects = document.querySelector(".filter-section");
     const gallery = document.querySelector(".gallery-section");
     const footer = document.querySelector("footer");
 
     // Step 1: show announcement
     setTimeout(() => {
-      announcement.classList.add("fade-in");
 
       // Step 2: show selects
       setTimeout(() => {
