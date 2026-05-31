@@ -28,3 +28,14 @@ Usage
     </div>
   </div>
 </center>
+
+
+Description Plugin (Broken)
+
+// Appears to be inserting the wrong html.
+
+if (item.desc) {
+  const descPara = document.createElement("p");
+  descPara.innerHTML = `<strong>Description:</strong><br> <div id="item-desc">${item.desc}</div>`;
+  modalAltDesc.appendChild(descPara);
+}

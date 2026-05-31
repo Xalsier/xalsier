@@ -14,11 +14,8 @@ function initApp() {
   setupEventListeners();
   loadItems();
   DEFAULT_FILTERS.forEach((filterName) => {
-    // --- FIX APPLIED HERE ---
-    // The filter type is "history" if the name is "Recent", "Rating", or "Oldest". Otherwise, it defaults to "tag".
     const isHistoryFilter = ["Recent", "Rating", "Oldest"].includes(filterName);
     const filterType = isHistoryFilter ? "history" : "tag";
-    // ------------------------
     
     const filterId = `${filterType}-${filterName}`;
     archiveState.activeFilters.set(filterId, {
@@ -826,13 +823,6 @@ if (item.alt) {
   const altPara = document.createElement("p");
   altPara.innerHTML = `<strong>Alt:</strong><br> <div id="item-alt">${item.alt}</div>`;
   modalAltDesc.appendChild(altPara);
-}
-
-// Add description if it exists
-if (item.desc) {
-  const descPara = document.createElement("p");
-  descPara.innerHTML = `<strong>Description:</strong><br> <div id="item-desc">${item.desc}</div>`;
-  modalAltDesc.appendChild(descPara);
 }
 
 

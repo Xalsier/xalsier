@@ -132,20 +132,32 @@ async function init() {
   await loadSVG();
 
   const eventTrack = document.getElementById("eventTrack");
-  const streamTrack = document.getElementById("streamTrack");
-
+  const twitchTrack = document.getElementById("twitchTrack");
+  const picartoTrack = document.getElementById("picartoTrack");
+  
   if (eventTrack) {
     events.forEach(event => {
       eventTrack.appendChild(createCard(event));
     });
   }
 
-  if (streamTrack) {
-    streams.forEach(stream => {
-      streamTrack.appendChild(createCard(stream));
-    });
+  if (twitchTrack) {
+    streams
+      .filter(stream => stream.platform === "twitch")
+      .forEach(stream => {
+        twitchTrack.appendChild(createCard(stream));
+      });
+  }
+  
+  if (picartoTrack) {
+    streams
+      .filter(stream => stream.platform === "picarto")
+      .forEach(stream => {
+        picartoTrack.appendChild(createCard(stream));
+      });
   }
 
 }
 
 init();
+
