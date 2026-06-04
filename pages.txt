@@ -1,10 +1,24 @@
 May 28, 2026 store.html // Primal Market
 May 12, 2026 untitled.html // Untitled Comic
-May 1, 2026 - ama.html // Ask Me Anything (removed)
+April 9, 2026 - silent.html // A Silent Whimper (short story)
 April 7, 2026 - short-stories.html // Short Stories
-March 4, 2026 - live.html // Livestreams & EVents
+March 4, 2026 - live.html // Livestreams & Events
 March 2, 2026 - roadmap.html // Roadmap
+March 1, 2026 - texas.html // A Fragging in Texas (short story)
 February 27, 2026 - press.html // Press Kit
+February 4, 2026 - rorschach.html // Prion Rorschach (short story)
+January 2, 2026 - socials.html // Socials (note: page was necessary to update google knowledge panel)
 November 24, 2025 - music.html // Music Archive
 November 24, 2025 - notice.html // Notice Archive
 November 24, 2025 - youtube.html // YouTube Archive
+September 13, 2025 - untitled.html // Untitled Project (short story)
+August 16, 2025 - analytics.html // Analytics
+August 15, 2025 - bio.html // Biography
+July 14, 2025 - index.html // Rawr Folder
+
+
+// Removed Pages //
+May 1, 2026 - ama.html // Ask Me Anything (removed: cannot maintain)
+March 3, 2026 - characters.html // List of Characters (removed: cannot maintain)
+December 28, 2025 - sitemap.html // Sitemap (removed: cannot maintain)
+??? - breath.html // Last Breath of an Angels Mercenary (short story) (removed: rewrite)
