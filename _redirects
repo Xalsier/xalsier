@@ -35,6 +35,7 @@
 /frag               /texas              301
 /short-story        /short-stories      301
 /beliefs            /bio#activism       301
+/activism           /bio#activism
 
 # External Links
 
@@ -47,3 +48,9 @@
 /comics/live        /live
 /comics/short-stories    /short-stories
 /comics/texas         /texas
+/comics/rorschach       /rorschach
+/comics/silent        /silent
+/comics/store         /store
+/comics/swallow-pines       /swallow-pines
+/comics/press          /press
+/comics/analytics         /analytics 
