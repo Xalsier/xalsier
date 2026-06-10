@@ -58,3 +58,16 @@
 /comics/swallow-pines       /swallow-pines
 /comics/press          /press
 /comics/analytics         /analytics 
+
+# Broken Links (Comics)
+
+/comics/comics/socials     /socials
+/comics/comics/live        /live
+/comics/comics/short-stories    /short-stories
+/comics/comics/texas         /texas
+/comics/comics/rorschach       /rorschach
+/comics/comics/silent        /silent
+/comics/comics/store         /store
+/comics/comics/swallow-pines       /swallow-pines
+/comics/comics/press          /press
+/comics/comics/analytics         /analytics 
