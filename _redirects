@@ -60,6 +60,7 @@
 /comics/swallow-pines       /swallow-pines
 /comics/press          /press
 /comics/analytics         /analytics 
+/comics/roadmap        /roadmap
 
 # Broken Links (Comics)
 
@@ -73,3 +74,4 @@
 /comics/comics/swallow-pines       /swallow-pines
 /comics/comics/press          /press
 /comics/comics/analytics         /analytics 
+/comics/comics/roadmap        /roadmap
