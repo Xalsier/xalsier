@@ -1,82 +1,50 @@
 document.addEventListener('DOMContentLoaded', (event) => {
   const worksContainer = document.getElementById('works-container');
-
   const upcomingWorksDiv = document.createElement('div');
   upcomingWorksDiv.className = 'upcoming-works fade-in';
-
+  
   const heading = document.createElement('h2');
   heading.textContent = 'Written Works';
   upcomingWorksDiv.appendChild(heading);
 
-  const worksCardsDiv = document.createElement('div');
-  worksCardsDiv.className = 'works-cards';
+  // Helper to render sections
+  const renderSection = (title, dataArray) => {
+    const section = document.createElement('div');
+    section.innerHTML = `<h3>${title}</h3>            <br>`;
+    const cardsDiv = document.createElement('div');
+    cardsDiv.className = 'works-cards';
 
-  worksData.forEach(work => {
-    const workCard = document.createElement('div');
-    workCard.className = 'work-card';
-
-    // Check if an image path exists (not null)
-    if (work.img) {
-      const workCoverContainer = document.createElement('div');
-      workCoverContainer.className = 'work-cover-container';
-
-      const coverImage = document.createElement('img');
-      coverImage.src = work.img;
-      coverImage.alt = `Cover art for ${work.title}`;
-      coverImage.className = 'work-cover-image';
-
-      // --- New Code for Image Error Handling ---
-      coverImage.onerror = function() {
-        workCoverContainer.classList.add('image-error--green');
-        coverImage.style.display = 'none'; // Hide the broken image icon
-      };
-      // -----------------------------------------
+    dataArray.forEach(work => {
+      const workCard = document.createElement('div');
+      workCard.className = 'work-card';
       
-      workCoverContainer.appendChild(coverImage);
-      workCard.appendChild(workCoverContainer); // Append cover container only if img exists
-    } else {
-      // If work.img is null, the workCoverContainer is never created.
-      // We add a class to the card to allow the content to take up full space.
-      workCard.classList.add('no-image-work');
-    }
+      // Image Handling
+      if (work.img) {
+        workCard.innerHTML = `<div class="work-cover-container"><img src="${work.img}" alt="${work.title}" class="work-cover-image" onerror="this.parentElement.classList.add('image-error--green'); this.style.display='none';"></div>`;
+      } else {
+        workCard.classList.add('no-image-work');
+      }
 
-    const workContent = document.createElement('div');
-    workContent.className = 'work-content';
+      // Content Injection
+      workCard.insertAdjacentHTML('beforeend', `
+        <div class="work-content">
+          <div class="work-card-header">
+            <h3 class="work-title">${work.title}</h3>
+          </div>
+          <p class="work-description">${work.description}</p>
+          <div class="work-notes">${work.notes}</div>
+        </div>
+      `);
+      cardsDiv.appendChild(workCard);
+    });
 
-    const workCardHeader = document.createElement('div');
-    workCardHeader.className = 'work-card-header';
+    section.appendChild(cardsDiv);
+    upcomingWorksDiv.appendChild(section);
+  };
 
-    const workTitle = document.createElement('h3');
-    workTitle.className = 'work-title';
-    workTitle.textContent = work.title;
+  // Render the two categories
+  renderSection('Novels', novels);
+  renderSection('Short Stories', shortStories);
 
-    const workGenre = document.createElement('span');
-    workGenre.className = 'work-genre';
-    workGenre.textContent = work.genre;
-
-    workCardHeader.appendChild(workTitle);
-    workCardHeader.appendChild(workGenre);
-
-    const workDescription = document.createElement('p');
-    workDescription.className = 'work-description';
-    workDescription.textContent = work.description;
-
-    const workNotes = document.createElement('div');
-    workNotes.className = 'work-notes';
-    workNotes.textContent = work.notes;
-
-    workContent.appendChild(workCardHeader);
-    workContent.appendChild(workDescription);
-    workContent.appendChild(workNotes);
-
-    workCard.appendChild(workContent);
-
-    worksCardsDiv.appendChild(workCard);
-  });
-
-  upcomingWorksDiv.appendChild(worksCardsDiv);
-
-  if (worksContainer) {
-    worksContainer.appendChild(upcomingWorksDiv);
-  }
+  if (worksContainer) worksContainer.appendChild(upcomingWorksDiv);
 });
