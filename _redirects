@@ -39,6 +39,8 @@
 /primal-market      /store
 /market             /store
 /shop               /store
+/notice             /archive/notice
+/notices            /archive/notice
 
 # External Links
 
@@ -50,28 +52,43 @@
 
 # Broken Links (Comics)
 
-/comics/socials     /socials
-/comics/live        /live
-/comics/short-stories    /short-stories
-/comics/texas         /texas
-/comics/rorschach       /rorschach
-/comics/silent        /silent
-/comics/store         /store
-/comics/swallow-pines       /swallow-pines
-/comics/press          /press
-/comics/analytics         /analytics 
-/comics/roadmap        /roadmap
+/comics/socials                         /socials
+/comics/live                            /live
+/comics/events                          /live
+/comics/event                           /live
+/comics/short-stories                   /short-stories
+/comics/texas                           /texas
+/comics/rorschach                       /rorschach
+/comics/silent                          /silent
+/comics/store                           /store
+/comics/swallow-pines                   /swallow-pines
+/comics/press                           /press
+/comics/analytics                       /analytics 
+/comics/roadmap                         /roadmap
 
 # Broken Links (Comics)
 
-/comics/comics/socials     /socials
-/comics/comics/live        /live
-/comics/comics/short-stories    /short-stories
-/comics/comics/texas         /texas
-/comics/comics/rorschach       /rorschach
-/comics/comics/silent        /silent
-/comics/comics/store         /store
-/comics/comics/swallow-pines       /swallow-pines
-/comics/comics/press          /press
-/comics/comics/analytics         /analytics 
-/comics/comics/roadmap        /roadmap
+/comics/comics/socials                  /socials
+/comics/comics/live                     /live
+/comics/comics/short-stories            /short-stories
+/comics/comics/texas                    /texas
+/comics/comics/rorschach                /rorschach
+/comics/comics/silent                   /silent
+/comics/comics/store                    /store
+/comics/comics/swallow-pines            /swallow-pines
+/comics/comics/press                    /press
+/comics/comics/analytics                /analytics 
+/comics/comics/roadmap                  /roadmap
+
+# Broken Links (Archive)
+
+/archive/rorschach                      /rorschach
+/archive/archive/archive/music          /music
+/archive/archive/index                  /
+/archive/archive/reviews                /
+/archive/archive/archive/breath         /
+/archive/archive/breath                 /
+/archive/archive/archive/index          /
+/archive/archive/archive/youtube        /archive/youtube
+/archive/archive/notice                 /archive/notice
+/archive/archive/notices                /archive/notice
