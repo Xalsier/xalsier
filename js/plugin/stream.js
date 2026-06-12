@@ -5,159 +5,102 @@ async function loadSVG() {
   eyeSVG = await res.text();
 }
 
-
-
-
-/* CARD BUILDER */
-
+/* GENERIC CARD BUILDER */
 function createCard(item) {
-
   const card = document.createElement("div");
   card.className = "card";
 
   const thumb = document.createElement("div");
   thumb.className = "thumb";
-
-  if (item.thumb) {
-    thumb.style.backgroundImage = `url(${item.thumb})`;
-  }
-
-  /* THUMB OVERLAY */
-
+  if (item.thumb) thumb.style.backgroundImage = `url(${item.thumb})`;
+  
   const overlay = document.createElement("div");
   overlay.className = "thumb-overlay";
-
-  const title = document.createElement("div");
-  title.className = "thumb-title";
-  title.textContent = item.title;
-
-  overlay.appendChild(title);
+  overlay.innerHTML = `<div class="thumb-title">${item.title}</div>`;
   thumb.appendChild(overlay);
-
-  /* META SECTION */
 
   const meta = document.createElement("div");
   meta.className = "meta";
 
-  /* TAG CONTAINER */
-
+  // Tag Container
   const tagContainer = document.createElement("div");
   tagContainer.className = "tag-container";
-
-  item.tags.forEach(tagText => {
-    const tag = document.createElement("span");
-    tag.className = "tag";
-    tag.textContent = tagText;
-    tagContainer.appendChild(tag);
-  });
-
+  if (item.tags) {
+    item.tags.forEach(tagText => {
+      const tag = document.createElement("span");
+      tag.className = "tag";
+      tag.textContent = tagText;
+      tagContainer.appendChild(tag);
+    });
+  }
   meta.appendChild(tagContainer);
 
-  /* STATS */
-
+  // Stats: Views Left, Date Right
   const stats = document.createElement("div");
   stats.className = "stats";
-
+  stats.style.display = "flex";
+  stats.style.justifyContent = "space-between";
   stats.innerHTML = `
-    <span class="views">
-      ${eyeSVG} ${item.views}
-    </span>
+    <span class="views">${eyeSVG} ${item.views}</span>
     <span class="date">${item.date}</span>
   `;
-
   meta.appendChild(stats);
-
-  /* EVENT CLICK HANDLER */
-
-  if (item.modal) {
-
-    card.style.cursor = "pointer";
-
-    card.addEventListener("click", () => {
-      openEventPopup({
-        title: item.title,
-        synopsis: item.modal.synopsis,
-        link: item.modal.link
-      });
-    });
-
-  }
 
   card.appendChild(thumb);
   card.appendChild(meta);
-
   return card;
 }
 
-
-/* EVENT POPUP SYSTEM */
-
-function openEventPopup(data) {
-
-  const backdrop = document.createElement("div");
-  backdrop.className = "event-popup-backdrop";
-
-  const popup = document.createElement("div");
-  popup.className = "event-popup";
-
-  popup.innerHTML = `
-    <h2>${data.title}</h2>
-
-    <p>${data.synopsis}</p>
-
-    <a href="${data.link}" target="_blank" class="event-popup-link">
-      Link
-    </a>
-
-    <button class="event-popup-close">Close</button>
+/* DEBATE CARD BUILDER */
+function createDebateCard(item) {
+  const card = document.createElement("div");
+  card.className = "card debate-card";
+  
+  card.innerHTML = `
+    <div class="thumb" style="background: var(--green); display: flex; align-items: center; justify-content: center; color: var(--bg-color); font-weight: bold; text-align: center; padding: 10px;">
+      ${item.title}
+    </div>
+    <div class="meta">
+      <div class="tag-container">
+        ${item.tags ? item.tags.map(t => `<span class="tag">${t}</span>`).join('') : ''}
+      </div>
+      <div class="stats" style="display: flex; justify-content: space-between;">
+        <span class="views">${eyeSVG} ${item.views}</span>
+        <span class="date">${item.date}</span>
+      </div>
+    </div>
   `;
-
-  backdrop.appendChild(popup);
-  document.body.appendChild(backdrop);
-
-  const closeBtn = popup.querySelector(".event-popup-close");
-
-  closeBtn.onclick = () => backdrop.remove();
-
-  backdrop.onclick = e => {
-    if (e.target === backdrop) backdrop.remove();
-  };
+  return card;
 }
 
-
 /* INITIALIZE PAGE */
-
 async function init() {
-
   await loadSVG();
-
-  const eventTrack = document.getElementById("eventTrack");
-  const twitchTrack = document.getElementById("twitchTrack");
-  const picartoTrack = document.getElementById("picartoTrack");
   
-  if (eventTrack) {
-    events.forEach(event => {
-      eventTrack.appendChild(createCard(event));
-    });
-  }
+  const tracks = {
+    eventTrack: events,
+    debateTrack: debates,
+    twitchTrack: streams.filter(s => s.platform === "twitch"),
+    picartoTrack: streams.filter(s => s.platform === "picarto")
+  };
 
-  if (twitchTrack) {
-    streams
-      .filter(stream => stream.platform === "twitch")
-      .forEach(stream => {
-        twitchTrack.appendChild(createCard(stream));
+  for (const [id, data] of Object.entries(tracks)) {
+    const el = document.getElementById(id);
+    if (el) {
+      data.forEach(item => {
+        el.appendChild(id === 'debateTrack' ? createDebateCard(item) : createCard(item));
       });
+    }
   }
-  
-  if (picartoTrack) {
-    streams
-      .filter(stream => stream.platform === "picarto")
-      .forEach(stream => {
-        picartoTrack.appendChild(createCard(stream));
-      });
-  }
+}
 
+// Function for isolated pages
+async function initDebatesOnly(containerId) {
+  await loadSVG();
+  const container = document.getElementById(containerId);
+  if (container) {
+    debates.forEach(d => container.appendChild(createDebateCard(d)));
+  }
 }
 
 init();
-
