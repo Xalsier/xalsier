@@ -6,6 +6,7 @@
   <title>Press Kit</title>
   <link rel="icon" type="image/x-icon" href="./favicon.ico">
   <link rel="stylesheet" href="./css/custom/faq.css">
+  <link rel="stylesheet" href="./css/custom/press.css">
   <link rel="stylesheet" href="./css/index.css">
   <script type="application/ld+json">
     {
@@ -72,25 +73,6 @@
       ]
     }
     </script>
-  <style>
-    .download-btn {
-      height:fit-content;
-      display:flex;
-      background-color:var(--green);
-      color:var(--bg-color);
-      width:fit-content;
-      padding:10px;
-      border-radius:5px;
-      font-weight:bold;
-      border:none;
-      cursor:pointer;
-      transition: transform 0.3s ease-in;
-    }
-
-    .download-btn:hover {
-      transform: scale(1.2);
-    }
-    </style>
 </head>
 <body>
   <header class="page-header" style="text-align: center;">
@@ -181,13 +163,13 @@
   </div>
 </nav>
 
-<center><main style="width:65%;">
+<main class="press-content">
 
   <section class="faq-section">
     <div class="faq-container">
         <h2 class="faq-title">My Profile Icon</h2>
 
-        <div style="width:100%;text-align: left;flex-direction: row;display:flex;gap:20px">
+        <div style="width:100%; text-align: left; flex-direction: row; display: flex; gap: 20px; flex-wrap: wrap;">
           <img style="border-radius:5px;display:flex;" src="./thumb/fuwa2880.png" width="160">
           <img id="sourceImg" src="./thumb/fuwa2880.png" style="display:none;" width="160" crossorigin="anonymous">
 
@@ -240,16 +222,20 @@
 <section class="faq-section">
   <div class="faq-container">
     <h2 class="faq-title">Book Catalogues</h2>
-    <a href="https://www.goodreads.com/author/show/63506490"><img src="./svg/soc/Goodreads.svg" alt="Goodreads" height="50"></a>
-    <a href="https://www.librarything.com/author/kitsunexalsier"><img src="./svg/soc/LibraryThing.svg" alt="LibraryThing" height="50"></a>
+    <center>
+      <a href="https://www.goodreads.com/author/show/63506490"><img src="./svg/soc/Goodreads.svg" alt="Goodreads" height="50"></a>
+      <a href="https://www.librarything.com/author/kitsunexalsier"><img src="./svg/soc/LibraryThing.svg" alt="LibraryThing" height="50"></a>  
+    </center>
   </div>
 </section>
 
 <section class="faq-section">
   <div class="faq-container">
     <h2 class="faq-title">Authority Files</h2>
-    <a href="https://isni.org/isni/0000000529531494"><img src="./svg/soc/ISNI.svg" alt="ISNI" height="50"></a>
-    <a href="https://www.wikidata.org/wiki/Q137926713"><img src="./svg/soc/Wikidata.svg" alt="Wikidata" height="50"></a>
+    <center>
+      <a href="https://isni.org/isni/0000000529531494"><img src="./svg/soc/ISNI.svg" alt="ISNI" height="50"></a>
+      <a href="https://www.wikidata.org/wiki/Q137926713"><img src="./svg/soc/Wikidata.svg" alt="Wikidata" height="50"></a>  
+    </center>
   </div>
 </section>
 
@@ -258,11 +244,13 @@
     <h2 class="faq-title">Deprecated Resources</h2>
     <p>My profile on IMDb currently (As of April 2026) lists me as only a composer/music editor. This title is generally inaccurate, as while music is an interest of mine- it certainly is not my <strong>primary</strong> interest or occupation. For updates on my current music projects, I recommend viewing the <a href="https://www.youtube.com/@XalsiersHOWLS">channel</a> I spun off on Youtube dedicated to piano covers.</p>
     <br>
-    <a href="https://www.imdb.com/name/nm13769262/"><img src="./svg/soc/IMDB.svg" alt="IMDB" height="50"></a>
+    <center>
+      <a href="https://www.imdb.com/name/nm13769262/"><img src="./svg/soc/IMDB.svg" alt="IMDB" height="50"></a>
+    </center>
   </div>
 </section>
 
-</main></center>
+</main>
 
   <footer>
     <center class="footer-nav">

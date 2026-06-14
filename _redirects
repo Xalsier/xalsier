@@ -1,54 +1,46 @@
 # Redirect .html URLs
 
-/about.html         /bio                301
-/biography.html     /bio                301
-/cover.html         /archive/youtube    301
-/covers.html        /archive/youtube    301
-/data.html          /analytics          301
-/stats.html         /analytics          301
-/stat.html          /analytics          301
-/graph.html         /analytics          301
-/graphs.html        /analytics          301
+/about.html                            /bio                301
+/biography.html                        /bio                301
+/cover.html                            /archive/youtube    301
+/covers.html                           /archive/youtube    301
+/data.html                             /analytics          301
+/stats.html                            /analytics          301
+/stat.html                             /analytics          301
+/graph.html                            /analytics          301
+/graphs.html                           /analytics          301
 
 # Redirect extensionless URLs
 
-/about              /bio                301
-/biography          /bio                301
-/cover              /archive/youtube    301
-/covers             /archive/youtube    301
-/yt                 /archive/youtube    301
-/piano              /archive/youtube    301
-/piano_covers       /archive/youtube    301
-/data               /analytics          301
-/statistics         /analytics          301
-/stats              /analytics          301
-/stat               /analytics          301
-/graph              /analytics          301
-/graphs             /analytics          301
-/mus                /archive/music      301
-/msuic              /archive/music      301
-/songs              /archive/music      301
-/song               /archive/music      301
-/github             /contact            301
-/email              /contact            301
-/prion              /rorschach          301
-/frag               /texas              301
-/short-story        /short-stories      301
-/beliefs            /bio#activism       301
-/activism           /bio#activism
-/primal-market      /store
-/market             /store
-/shop               /store
-/notice             /archive/notice
-/notices            /archive/notice
-
-# External Links
-
-/ko-fi              https://ko-fi.com/xalsier
-/status             https://status.xalsier.com
-/wikidata           https://www.wikidata.org/wiki/Q137926713
-/wikidaya           https://www.wikidata.org/wiki/Q137926713
-
+/about                                 /bio                301
+/biography                             /bio                301
+/cover                                 /archive/youtube    301
+/covers                                /archive/youtube    301
+/yt                                    /archive/youtube    301
+/piano                                 /archive/youtube    301
+/piano_covers                          /archive/youtube    301
+/data                                  /analytics          301
+/statistics                            /analytics          301
+/stats                                 /analytics          301
+/stat                                  /analytics          301
+/graph                                 /analytics          301
+/graphs                                /analytics          301
+/mus                                   /archive/music      301
+/msuic                                 /archive/music      301
+/songs                                 /archive/music      301
+/song                                  /archive/music      301
+/github                                /contact            301
+/email                                 /contact            301
+/prion                                 /rorschach          301
+/frag                                  /texas              301
+/short-story                           /short-stories      301
+/beliefs                               /bio#activism       301
+/activism                              /bio#activism
+/primal-market                         /store
+/market                                /store
+/shop                                  /store
+/notice                                /archive/notice
+/notices                               /archive/notice
 
 # Broken Links (Comics)
 
@@ -65,8 +57,9 @@
 /comics/press                           /press
 /comics/analytics                       /analytics 
 /comics/roadmap                         /roadmap
+/comics/contact                         /contact
 
-# Broken Links (Comics)
+# Broken Links (Comics/Comics)
 
 /comics/comics/socials                  /socials
 /comics/comics/live                     /live
@@ -79,8 +72,13 @@
 /comics/comics/press                    /press
 /comics/comics/analytics                /analytics 
 /comics/comics/roadmap                  /roadmap
+/comics/comics/contact                  /contact
 
 # Broken Links (Archive)
+
+/archive/contact                        /contact
+
+# Broken Links (Archive/Archive)
 
 /archive/rorschach                      /rorschach
 /archive/archive/archive/music          /music
@@ -92,3 +90,13 @@
 /archive/archive/archive/youtube        /archive/youtube
 /archive/archive/notice                 /archive/notice
 /archive/archive/notices                /archive/notice
+/archive/archive/contact                /contact
+
+# External Links
+
+/ko-fi                                  https://ko-fi.com/xalsier
+/kofi                                   https://ko-fi.com/xalsier
+/status                                 https://status.xalsier.com
+/wikidata                               https://www.wikidata.org/wiki/Q137926713
+/wikidaya                               https://www.wikidata.org/wiki/Q137926713
+/goodreads                              https://www.goodreads.com/xalsier

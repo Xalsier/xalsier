@@ -1,0 +1,31 @@
+/* Centers the content and sets default desktop width */
+.press-content {
+    width: 65%;
+    margin: 0 auto; 
+    display: block;
+  }
+  
+  /* On screens 768px and smaller (tablets & mobile), expand the width */
+  @media (max-width: 768px) {
+    .press-content {
+      width: 92%; 
+    }
+  }
+
+  .download-btn {
+    height:fit-content;
+    display:flex;
+    background-color:var(--green);
+    color:var(--bg-color);
+    width:fit-content;
+    padding:10px;
+    border-radius:5px;
+    font-weight:bold;
+    border:none;
+    cursor:pointer;
+    transition: transform 0.3s ease-in;
+  }
+
+  .download-btn:hover {
+    transform: scale(1.2);
+  }
