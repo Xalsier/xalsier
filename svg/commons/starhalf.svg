@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="260" height="245" viewBox="0 0 260 245" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <clipPath id="leftHalfMask">
+            <rect x="0" y="0" width="130" height="245"/>
+        </clipPath>
+    </defs>
+
+    <path d="M84.248,149.964L10,96L101.763,96L130,9L158.237,96L250,96L175.752,149.964L204,237L130,183.216L56,237L84.248,149.964Z" 
+          style="fill:none;stroke:rgb(86,222,147);stroke-width:8px;"/>
+    
+    <path d="M84.248,149.964L10,96L101.763,96L130,9L158.237,96L250,96L175.752,149.964L204,237L130,183.216L56,237L84.248,149.964Z" 
+          style="fill:rgb(86,222,147);stroke:none;" 
+          clip-path="url(#leftHalfMask)"/>
+</svg>
