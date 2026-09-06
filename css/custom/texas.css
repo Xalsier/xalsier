@@ -1,0 +1,31 @@
+button {
+    background-color: var(--green);
+    color: var(--bg-color);
+    padding:10px;
+    border-radius: 5px;
+    font-weight: bold;
+    border: none;
+    transition: opacity 0.3s ease-in-out;
+    cursor: pointer;
+}
+
+#texas-buttons {
+    gap: 10px;
+    display: flex;
+}
+
+button:hover {
+    opacity:0.5;
+}
+
+.texas-btn {
+    cursor: pointer;
+}
+
+.texas-btn.active {
+    opacity: 1;
+}
+
+.texas-btn.inactive {
+    opacity: 0.5;
+}
