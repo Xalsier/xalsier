@@ -813,18 +813,6 @@ function openModal(item) {
   // Display tags regardless
   modalTags.style.display = "flex";
 
-  const modalAltDesc = document.getElementById("modalAltDesc");
-
-// Clear alt/desc each time
-modalAltDesc.innerHTML = "";
-
-// Add alt text if it exists
-if (item.alt) {
-  const altPara = document.createElement("p");
-  altPara.innerHTML = `<strong>Alt:</strong><br> <div id="item-alt">${item.alt}</div>`;
-  modalAltDesc.appendChild(altPara);
-}
-
 
   // Display the modal and add the animation class
   modal.style.display = "block";
