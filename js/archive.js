@@ -784,21 +784,6 @@ function openModal(item) {
     link.target = "_blank";
     link.className = "mirror-link";
     link.textContent = mirror.platform.charAt(0).toUpperCase() + mirror.platform.slice(1);
-    const svgPath = platformIconMap[mirror.platform];
-    if (svgPath) {
-      try {
-        const response = await fetch(svgPath);
-        if (response.ok) {
-          const svgText = await response.text();
-          const iconWrapper = document.createElement('div');
-          iconWrapper.className = 'mirror-icon-wrapper';
-          iconWrapper.innerHTML = svgText;
-          link.prepend(iconWrapper);
-        }
-      } catch (error) {
-        console.error(`Failed to load SVG icon for ${mirror.platform}:`, error);
-      }
-    }
     modalMirrors.appendChild(link);
   });
 
