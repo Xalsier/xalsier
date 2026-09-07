@@ -4,7 +4,7 @@ const socialLinks = [
   { href: "https://www.artstation.com/xalsier", src: "./svg/soc/ArtStation.svg", alt: "ArtStation" },
   { href: "https://x.com/Xalsier", src: "./svg/soc/Twitter.svg", alt: "X / Twitter" },
   { href: "https://instagram.com/xalsier", src: "./svg/soc/Instagram.svg", alt: "Instagram" },
-  { href: "https://bsky.app/profile/xalsier.bsky.social", src: "./svg/soc/Bluesky.svg", alt: "Bluesky" },
+  { href: "https://bsky.app/profile/xalsier.com", src: "./svg/soc/Bluesky.svg", alt: "Bluesky" },
   { href: "https://www.youtube.com/c/Xalsier", src: "./svg/soc/YouTube.svg", alt: "Youtube" },
  { href: "https://www.tiktok.com/@xalsier", src: "./svg/soc/TikTok.svg", alt: "TikTok" },
  { href: "https://www.linkedin.com/in/xalsier/", src: "./svg/soc/LinkedIn.svg", alt: "LinkedIn" },
