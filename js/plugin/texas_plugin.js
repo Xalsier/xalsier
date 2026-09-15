@@ -45,7 +45,8 @@ const formatTemplates = {
         </p><br>
         <p>
           ✿ <a href="https://www.weasyl.com/~xalsier/submissions/2614721/a-fragging-in-texas">Weasyl</a>
-          ✿ <a href="https://www.tumblr.com/xalsier/827185351810498560/a-fragging-in-texas">Tumblr</a> ✿
+          ✿ <a href="https://www.tumblr.com/xalsier/827185351810498560/a-fragging-in-texas">Tumblr</a>
+          ✿ <a href="https://bsky.app/profile/xalsier.com/post/3mvk5hzzdmk2e">Bluesky Thread</a> ✿
         </p>
       </div>`,
   
