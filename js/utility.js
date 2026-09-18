@@ -1,19 +1,13 @@
-const pageVisits = 100; 
-
 const socialLinks = [
   { href: "https://www.artstation.com/xalsier", src: "./svg/soc/ArtStation.svg", alt: "ArtStation" },
   { href: "https://x.com/Xalsier", src: "./svg/soc/Twitter.svg", alt: "X / Twitter" },
-  { href: "https://instagram.com/xalsier", src: "./svg/soc/Instagram.svg", alt: "Instagram" },
   { href: "https://bsky.app/profile/xalsier.com", src: "./svg/soc/Bluesky.svg", alt: "Bluesky" },
   { href: "https://www.youtube.com/c/Xalsier", src: "./svg/soc/YouTube.svg", alt: "Youtube" },
  { href: "https://www.tiktok.com/@xalsier", src: "./svg/soc/TikTok.svg", alt: "TikTok" },
- { href: "https://www.linkedin.com/in/xalsier/", src: "./svg/soc/LinkedIn.svg", alt: "LinkedIn" },
  { href: "https://www.furaffinity.net/user/xalsier", src: "./svg/soc/FurAffinity.svg", alt: "FurAffinity" },
 ];
-
 const socialContainer = document.getElementById("socialBar");
 const visitsContainer = document.getElementById("visitsContainer");
-
 socialLinks.forEach((link) => {
   fetch(link.src)
     .then((res) => res.text())
@@ -26,106 +20,72 @@ socialLinks.forEach((link) => {
     })
     .catch((err) => console.error(`Failed to load ${link.src}`, err));
 });
-
-// Create and add the page visits heading
-if (visitsContainer) {
-  const visitsHeading = document.createElement("h1");
-  visitsHeading.id = "pageVisitsCounter"; // Assign a unique ID to the h1
-  visitsHeading.textContent = `~${pageVisits}+ Page Visits!`;
-  visitsContainer.appendChild(visitsHeading);
-}
-
 function toggleModal(show) {
   const modal = document.getElementById("navModal");
   modal.style.display = show ? "flex" : "none";
 }
-
 function navigate(select) {
   const value = select.value;
   if (value) {
     window.location.href = value;
   }
 }
-
 function scrollToSection(sectionId) {
   const section = document.getElementById(sectionId);
-
   if (section) {
     section.scrollIntoView({ behavior: "smooth" });
   }
 }
-
 document.addEventListener("keydown", (e) => {
   if (e.key === "Escape") {
     console.log("closeReviewModal function needs to be defined");
     toggleModal(false);
   }
 });
-
 function showLoading(elementId) {
   const element = document.getElementById(elementId);
   if (element) {
     element.classList.add("loading");
   }
 }
-
 function hideLoading(elementId) {
   const element = document.getElementById(elementId);
   if (element) {
     element.classList.remove("loading");
   }
 }
-
 function getArchiveStats() {
   if (!Array.isArray(ARCHIVE_ITEMS)) {
     console.warn("ARCHIVE_ITEMS is not an array.");
     return { valid: 0, nullItems: 0 };
   }
-
   const validItems = ARCHIVE_ITEMS.filter(item => 
     item.image && typeof item.image === 'string' && item.image.trim() !== ""
   ).length;
-
   const nullItems = ARCHIVE_ITEMS.length - validItems;
-
   return {
     valid: validItems,
     nullItems: nullItems
   };
 }
-
 function updateArchiveHeader() {
   const header = document.getElementById("archive-count");
   if (!header) return;
-
   const stats = getArchiveStats();
-  
-  // Format: "X Items (Y Null Items)"
   const validText = `${stats.valid} Item${stats.valid !== 1 ? "s" : ""}`;
   const nullText = `${stats.nullItems} Null Item${stats.nullItems !== 1 ? "s" : ""}`;
-  
   header.textContent = `${validText} (${nullText})`;
 }
-
 function addValidSrcTag() {
-  // Check if the global variable ARCHIVE_ITEMS exists and is an array
   if (typeof ARCHIVE_ITEMS === 'undefined' || !Array.isArray(ARCHIVE_ITEMS)) {
     console.error("ARCHIVE_ITEMS global variable is not defined or is not an array.");
     return;
   }
-
-  // Iterate over each item in the ARCHIVE_ITEMS array.
   ARCHIVE_ITEMS.forEach(item => {
-    // Ensure the item has a tags array.
     if (!item.tags) {
       item.tags = [];
     }
-
-    // Check if the item's image property is a non-empty string.
     if (item.image && typeof item.image === 'string' && item.image.trim() !== "") {
-
-
-      // Check for file extensions and add corresponding tags
       const lowerCaseSrc = item.image.toLowerCase();
       if (lowerCaseSrc.endsWith(".png")) {
         if (!item.tags.includes("PNG")) {
@@ -141,15 +101,11 @@ function addValidSrcTag() {
         }
       }
     }
-
-    // Check for missing alt text
     if (!item.alt || typeof item.alt !== "string" || item.alt.trim() === "") {
       if (!item.tags.includes("Alt Text Missing")) {
         item.tags.push("Alt Text Missing");
       }
     }
-
-    // Check for missing description
     if (!item.desc || typeof item.desc !== "string" || item.desc.trim() === "") {
       if (!item.tags.includes("Description Missing")) {
         item.tags.push("Description Missing");
