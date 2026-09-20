@@ -94,3 +94,7 @@
         .hidden {
             display: none;
         }
+
+        .blurMain {
+            filter: blur(10px);
+        }
