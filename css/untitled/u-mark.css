@@ -6,6 +6,10 @@
     margin: 0;
 }
 
+#prologueWrapper strong {
+    color: var(--green);
+}
+
 main {
   display: flex;
   flex-direction: column;
