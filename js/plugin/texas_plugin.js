@@ -47,7 +47,10 @@ const formatTemplates = {
           ✿ <a href="https://www.weasyl.com/~xalsier/submissions/2614721/a-fragging-in-texas">Weasyl</a>
           ✿ <a href="https://www.tumblr.com/xalsier/827185351810498560/a-fragging-in-texas">Tumblr</a>
           ✿ <a href="https://bsky.app/profile/xalsier.com/post/3mvk5hzzdmk2e">Bluesky Thread</a> ✿
-        </p>
+        </p><br>
+        <p>
+        ✿ <a href="https://www.reddit.com/user/Lost_Kitsune/comments/1x5axyz/a_fragging_in_texas/">Reddit</a> ✿
+      </p>
       </div>`,
   
     book: `
