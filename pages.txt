@@ -18,7 +18,7 @@ November 24, 2025 - youtube.html // YouTube Archive
 September 13, 2025 - untitled.html // Untitled Project (short story)
 August 16, 2025 - analytics.html // Analytics
 August 15, 2025 - bio.html // Biography
-July 14, 2025 - index.html // Rawr Folder
+July 14, 2025 - index.html // Rawr Folder (Now home page)
 
 
 // Removed Pages //
