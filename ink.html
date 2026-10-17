@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Rawr Folder</title>
+  <link rel="icon" type="image/x-icon" href="./favicon.ico">
+  <link rel="stylesheet" href="./css/custom/archive.css">
+  <link rel="stylesheet" href="./css/custom/caro.css">
+  <link rel="stylesheet" href="./css/index.css">
+  <link rel="stylesheet" href="./css/index/notice.css">
+  <link rel="stylesheet" href="./css/index/warning.css">
+  <link rel="stylesheet" href="./css/index/profile.css">
+  <link rel="stylesheet" href="./css/index/markdown.css">
+  <link rel="stylesheet" href="./css/index/start.css">
+  <link rel="stylesheet" href="./css/custom/live.css">
+  <link rel="stylesheet" href="./css/bg.css">
+  <link rel="stylesheet" href="./css/custom/faq.css">
+  <link rel="stylesheet" href="./css/custom/about.css">
+  <link rel="stylesheet" href="./css/custom/bio-edu.css">
+</head>
+<body>
+  <header class="page-header" style="text-align: center;">
+    <div class="header-left">
+      <button id="sidebarToggle" class="sidebar-toggle" aria-label="Open navigation" aria-expanded="false" title="Open navigation">
+        <!-- your SVG -->
+        <svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 -960 960 960"   aria-hidden="true">
+          <path d="M440-690v-100q0-42 29-71t71-29h100v100q0 42-29 71t-71 29H440ZM220-450q-58 0-99-41t-41-99v-140h140q58 0 99 41t41 99v140H220ZM640-90q-39 0-74.5-12T501-135l-33 33q-11 11-28 11t-28-11q-11-11-11-28t11-28l33-33q-21-29-33-64.5T400-330q0-100 70-170.5T640-571h241v241q0 100-70.5 170T640-90Zm0-80q67 0 113-47t46-113v-160H640q-66 0-113 46.5T480-330q0 23 5.5 43.5T502-248l110-110q11-11 28-11t28 11q11 11 11 28t-11 28L558-192q18 11 38.5 16.5T640-170Zm1-161Z"/>
+        </svg>
+      </button>
+    </div>
+    <div class="header-center">
+      <h1>Rawr Folder</h1>
+    </div>
+</header>
+
+<div id="sidebarOverlay" class="sidebar-overlay" data-open="false" aria-hidden="true"></div>
+<nav id="siteSidebar" class="site-sidebar" aria-hidden="true" aria-labelledby="sidebarToggle" data-open="false">
+  <div class="sidebar-inner" role="navigation" aria-label="Site navigation">
+    <div class="sidebar-section">
+        <div class="sidebar-brand">
+            <a href="index.html">xalsier.com</a>
+            <button id="sidebarCloseBtn" class="sidebar-toggle" aria-label="Close navigation">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" aria-hidden="true">
+                <path d="M440-690v-100q0-42 29-71t71-29h100v100q0 42-29 71t-71 29H440ZM220-450q-58 0-99-41t-41-99v-140h140q58 0 99 41t41 99v140H220ZM640-90q-39 0-74.5-12T501-135l-33 33q-11 11-28 11t-28-11q-11-11-11-28t11-28l33-33q-21-29-33-64.5T400-330q0-100 70-170.5T640-571h241v241q0 100-70.5 170T640-90Zm0-80q67 0 113-47t46-113v-160H640q-66 0-113 46.5T480-330q0 23 5.5 43.5T502-248l110-110q11-11 28-11t28 11q11 11 11 28t-11 28L558-192q18 11 38.5 16.5T640-170Zm1-161Z"/>
+              </svg>
+            </button>
+        </div>
+          
+        <div class="sidebar-group" data-open="true" id="group-explore">
+          <button class="group-toggle" aria-expanded="false">Explore</button>
+          <ul class="group-list">
+            <li><a href="index.html">Rawr Folder</a></li>
+            <li><a href="bio.html">Biography</a></li>
+            <li><a href="store.html">Primal Market</a></li>
+            <li><a href="short-stories.html">Short Stories</a></li>
+            <li><a href="live.html">Events & Livestreams</a></li>
+          </ul>
+        </div>
+  
+        <div class="sidebar-group" data-open="true" id="group-stories">
+          <button class="group-toggle" aria-expanded="true">Series</button>
+          <ul class="group-list">
+            <li><a href="swallow-pines.html">Swallow Pines</a></li>
+          </ul>
+        </div>
+
+        <div class="sidebar-group" data-open="true" id="group-stories">
+          <button class="group-toggle" aria-expanded="true">Swallow Pines</button>
+          <ul class="group-list">
+            <li><a href="untitled.html">One-shot // Pilot</a></li>
+            <li><a href="untitled-collection.html">Untitled Collection</a></li>
+            <li><a href="./comics/untitled.html">Untitled Comic</a></li>
+          </ul>
+        </div>
+  
+        <div class="sidebar-group" data-open="true" id="group-stories">
+          <button class="group-toggle" aria-expanded="true">Written works</button>
+          <ul class="group-list">
+            <li><a href="untitled.html">Swallow Pines: One-shot</a></li>
+            <li><a href="silent.html">A Silent Whimper</a></li>
+            <li><a href="texas.html">A Fragging in Texas</a></li>
+            <li><a style="opacity:0.5;color:grey;" href="rorschach.html">Prion Rorschach</a></li>
+            <li><a style="opacity:0.5;color:grey;" href="lockjaw.html">Birth by Memory: Lockjaw</a></li>
+          </ul>
+        </div>
+
+        <div class="sidebar-group" data-open="true" id="group-stories">
+          <button class="group-toggle" aria-expanded="true">Comics</button>
+          <ul class="group-list">
+            <li><a href="./comics/untitled.html">Untitled Comic</a></li>
+          </ul>
+      </div>
+  
+        <div class="sidebar-group" data-open="true" id="group-stories">
+          <button class="group-toggle" aria-expanded="true">Meta</button>
+          <ul class="group-list">
+            <li><a href="roadmap.html">Roadmap</a></li>
+            <li><a href="characters.html">Characters</a></li>
+            <li><a href="analytics.html">Analytics</a></li>
+            <li><a href="socials.html">Socials</a></li>
+            <li><a href="press.html">Press Kit</a></li>
+          </ul>
+        </div>
+
+
+    <div class="sidebar-footer"></div>
+  </div>
+</nav>
+
+<center>
+    <div class="content-section" >
+      <div class="artist-header-container">
+        <img title="(Fuwa) Xalsier's profile on Social Media." alt="A drawing of the character Fuwa, an anthropomorphic rabbit. Xalsier's main profile image on social media." class="profile-placeholder" src="./thumb/fuwa2880.png">
+        <div class="artist-header">
+            <h1 class="artist-name">Xalsier</h1>
+            <p class="artist-description">Hispanic-American author and visual artist</p>
+        </div>
+    </div>
+    
+    <section class="section-nav">
+      <div style="display: flex;flex-wrap: wrap;flex-direction: row; gap: 20px;">
+        <a href="./bio.html" id="btn-overview" class="nav-btn inactive">Overview</a>
+        <a href="./ink.html"id="btn-activism" class="nav-btn active">Rawr Folder</a>
+        <a href="./books.html" id="btn-activism" class="nav-btn inactive">Writing</a>
+        <a href="./store.html" id="btn-activism" class="nav-btn inactive">Primal Market</a>
+        <a href="./bio.html#Activism" id="btn-activism" class="nav-btn inactive">Activism</a>
+        <a href="./discord"  class="nav-btn inactive">Discord</a>
+        <a href="./live.html" id="btn-activism" class="nav-btn inactive">Events</a>
+      </div>
+    </section>
+    </div>
+  </center>
+
+
+    <!-- Filter Section -->
+    <div class="filter-section">
+        <div class="filter-controls">
+          <div class="filter-group">
+            <label for="metaFilter">Meta</label>
+            <select id="metaFilter" class="filter-select">
+              <!-- Options will be populated by JavaScript -->
+            </select>
+          </div>
+    
+          <div class="filter-group">
+            <label for="characterFilter">Characters</label>
+            <select id="characterFilter" class="filter-select">
+              <!-- Options will be populated by JavaScript -->
+            </select>
+          </div>
+    
+          <div class="filter-group">
+            <label for="attributeFilter">Attributes</label>
+            <select id="attributeFilter" class="filter-select">
+              <!-- Options will be populated by JavaScript -->
+            </select>
+          </div>
+        </div>
+    
+        <!-- Active Filters Display -->
+        <div class="active-filters" id="activeFilters"></div>
+  
+        
+    
+        <!-- Search Section -->
+        <div class="search-section">
+          <button class="search-btn" id="searchBtn" onclick="performSearch();">Hunt</button>
+          <div class="progress-container" id="progressContainer" style="display: none;">
+            <div class="progress-bar">
+              <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <div class="progress-text" id="progressText">Searching...</div>
+          </div>
+        </div>
+    
+      </div>
+  
+    
+      <!-- Gallery Section -->
+      <div class="gallery-section" id="gallerySection">
+  
+              <!-- Pagination -->
+              <div class="pagination" id="pagination"></div>
+              <br>
+        <div class="gallery-grid" id="galleryGrid">
+          <!-- Gallery items will be populated by JavaScript -->
+        </div>
+    
+  
+        
+          <!-- NEW: Markdown/story content goes here -->
+          <div class="character-markdown">
+            <div id="profileMarkdown"></div>
+          </div>
+        </div>
+        
+  
+            <!-- Error Display -->
+            <div class="error-display" id="errorDisplay" style="display: none;"></div>
+    
+      </div>
+    
+  <!-- Image Expansion Modal -->
+  <div class="image-modal" id="imageModal">
+    <div class="modal-backdrop"></div>
+    <div class="modal-content">
+      <button class="modal-close" id="modalClose">&times;</button>
+      <div class="modal-image-container">
+        <img id="modalImage" alt="">
+      </div>
+      <div class="modal-info">
+        <h3 id="modalTitle"></h3>
+        <div class="modal-meta">
+          <p><strong style="text-align:left;">Created:</strong> <span id="modalDate"></span></p>
+        </div>
+        <div class="modal-versions-container" id="modalVersions"></div>
+        <div class="modal-tags-section">
+          <div class="modal-tags" id="modalTags"></div>
+        </div>
+        <!-- Alt/Desc insert point -->
+        <div id="modalAltDesc"></div>
+        <div class="modal-mirrors" id="modalMirrors"></div>
+      </div>
+    </div>
+  </div>
+  
+  
+    <div id="warningModal" class="modal-overlay hidden">
+        <div class="modal-warn-content modal-large">
+            <strong>You must be 18+ or older to view explicit content.</strong>
+            <div class="modal-buttons">
+                <button id="warningOkayBtn">Okay</button>
+                <button id="warningLeaveBtn">Return</button>
+            </div>
+        </div>
+    </div>
+
+  <footer>
+    <center class="footer-nav">
+      <a style="font-size: 1.5em;" href="bio.html">About</a>
+      <a style="font-size: 1.5em;" href="press.html">Press Kit</a> 
+      <a style="font-size: 1.5em;" href="contact.html">Contact</a>
+      <a style="font-size: 1.5em;" href="https://status.xalsier.com/">Site Status</a> 
+    </center>
+    <center><div style="font-size: 1.5em;width: 100%;display:flex;justify-content: center;flex-direction: column;">© Xalsier Kitsune 2025-2026</div></center>
+    <center><small><div style="font-size: 1.5em;width: 100%;opacity:0.6;display:flex;justify-content: center;flex-direction: column;">Page Created: October 17, 2026</div></small></center>
+  </footer>
+  <script src="./con/library.js"></script>
+  <script src="./con/filters.js"></script>
+  <script src="./con/char.js"></script>
+  <script src="./con/con_archive.js"></script>
+  <script src="./js/utility.js"></script>
+  <script src="./js/select.js"></script>
+  <script src="./js/utility/articles.js"></script>
+  <script src="./js/archive.js"></script>
+  <script src="./js/utility/prog.js"></script>  
+  <script src="./js/sidebar.js"></script>
+</body>
+</html>
